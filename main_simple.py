@@ -148,5 +148,12 @@ def main():
 # For gunicorn deployment
 app = create_app()
 
+# Validate app creation
+if app is None:
+    raise RuntimeError("Failed to create Flask app")
+
+logger.info(f"✅ Flask app created successfully: {app.name}")
+logger.info(f"✅ App routes: {[rule.rule for rule in app.url_map.iter_rules()]}")
+
 if __name__ == "__main__":
     main()

@@ -4,7 +4,11 @@
       "Bash(chmod:*)",
       "Bash(az:*)",
       "Bash(python test:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git checkout:*)",
+      "Bash(cp:*)",
+      "Bash(rm:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

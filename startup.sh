@@ -33,15 +33,12 @@ else
     echo "No virtual environment found, using system Python"
 fi
 
-# Install dependencies - prioritize simplified requirements
-if [ -f "requirements_simple.txt" ]; then
-    echo "Installing simplified Python dependencies (no database)..."
-    pip install --no-cache-dir -r requirements_simple.txt
-elif [ -f "requirements.txt" ]; then
-    echo "Installing full Python dependencies..."
+# Install dependencies
+if [ -f "requirements.txt" ]; then
+    echo "Installing Python dependencies from requirements.txt..."
     pip install --no-cache-dir -r requirements.txt
 else
-    echo "Warning: No requirements file found"
+    echo "Warning: requirements.txt not found"
 fi
 
 # Check if the main application file exists

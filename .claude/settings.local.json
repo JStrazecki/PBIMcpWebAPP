@@ -10,7 +10,12 @@
       "Bash(python:*)",
       "Bash(diff:*)",
       "Bash(rm:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(test_envScriptsactivate)",
+      "Bash(pip install:*)",
+      "Bash(\"test_env\\Scripts\\activate.bat\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }

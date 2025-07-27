@@ -1,0 +1,41 @@
+025-07-27T18:39:41.7978398Z    _____
+2025-07-27T18:39:41.7986938Z   /  _  \ __________ _________   ____
+2025-07-27T18:39:41.7987021Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-07-27T18:39:41.7987051Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-07-27T18:39:41.7987114Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-27T18:39:41.7987151Z         \/      \/                  \/
+2025-07-27T18:39:41.7987179Z A P P   S E R V I C E   O N   L I N U X
+2025-07-27T18:39:41.7987210Z
+2025-07-27T18:39:41.7987241Z Documentation: http://aka.ms/webapp-linux
+2025-07-27T18:39:41.7987271Z Python 3.11.12
+2025-07-27T18:39:41.7987326Z Note: Any data outside '/home' is not persisted
+2025-07-27T18:39:40.1655368Z Starting watchers and probes.
+2025-07-27T18:39:40.1664474Z Starting metrics collection.
+2025-07-27T18:39:40.1671418Z Container is running.
+2025-07-27T18:39:41.3868732Z Container start method finished after 11495 ms.
+2025-07-27T18:39:48.3424363Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-27T18:39:48.4358246Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-27T18:39:48.6383371Z Updating certificates in /etc/ssl/certs...
+2025-07-27T18:40:13.4179570Z 2 added, 0 removed; done.
+2025-07-27T18:40:13.4360995Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-27T18:40:13.4361360Z done.
+2025-07-27T18:40:13.5457997Z CA certificates copied and updated successfully.
+2025-07-27T18:40:13.9379609Z Site's appCommandLine: gunicorn --bind 0.0.0.0:8000 --worker-class aiohttp.GunicornWebWorker --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info app:APP
+2025-07-27T18:40:14.9865079Z Starting periodic command scheduler: cron.
+2025-07-27T18:40:14.9886149Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind 0.0.0.0:8000 --worker-class aiohttp.GunicornWebWorker --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info app:APP'
+2025-07-27T18:40:16.1235987Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-27T18:40:16.1811643Z Build Operation ID: 6575baea21e172ad
+2025-07-27T18:40:16.1891942Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-07-27T18:40:11.4769624Z Sun Jul 27 18:40:11 UTC 2025 running .net core
+2025-07-27T18:40:16.3296701Z Output is compressed. Extracting it...
+2025-07-27T18:40:16.3297236Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddc49a76f53b75'...
+2025-07-27T18:40:21.4531696Z Startup : 06.40.21.347172
+2025-07-27T18:40:21.6719602Z Configure Services : 06.40.21.671665
+2025-07-27T18:40:23.7595633Z Configure : 06.40.23.759284
+2025-07-27T18:40:24.5782949Z Setting Up Routes : 06.40.24.578141
+2025-07-27T18:40:26.6813530Z Exiting Configure : 06.40.26.681186
+2025-07-27T18:40:27.9614029Z Hosting environment: Production
+2025-07-27T18:40:27.9677057Z Content root path: /opt/Kudu
+2025-07-27T18:40:27.9684286Z Now listening on: http://0.0.0.0:8181
+2025-07-27T18:40:27.9689725Z Application started. Press Ctrl+C to shut down.
+2025-07-27T18:40:57  Welcome, you are now connected to log-streaming service

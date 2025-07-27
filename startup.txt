@@ -1,1 +1,1 @@
-gunicorn --bind 0.0.0.0:8000 --worker-class sync --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info main_simple:app
+bash startup.sh

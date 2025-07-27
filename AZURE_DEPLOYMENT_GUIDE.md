@@ -1,52 +1,117 @@
 # Azure Web App Deployment Guide
 
-Simple deployment guide for your Power BI MCP Finance Server to Azure Web App.
+Complete deployment guide for your Power BI MCP Finance Server to Azure Web App.
 
-## 🤔 Why Create a Separate Azure AD App Registration?
+## 🎯 Deployment Modes
 
-You need to create a **separate** Azure AD app registration (`PowerBI-MCP-Finance-Server`) because:
+### Mode 1: Simplified (Recommended for Azure)
+- ✅ **No database dependencies** - perfect for cloud deployment
+- ✅ **Faster startup** - minimal resource requirements
+- ✅ **Easy troubleshooting** - fewer moving parts
+- 🚀 **File**: `main_simple.py` with `requirements_simple.txt`
 
-1. **Different Authentication Flow**: Your existing Power BI registration uses **Service Principal** flow (client credentials) for API access, while the web app needs **OAuth2 Authorization Code** flow for user authentication
+### Mode 2: Full Featured (Advanced/Local)
+- ✅ **Complete functionality** - conversation tracking, metrics
+- ❌ **Database required** - SQLite setup needed
+- ❌ **More complex** - additional dependencies
+- 🚀 **File**: `pbi_mcp_finance/main.py` with `requirements.txt`
 
-2. **Different Redirect URLs**: Web authentication requires specific redirect URLs (`/auth/callback`) that shouldn't be mixed with your existing Power BI service configuration
+## 🚨 Critical Environment Variables
 
-3. **Different Permissions**: The web app needs user authentication permissions (`User.Read`, `openid`, `profile`) while Power BI needs API access permissions
+**Your app will not start without these 4 variables:**
 
-4. **Security Isolation**: Separating concerns keeps your existing Power BI setup unchanged and secure
+### Power BI Authentication (Choose ONE method)
 
-**Your existing Power BI variables remain the same** - this new registration is only for web user authentication.
+**Method 1: OAuth2 (Recommended)**
+```bash
+POWERBI_CLIENT_ID=your-powerbi-app-client-id
+POWERBI_CLIENT_SECRET=your-powerbi-app-client-secret  
+POWERBI_TENANT_ID=your-azure-tenant-id
+```
 
-## 📋 What You Need
+**Method 2: Manual Token (Alternative)**
+```bash
+POWERBI_TOKEN=your-manual-bearer-token
+```
 
-### Azure AD App Registration (New - for Web Authentication)
+### Security (Required)
+```bash
+FLASK_SECRET_KEY=generate-random-32-character-string
+```
+
+**Generate Flask secret key:**
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+## 🌐 Optional: Web Authentication Setup
+
+**Only needed if you want a web interface with user login:**
+
+### Create Azure AD App Registration (for web authentication)
 1. **Go to**: Azure Portal > Azure Active Directory > App registrations
 2. **Click**: "New registration"
 3. **Fill out**:
-   - **Name**: `PowerBI-MCP-Finance-Server`
+   - **Name**: `PowerBI-MCP-Finance-Server-Web`
    - **Supported account types**: Single tenant
-   - **Redirect URI**: Web > `https://pbimcp.azurewebsites.net/auth/callback`
+   - **Redirect URI**: Web > `https://your-app.azurewebsites.net/auth/callback`
 
-4. **After creation, get these values**:
-   - **Application (client) ID** → This becomes `AZURE_CLIENT_ID`
-   - **Directory (tenant) ID** → This becomes `AZURE_TENANT_ID`
+4. **Get these values**:
+   - **Application (client) ID** → `AZURE_CLIENT_ID`
+   - **Directory (tenant) ID** → `AZURE_TENANT_ID`
 
 5. **Create Client Secret**:
-   - Go to "Certificates & secrets"
-   - Click "New client secret"
-   - Copy the **Value** (not the ID!) → This becomes `AZURE_CLIENT_SECRET`
+   - Go to "Certificates & secrets" → "New client secret"
+   - Copy the **Value** → `AZURE_CLIENT_SECRET`
 
 6. **Set API Permissions**:
-   - Go to "API permissions"
-   - Add these Microsoft Graph permissions:
-     - `User.Read` (Delegated)
-     - `openid` (Delegated) 
-     - `profile` (Delegated)
-     - `email` (Delegated)
+   - Go to "API permissions" → Add `User.Read`, `openid`, `profile`, `email`
    - Click "Grant admin consent"
 
-## 🚀 Deployment Steps
+### Add to Azure Web App
+```bash
+AUTH_ENABLED=true
+AZURE_CLIENT_ID=your-web-auth-client-id
+AZURE_CLIENT_SECRET=your-web-auth-client-secret
+AZURE_REDIRECT_URI=https://your-app.azurewebsites.net/auth/callback
+```
 
-### Step 1: Configure Azure Web App Environment Variables
+## 🚀 Deployment Options
+
+### Option 1: GitHub Actions (Recommended)
+**Automatic deployment on every push to main branch**
+
+1. **Push your changes**:
+   ```bash
+   git add .
+   git commit -m "Deploy to Azure"
+   git push origin main
+   ```
+
+2. **Monitor deployment**: Check GitHub Actions tab in your repository
+
+3. **Fixed Issues**: 
+   - ✅ Artifact storage quota resolved
+   - ✅ Direct deployment without artifacts
+   - ✅ Simplified dependencies
+
+### Option 2: Azure CLI (Manual)
+```bash
+# Deploy directly to Azure
+az webapp up --name your-app-name --resource-group your-rg --runtime "PYTHON:3.11"
+```
+
+### Option 3: Azure Portal (ZIP Upload)
+1. Create ZIP file (exclude AzureBotTest, venv, .git)
+2. Azure Portal > Your Web App > Development Tools > Advanced Tools
+3. Upload and extract ZIP
+
+## 🔧 Azure Web App Configuration
+
+### Step 1: Set Environment Variables
+**Go to Azure Portal > Your Web App > Configuration > Application settings**
+
+**Add these 4 critical variables:**
 
 In Azure Portal > Your Web App (`pbimcp`) > Configuration > Application settings, add:
 

@@ -1,34 +1,49 @@
-# Power BI MCP Finance Web App
+# Power BI MCP Finance Server
 
-Microsoft Azure AD authenticated web application for Power BI Model Context Protocol (MCP) server.
+An enhanced Model Context Protocol (MCP) server providing intelligent Power BI integration for financial data analysis.
 
-## 🚀 Features
+## 🚀 Quick Start
 
-- 🔐 **Microsoft Azure AD OAuth2** - Enterprise authentication
-- 📊 **Power BI API Integration** - Direct workspace and dataset access
-- 🌐 **Web-based MCP Tools** - Browser access to all MCP functionality
-- ☁️ **Azure Web App Ready** - One-click deployment to Azure
-- 🛡️ **Enterprise Security** - Session management and secure tokens
-- 📈 **Real-time Monitoring** - Application health and performance tracking
+### Option 1: Simplified Deployment (Recommended)
+**Perfect for Azure Web App - No database dependencies**
 
-## 📋 Quick Deployment
-
-### 1. Deploy to Azure Web App
 ```bash
-# Follow the comprehensive guide
-AZURE_DEPLOYMENT_GUIDE.md
+# 1. Set critical environment variables
+export POWERBI_CLIENT_ID=your-client-id
+export POWERBI_CLIENT_SECRET=your-client-secret
+export POWERBI_TENANT_ID=your-tenant-id
+export FLASK_SECRET_KEY=$(python -c "import secrets; print(secrets.token_urlsafe(32))")
+
+# 2. Install minimal dependencies
+pip install -r requirements_simple.txt
+
+# 3. Run simplified server
+python main_simple.py
 ```
 
-### 2. Configure Authentication
+### Option 2: Full Features
+**Complete functionality with conversation tracking**
+
 ```bash
-# Create Azure AD app registration
-# Add environment variables to Azure Web App
-# See: ENVIRONMENT_SETUP.md
+# 1. Copy environment template
+cp .env.template .env
+
+# 2. Fill in your credentials in .env file
+
+# 3. Install all dependencies
+pip install -r requirements.txt
+
+# 4. Run full server
+python pbi_mcp_finance/main.py
 ```
 
-### 3. Access Your Application
-```
-https://your-webapp.azurewebsites.net/auth/login
+### Option 3: Azure Web App Deployment
+```bash
+# Automated deployment via GitHub Actions
+git push origin main
+
+# Or manual deployment
+az webapp up --name your-app-name --resource-group your-rg --runtime "PYTHON:3.11"
 ```
 
 ## 📚 Documentation
@@ -41,40 +56,61 @@ https://your-webapp.azurewebsites.net/auth/login
 
 ## 🏗️ Architecture
 
+### Simplified Mode (Recommended for Azure)
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Web Browser   │───▶│   Azure Web App  │───▶│   Power BI API  │
-│                 │    │                  │    │                 │
-│ Microsoft Login │◀───│ OAuth2 + Flask   │◀───│ Service Principal│
+│   Claude/MCP    │───▶│   Flask + MCP    │───▶│   Power BI API  │
+│   Client        │    │   (main_simple)  │    │                 │
+│                 │◀───│   No Database    │◀───│ OAuth2/Token    │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+```
+
+### Full Mode (Local/Advanced)
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Claude/MCP    │───▶│ FastMCP + Flask  │───▶│   Power BI API  │
+│   Client        │    │ + SQLite Tracking│    │                 │
+│ Web Interface   │◀───│ + Monitoring     │◀───│ OAuth2/Token    │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
 ### Technology Stack
-- **Frontend**: Flask with Microsoft OAuth2 integration
-- **Backend**: Power BI MCP server with enhanced authentication  
+- **Core**: FastMCP for Model Context Protocol
+- **Web**: Flask for HTTP endpoints and optional authentication
 - **Deployment**: Azure Web App (Linux, Python 3.11)
-- **Authentication**: Azure Active Directory with secure sessions
-- **API**: Power BI REST API with automatic token management
+- **Database**: SQLite (full mode) or None (simplified mode)
+- **Authentication**: Power BI OAuth2 + optional Azure AD web auth
 
 ## 🔧 Environment Variables
 
-### Required for Authentication
+### 🚨 Critical Variables (App won't start without these)
 ```bash
-AUTH_ENABLED=true
-AZURE_CLIENT_ID=<azure-ad-app-client-id>
-AZURE_CLIENT_SECRET=<azure-ad-app-secret>
-AZURE_TENANT_ID=<your-tenant-id>
-FLASK_SECRET_KEY=<random-32-chars>
+# Power BI Authentication (choose one method)
+POWERBI_CLIENT_ID=your-powerbi-app-client-id
+POWERBI_CLIENT_SECRET=your-powerbi-app-client-secret  
+POWERBI_TENANT_ID=your-azure-tenant-id
+
+# OR use manual token instead
+POWERBI_TOKEN=your-manual-bearer-token
+
+# Security (required)
+FLASK_SECRET_KEY=generate-32-char-random-string
 ```
 
-### Required for Power BI
+### Optional Web Authentication
 ```bash
-POWERBI_CLIENT_ID=<power-bi-service-principal-id>
-POWERBI_CLIENT_SECRET=<power-bi-service-principal-secret>
-POWERBI_TENANT_ID=<your-tenant-id>
+AUTH_ENABLED=true  # Enable web UI authentication
+AZURE_CLIENT_ID=azure-ad-app-client-id
+AZURE_CLIENT_SECRET=azure-ad-app-secret
+AZURE_REDIRECT_URI=https://your-app.azurewebsites.net/auth/callback
 ```
 
-See `.env.template` for complete configuration.
+### Generate Flask Secret Key
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+See `.env.template` for complete configuration options.
 
 ## 🛡️ Security Features
 
@@ -87,72 +123,132 @@ See `.env.template` for complete configuration.
 
 ## 🌐 Available Endpoints
 
+### Core Endpoints (Both Modes)
 | Endpoint | Description | Authentication |
 |----------|-------------|----------------|
-| `/` | Health check and application status | None |
-| `/health` | Detailed health information | None |
+| `/` | Service status and configuration | None |
+| `/health` | Health check with Power BI status | None |
+| `/api/powerbi/workspaces` | List Power BI workspaces | None* |
+
+### Web Authentication (Full Mode Only)
+| Endpoint | Description | Authentication |
+|----------|-------------|----------------|
 | `/auth/login` | Start Microsoft OAuth login | None |
 | `/auth/callback` | OAuth callback handler | None |
 | `/auth/status` | Current authentication status | None |
 | `/auth/logout` | Sign out and clear session | Authenticated |
-| MCP Tools | All Power BI MCP functionality | Authenticated |
 
-## 🚀 Deployment Options
+### MCP Tools (Available via MCP protocol)
+- Workspace discovery and management
+- Dataset schema exploration  
+- Financial data analysis tools
+- Query optimization and recommendations
 
-### Azure Web App (Recommended)
-- Built-in HTTPS and custom domains
-- Automatic scaling and load balancing
-- Integrated with Azure Active Directory
-- Application Insights monitoring
+*Requires Power BI credentials to be configured
+
+## 📁 Project Structure
+
+```
+├── main_simple.py              # 🚨 Simplified server (no database) - RECOMMENDED
+├── requirements_simple.txt     # 🚨 Minimal dependencies for Azure
+├── pbi_mcp_finance/            # Full server with all features
+│   ├── main.py                 # Full MCP server with database
+│   ├── auth/                   # Authentication modules
+│   ├── mcp/tools/              # MCP tool implementations
+│   └── database/               # SQLite database modules
+├── requirements.txt            # Full dependencies (includes database)
+├── .env.template              # Environment variables template
+├── startup.sh                 # Azure startup script (auto-detects mode)
+├── web.config                 # Azure Web App configuration
+└── .github/workflows/         # GitHub Actions for deployment
+```
+
+## 🚀 Deployment Modes
+
+### Mode 1: Simplified (Recommended for Azure)
+✅ **No database dependencies**  
+✅ **Faster startup and deployment**  
+✅ **Perfect for cloud environments**  
+❌ No conversation tracking  
+❌ No performance metrics  
+
+### Mode 2: Full Featured (Local/Advanced)
+✅ **Complete MCP functionality**  
+✅ **SQLite conversation tracking**  
+✅ **Performance monitoring**  
+❌ Requires SQLite database setup  
+❌ More complex deployment  
 
 ### Local Development
 ```bash
-# Copy environment template
+# Option 1: Test simplified version
+python main_simple.py
+
+# Option 2: Test full version
 cp .env.template .env
-
-# Fill in your credentials
-# Set AUTH_ENABLED=false for local testing
-
-# Run the application
-python -m pbi_mcp_finance.main
+# Fill in credentials
+python pbi_mcp_finance/main.py
 ```
 
-## 📊 Monitoring
+## 🧪 Testing
 
-The application includes:
-- **Health check endpoints** for Azure monitoring
-- **Structured logging** with configurable levels
-- **Application metrics** and performance tracking
-- **Authentication audit trail**
-- **Power BI API call monitoring**
+### Test Environment Configuration
+```bash
+# Test your environment setup
+python test_env_simple.py
 
-## 🔄 Development Workflow
+# Expected output: Shows which variables are set/missing
+```
 
-1. **Local Development**: `AUTH_ENABLED=false` for testing without OAuth
-2. **Staging**: Deploy with authentication to test OAuth flow
-3. **Production**: Full deployment with monitoring and scaling
+### Test Endpoints
+```bash
+# Test health endpoint
+curl http://localhost:8000/health
 
-## 📞 Support
+# Test Power BI status (requires credentials)
+curl http://localhost:8000/api/powerbi/workspaces
+```
 
-### Troubleshooting
-- Check Azure Web App logs for deployment issues
+## 🔧 Troubleshooting
+
+### Deployment Issues
+
+**GitHub Actions Artifact Storage Quota**
+- ✅ **Fixed**: Updated workflow deploys directly without artifacts
+
+**Azure Web App Won't Start**
+- Check Application Logs in Azure Portal
 - Verify environment variables are set correctly
-- Ensure Azure AD app permissions are granted
-- Validate Power BI service principal access
+- Ensure startup command is `/home/site/wwwroot/startup.sh`
 
-### Common Issues
-- **OAuth redirect mismatch**: Check redirect URI matches exactly
-- **Power BI access denied**: Verify service principal permissions
-- **Session expired**: Check `FLASK_SECRET_KEY` consistency
-- **Build failures**: Review `requirements.txt` dependencies
+**Database Errors**
+- ✅ **Fixed**: Use simplified mode (`main_simple.py`) - no database required
+
+### Authentication Issues
+
+**Power BI Authentication Failed**
+- Verify `POWERBI_CLIENT_ID`, `POWERBI_CLIENT_SECRET`, `POWERBI_TENANT_ID`
+- Check Azure AD app registration permissions
+- Try manual token: Set `POWERBI_TOKEN` instead
+
+**Flask Secret Key Missing**
+- Generate: `python -c "import secrets; print(secrets.token_urlsafe(32))"`
+- Add to Azure App Settings or .env file
+
+## 🎯 Next Steps
+
+1. **Quick Test**: Run `python main_simple.py` locally
+2. **Configure**: Set the 4 critical environment variables 🚨
+3. **Deploy**: Push to main branch or use Azure CLI
+4. **Verify**: Check `/health` endpoint after deployment
+5. **Use**: Connect Claude with MCP to your deployed server
+
+## 📚 Additional Documentation
+
+- [Environment Setup Guide](ENVIRONMENT_SETUP.md) - Detailed variable configuration
+- [Azure Deployment Guide](AZURE_DEPLOYMENT_GUIDE.md) - Step-by-step deployment
+- [Deployment Checklist](DEPLOYMENT_CHECKLIST.md) - Pre-deployment verification
 
 ---
 
-## 🎯 Getting Started
-
-1. **Deploy**: Follow `AZURE_DEPLOYMENT_GUIDE.md`
-2. **Configure**: Set environment variables per `ENVIRONMENT_SETUP.md`
-3. **Test**: Visit `/auth/login` to verify authentication
-4. **Use**: Access authenticated MCP tools via web interface
-
-**Enterprise-ready Power BI web access with Microsoft authentication!** 🎉
+**🚀 Ready to deploy your Power BI MCP server to Azure!**

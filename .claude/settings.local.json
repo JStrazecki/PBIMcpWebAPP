@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(chmod:*)",
-      "Bash(az:*)"
+      "Bash(az:*)",
+      "Bash(python test:*)"
     ],
     "deny": []
   }

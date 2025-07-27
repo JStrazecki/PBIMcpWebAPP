@@ -12,13 +12,18 @@
    - `POWERBI_CLIENT_SECRET` 
    - `POWERBI_TENANT_ID`
 
-3. **For local testing without authentication:**
+3. **Test your environment:**
+   ```bash
+   python test_env.py
+   ```
+
+4. **For local testing without authentication:**
    ```bash
    # In your .env file
    AUTH_ENABLED=false
    ```
 
-4. **For local testing with authentication:**
+5. **For local testing with authentication:**
    - Follow the Azure AD setup in `.env.template`
    - Set `AUTH_ENABLED=true`
    - Use `http://localhost:8000/auth/callback` as redirect URI for local testing

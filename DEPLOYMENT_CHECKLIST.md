@@ -6,103 +6,105 @@ Use this checklist to ensure your Power BI MCP Finance Server is properly deploy
 
 ### ✅ Azure Resources Setup
 - [ ] **Azure Web App Created**
-  - Name: `pbimcp`
+  - Name: `pbimcp` (or your chosen name)
   - Runtime: Python 3.11
   - Operating System: Linux
-  - App Service Plan: `linux-sqlbot` (B1 or higher)
+  - App Service Plan: B1 or higher
 
-- [ ] **Azure AD App Registration**
-  - App registered in Azure Active Directory
+### ✅ Power BI Service Setup
+- [ ] **Power BI App Registration**
+  - Azure AD app registered for Power BI API access
   - Client ID, Client Secret, and Tenant ID obtained
-  - Redirect URI configured: `https://pbimcp.azurewebsites.net/auth/callback`
+  - Service principal added to Power BI workspaces (if applicable)
+  - **OR Manual Bearer Token obtained** (alternative to OAuth)
+
+### ✅ Web Authentication Setup (Optional)
+- [ ] **Azure AD App Registration for Web Auth**
+  - Separate app registered for web interface authentication
+  - Redirect URI configured: `https://your-app.azurewebsites.net/auth/callback`
   - API permissions granted: `User.Read`, `openid`, `profile`, `email`
   - Admin consent granted (if required)
 
-- [ ] **Power BI Service Setup**
-  - Power BI app registered (if using service principal)
-  - Client ID and Client Secret for Power BI API access
-  - Service principal added to Power BI workspaces (if applicable)
-
 ### ✅ Code Preparation
-- [ ] **Branch Ready**: All changes committed to `feature/oauth-auth` branch
-- [ ] **Dependencies Updated**: `requirements.txt` includes all necessary packages
-- [ ] **Startup Script**: `startup.sh` is executable and configured
-- [ ] **Configuration Files**: `web.config` created for Azure App Service
-- [ ] **Database Disabled**: SQLite tracking disabled per requirements
+- [ ] **Main Branch Ready**: All changes committed to `main` branch
+- [ ] **Simplified Mode**: `main_simple.py` and `requirements_simple.txt` available
+- [ ] **Startup Script**: `startup.sh` configured to auto-detect mode
+- [ ] **GitHub Actions**: Updated workflow without artifacts
+- [ ] **No Database Dependencies**: SQLite requirements removed
 
 ## 🔧 Azure Web App Configuration
 
-### ✅ Application Settings (Environment Variables)
-Copy these to Azure Portal > Web App > Configuration > Application settings:
+### ✅ Critical Environment Variables 🚨
+**App will not start without these! Add to Azure Portal > Configuration > Application settings:**
 
-#### Authentication Configuration
-- [ ] `AUTH_ENABLED=true`
-- [ ] `FLASK_SECRET_KEY=<32-character-random-string>`
-- [ ] `AUTH_PORT=8000`
-
-#### Azure AD OAuth Settings
-- [ ] `AZURE_CLIENT_ID=<your-azure-ad-client-id>`
-- [ ] `AZURE_CLIENT_SECRET=<your-azure-ad-client-secret>`
-- [ ] `AZURE_TENANT_ID=<your-azure-tenant-id>`
-- [ ] `AZURE_REDIRECT_URI=https://pbimcp.azurewebsites.net/auth/callback`
-
-#### Power BI API Settings
+#### 🚨 Required Power BI Authentication (Choose ONE method)
+**Method 1: OAuth2 (Recommended)**
 - [ ] `POWERBI_CLIENT_ID=<your-powerbi-client-id>`
 - [ ] `POWERBI_CLIENT_SECRET=<your-powerbi-client-secret>`
 - [ ] `POWERBI_TENANT_ID=<your-azure-tenant-id>`
 
-#### Optional Power BI Manual Token (if preferred over service principal)
-- [ ] `POWERBI_TOKEN=<manual-bearer-token>` (optional)
+**Method 2: Manual Token (Alternative)**
+- [ ] `POWERBI_TOKEN=<manual-bearer-token>`
 
-#### Application Platform Settings
-- [ ] `SCM_DO_BUILD_DURING_DEPLOYMENT=true`
-- [ ] `WEBSITES_ENABLE_APP_SERVICE_STORAGE=false`
-- [ ] `PYTHONPATH=/home/site/wwwroot`
+#### 🚨 Required Security
+- [ ] `FLASK_SECRET_KEY=<32-character-random-string>`
+  Generate with: `python -c "import secrets; print(secrets.token_urlsafe(32))"`
+
+### ✅ Optional Web Authentication Settings
+#### Web Interface Authentication (if AUTH_ENABLED=true)
+- [ ] `AUTH_ENABLED=true`
+- [ ] `AZURE_CLIENT_ID=<web-auth-client-id>`
+- [ ] `AZURE_CLIENT_SECRET=<web-auth-client-secret>`
+- [ ] `AZURE_REDIRECT_URI=https://your-app.azurewebsites.net/auth/callback`
+
+### ✅ Optional Configuration
+- [ ] `LOG_LEVEL=INFO`
+- [ ] `DEBUG=false`
 
 ### ✅ General Settings
 - [ ] **Runtime stack**: Python 3.11
-- [ ] **Startup Command**: `startup.sh`
+- [ ] **Startup Command**: `/home/site/wwwroot/startup.sh`
 - [ ] **Always On**: Enabled (to prevent cold starts)
 
 ### ✅ Deployment Configuration
-- [ ] **Deployment method chosen**:
-  - [ ] GitHub Actions (recommended)
-  - [ ] ZIP deployment
-  - [ ] FTP deployment
+- [ ] **GitHub Actions (Recommended)**:
+  - Connected to GitHub repository
+  - Push to `main` branch triggers deployment
+  - Build provider: GitHub Actions
+  - **No artifacts** (fixed storage quota issue)
 
 ## 🚀 Deployment Steps
 
-### ✅ GitHub Deployment (Recommended)
-- [ ] **Connected to GitHub**:
-  - Repository: `PbiMCPFinance`
-  - Branch: `feature/oauth-auth`
-  - Build provider: App Service build service
+### ✅ GitHub Actions Deployment (Recommended)
+- [ ] **Repository Connected**: GitHub Actions workflow active
+- [ ] **Push to Main Branch**: `git push origin main`
+- [ ] **Deployment Successful**: Check GitHub Actions logs
+- [ ] **No Artifact Errors**: Storage quota issue resolved
 
-- [ ] **Deployment triggered and successful**
-- [ ] **Build logs reviewed** (no errors)
-
-### ✅ Alternative: Manual Deployment
-- [ ] **Files prepared**:
+### ✅ Alternative: Azure CLI Deployment
+- [ ] **Azure CLI Method**:
   ```bash
-  # Exclude unnecessary files
-  zip -r deploy.zip . -x "venv/*" "*.git/*" "*.log" "__pycache__/*" "*.pyc" "shared/*"
+  az webapp up --name your-app-name --resource-group your-rg --runtime "PYTHON:3.11"
   ```
-- [ ] **Deployed via Azure CLI**:
+
+### ✅ Alternative: ZIP Deployment
+- [ ] **Files prepared** (exclude unnecessary files):
   ```bash
-  az webapp deploy --resource-group <your-resource-group> --name pbimcp --src-path deploy.zip
+  zip -r deploy.zip . -x "venv/*" "*.git/*" "*.log" "__pycache__/*" "*.pyc" "AzureBotTest/*"
   ```
 
 ## 🧪 Post-Deployment Testing
 
-### ✅ Health Checks
-- [ ] **Basic Health Check**: `https://pbimcp.azurewebsites.net/`
-  - Expected: `{"status": "healthy", "service": "Power BI MCP Finance Server", ...}`
+### ✅ Basic Health Checks
+- [ ] **Root Endpoint**: `https://your-app.azurewebsites.net/`
+  - Expected: Service status with mode detection (simplified/full)
 
-- [ ] **Detailed Health Check**: `https://pbimcp.azurewebsites.net/health`
-  - Expected: PowerBI auth status and OAuth configuration
+- [ ] **Health Check**: `https://your-app.azurewebsites.net/health`
+  - Expected: Power BI auth status and environment info
 
-- [ ] **Authentication Status**: `https://pbimcp.azurewebsites.net/auth/status`
-  - Expected: `{"authenticated": false}` (before login)
+### ✅ Power BI Integration
+- [ ] **Power BI Status**: `https://your-app.azurewebsites.net/api/powerbi/workspaces`
+  - Expected: Power BI authentication confirmation or error message
 
 ### ✅ Authentication Flow
 - [ ] **Login Endpoint**: `https://pbimcp.azurewebsites.net/auth/login`

@@ -42,8 +42,12 @@ else
 fi
 
 # Check if the main application file exists
-if [ -f "pbi_mcp_finance/main.py" ]; then
+if [ -f "main_simple.py" ]; then
+    MAIN_MODULE="main_simple"
+    echo "Using simplified main module (no database dependencies)"
+elif [ -f "pbi_mcp_finance/main.py" ]; then
     MAIN_MODULE="pbi_mcp_finance.main"
+    echo "Using full main module (with database dependencies)"
 elif [ -f "main.py" ]; then
     MAIN_MODULE="main"
 else

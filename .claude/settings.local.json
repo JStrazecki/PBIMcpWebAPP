@@ -6,7 +6,9 @@
       "Bash(python test:*)",
       "Bash(ls:*)",
       "Bash(copy main_simple.py app.py)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(python:*)",
+      "Bash(diff:*)"
     ],
     "deny": []
   }

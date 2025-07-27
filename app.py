@@ -153,8 +153,8 @@ APP = app  # Azure expects uppercase APP
 if app is None:
     raise RuntimeError("Failed to create Flask app")
 
-logger.info(f"✅ Flask app created successfully: {app.name}")
-logger.info(f"✅ App routes: {[rule.rule for rule in app.url_map.iter_rules()]}")
+logger.info(f"Flask app created successfully: {app.name}")
+logger.info(f"App routes: {[rule.rule for rule in app.url_map.iter_rules()]}")
 
 if __name__ == "__main__":
     main()

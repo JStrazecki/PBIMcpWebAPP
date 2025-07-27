@@ -1,6 +1,6 @@
-# Streamlined deployment without artifacts to avoid storage quota issues
-# Uses simplified dependencies for faster, more reliable deployment
-name: Deploy Power BI MCP Server to Azure
+# Simplified deployment - no database dependencies, minimal requirements
+# Perfect for Azure Web App deployment with fast startup
+name: Deploy Power BI MCP Server (Simplified)
 
 on:
   push:
@@ -27,29 +27,36 @@ jobs:
           python -m venv venv
           source venv/bin/activate
       
-      - name: Install simplified dependencies
+      - name: Install dependencies
         run: |
-          # Use simplified requirements for faster deployment
-          if [ -f "requirements_simple.txt" ]; then
-            echo "Using simplified requirements (no database dependencies)"
-            pip install -r requirements_simple.txt
-          else
-            echo "Falling back to full requirements"
-            pip install -r requirements.txt
-          fi
+          echo "Installing simplified dependencies from requirements.txt..."
+          pip install -r requirements.txt
         
       - name: Verify deployment files
         run: |
-          echo "Checking deployment files..."
+          echo "=== Power BI MCP Server Deployment Verification ==="
+          echo "Branch: $(git branch --show-current)"
+          echo "Commit: $(git rev-parse --short HEAD)"
+          echo ""
+          echo "📁 Deployment files:"
           ls -la
-          echo "✓ Checking for main_simple.py (recommended):"
-          test -f main_simple.py && echo "✓ main_simple.py found (simplified mode)" || echo "✗ main_simple.py not found"
-          echo "✓ Checking for startup.sh:"
-          test -f startup.sh && echo "✓ startup.sh found" || echo "✗ startup.sh missing"
-          echo "✓ Checking for requirements:"
-          test -f requirements_simple.txt && echo "✓ requirements_simple.txt found" || echo "✗ requirements_simple.txt missing"
+          echo ""
+          echo "🔍 Required files check:"
           test -f requirements.txt && echo "✓ requirements.txt found" || echo "✗ requirements.txt missing"
-          echo "✓ Deployment verification complete"
+          test -f startup.sh && echo "✓ startup.sh found" || echo "✗ startup.sh missing"
+          test -f web.config && echo "✓ web.config found" || echo "✗ web.config missing"
+          echo ""
+          echo "🚀 Application mode detection:"
+          if [ -f "main_simple.py" ]; then
+            echo "✓ main_simple.py found - SIMPLIFIED MODE (recommended for Azure)"
+          else
+            echo "ℹ️ main_simple.py not found"
+          fi
+          echo ""
+          echo "📦 Dependencies check:"
+          echo "Requirements file size: $(wc -l < requirements.txt) lines"
+          head -5 requirements.txt
+          echo "✅ Deployment verification complete"
       
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3

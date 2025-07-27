@@ -1,87 +1,50 @@
 #!/bin/bash
-# Startup script for Azure App Service - Power BI MCP Finance Server
-# This script configures and starts the Python application on Azure Linux App Service
+# startup.sh - PBI MCP Bot Startup Script
 
-echo "=== Power BI MCP Finance Server Startup ==="
-echo "Starting at: $(date)"
-echo "Working directory: $(pwd)"
-echo "Files in directory: $(ls -la)"
+echo "=== PBI MCP Bot Startup ==="
+echo "Time: $(date)"
+echo "Directory: $(pwd)"
+echo "Running PBI MCP Assistant"
 
-# Set environment variables for Azure App Service
-export PYTHONPATH="/home/site/wwwroot:$PYTHONPATH"
-export PYTHONUNBUFFERED=1
-
-# Azure App Service provides PORT environment variable
-export PORT=${PORT:-8000}
-
-echo "Python path: $PYTHONPATH"
-echo "Server port: $PORT"
-echo "Python version: $(python3 --version)"
-echo "Python location: $(which python3)"
-
-# Navigate to application directory
 cd /home/site/wwwroot
 
-# Azure Oryx creates virtual environment at /home/site/wwwroot/antenv
-if [ -d "antenv" ]; then
-    echo "Activating Oryx virtual environment..."
-    source antenv/bin/activate
-    echo "Virtual environment activated: $(which python)"
-    echo "Pip packages installed:"
-    pip list | grep -E "(flask|gunicorn|fastmcp)"
+# Use Python 3.13 (matching the working example approach)
+export PATH="/opt/python/3.13.5/bin:/opt/python/3.13/bin:$PATH"
+export PYTHONPATH="/home/site/wwwroot:$PYTHONPATH"
+
+echo "Python: $(which python3)"
+echo "Python version: $(python3 --version)"
+
+# Install packages if not already installed (like the working example)
+if [ ! -d "/home/.local/lib/python3.13/site-packages/fastmcp" ]; then
+    echo "Installing packages..."
+    python3 -m pip install --user --upgrade pip
+    python3 -m pip install --user -r requirements.txt
 else
-    echo "No virtual environment found, using system Python"
+    echo "Packages already installed, skipping installation"
 fi
 
-# Verify required files exist
-echo "Checking for main application file..."
-if [ -f "main_simple.py" ]; then
-    MAIN_MODULE="main_simple"
-    echo "✅ Found main_simple.py - using simplified module"
-else
-    echo "❌ Error: main_simple.py not found"
-    echo "Available Python files:"
-    ls -la *.py 2>/dev/null || echo "No Python files found"
-    exit 1
-fi
+# Add user site-packages to Python path (critical from working example)
+export PATH="$PATH:/home/.local/bin"
+export PYTHONPATH="$PYTHONPATH:/home/.local/lib/python3.13/site-packages"
 
-# Verify the app can be imported
-echo "Testing application import..."
-python3 -c "from $MAIN_MODULE import app; print('✅ App imported successfully')" || {
-    echo "❌ Failed to import application"
-    exit 1
-}
+# Verify core packages (like the working example)
+echo "Verifying packages..."
+python3 -c "import fastmcp; print('✓ fastmcp installed')" || exit 1
+python3 -c "import flask; print('✓ flask installed')" || exit 1
+python3 -c "import msal; print('✓ msal installed')" || exit 1
+python3 -c "import requests; print('✓ requests installed')" || exit 1
+python3 -c "import gunicorn; print('✓ gunicorn installed')" || exit 1
 
-# Check Power BI configuration
-echo "Checking Power BI configuration..."
-if [ -z "$POWERBI_TOKEN" ] && ([ -z "$POWERBI_CLIENT_ID" ] || [ -z "$POWERBI_CLIENT_SECRET" ]); then
-    echo "⚠️  Warning: Power BI authentication not configured"
-    echo "Set either POWERBI_TOKEN or POWERBI_CLIENT_ID + POWERBI_CLIENT_SECRET"
-else
-    echo "✅ Power BI configuration found"
-fi
-
-# Create logs directory
+# Create necessary directories
+echo "Creating directories..."
 mkdir -p logs
+mkdir -p .cache
 
-# Set up logging
-export LOG_LEVEL=${LOG_LEVEL:-INFO}
-echo "Log level: $LOG_LEVEL"
+# Verify main app loads (exactly like working example)
+echo "Testing main app import..."
+python3 -c "from app import APP; print('✓ PBI MCP app loads successfully')" || exit 1
 
-# Start the application
-echo "🚀 Starting Power BI MCP Finance Server..."
-echo "Listening on port: $PORT"
-echo "Module: $MAIN_MODULE"
-echo "================================================"
-
-# Use gunicorn for production deployment
-echo "Starting with Gunicorn..."
-exec gunicorn \
-    --bind "0.0.0.0:$PORT" \
-    --workers 1 \
-    --timeout 600 \
-    --access-logfile "-" \
-    --error-logfile "-" \
-    --log-level info \
-    --preload \
-    "$MAIN_MODULE:app"
+# Start the app (using the exact same pattern as working example)
+echo "Starting PBI MCP Bot on port 8000..."
+exec python3 -m gunicorn --bind 0.0.0.0:8000 --worker-class sync --timeout 600 --workers 1 app:APP

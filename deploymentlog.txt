@@ -1,44 +1,3 @@
-build
-failed 6 minutes ago in 26s
-Search logs
-2s
-Current runner version: '2.326.0'
-Runner Image Provisioner
-Operating System
-Runner Image
-GITHUB_TOKEN Permissions
-Secret source: Actions
-Prepare workflow directory
-Prepare all required actions
-Getting action download info
-Download immutable action package 'actions/checkout@v4'
-Download immutable action package 'actions/setup-python@v5'
-Download immutable action package 'actions/upload-artifact@v4'
-Complete job name: build
-1s
-Run actions/checkout@v4
-Syncing repository: JStrazecki/PBIMcpWebAPP
-Getting Git version info
-Temporarily overriding HOME='/home/runner/work/_temp/0d35d21c-afff-475b-88c8-bab0cbc5dada' before making global git config changes
-Adding repository directory to the temporary git global config as a safe directory
-/usr/bin/git config --global --add safe.directory /home/runner/work/PBIMcpWebAPP/PBIMcpWebAPP
-Deleting the contents of '/home/runner/work/PBIMcpWebAPP/PBIMcpWebAPP'
-Initializing the repository
-Disabling automatic garbage collection
-Setting up auth
-Fetching the repository
-Determining the checkout info
-/usr/bin/git sparse-checkout disable
-/usr/bin/git config --local --unset-all extensions.worktreeConfig
-Checking out the ref
-/usr/bin/git log -1 --format=%H
-39f4e5537887fc294264e604ac3703b429f344b3
-0s
-Run actions/setup-python@v5
-Installed versions
-4s
-Run python -m venv venv
-15s
 Run pip install -r requirements.txt
 Collecting fastmcp>=0.1.0 (from -r requirements.txt (line 1))
   Downloading fastmcp-2.10.6-py3-none-any.whl.metadata (17 kB)
@@ -196,7 +155,7 @@ Downloading fastmcp-2.10.6-py3-none-any.whl (202 kB)
 Downloading mcp-1.12.2-py3-none-any.whl (158 kB)
 Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
 Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 69.4 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 75.7 MB/s eta 0:00:00
 Downloading requests-2.32.4-py3-none-any.whl (64 kB)
 Downloading charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (147 kB)
 Downloading idna-3.10-py3-none-any.whl (70 kB)
@@ -207,7 +166,7 @@ Downloading flask_cors-6.0.1-py3-none-any.whl (13 kB)
 Downloading msal-1.33.0-py3-none-any.whl (116 kB)
 Downloading PyJWT-2.10.1-py3-none-any.whl (22 kB)
 Downloading cryptography-45.0.5-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 138.6 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 146.8 MB/s eta 0:00:00
 Downloading authlib-1.6.1-py2.py3-none-any.whl (239 kB)
 Downloading python_jose-3.5.0-py2.py3-none-any.whl (34 kB)
 Downloading rsa-4.9.1-py3-none-any.whl (34 kB)
@@ -245,7 +204,7 @@ Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
 Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
 Downloading rich-14.1.0-py3-none-any.whl (243 kB)
 Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 104.0 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 159.5 MB/s eta 0:00:00
 Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
 Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
 Downloading rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (383 kB)
@@ -260,7 +219,7 @@ Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
 Downloading werkzeug-3.1.3-py3-none-any.whl (224 kB)
 Downloading zipp-3.23.0-py3-none-any.whl (10 kB)
 Downloading docutils-0.21.2-py3-none-any.whl (587 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 587.4/587.4 kB 79.4 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 587.4/587.4 kB 86.6 MB/s eta 0:00:00
 Downloading jaraco.classes-3.4.0-py3-none-any.whl (6.8 kB)
 Downloading jaraco.context-6.0.1-py3-none-any.whl (6.8 kB)
 Downloading backports.tarfile-1.2.0-py3-none-any.whl (30 kB)
@@ -271,7 +230,7 @@ Downloading pycparser-2.22-py3-none-any.whl (117 kB)
 Building wheels for collected packages: pyperclip
   Building wheel for pyperclip (pyproject.toml): started
   Building wheel for pyperclip (pyproject.toml): finished with status 'done'
-  Created wheel for pyperclip: filename=pyperclip-1.9.0-py3-none-any.whl size=11103 sha256=9b998ffff4e7cf2f5c2eeba204f3ae08b37bc0c7e698025131ca499be81ba323
+  Created wheel for pyperclip: filename=pyperclip-1.9.0-py3-none-any.whl size=11103 sha256=4e555ffd2c4a4a458396260a1332f1cec3492651cf39133af77ca28334534573
   Stored in directory: /home/runner/.cache/pip/wheels/e8/e7/56/591cb88ba1783b38c40d584026e766aac9c3a048e34128ce8b
 Successfully built pyperclip
 Installing collected packages: pyperclip, zipp, urllib3, typing-extensions, sniffio, six, rpds-py, python-multipart, python-dotenv, pyjwt, pygments, pycparser, pyasn1, packaging, more-itertools, mdurl, markupsafe, jeepney, itsdangerous, idna, httpx-sse, h11, docutils, docstring-parser, dnspython, click, charset_normalizer, certifi, blinker, backports.tarfile, attrs, annotated-types, werkzeug, uvicorn, typing-inspection, rsa, requests, referencing, pydantic-core, markdown-it-py, jinja2, jaraco.functools, jaraco.context, jaraco.classes, importlib_metadata, httpcore, gunicorn, exceptiongroup, email-validator, ecdsa, cffi, anyio, starlette, sse-starlette, rich, python-jose, pydantic, jsonschema-specifications, httpx, flask, cryptography, SecretStorage, rich-rst, pydantic-settings, openapi-pydantic, jsonschema, flask-cors, authlib, msal, mcp, keyring, cyclopts, fastmcp
@@ -279,7 +238,8 @@ Installing collected packages: pyperclip, zipp, urllib3, typing-extensions, snif
 Successfully installed SecretStorage-3.3.3 annotated-types-0.7.0 anyio-4.9.0 attrs-25.3.0 authlib-1.6.1 backports.tarfile-1.2.0 blinker-1.9.0 certifi-2025.7.14 cffi-1.17.1 charset_normalizer-3.4.2 click-8.2.1 cryptography-45.0.5 cyclopts-3.22.3 dnspython-2.7.0 docstring-parser-0.17.0 docutils-0.21.2 ecdsa-0.19.1 email-validator-2.2.0 exceptiongroup-1.3.0 fastmcp-2.10.6 flask-3.1.1 flask-cors-6.0.1 gunicorn-23.0.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 httpx-sse-0.4.1 idna-3.10 importlib_metadata-8.7.0 itsdangerous-2.2.0 jaraco.classes-3.4.0 jaraco.context-6.0.1 jaraco.functools-4.2.1 jeepney-0.9.0 jinja2-3.1.6 jsonschema-4.25.0 jsonschema-specifications-2025.4.1 keyring-25.6.0 markdown-it-py-3.0.0 markupsafe-3.0.2 mcp-1.12.2 mdurl-0.1.2 more-itertools-10.7.0 msal-1.33.0 openapi-pydantic-0.5.1 packaging-25.0 pyasn1-0.6.1 pycparser-2.22 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.19.2 pyjwt-2.10.1 pyperclip-1.9.0 python-dotenv-1.1.1 python-jose-3.5.0 python-multipart-0.0.20 referencing-0.36.2 requests-2.32.4 rich-14.1.0 rich-rst-1.3.1 rpds-py-0.26.0 rsa-4.9.1 six-1.17.0 sniffio-1.3.1 sse-starlette-3.0.2 starlette-0.47.2 typing-extensions-4.14.1 typing-inspection-0.4.1 urllib3-2.5.0 uvicorn-0.35.0 werkzeug-3.1.3 zipp-3.23.0
 1s
 Run actions/upload-artifact@v4
-With the provided path, there will be 51 files uploaded
+  
+With the provided path, there will be 49 files uploaded
 Artifact name is valid!
 Root directory input is valid!
 Error: Failed to CreateArtifact: Artifact storage quota has been hit. Unable to upload any new artifacts. Usage is recalculated every 6-12 hours.
@@ -289,7 +249,7 @@ More info on storage limits: https://docs.github.com/en/billing/managing-billing
 Post job cleanup.
 /usr/bin/git version
 git version 2.50.1
-Temporarily overriding HOME='/home/runner/work/_temp/f0b5024c-7d32-4285-bc70-3ff80f2084da' before making global git config changes
+Temporarily overriding HOME='/home/runner/work/_temp/40c2edb3-6db6-406c-a0be-579032d8b0fc' before making global git config changes
 Adding repository directory to the temporary git global config as a safe directory
 /usr/bin/git config --global --add safe.directory /home/runner/work/PBIMcpWebAPP/PBIMcpWebAPP
 /usr/bin/git config --local --name-only --get-regexp core\.sshCommand

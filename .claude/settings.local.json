@@ -3,7 +3,8 @@
     "allow": [
       "Bash(chmod:*)",
       "Bash(az:*)",
-      "Bash(python test:*)"
+      "Bash(python test:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

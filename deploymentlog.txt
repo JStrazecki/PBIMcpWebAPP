@@ -1,256 +1,367 @@
-Connected!
-2025-07-27T13:54:53  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
-2025-07-27T13:54:19.7224100Z image detector file exists, platform is python..
-2025-07-27T13:54:19.7410784Z OS detector file exists, OS is bullseye..
-2025-07-27T13:54:20.5133986Z Python Version: /tmp/oryx/platforms/python/3.11.13/bin/python3.11
-2025-07-27T13:54:20.5607036Z Creating directory for command manifest file if it does not exist
-2025-07-27T13:54:20.6562228Z Removing existing manifest file
-2025-07-27T13:54:20.7345245Z Python Virtual Environment: antenv
-2025-07-27T13:54:20.7611925Z Creating virtual environment...
-2025-07-27T13:54:42.3162509Z .................
-2025-07-27T13:54:42.3248246Z Activating virtual environment...
-2025-07-27T13:54:42.3531642Z Running pip install...Ending Log Tail of existing logs ---Starting Live Log Stream ---
-2025-07-27T13:55:43.7516778Z ........................................................
-2025-07-27T13:55:43.7784492Z [13:54:44+0000] Collecting fastmcp>=0.1.0 (from -r requirements.txt (line 5))
-2025-07-27T13:55:43.8198145Z .
-2025-07-27T13:55:43.8198728Z [13:54:44+0000]   Downloading fastmcp-2.10.6-py3-none-any.whl.metadata (17 kB)
-2025-07-27T13:55:43.8757874Z [13:54:44+0000] Collecting flask>=2.3.0 (from -r requirements.txt (line 6))
-2025-07-27T13:55:43.9142514Z [13:54:44+0000]   Downloading flask-3.1.1-py3-none-any.whl.metadata (3.0 kB)
-2025-07-27T13:55:43.9638325Z [13:54:44+0000] Collecting flask-cors>=4.0.0 (from -r requirements.txt (line 7))
-2025-07-27T13:55:44.0000624Z [13:54:44+0000]   Downloading flask_cors-6.0.1-py3-none-any.whl.metadata (5.3 kB)
-2025-07-27T13:55:44.0130083Z [13:54:45+0000] Collecting gunicorn>=20.1.0 (from -r requirements.txt (line 8))
-2025-07-27T13:55:44.0478056Z [13:54:45+0000]   Downloading gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
-2025-07-27T13:55:44.0672166Z [13:54:45+0000] Collecting msal>=1.24.0 (from -r requirements.txt (line 11))
-2025-07-27T13:55:44.1056629Z [13:54:45+0000]   Downloading msal-1.33.0-py3-none-any.whl.metadata (11 kB)
-2025-07-27T13:55:44.1656544Z [13:54:45+0000] Collecting requests>=2.31.0 (from -r requirements.txt (line 12))
-2025-07-27T13:55:44.2030521Z [13:54:45+0000]   Downloading requests-2.32.4-py3-none-any.whl.metadata (4.9 kB)
-2025-07-27T13:55:44.2420662Z [13:54:45+0000] Collecting pyjwt>=2.8.0 (from -r requirements.txt (line 15))
-2025-07-27T13:55:44.2766105Z [13:54:45+0000]   Downloading PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
-2025-07-27T13:55:44.2886465Z [13:54:45+0000] Collecting python-dotenv>=1.0.0 (from -r requirements.txt (line 18))
-2025-07-27T13:55:44.3435306Z [13:54:45+0000]   Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
-2025-07-27T13:55:44.3820019Z [13:54:45+0000] Collecting authlib>=1.5.2 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:44.4203175Z [13:54:45+0000]   Downloading authlib-1.6.1-py2.py3-none-any.whl.metadata (1.6 kB)
-2025-07-27T13:55:44.4584818Z [13:54:46+0000] Collecting cyclopts>=3.0.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:44.5041695Z [13:54:46+0000]   Downloading cyclopts-3.22.3-py3-none-any.whl.metadata (11 kB)
-2025-07-27T13:55:44.5330793Z [13:54:46+0000] Collecting exceptiongroup>=1.2.2 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:44.5884742Z [13:54:46+0000]   Downloading exceptiongroup-1.3.0-py3-none-any.whl.metadata (6.7 kB)
-2025-07-27T13:55:44.6074420Z [13:54:46+0000] Collecting httpx>=0.28.1 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:44.6187406Z [13:54:46+0000]   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
-2025-07-27T13:55:44.6382325Z [13:54:46+0000] Collecting mcp>=1.10.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:44.6584300Z [13:54:46+0000]   Downloading mcp-1.12.2-py3-none-any.whl.metadata (60 kB)
-2025-07-27T13:55:44.6939142Z [13:54:46+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.0/61.0 kB 2.1 MB/s eta 0:00:00
-2025-07-27T13:55:44.7158214Z [13:54:46+0000] Collecting openapi-pydantic>=0.5.1 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:44.7353327Z [13:54:46+0000]   Downloading openapi_pydantic-0.5.1-py3-none-any.whl.metadata (10 kB)
-2025-07-27T13:55:44.7762618Z [13:54:47+0000] Collecting pydantic>=2.11.7 (from pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:44.8194991Z [13:54:47+0000]   Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
-2025-07-27T13:55:44.8395085Z [13:54:47+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 68.0/68.0 kB 2.6 MB/s eta 0:00:00
-2025-07-27T13:55:44.8778422Z [13:54:47+0000] Collecting pyperclip>=1.9.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:44.8966797Z [13:54:47+0000]   Downloading pyperclip-1.9.0.tar.gz (20 kB)
-2025-07-27T13:55:44.9248062Z [13:54:47+0000]   Preparing metadata (setup.py): started
-2025-07-27T13:55:44.9464080Z [13:54:48+0000]   Preparing metadata (setup.py): finished with status 'done'
-2025-07-27T13:55:44.9557420Z [13:54:49+0000] Collecting rich>=13.9.4 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:45.0207006Z [13:54:49+0000]   Downloading rich-14.1.0-py3-none-any.whl.metadata (18 kB)
-2025-07-27T13:55:45.0413007Z [13:54:49+0000] Collecting blinker>=1.9.0 (from flask>=2.3.0->-r requirements.txt (line 6))
-2025-07-27T13:55:45.0597583Z [13:54:49+0000]   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
-2025-07-27T13:55:45.0925747Z [13:54:49+0000] Collecting click>=8.1.3 (from flask>=2.3.0->-r requirements.txt (line 6))
-2025-07-27T13:55:45.1333258Z [13:54:49+0000]   Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
-2025-07-27T13:55:45.1704704Z [13:54:49+0000] Collecting itsdangerous>=2.2.0 (from flask>=2.3.0->-r requirements.txt (line 6))
-2025-07-27T13:55:45.2358025Z [13:54:49+0000]   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
-2025-07-27T13:55:45.2652198Z [13:54:49+0000] Collecting jinja2>=3.1.2 (from flask>=2.3.0->-r requirements.txt (line 6))
-2025-07-27T13:55:45.3242745Z [13:54:49+0000]   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
-2025-07-27T13:55:45.3893114Z [13:54:50+0000] Collecting markupsafe>=2.1.1 (from flask>=2.3.0->-r requirements.txt (line 6))
-2025-07-27T13:55:45.4561676Z [13:54:50+0000]   Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
-2025-07-27T13:55:45.5422435Z [13:54:50+0000] Collecting werkzeug>=3.1.0 (from flask>=2.3.0->-r requirements.txt (line 6))
-2025-07-27T13:55:45.5807593Z [13:54:50+0000]   Downloading werkzeug-3.1.3-py3-none-any.whl.metadata (3.7 kB)
-2025-07-27T13:55:45.6558850Z [13:54:51+0000] Collecting packaging (from gunicorn>=20.1.0->-r requirements.txt (line 8))
-2025-07-27T13:55:45.6839074Z [13:54:51+0000]   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
-2025-07-27T13:55:45.7979919Z [13:54:52+0000] Collecting cryptography<48,>=2.5 (from msal>=1.24.0->-r requirements.txt (line 11))
-2025-07-27T13:55:45.8174246Z [13:54:52+0000]   Downloading cryptography-45.0.5-cp311-abi3-manylinux_2_28_x86_64.whl.metadata (5.7 kB)
-2025-07-27T13:55:45.8827224Z [13:54:52+0000] Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->-r requirements.txt (line 12))
-2025-07-27T13:55:45.9206238Z [13:54:52+0000]   Downloading charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
-2025-07-27T13:55:45.9678077Z [13:54:53+0000] Collecting idna<4,>=2.5 (from requests>=2.31.0->-r requirements.txt (line 12))
-2025-07-27T13:55:46.0059282Z [13:54:53+0000]   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
-2025-07-27T13:55:46.0603146Z [13:54:53+0000] Collecting urllib3<3,>=1.21.1 (from requests>=2.31.0->-r requirements.txt (line 12))
-2025-07-27T13:55:46.2107249Z [13:54:53+0000]   Downloading urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
-2025-07-27T13:55:46.2384735Z [13:54:53+0000] Collecting certifi>=2017.4.17 (from requests>=2.31.0->-r requirements.txt (line 12))
-2025-07-27T13:55:46.2689557Z [13:54:53+0000]   Downloading certifi-2025.7.14-py3-none-any.whl.metadata (2.4 kB)
-2025-07-27T13:55:46.3186477Z [13:54:54+0000] Collecting cffi>=1.14 (from cryptography<48,>=2.5->msal>=1.24.0->-r requirements.txt (line 11))
-2025-07-27T13:55:46.3451083Z [13:54:54+0000]   Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
-2025-07-27T13:55:46.3586057Z [13:54:54+0000] Collecting attrs>=23.1.0 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.4123412Z [13:54:54+0000]   Downloading attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
-2025-07-27T13:55:46.4678084Z [13:54:55+0000] Collecting docstring-parser>=0.15 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.5161244Z [13:54:55+0000]   Downloading docstring_parser-0.17.0-py3-none-any.whl.metadata (3.5 kB)
-2025-07-27T13:55:46.5365752Z [13:54:55+0000] Collecting rich-rst<2.0.0,>=1.3.1 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.5564704Z [13:54:55+0000]   Downloading rich_rst-1.3.1-py3-none-any.whl.metadata (6.0 kB)
-2025-07-27T13:55:46.6032987Z [13:54:55+0000] Collecting typing-extensions>=4.6.0 (from exceptiongroup>=1.2.2->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.6691876Z [13:54:55+0000]   Downloading typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
-2025-07-27T13:55:46.6975075Z [13:54:55+0000] Collecting anyio (from httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.7366493Z [13:54:55+0000]   Downloading anyio-4.9.0-py3-none-any.whl.metadata (4.7 kB)
-2025-07-27T13:55:46.8109924Z [13:54:55+0000] Collecting httpcore==1.* (from httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.8292113Z [13:54:56+0000]   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
-2025-07-27T13:55:46.8404137Z [13:54:56+0000] Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.8963540Z [13:54:56+0000]   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
-2025-07-27T13:55:46.9073283Z [13:54:57+0000] Collecting httpx-sse>=0.4 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.9450018Z [13:54:57+0000]   Downloading httpx_sse-0.4.1-py3-none-any.whl.metadata (9.4 kB)
-2025-07-27T13:55:46.9654771Z [13:54:58+0000] Collecting jsonschema>=4.20.0 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:46.9865127Z [13:54:58+0000]   Downloading jsonschema-4.25.0-py3-none-any.whl.metadata (7.7 kB)
-2025-07-27T13:55:47.0302717Z [13:54:58+0000] Collecting pydantic-settings>=2.5.2 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.0582888Z [13:54:58+0000]   Downloading pydantic_settings-2.10.1-py3-none-any.whl.metadata (3.4 kB)
-2025-07-27T13:55:47.0676832Z [13:54:58+0000] Collecting python-multipart>=0.0.9 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.0812110Z [13:54:58+0000]   Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
-2025-07-27T13:55:47.1080415Z [13:54:59+0000] Collecting sse-starlette>=1.6.1 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.1274919Z [13:54:59+0000]   Downloading sse_starlette-3.0.2-py3-none-any.whl.metadata (11 kB)
-2025-07-27T13:55:47.2021550Z [13:55:00+0000] Collecting starlette>=0.27 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.2206689Z [13:55:00+0000]   Downloading starlette-0.47.2-py3-none-any.whl.metadata (6.2 kB)
-2025-07-27T13:55:47.2304795Z [13:55:00+0000] Collecting uvicorn>=0.23.1 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.2856512Z [13:55:00+0000]   Downloading uvicorn-0.35.0-py3-none-any.whl.metadata (6.5 kB)
-2025-07-27T13:55:47.2970780Z [13:55:00+0000] Collecting annotated-types>=0.6.0 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.3241165Z [13:55:00+0000]   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
-2025-07-27T13:55:47.3789182Z [13:55:06+0000] Collecting pydantic-core==2.33.2 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.3971537Z [13:55:06+0000]   Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
-2025-07-27T13:55:47.4250743Z [13:55:06+0000] Collecting typing-inspection>=0.4.0 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.4378992Z [13:55:06+0000]   Downloading typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
-2025-07-27T13:55:47.4529942Z [13:55:06+0000] Collecting email-validator>=2.0.0 (from pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.4628741Z [13:55:06+0000]   Downloading email_validator-2.2.0-py3-none-any.whl.metadata (25 kB)
-2025-07-27T13:55:47.4721184Z [13:55:06+0000] Collecting markdown-it-py>=2.2.0 (from rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.4795722Z [13:55:06+0000]   Downloading markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
-2025-07-27T13:55:47.4827599Z [13:55:06+0000] Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.4860291Z [13:55:06+0000]   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
-2025-07-27T13:55:47.4892820Z [13:55:07+0000] Collecting sniffio>=1.1 (from anyio->httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.4924344Z [13:55:07+0000]   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
-2025-07-27T13:55:47.4964541Z [13:55:07+0000] Collecting pycparser (from cffi>=1.14->cryptography<48,>=2.5->msal>=1.24.0->-r requirements.txt (line 11))
-2025-07-27T13:55:47.4996877Z [13:55:07+0000]   Downloading pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
-2025-07-27T13:55:47.5034406Z [13:55:07+0000] Collecting dnspython>=2.0.0 (from email-validator>=2.0.0->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.5061655Z [13:55:07+0000]   Downloading dnspython-2.7.0-py3-none-any.whl.metadata (5.8 kB)
-2025-07-27T13:55:47.5114657Z [13:55:07+0000] Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.5155069Z [13:55:07+0000]   Downloading jsonschema_specifications-2025.4.1-py3-none-any.whl.metadata (2.9 kB)
-2025-07-27T13:55:47.5196335Z [13:55:08+0000] Collecting referencing>=0.28.4 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.5255079Z [13:55:08+0000]   Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
-2025-07-27T13:55:47.5438151Z [13:55:10+0000] Collecting rpds-py>=0.7.1 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.5468117Z [13:55:10+0000]   Downloading rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
-2025-07-27T13:55:47.5499308Z [13:55:10+0000] Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.5528912Z [13:55:10+0000]   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
-2025-07-27T13:55:47.5566974Z [13:55:10+0000] Collecting docutils (from rich-rst<2.0.0,>=1.3.1->cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
-2025-07-27T13:55:47.5597541Z [13:55:10+0000]   Downloading docutils-0.21.2-py3-none-any.whl.metadata (2.8 kB)
-2025-07-27T13:55:47.5638542Z [13:55:11+0000] Downloading fastmcp-2.10.6-py3-none-any.whl (202 kB)
-2025-07-27T13:55:47.5686820Z [13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 202.6/202.6 kB 9.1 MB/s eta 0:00:00
-2025-07-27T13:55:47.5729232Z [13:55:11+0000] Downloading flask-3.1.1-py3-none-any.whl (103 kB)
-2025-07-27T13:55:47.5756548Z [13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.3/103.3 kB 4.7 MB/s eta 0:00:00
-2025-07-27T13:55:47.5826627Z [13:55:11+0000] Downloading flask_cors-6.0.1-py3-none-any.whl (13 kB)
-2025-07-27T13:55:47.5904911Z [13:55:11+0000] Downloading gunicorn-23.0.0-py3-none-any.whl (85 kB)
-2025-07-27T13:55:47.5985804Z [13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.0/85.0 kB 3.3 MB/s eta 0:00:00
-2025-07-27T13:55:47.6026954Z [13:55:11+0000] Downloading msal-1.33.0-py3-none-any.whl (116 kB)
-2025-07-27T13:55:47.6071586Z [13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 116.9/116.9 kB 5.1 MB/s eta 0:00:00
-2025-07-27T13:55:47.6102370Z [13:55:11+0000] Downloading requests-2.32.4-py3-none-any.whl (64 kB)
-2025-07-27T13:55:47.6142841Z [13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.8/64.8 kB 2.9 MB/s eta 0:00:00
-2025-07-27T13:55:47.6180262Z [13:55:11+0000] Downloading PyJWT-2.10.1-py3-none-any.whl (22 kB)
-2025-07-27T13:55:47.6228015Z [13:55:11+0000] Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
-2025-07-27T13:55:47.6306496Z [13:55:11+0000] Downloading authlib-1.6.1-py2.py3-none-any.whl (239 kB)
-2025-07-27T13:55:47.6386610Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 239.3/239.3 kB 4.6 MB/s eta 0:00:00
-2025-07-27T13:55:47.6422982Z [13:55:12+0000] Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
-2025-07-27T13:55:47.6461914Z [13:55:12+0000] Downloading certifi-2025.7.14-py3-none-any.whl (162 kB)
-2025-07-27T13:55:47.6495194Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 162.7/162.7 kB 4.5 MB/s eta 0:00:00
-2025-07-27T13:55:47.6527845Z [13:55:12+0000] Downloading charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (147 kB)
-2025-07-27T13:55:47.6563438Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 147.3/147.3 kB 4.7 MB/s eta 0:00:00
-2025-07-27T13:55:47.6597874Z [13:55:12+0000] Downloading click-8.2.1-py3-none-any.whl (102 kB)
-2025-07-27T13:55:47.6630073Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 4.1 MB/s eta 0:00:00
-2025-07-27T13:55:47.6676261Z [13:55:12+0000] Downloading cryptography-45.0.5-cp311-abi3-manylinux_2_28_x86_64.whl (4.5 MB)
-2025-07-27T13:55:47.6705147Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 17.8 MB/s eta 0:00:00
-2025-07-27T13:55:47.6734082Z [13:55:12+0000] Downloading cyclopts-3.22.3-py3-none-any.whl (84 kB)
-2025-07-27T13:55:47.6768475Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.9/84.9 kB 3.7 MB/s eta 0:00:00
-2025-07-27T13:55:47.7186893Z [13:55:12+0000] Downloading exceptiongroup-1.3.0-py3-none-any.whl (16 kB)
-2025-07-27T13:55:47.7300294Z [13:55:12+0000] Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
-2025-07-27T13:55:47.7734433Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 2.1 MB/s eta 0:00:00
-2025-07-27T13:55:47.7767688Z [13:55:12+0000] Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
-2025-07-27T13:55:47.7942074Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 2.9 MB/s eta 0:00:00
-2025-07-27T13:55:47.8131901Z [13:55:12+0000] Downloading idna-3.10-py3-none-any.whl (70 kB)
-2025-07-27T13:55:47.8218329Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 3.0 MB/s eta 0:00:00
-2025-07-27T13:55:47.8307177Z [13:55:12+0000] Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
-2025-07-27T13:55:47.8396115Z [13:55:12+0000] Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
-2025-07-27T13:55:47.8481030Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 6.3 MB/s eta 0:00:00
-2025-07-27T13:55:47.8619754Z [13:55:12+0000] Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
-2025-07-27T13:55:47.9184036Z [13:55:12+0000] Downloading mcp-1.12.2-py3-none-any.whl (158 kB)
-2025-07-27T13:55:48.0125916Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 158.5/158.5 kB 7.3 MB/s eta 0:00:00
-2025-07-27T13:55:48.0398878Z [13:55:12+0000] Downloading openapi_pydantic-0.5.1-py3-none-any.whl (96 kB)
-2025-07-27T13:55:48.1330638Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.4/96.4 kB 3.8 MB/s eta 0:00:00
-2025-07-27T13:55:48.2062471Z [13:55:12+0000] Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
-2025-07-27T13:55:48.2266499Z [13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 444.8/444.8 kB 13.9 MB/s eta 0:00:00
-2025-07-27T13:55:48.2640175Z [13:55:12+0000] Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
-2025-07-27T13:55:48.3116852Z [13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 3.4 MB/s eta 0:00:00
-2025-07-27T13:55:48.3478493Z [13:55:13+0000] Downloading rich-14.1.0-py3-none-any.whl (243 kB)
-2025-07-27T13:55:48.3588809Z [13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 243.4/243.4 kB 1.4 MB/s eta 0:00:00
-2025-07-27T13:55:48.3780777Z [13:55:13+0000] Downloading urllib3-2.5.0-py3-none-any.whl (129 kB)
-2025-07-27T13:55:48.4359469Z [13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.8/129.8 kB 4.6 MB/s eta 0:00:00
-2025-07-27T13:55:48.5040112Z [13:55:13+0000] Downloading werkzeug-3.1.3-py3-none-any.whl (224 kB)
-2025-07-27T13:55:48.5212225Z [13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 224.5/224.5 kB 8.3 MB/s eta 0:00:00
-2025-07-27T13:55:48.5786408Z [13:55:13+0000] Downloading packaging-25.0-py3-none-any.whl (66 kB)
-2025-07-27T13:55:48.5987177Z [13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.5/66.5 kB 2.6 MB/s eta 0:00:00
-2025-07-27T13:55:48.6380001Z [13:55:13+0000] Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
-2025-07-27T13:55:48.6568181Z [13:55:13+0000] Downloading anyio-4.9.0-py3-none-any.whl (100 kB)
-2025-07-27T13:55:48.6764809Z [13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.9/100.9 kB 4.8 MB/s eta 0:00:00
-2025-07-27T13:55:48.6954710Z [13:55:13+0000] Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
-2025-07-27T13:55:48.7145696Z [13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.8/63.8 kB 2.6 MB/s eta 0:00:00
-2025-07-27T13:55:48.7344647Z [13:55:13+0000] Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467kB)
-2025-07-27T13:55:48.7525016Z [13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 467.2/467.2 kB 12.5 MB/s eta 0:00:00
-2025-07-27T13:55:48.7712017Z [13:55:13+0000] Downloading docstring_parser-0.17.0-py3-none-any.whl (36 kB)
-2025-07-27T13:55:48.8089810Z [13:55:14+0000] Downloading email_validator-2.2.0-py3-none-any.whl (33 kB)
-2025-07-27T13:55:48.8464345Z [13:55:14+0000] Downloading httpx_sse-0.4.1-py3-none-any.whl (8.1 kB)
-2025-07-27T13:55:48.8734882Z [13:55:14+0000] Downloading jsonschema-4.25.0-py3-none-any.whl (89 kB)
-2025-07-27T13:55:48.9055378Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 89.2/89.2 kB 3.5 MB/s eta 0:00:00
-2025-07-27T13:55:48.9670808Z [13:55:14+0000] Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
-2025-07-27T13:55:48.9878444Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 87.5/87.5 kB 4.0 MB/s eta 0:00:00
-2025-07-27T13:55:49.1492882Z [13:55:14+0000] Downloading pydantic_settings-2.10.1-py3-none-any.whl (45 kB)
-2025-07-27T13:55:49.1613192Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.2/45.2 kB 1.2 MB/s eta 0:00:00
-2025-07-27T13:55:49.1864068Z [13:55:14+0000] Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
-2025-07-27T13:55:49.2262589Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 14.8 MB/s eta 0:00:00
-2025-07-27T13:55:49.2465413Z [13:55:14+0000] Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
-2025-07-27T13:55:49.2656312Z [13:55:14+0000] Downloading rich_rst-1.3.1-py3-none-any.whl (11 kB)
-2025-07-27T13:55:49.3211232Z [13:55:14+0000] Downloading sse_starlette-3.0.2-py3-none-any.whl (11 kB)
-2025-07-27T13:55:49.3597779Z [13:55:14+0000] Downloading starlette-0.47.2-py3-none-any.whl (72 kB)
-2025-07-27T13:55:49.4002472Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.0/73.0 kB 2.8 MB/s eta 0:00:00
-2025-07-27T13:55:49.4190368Z [13:55:14+0000] Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
-2025-07-27T13:55:49.4374505Z [13:55:14+0000]    ━━━━━━━━━━━━��━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.9/43.9 kB 1.5 MB/s eta 0:00:00
-2025-07-27T13:55:49.4567218Z [13:55:14+0000] Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
-2025-07-27T13:55:49.4767487Z [13:55:14+0000] Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
-2025-07-27T13:55:49.4964477Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.4/66.4 kB 3.1 MB/s eta 0:00:00
-2025-07-27T13:55:49.5157160Z [13:55:14+0000] Downloading dnspython-2.7.0-py3-none-any.whl (313 kB)
-2025-07-27T13:55:49.5541490Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 313.6/313.6 kB 9.7 MB/s eta 0:00:00
-2025-07-27T13:55:49.5755379Z [13:55:14+0000] Downloading h11-0.16.0-py3-none-any.whl (37 kB)
-2025-07-27T13:55:49.5963705Z [13:55:14+0000] Downloading jsonschema_specifications-2025.4.1-py3-none-any.whl (18 kB)
-2025-07-27T13:55:49.6539631Z [13:55:14+0000] Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
-2025-07-27T13:55:49.6736424Z [13:55:14+0000] Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
-2025-07-27T13:55:49.6937196Z [13:55:14+0000] Downloading rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (383 kB)
-2025-07-27T13:55:49.7133750Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 383.9/383.9 kB 11.3 MB/s eta 0:00:00
-2025-07-27T13:55:49.7319493Z [13:55:14+0000] Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
-2025-07-27T13:55:49.7698409Z [13:55:14+0000] Downloading docutils-0.21.2-py3-none-any.whl (587 kB)
-2025-07-27T13:55:49.7960360Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 587.4/587.4 kB 7.2 MB/s eta 0:00:00
-2025-07-27T13:55:49.8357094Z [13:55:14+0000] Downloading pycparser-2.22-py3-none-any.whl (117 kB)
-2025-07-27T13:55:49.8560989Z [13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.6/117.6 kB 3.1 MB/s eta 0:00:00
-2025-07-27T13:55:49.8759572Z [13:55:15+0000] Building wheels for collected packages: pyperclip
-2025-07-27T13:55:49.8960317Z [13:55:15+0000]   Building wheel for pyperclip (setup.py): started
-2025-07-27T13:55:49.9321359Z [13:55:17+0000]   Building wheel for pyperclip (setup.py): finished with status 'done'
-2025-07-27T13:55:49.9526832Z [13:55:17+0000]   Created wheel for pyperclip: filename=pyperclip-1.9.0-py3-none-any.whl size=11001 sha256=b0eeb5cfd8b3cff960aa841c11f97bdbcd7d23fb8fbea82406ba43a1d07c44aa
-2025-07-27T13:55:49.9705720Z [13:55:17+0000]   Stored in directory: /usr/local/share/pip-cache/wheels/e8/e7/56/591cb88ba1783b38c40d584026e766aac9c3a048e34128ce8b
-2025-07-27T13:55:49.9909503Z [13:55:17+0000] Successfully built pyperclip
-2025-07-27T13:55:50.0085626Z [13:55:18+0000] Installing collected packages: pyperclip, urllib3, typing-extensions, sniffio, rpds-py, python-multipart, python-dotenv, pyjwt, pygments, pycparser, packaging, mdurl, markupsafe, itsdangerous, idna, httpx-sse, h11, docutils, docstring-parser, dnspython, click, charset_normalizer, certifi, blinker, attrs, annotated-types, werkzeug, uvicorn, typing-inspection, requests, referencing, pydantic-core, markdown-it-py, jinja2, httpcore, gunicorn, exceptiongroup, email-validator, cffi, anyio, starlette, sse-starlette, rich, pydantic, jsonschema-specifications, httpx, flask, cryptography, rich-rst, pydantic-settings, openapi-pydantic, jsonschema, flask-cors, authlib, msal, mcp, cyclopts, fastmcp
-2025-07-27T13:55:50.0474640Z [13:55:40+0000] Successfully installed annotated-types-0.7.0 anyio-4.9.0 attrs-25.3.0 authlib-1.6.1 blinker-1.9.0 certifi-2025.7.14 cffi-1.17.1 charset_normalizer-3.4.2 click-8.2.1 cryptography-45.0.5 cyclopts-3.22.3 dnspython-2.7.0 docstring-parser-0.17.0 docutils-0.21.2 email-validator-2.2.0 exceptiongroup-1.3.0 fastmcp-2.10.6 flask-3.1.1 flask-cors-6.0.1 gunicorn-23.0.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 httpx-sse-0.4.1 idna-3.10 itsdangerous-2.2.0 jinja2-3.1.6 jsonschema-4.25.0 jsonschema-specifications-2025.4.1 markdown-it-py-3.0.0 markupsafe-3.0.2 mcp-1.12.2 mdurl-0.1.2 msal-1.33.0 openapi-pydantic-0.5.1 packaging-25.0 pycparser-2.22 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.19.2 pyjwt-2.10.1 pyperclip-1.9.0 python-dotenv-1.1.1 python-multipart-0.0.20 referencing-0.36.2 requests-2.32.4 rich-14.1.0 rich-rst-1.3.1 rpds-py-0.26.0 sniffio-1.3.1 sse-starlette-3.0.2 starlette-0.47.2 typing-extensions-4.14.1 typing-inspection-0.4.1 urllib3-2.5.0 uvicorn-0.35.0 werkzeug-3.1.3
-2025-07-27T13:55:50.0755216Z
-2025-07-27T13:55:50.1139022Z [notice] A new release of pip is available: 24.0 -> 25.1.1
-2025-07-27T13:55:50.3002398Z [notice] To update, run: pip install --upgrade pip
-2025-07-27T13:55:50.3800858Z Not a vso image, so not writing build commands
-2025-07-27T13:55:50.4253234Z Preparing output...
-2025-07-27T13:55:50.5510420Z
-2025-07-27T13:55:50.5924120Z Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
-2025-07-27T13:56:00.2663801Z .....
-2025-07-27T13:56:00.2816877Z Done in 17 sec(s).
-2025-07-27T13:56:00.3202990Z Compressing content of directory '/tmp/_preCompressedDestinationDir'...
-2025-07-27T13:56:32.6922842Z ...........................
-2025-07-27T13:56:32.6996460Z Copied the compressed output to '/home/site/wwwroot'
-2025-07-27T13:56:32.8779245Z
-2025-07-27T13:56:32.8897147Z Removing existing manifest file
-2025-07-27T13:56:32.9094279Z Creating a manifest file...
-2025-07-27T13:56:32.9650091Z Manifest file created.
-2025-07-27T13:56:32.9691057Z Copying .ostype to manifest output directory.
-2025-07-27T13:56:33.0230123Z
-2025-07-27T13:56:33.0431954Z Done in 168 sec(s).
-2025-07-27T13:57:53  No new trace in the past 1 min(s).
+og details
+Deployment ID: 40ced218-c3b5-4e17-80f6-62c4fee8a5e8
+7/27/2025, 03:53:32 PM
+Updating submodules.
+7/27/2025, 03:53:33 PM
+Preparing deployment for commit id '40ced218-c'.
+7/27/2025, 03:53:34 PM
+PreDeployment: context.CleanOutputPath False
+7/27/2025, 03:53:34 PM
+PreDeployment: context.OutputPath /home/site/wwwroot
+7/27/2025, 03:53:34 PM
+Repository path is /tmp/zipdeploy/extracted
+7/27/2025, 03:53:34 PM
+Running oryx build...
+Show logs
+7/27/2025, 03:56:34 PM
+Running post deployment command(s)...
+7/27/2025, 03:56:34 PM
+7/27/2025, 03:56:34 PM
+Generating summary of Oryx build
+7/27/2025, 03:56:34 PM
+Parsing the build logs
+7/27/2025, 03:56:34 PM
+Found 0 issue(s)
+7/27/2025, 03:56:34 PM
+7/27/2025, 03:56:34 PM
+Build Summary :
+7/27/2025, 03:56:34 PM
+===============
+7/27/2025, 03:56:34 PM
+Errors (0)
+7/27/2025, 03:56:34 PM
+Warnings (0)
+7/27/2025, 03:56:35 PM
+7/27/2025, 03:56:35 PM
+Triggering container recycle for OneDeploy by adding/updating restartTrigger.txt to the site root path
+7/27/2025, 03:56:35 PM
+Deployment successful. deployer = OneDeploy deploymentPath = OneDeploy
+Command: oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform python --platform-version 3.11 -p virtualenv_name=antenv --log-file /tmp/build-debug.log  -i /tmp/8ddcd14fa62f158 --compress-destination-dir | tee /tmp/oryx-build.log
+Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+You can report issues at https://github.com/Microsoft/Oryx/issues
+
+Oryx Version: 0.2.20250611.1+0649de32f1279969c9023dd41b389cce4bb94493, Commit: 0649de32f1279969c9023dd41b389cce4bb94493, ReleaseTagName: 20250611.1
+
+Build Operation ID: 4a188ea615cb67b8
+Repository Commit : 40ced218-c3b5-4e17-80f6-62c4fee8a5e8
+OS Type           : bullseye
+Image Type        : githubactions
+
+Primary SDK Storage URL: https://oryx-cdn.microsoft.io
+Backup SDK Storage URL: https://oryxsdks-cdn.azureedge.net
+Detecting platforms...
+External SDK provider is enabled.
+Requesting metadata for platform python from external SDK provider
+Requesting metadata for platform python from external SDK provider
+Detected following platforms:
+  python: 3.11.13
+Requesting metadata for platform python from external SDK provider
+Version '3.11.13' of platform 'python' is not installed. Generating script to install it...
+
+Using intermediate directory '/tmp/8ddcd14fa62f158'.
+
+Copying files to the intermediate directory...
+Done in 4 sec(s).
+
+Source directory     : /tmp/8ddcd14fa62f158
+Destination directory: /home/site/wwwroot
+
+
+Downloading and extracting 'python' version '3.11.13' to '/tmp/oryx/platforms/python/3.11.13'...
+Detected image debian flavor: bullseye.
+Skipping download of python version 3.11.13 as it is available in external sdk provider cache...
+Extracting contents...
+Successfully extracted python version 3.11.13 from external sdk provider cache...
+Done in 30 sec(s).
+
+image detector file exists, platform is python..
+OS detector file exists, OS is bullseye..
+Python Version: /tmp/oryx/platforms/python/3.11.13/bin/python3.11
+Creating directory for command manifest file if it does not exist
+Removing existing manifest file
+Python Virtual Environment: antenv
+Creating virtual environment...
+Activating virtual environment...
+Running pip install...
+[13:54:44+0000] Collecting fastmcp>=0.1.0 (from -r requirements.txt (line 5))
+[13:54:44+0000]   Downloading fastmcp-2.10.6-py3-none-any.whl.metadata (17 kB)
+[13:54:44+0000] Collecting flask>=2.3.0 (from -r requirements.txt (line 6))
+[13:54:44+0000]   Downloading flask-3.1.1-py3-none-any.whl.metadata (3.0 kB)
+[13:54:44+0000] Collecting flask-cors>=4.0.0 (from -r requirements.txt (line 7))
+[13:54:44+0000]   Downloading flask_cors-6.0.1-py3-none-any.whl.metadata (5.3 kB)
+[13:54:45+0000] Collecting gunicorn>=20.1.0 (from -r requirements.txt (line 8))
+[13:54:45+0000]   Downloading gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+[13:54:45+0000] Collecting msal>=1.24.0 (from -r requirements.txt (line 11))
+[13:54:45+0000]   Downloading msal-1.33.0-py3-none-any.whl.metadata (11 kB)
+[13:54:45+0000] Collecting requests>=2.31.0 (from -r requirements.txt (line 12))
+[13:54:45+0000]   Downloading requests-2.32.4-py3-none-any.whl.metadata (4.9 kB)
+[13:54:45+0000] Collecting pyjwt>=2.8.0 (from -r requirements.txt (line 15))
+[13:54:45+0000]   Downloading PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
+[13:54:45+0000] Collecting python-dotenv>=1.0.0 (from -r requirements.txt (line 18))
+[13:54:45+0000]   Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+[13:54:45+0000] Collecting authlib>=1.5.2 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:45+0000]   Downloading authlib-1.6.1-py2.py3-none-any.whl.metadata (1.6 kB)
+[13:54:46+0000] Collecting cyclopts>=3.0.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:46+0000]   Downloading cyclopts-3.22.3-py3-none-any.whl.metadata (11 kB)
+[13:54:46+0000] Collecting exceptiongroup>=1.2.2 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:46+0000]   Downloading exceptiongroup-1.3.0-py3-none-any.whl.metadata (6.7 kB)
+[13:54:46+0000] Collecting httpx>=0.28.1 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:46+0000]   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+[13:54:46+0000] Collecting mcp>=1.10.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:46+0000]   Downloading mcp-1.12.2-py3-none-any.whl.metadata (60 kB)
+[13:54:46+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.0/61.0 kB 2.1 MB/s eta 0:00:00
+[13:54:46+0000] Collecting openapi-pydantic>=0.5.1 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:46+0000]   Downloading openapi_pydantic-0.5.1-py3-none-any.whl.metadata (10 kB)
+[13:54:47+0000] Collecting pydantic>=2.11.7 (from pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:47+0000]   Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
+[13:54:47+0000]      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 68.0/68.0 kB 2.6 MB/s eta 0:00:00
+[13:54:47+0000] Collecting pyperclip>=1.9.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:47+0000]   Downloading pyperclip-1.9.0.tar.gz (20 kB)
+[13:54:47+0000]   Preparing metadata (setup.py): started
+[13:54:48+0000]   Preparing metadata (setup.py): finished with status 'done'
+[13:54:49+0000] Collecting rich>=13.9.4 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:49+0000]   Downloading rich-14.1.0-py3-none-any.whl.metadata (18 kB)
+[13:54:49+0000] Collecting blinker>=1.9.0 (from flask>=2.3.0->-r requirements.txt (line 6))
+[13:54:49+0000]   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+[13:54:49+0000] Collecting click>=8.1.3 (from flask>=2.3.0->-r requirements.txt (line 6))
+[13:54:49+0000]   Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
+[13:54:49+0000] Collecting itsdangerous>=2.2.0 (from flask>=2.3.0->-r requirements.txt (line 6))
+[13:54:49+0000]   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+[13:54:49+0000] Collecting jinja2>=3.1.2 (from flask>=2.3.0->-r requirements.txt (line 6))
+[13:54:49+0000]   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+[13:54:50+0000] Collecting markupsafe>=2.1.1 (from flask>=2.3.0->-r requirements.txt (line 6))
+[13:54:50+0000]   Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+[13:54:50+0000] Collecting werkzeug>=3.1.0 (from flask>=2.3.0->-r requirements.txt (line 6))
+[13:54:50+0000]   Downloading werkzeug-3.1.3-py3-none-any.whl.metadata (3.7 kB)
+[13:54:51+0000] Collecting packaging (from gunicorn>=20.1.0->-r requirements.txt (line 8))
+[13:54:51+0000]   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+[13:54:52+0000] Collecting cryptography<48,>=2.5 (from msal>=1.24.0->-r requirements.txt (line 11))
+[13:54:52+0000]   Downloading cryptography-45.0.5-cp311-abi3-manylinux_2_28_x86_64.whl.metadata (5.7 kB)
+[13:54:52+0000] Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->-r requirements.txt (line 12))
+[13:54:52+0000]   Downloading charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
+[13:54:53+0000] Collecting idna<4,>=2.5 (from requests>=2.31.0->-r requirements.txt (line 12))
+[13:54:53+0000]   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+[13:54:53+0000] Collecting urllib3<3,>=1.21.1 (from requests>=2.31.0->-r requirements.txt (line 12))
+[13:54:53+0000]   Downloading urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
+[13:54:53+0000] Collecting certifi>=2017.4.17 (from requests>=2.31.0->-r requirements.txt (line 12))
+[13:54:53+0000]   Downloading certifi-2025.7.14-py3-none-any.whl.metadata (2.4 kB)
+[13:54:54+0000] Collecting cffi>=1.14 (from cryptography<48,>=2.5->msal>=1.24.0->-r requirements.txt (line 11))
+[13:54:54+0000]   Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+[13:54:54+0000] Collecting attrs>=23.1.0 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:54+0000]   Downloading attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+[13:54:55+0000] Collecting docstring-parser>=0.15 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:55+0000]   Downloading docstring_parser-0.17.0-py3-none-any.whl.metadata (3.5 kB)
+[13:54:55+0000] Collecting rich-rst<2.0.0,>=1.3.1 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:55+0000]   Downloading rich_rst-1.3.1-py3-none-any.whl.metadata (6.0 kB)
+[13:54:55+0000] Collecting typing-extensions>=4.6.0 (from exceptiongroup>=1.2.2->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:55+0000]   Downloading typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+[13:54:55+0000] Collecting anyio (from httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:55+0000]   Downloading anyio-4.9.0-py3-none-any.whl.metadata (4.7 kB)
+[13:54:55+0000] Collecting httpcore==1.* (from httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:56+0000]   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+[13:54:56+0000] Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:56+0000]   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+[13:54:57+0000] Collecting httpx-sse>=0.4 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:57+0000]   Downloading httpx_sse-0.4.1-py3-none-any.whl.metadata (9.4 kB)
+[13:54:58+0000] Collecting jsonschema>=4.20.0 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:58+0000]   Downloading jsonschema-4.25.0-py3-none-any.whl.metadata (7.7 kB)
+[13:54:58+0000] Collecting pydantic-settings>=2.5.2 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:58+0000]   Downloading pydantic_settings-2.10.1-py3-none-any.whl.metadata (3.4 kB)
+[13:54:58+0000] Collecting python-multipart>=0.0.9 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:58+0000]   Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+[13:54:59+0000] Collecting sse-starlette>=1.6.1 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:54:59+0000]   Downloading sse_starlette-3.0.2-py3-none-any.whl.metadata (11 kB)
+[13:55:00+0000] Collecting starlette>=0.27 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:00+0000]   Downloading starlette-0.47.2-py3-none-any.whl.metadata (6.2 kB)
+[13:55:00+0000] Collecting uvicorn>=0.23.1 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:00+0000]   Downloading uvicorn-0.35.0-py3-none-any.whl.metadata (6.5 kB)
+[13:55:00+0000] Collecting annotated-types>=0.6.0 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:00+0000]   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+[13:55:06+0000] Collecting pydantic-core==2.33.2 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:06+0000]   Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+[13:55:06+0000] Collecting typing-inspection>=0.4.0 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:06+0000]   Downloading typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
+[13:55:06+0000] Collecting email-validator>=2.0.0 (from pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:06+0000]   Downloading email_validator-2.2.0-py3-none-any.whl.metadata (25 kB)
+[13:55:06+0000] Collecting markdown-it-py>=2.2.0 (from rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:06+0000]   Downloading markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
+[13:55:06+0000] Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:06+0000]   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+[13:55:07+0000] Collecting sniffio>=1.1 (from anyio->httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:07+0000]   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+[13:55:07+0000] Collecting pycparser (from cffi>=1.14->cryptography<48,>=2.5->msal>=1.24.0->-r requirements.txt (line 11))
+[13:55:07+0000]   Downloading pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
+[13:55:07+0000] Collecting dnspython>=2.0.0 (from email-validator>=2.0.0->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:07+0000]   Downloading dnspython-2.7.0-py3-none-any.whl.metadata (5.8 kB)
+[13:55:07+0000] Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:07+0000]   Downloading jsonschema_specifications-2025.4.1-py3-none-any.whl.metadata (2.9 kB)
+[13:55:08+0000] Collecting referencing>=0.28.4 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:08+0000]   Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+[13:55:10+0000] Collecting rpds-py>=0.7.1 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:10+0000]   Downloading rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+[13:55:10+0000] Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:10+0000]   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+[13:55:10+0000] Collecting docutils (from rich-rst<2.0.0,>=1.3.1->cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+[13:55:10+0000]   Downloading docutils-0.21.2-py3-none-any.whl.metadata (2.8 kB)
+[13:55:11+0000] Downloading fastmcp-2.10.6-py3-none-any.whl (202 kB)
+[13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 202.6/202.6 kB 9.1 MB/s eta 0:00:00
+[13:55:11+0000] Downloading flask-3.1.1-py3-none-any.whl (103 kB)
+[13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.3/103.3 kB 4.7 MB/s eta 0:00:00
+[13:55:11+0000] Downloading flask_cors-6.0.1-py3-none-any.whl (13 kB)
+[13:55:11+0000] Downloading gunicorn-23.0.0-py3-none-any.whl (85 kB)
+[13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.0/85.0 kB 3.3 MB/s eta 0:00:00
+[13:55:11+0000] Downloading msal-1.33.0-py3-none-any.whl (116 kB)
+[13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 116.9/116.9 kB 5.1 MB/s eta 0:00:00
+[13:55:11+0000] Downloading requests-2.32.4-py3-none-any.whl (64 kB)
+[13:55:11+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.8/64.8 kB 2.9 MB/s eta 0:00:00
+[13:55:11+0000] Downloading PyJWT-2.10.1-py3-none-any.whl (22 kB)
+[13:55:11+0000] Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+[13:55:11+0000] Downloading authlib-1.6.1-py2.py3-none-any.whl (239 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 239.3/239.3 kB 4.6 MB/s eta 0:00:00
+[13:55:12+0000] Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+[13:55:12+0000] Downloading certifi-2025.7.14-py3-none-any.whl (162 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 162.7/162.7 kB 4.5 MB/s eta 0:00:00
+[13:55:12+0000] Downloading charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (147 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 147.3/147.3 kB 4.7 MB/s eta 0:00:00
+[13:55:12+0000] Downloading click-8.2.1-py3-none-any.whl (102 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 4.1 MB/s eta 0:00:00
+[13:55:12+0000] Downloading cryptography-45.0.5-cp311-abi3-manylinux_2_28_x86_64.whl (4.5 MB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 17.8 MB/s eta 0:00:00
+[13:55:12+0000] Downloading cyclopts-3.22.3-py3-none-any.whl (84 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.9/84.9 kB 3.7 MB/s eta 0:00:00
+[13:55:12+0000] Downloading exceptiongroup-1.3.0-py3-none-any.whl (16 kB)
+[13:55:12+0000] Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 2.1 MB/s eta 0:00:00
+[13:55:12+0000] Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 2.9 MB/s eta 0:00:00
+[13:55:12+0000] Downloading idna-3.10-py3-none-any.whl (70 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 3.0 MB/s eta 0:00:00
+[13:55:12+0000] Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+[13:55:12+0000] Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 6.3 MB/s eta 0:00:00
+[13:55:12+0000] Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+[13:55:12+0000] Downloading mcp-1.12.2-py3-none-any.whl (158 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 158.5/158.5 kB 7.3 MB/s eta 0:00:00
+[13:55:12+0000] Downloading openapi_pydantic-0.5.1-py3-none-any.whl (96 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.4/96.4 kB 3.8 MB/s eta 0:00:00
+[13:55:12+0000] Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
+[13:55:12+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 444.8/444.8 kB 13.9 MB/s eta 0:00:00
+[13:55:12+0000] Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+[13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 3.4 MB/s eta 0:00:00
+[13:55:13+0000] Downloading rich-14.1.0-py3-none-any.whl (243 kB)
+[13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 243.4/243.4 kB 1.4 MB/s eta 0:00:00
+[13:55:13+0000] Downloading urllib3-2.5.0-py3-none-any.whl (129 kB)
+[13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.8/129.8 kB 4.6 MB/s eta 0:00:00
+[13:55:13+0000] Downloading werkzeug-3.1.3-py3-none-any.whl (224 kB)
+[13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 224.5/224.5 kB 8.3 MB/s eta 0:00:00
+[13:55:13+0000] Downloading packaging-25.0-py3-none-any.whl (66 kB)
+[13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.5/66.5 kB 2.6 MB/s eta 0:00:00
+[13:55:13+0000] Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+[13:55:13+0000] Downloading anyio-4.9.0-py3-none-any.whl (100 kB)
+[13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.9/100.9 kB 4.8 MB/s eta 0:00:00
+[13:55:13+0000] Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
+[13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.8/63.8 kB 2.6 MB/s eta 0:00:00
+[13:55:13+0000] Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467 kB)
+[13:55:13+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 467.2/467.2 kB 12.5 MB/s eta 0:00:00
+[13:55:13+0000] Downloading docstring_parser-0.17.0-py3-none-any.whl (36 kB)
+[13:55:14+0000] Downloading email_validator-2.2.0-py3-none-any.whl (33 kB)
+[13:55:14+0000] Downloading httpx_sse-0.4.1-py3-none-any.whl (8.1 kB)
+[13:55:14+0000] Downloading jsonschema-4.25.0-py3-none-any.whl (89 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 89.2/89.2 kB 3.5 MB/s eta 0:00:00
+[13:55:14+0000] Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 87.5/87.5 kB 4.0 MB/s eta 0:00:00
+[13:55:14+0000] Downloading pydantic_settings-2.10.1-py3-none-any.whl (45 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.2/45.2 kB 1.2 MB/s eta 0:00:00
+[13:55:14+0000] Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 14.8 MB/s eta 0:00:00
+[13:55:14+0000] Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
+[13:55:14+0000] Downloading rich_rst-1.3.1-py3-none-any.whl (11 kB)
+[13:55:14+0000] Downloading sse_starlette-3.0.2-py3-none-any.whl (11 kB)
+[13:55:14+0000] Downloading starlette-0.47.2-py3-none-any.whl (72 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.0/73.0 kB 2.8 MB/s eta 0:00:00
+[13:55:14+0000] Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━��━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.9/43.9 kB 1.5 MB/s eta 0:00:00
+[13:55:14+0000] Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+[13:55:14+0000] Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.4/66.4 kB 3.1 MB/s eta 0:00:00
+[13:55:14+0000] Downloading dnspython-2.7.0-py3-none-any.whl (313 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 313.6/313.6 kB 9.7 MB/s eta 0:00:00
+[13:55:14+0000] Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+[13:55:14+0000] Downloading jsonschema_specifications-2025.4.1-py3-none-any.whl (18 kB)
+[13:55:14+0000] Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+[13:55:14+0000] Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
+[13:55:14+0000] Downloading rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (383 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 383.9/383.9 kB 11.3 MB/s eta 0:00:00
+[13:55:14+0000] Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+[13:55:14+0000] Downloading docutils-0.21.2-py3-none-any.whl (587 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 587.4/587.4 kB 7.2 MB/s eta 0:00:00
+[13:55:14+0000] Downloading pycparser-2.22-py3-none-any.whl (117 kB)
+[13:55:14+0000]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.6/117.6 kB 3.1 MB/s eta 0:00:00
+[13:55:15+0000] Building wheels for collected packages: pyperclip
+[13:55:15+0000]   Building wheel for pyperclip (setup.py): started
+[13:55:17+0000]   Building wheel for pyperclip (setup.py): finished with status 'done'
+[13:55:17+0000]   Created wheel for pyperclip: filename=pyperclip-1.9.0-py3-none-any.whl size=11001 sha256=b0eeb5cfd8b3cff960aa841c11f97bdbcd7d23fb8fbea82406ba43a1d07c44aa
+[13:55:17+0000]   Stored in directory: /usr/local/share/pip-cache/wheels/e8/e7/56/591cb88ba1783b38c40d584026e766aac9c3a048e34128ce8b
+[13:55:17+0000] Successfully built pyperclip
+[13:55:18+0000] Installing collected packages: pyperclip, urllib3, typing-extensions, sniffio, rpds-py, python-multipart, python-dotenv, pyjwt, pygments, pycparser, packaging, mdurl, markupsafe, itsdangerous, idna, httpx-sse, h11, docutils, docstring-parser, dnspython, click, charset_normalizer, certifi, blinker, attrs, annotated-types, werkzeug, uvicorn, typing-inspection, requests, referencing, pydantic-core, markdown-it-py, jinja2, httpcore, gunicorn, exceptiongroup, email-validator, cffi, anyio, starlette, sse-starlette, rich, pydantic, jsonschema-specifications, httpx, flask, cryptography, rich-rst, pydantic-settings, openapi-pydantic, jsonschema, flask-cors, authlib, msal, mcp, cyclopts, fastmcp
+[13:55:40+0000] Successfully installed annotated-types-0.7.0 anyio-4.9.0 attrs-25.3.0 authlib-1.6.1 blinker-1.9.0 certifi-2025.7.14 cffi-1.17.1 charset_normalizer-3.4.2 click-8.2.1 cryptography-45.0.5 cyclopts-3.22.3 dnspython-2.7.0 docstring-parser-0.17.0 docutils-0.21.2 email-validator-2.2.0 exceptiongroup-1.3.0 fastmcp-2.10.6 flask-3.1.1 flask-cors-6.0.1 gunicorn-23.0.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 httpx-sse-0.4.1 idna-3.10 itsdangerous-2.2.0 jinja2-3.1.6 jsonschema-4.25.0 jsonschema-specifications-2025.4.1 markdown-it-py-3.0.0 markupsafe-3.0.2 mcp-1.12.2 mdurl-0.1.2 msal-1.33.0 openapi-pydantic-0.5.1 packaging-25.0 pycparser-2.22 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.19.2 pyjwt-2.10.1 pyperclip-1.9.0 python-dotenv-1.1.1 python-multipart-0.0.20 referencing-0.36.2 requests-2.32.4 rich-14.1.0 rich-rst-1.3.1 rpds-py-0.26.0 sniffio-1.3.1 sse-starlette-3.0.2 starlette-0.47.2 typing-extensions-4.14.1 typing-inspection-0.4.1 urllib3-2.5.0 uvicorn-0.35.0 werkzeug-3.1.3
+
+[notice] A new release of pip is available: 24.0 -> 25.1.1
+[notice] To update, run: pip install --upgrade pip
+Not a vso image, so not writing build commands
+Preparing output...
+
+Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
+Done in 17 sec(s).
+Compressing content of directory '/tmp/_preCompressedDestinationDir'...
+Copied the compressed output to '/home/site/wwwroot'
+
+Removing existing manifest file
+Creating a manifest file...
+Manifest file created.
+Copying .ostype to manifest output directory.
+
+Done in 168 sec(s).
+
+
+
+Unable to open a connection to your app. This may be due to any network security groups or IP restriction rules that you have placed on your app. To use log streaming, please make sure you are able to access your app directly from your current network.
+2025-07-27T14:16:37  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
+2025-07-27T14:16:31.1672444Z Sun Jul 27 14:16:31 UTC 2025 running .net core
+2025-07-27T14:16:32.9977820Z Startup : 02.16.32.980542
+2025-07-27T14:16:33.0347403Z Configure Services : 02.16.33.034527
+2025-07-27T14:16:33.6243825Z Configure : 02.16.33.624075
+2025-07-27T14:16:34.1337440Z Setting Up Routes : 02.16.34.128339
+2025-07-27T14:16:34.8750695Z Exiting Configure : 02.16.34.874877
+2025-07-27T14:16:35.2765013Z Hosting environment: Production
+2025-07-27T14:16:35.2830328Z Content root path: /opt/Kudu
+2025-07-27T14:16:35.2830497Z Now listening on: http://0.0.0.0:8181
+2025-07-27T14:16:35.2830531Z Application started. Press Ctrl+C to shut down.Ending Log Tail of existing logs ---Starting Live Log Stream ---
+2025-07-27T14:17:31.6809972Z     __ __          __      __    _ __
+2025-07-27T14:17:31.6811266Z    / //_/_  _ ____/ /_  __/ /   (_) /____
+2025-07-27T14:17:31.6811356Z   / ,< / / / / __  / / / / /   / / __/ _
+2025-07-27T14:17:31.6811376Z  / /| / /_/ / /_/ / /_/ / /___/ / /_/  __/
+2025-07-27T14:17:31.6811395Z /_/ |_\__,_/\__,_/\__,_/_____/_/\__/\___/
+2025-07-27T14:17:31.6811424Z
+2025-07-27T14:17:31.6811447Z
+2025-07-27T14:17:31.6811464Z DEBUG CONSOLE | AZURE APP SERVICE ON LINUX
+2025-07-27T14:17:31.6811480Z
+2025-07-27T14:17:31.6811501Z Documentation: http://aka.ms/webapp-linux
+2025-07-27T14:17:31.6811547Z Kudu Version : 20250623.5
+2025-07-27T14:17:31.6811567Z Commit       : 353543ec4c45fcbfd4750522d32c94e23b31927a
+2025-07-27T14:17:31.6811586Z
+2025-07-27T14:17:33.1440366Z chown: changing ownership of '/temp': Operation not permitted
+2025-07-27T14:17:33.1543698Z chmod: changing permissions of '/temp': Operation not permitted
+2025-07-27T14:17:35.0475543Z Restarting OpenBSD Secure Shell server: sshd.
+2025-07-27T14:17:35.1922246Z node not running, starting node /opt/webssh/index.js
+2025-07-27T14:18:42  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
+2025-07-27T14:18:38.5750931Z Sun Jul 27 14:18:38 UTC 2025 running .net core
+2025-07-27T14:18:40.2764884Z Startup : 02.18.40.256589
+2025-07-27T14:18:40.3034479Z Configure Services : 02.18.40.303242
+2025-07-27T14:18:40.6702743Z Configure : 02.18.40.670056
+2025-07-27T14:18:41.0739482Z Setting Up Routes : 02.18.41.073760
+2025-07-27T14:18:41.4905151Z Exiting Configure : 02.18.41.490289
+2025-07-27T14:18:41.8315127Z Hosting environment: Production
+2025-07-27T14:18:41.8323628Z Content root path: /opt/Kudu
+2025-07-27T14:18:41.8393485Z Now listening on: http://0.0.0.0:8181
+2025-07-27T14:18:41.8398671Z Application started. Press Ctrl+C to shut down.Ending Log Tail of existing logs ---Starting Live Log Stream ---

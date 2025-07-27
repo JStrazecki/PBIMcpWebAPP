@@ -219,3 +219,6 @@ development.py
 shared/
 data/
 logs/
+
+# Windows Azure Web App config (conflicts with Linux Python)
+web.config

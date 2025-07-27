@@ -1,0 +1,327 @@
+"""
+Simple discovery tools using direct custom DAX queries
+These replace the complex discovery tools with simple wrappers around execute_custom_dax
+"""
+
+from fastmcp import FastMCP
+from datetime import datetime
+from ...powerbi.client import get_powerbi_client
+from ...config.settings import settings
+from ...utils.logging import mcp_logger
+
+
+def register_simple_discovery_tools(mcp: FastMCP):
+    """Register simple discovery tools that use direct custom DAX queries"""
+    
+    @mcp.tool()
+    def discover_tables(
+        workspace_name: str,
+        dataset_name: str
+    ) -> str:
+        """
+        Discover all tables in the Power BI model using direct DAX query.
+        
+        Args:
+            workspace_name: Power BI workspace name (required)
+            dataset_name: Dataset name (required)
+        """
+        try:
+            mcp_logger.info(f"Discovering tables: {workspace_name}/{dataset_name}")
+            
+            # Get PowerBI client
+            client = get_powerbi_client()
+            
+            # Get workspace and dataset
+            workspace = client.get_workspace_by_name(workspace_name)
+            dataset = client.get_dataset_by_name(workspace['id'], dataset_name)
+            
+            # Execute the same DAX query that works
+            tables_query = """
+            EVALUATE CALCULATETABLE( 
+                SELECTCOLUMNS(__def_Tables, [Name], [Description]), 
+                NOT(ISBLANK(__def_Tables[Description])) 
+            )
+            """
+            
+            result = client.execute_dax_query(workspace['id'], dataset['id'], tables_query)
+            
+            output = f"📊 TABLES DISCOVERY\n"
+            output += f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+            output += "=" * 50 + "\n\n"
+            
+            if isinstance(result, list) and len(result) > 0 and 'rows' in result[0]:
+                rows = result[0]['rows']
+                output += f"🎯 DISCOVERED {len(rows)} TABLES:\n\n"
+                
+                for row in rows:
+                    table_name = row.get('__def_Tables[Name]', '')
+                    description = row.get('__def_Tables[Description]', '')
+                    output += f"• {table_name}\n"
+                    if description:
+                        output += f"  📝 {description}\n"
+                    output += "\n"
+            else:
+                output += "❌ No tables discovered\n"
+                mcp_logger.debug(f"Raw result: {result}")
+            
+            return output
+            
+        except Exception as e:
+            error_msg = f"❌ Error discovering tables: {str(e)}"
+            mcp_logger.error(error_msg)
+            return error_msg
+    
+    @mcp.tool()
+    def discover_measures(
+        workspace_name: str,
+        dataset_name: str
+    ) -> str:
+        """
+        Discover all measures in the Power BI model using direct DAX query.
+        
+        Args:
+            workspace_name: Power BI workspace name (required)
+            dataset_name: Dataset name (required)
+        """
+        try:
+            mcp_logger.info(f"Discovering measures: {workspace_name}/{dataset_name}")
+            
+            # Get PowerBI client
+            client = get_powerbi_client()
+            
+            # Get workspace and dataset
+            workspace = client.get_workspace_by_name(workspace_name)
+            dataset = client.get_dataset_by_name(workspace['id'], dataset_name)
+            
+            # Execute the same DAX query that works
+            measures_query = """
+            EVALUATE CALCULATETABLE( 
+                SELECTCOLUMNS(__def_Measures, [Name], [Description], [DisplayFolder]), 
+                NOT(ISBLANK(__def_Measures[Description])) 
+            )
+            """
+            
+            result = client.execute_dax_query(workspace['id'], dataset['id'], measures_query)
+            
+            output = f"📊 MEASURES DISCOVERY\n"
+            output += f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+            output += "=" * 50 + "\n\n"
+            
+            if isinstance(result, list) and len(result) > 0 and 'rows' in result[0]:
+                rows = result[0]['rows']
+                output += f"🎯 DISCOVERED {len(rows)} MEASURES:\n\n"
+                
+                for row in rows:
+                    measure_name = row.get('__def_Measures[Name]', '')
+                    description = row.get('__def_Measures[Description]', '')
+                    display_folder = row.get('__def_Measures[DisplayFolder]', '')
+                    
+                    output += f"• {measure_name}\n"
+                    if description:
+                        output += f"  📝 {description}\n"
+                    if display_folder:
+                        output += f"  📁 Folder: {display_folder}\n"
+                    output += "\n"
+                
+                output += "⚠️ CRITICAL: ALWAYS use these existing measures for calculations!\n"
+                output += "⚠️ NEVER recreate measures that already exist!\n"
+            else:
+                output += "❌ No measures discovered\n"
+                mcp_logger.debug(f"Raw result: {result}")
+            
+            return output
+            
+        except Exception as e:
+            error_msg = f"❌ Error discovering measures: {str(e)}"
+            mcp_logger.error(error_msg)
+            return error_msg
+    
+    @mcp.tool()
+    def discover_columns(
+        workspace_name: str,
+        dataset_name: str
+    ) -> str:
+        """
+        Discover all columns in the Power BI model using direct DAX query.
+        
+        Args:
+            workspace_name: Power BI workspace name (required)
+            dataset_name: Dataset name (required)
+        """
+        try:
+            mcp_logger.info(f"Discovering columns: {workspace_name}/{dataset_name}")
+            
+            # Get PowerBI client
+            client = get_powerbi_client()
+            
+            # Get workspace and dataset
+            workspace = client.get_workspace_by_name(workspace_name)
+            dataset = client.get_dataset_by_name(workspace['id'], dataset_name)
+            
+            # Execute the same DAX query that works
+            columns_query = """
+            EVALUATE CALCULATETABLE( 
+                SELECTCOLUMNS(__def_Columns, [Table], [Name], [Description]), 
+                NOT(ISBLANK(__def_Columns[Description])) 
+            )
+            """
+            
+            result = client.execute_dax_query(workspace['id'], dataset['id'], columns_query)
+            
+            output = f"📊 COLUMNS DISCOVERY\n"
+            output += f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+            output += "=" * 50 + "\n\n"
+            
+            if isinstance(result, list) and len(result) > 0 and 'rows' in result[0]:
+                rows = result[0]['rows']
+                output += f"🎯 DISCOVERED {len(rows)} COLUMNS:\n\n"
+                
+                # Group by table
+                tables = {}
+                for row in rows:
+                    table_name = row.get('__def_Columns[Table]', '')
+                    column_name = row.get('__def_Columns[Name]', '')
+                    description = row.get('__def_Columns[Description]', '')
+                    
+                    if table_name not in tables:
+                        tables[table_name] = []
+                    tables[table_name].append((column_name, description))
+                
+                for table_name, columns in tables.items():
+                    output += f"📋 {table_name}:\n"
+                    for column_name, description in columns:
+                        output += f"  • {column_name}\n"
+                        if description:
+                            output += f"    📝 {description}\n"
+                    output += "\n"
+            else:
+                output += "❌ No columns discovered\n"
+                mcp_logger.debug(f"Raw result: {result}")
+            
+            return output
+            
+        except Exception as e:
+            error_msg = f"❌ Error discovering columns: {str(e)}"
+            mcp_logger.error(error_msg)
+            return error_msg
+    
+    @mcp.tool()
+    def discover_relationships(
+        workspace_name: str,
+        dataset_name: str
+    ) -> str:
+        """
+        Discover all relationships in the Power BI model using direct DAX query.
+        
+        Args:
+            workspace_name: Power BI workspace name (required)
+            dataset_name: Dataset name (required)
+        """
+        try:
+            mcp_logger.info(f"Discovering relationships: {workspace_name}/{dataset_name}")
+            
+            # Get PowerBI client
+            client = get_powerbi_client()
+            
+            # Get workspace and dataset
+            workspace = client.get_workspace_by_name(workspace_name)
+            dataset = client.get_dataset_by_name(workspace['id'], dataset_name)
+            
+            # Execute the same DAX query that works
+            relationships_query = """
+            EVALUATE CALCULATETABLE(
+                SELECTCOLUMNS(__def_Relationships, [Relationship]),
+                __def_Relationships[IsActive] = TRUE() 
+            )
+            """
+            
+            result = client.execute_dax_query(workspace['id'], dataset['id'], relationships_query)
+            
+            output = f"📊 RELATIONSHIPS DISCOVERY\n"
+            output += f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+            output += "=" * 50 + "\n\n"
+            
+            if isinstance(result, list) and len(result) > 0 and 'rows' in result[0]:
+                rows = result[0]['rows']
+                output += f"🎯 DISCOVERED {len(rows)} RELATIONSHIPS:\n\n"
+                
+                for row in rows:
+                    relationship = row.get('__def_Relationships[Relationship]', '')
+                    output += f"• {relationship}\n"
+                
+                output += "\n🔗 These relationships show how tables connect to each other\n"
+                output += "📅 Note: _Date table is the main date dimension for filtering\n"
+            else:
+                output += "❌ No relationships discovered\n"
+                mcp_logger.debug(f"Raw result: {result}")
+            
+            return output
+            
+        except Exception as e:
+            error_msg = f"❌ Error discovering relationships: {str(e)}"
+            mcp_logger.error(error_msg)
+            return error_msg
+    
+    @mcp.tool()
+    def discover_complete_model(
+        workspace_name: str,
+        dataset_name: str
+    ) -> str:
+        """
+        Run complete model discovery - all 4 discovery functions in sequence.
+        
+        Args:
+            workspace_name: Power BI workspace name (required)
+            dataset_name: Dataset name (required)
+        """
+        try:
+            mcp_logger.info(f"Running complete model discovery: {workspace_name}/{dataset_name}")
+            
+            output = f"🚀 COMPLETE MODEL DISCOVERY\n"
+            output += f"Workspace: {workspace_name}\n"
+            output += f"Dataset: {dataset_name}\n"
+            output += "=" * 60 + "\n\n"
+            
+            # 1. Discover Tables
+            output += "1️⃣ DISCOVERING TABLES...\n"
+            try:
+                tables_result = discover_tables(workspace_name, dataset_name)
+                output += "✅ Tables discovery completed\n\n"
+            except Exception as e:
+                output += f"❌ Tables discovery failed: {e}\n\n"
+            
+            # 2. Discover Measures
+            output += "2️⃣ DISCOVERING MEASURES...\n"
+            try:
+                measures_result = discover_measures(workspace_name, dataset_name)
+                output += "✅ Measures discovery completed\n\n"
+            except Exception as e:
+                output += f"❌ Measures discovery failed: {e}\n\n"
+            
+            # 3. Discover Columns
+            output += "3️⃣ DISCOVERING COLUMNS...\n"
+            try:
+                columns_result = discover_columns(workspace_name, dataset_name)
+                output += "✅ Columns discovery completed\n\n"
+            except Exception as e:
+                output += f"❌ Columns discovery failed: {e}\n\n"
+            
+            # 4. Discover Relationships
+            output += "4️⃣ DISCOVERING RELATIONSHIPS...\n"
+            try:
+                relationships_result = discover_relationships(workspace_name, dataset_name)
+                output += "✅ Relationships discovery completed\n\n"
+            except Exception as e:
+                output += f"❌ Relationships discovery failed: {e}\n\n"
+            
+            output += "🎉 COMPLETE MODEL DISCOVERY FINISHED!\n"
+            output += "• All data retrieved fresh from Power BI model\n"
+            output += "• No caching - always latest information\n"
+            output += "• Ready for analysis and queries\n"
+            
+            return output
+            
+        except Exception as e:
+            error_msg = f"❌ Error in complete model discovery: {str(e)}"
+            mcp_logger.error(error_msg)
+            return error_msg

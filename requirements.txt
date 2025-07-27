@@ -1,0 +1,11 @@
+fastmcp>=0.1.0
+mcp>=1.0.0
+requests>=2.31.0
+keyring>=23.0.1
+flask>=2.3.0
+flask-cors>=4.0.0
+msal>=1.24.0
+authlib>=1.2.0
+pyjwt>=2.8.0
+python-jose>=3.3.0
+gunicorn>=20.1.0

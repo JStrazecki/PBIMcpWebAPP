@@ -8,7 +8,9 @@
       "Bash(copy main_simple.py app.py)",
       "Bash(cp:*)",
       "Bash(python:*)",
-      "Bash(diff:*)"
+      "Bash(diff:*)",
+      "Bash(rm:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }

@@ -8,15 +8,15 @@ echo "Running PBI MCP Assistant"
 
 cd /home/site/wwwroot
 
-# Use Python 3.13 (matching the working example approach)
-export PATH="/opt/python/3.13.5/bin:/opt/python/3.13/bin:$PATH"
+# Use Python 3.11 (matching the working example approach)
+export PATH="/opt/python/3.11.12/bin:/opt/python/3.11/bin:$PATH"
 export PYTHONPATH="/home/site/wwwroot:$PYTHONPATH"
 
 echo "Python: $(which python3)"
 echo "Python version: $(python3 --version)"
 
 # Install packages if not already installed (like the working example)
-if [ ! -d "/home/.local/lib/python3.13/site-packages/fastmcp" ]; then
+if [ ! -d "/home/.local/lib/python3.11/site-packages/fastmcp" ]; then
     echo "Installing packages..."
     python3 -m pip install --user --upgrade pip
     python3 -m pip install --user -r requirements.txt
@@ -26,7 +26,7 @@ fi
 
 # Add user site-packages to Python path (critical from working example)
 export PATH="$PATH:/home/.local/bin"
-export PYTHONPATH="$PYTHONPATH:/home/.local/lib/python3.13/site-packages"
+export PYTHONPATH="$PYTHONPATH:/home/.local/lib/python3.11/site-packages"
 
 # Verify core packages (like the working example)
 echo "Verifying packages..."

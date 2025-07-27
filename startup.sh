@@ -94,15 +94,10 @@ if command -v gunicorn &> /dev/null; then
     exec gunicorn \
         --bind "0.0.0.0:$PORT" \
         --workers 1 \
-        --threads 4 \
-        --timeout 300 \
-        --keep-alive 2 \
-        --max-requests 1000 \
-        --max-requests-jitter 100 \
+        --timeout 600 \
         --access-logfile "-" \
         --error-logfile "-" \
         --log-level info \
-        --worker-class sync \
         "$MAIN_MODULE:app"
 else
     echo "Gunicorn not found, starting with Python directly..."

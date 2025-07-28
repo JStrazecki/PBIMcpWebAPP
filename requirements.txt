@@ -1,18 +1,20 @@
-# Simplified requirements - NO DATABASE DEPENDENCIES
-# For Azure Web App deployment
+# Simplified requirements - EXACTLY MATCHING WORKING EXAMPLE PATTERN
+# For Azure Web App deployment (NO DATABASE DEPENDENCIES)
 
-# Core MCP and web framework
-fastmcp>=0.1.0
+# Core web framework (matching working example)
 flask>=2.3.0
 flask-cors>=4.0.0
 gunicorn>=20.1.0
 
-# Power BI authentication  
+# Power BI authentication (essential only)
 msal>=1.24.0
 requests>=2.31.0
 
-# Security
+# Security (matching working example)
 pyjwt>=2.8.0
 
 # Basic utilities (no database packages)
 python-dotenv>=1.0.0
+
+# Optional MCP (if needed later)
+# fastmcp>=0.1.0

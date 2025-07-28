@@ -15,8 +15,8 @@ export PYTHONPATH="/home/site/wwwroot:$PYTHONPATH"
 echo "Python: $(which python3)"
 echo "Python version: $(python3 --version)"
 
-# Install packages if not already installed (like the working example)
-if [ ! -d "/home/.local/lib/python3.11/site-packages/fastmcp" ]; then
+# Install packages if not already installed (matching working example)
+if [ ! -d "/home/.local/lib/python3.11/site-packages/flask" ]; then
     echo "Installing packages..."
     python3 -m pip install --user --upgrade pip
     python3 -m pip install --user -r requirements.txt
@@ -28,9 +28,8 @@ fi
 export PATH="$PATH:/home/.local/bin"
 export PYTHONPATH="$PYTHONPATH:/home/.local/lib/python3.11/site-packages"
 
-# Verify core packages (like the working example)
+# Verify core packages (matching working example pattern)
 echo "Verifying packages..."
-python3 -c "import fastmcp; print('✓ fastmcp installed')" || exit 1
 python3 -c "import flask; print('✓ flask installed')" || exit 1
 python3 -c "import msal; print('✓ msal installed')" || exit 1
 python3 -c "import requests; print('✓ requests installed')" || exit 1
@@ -43,8 +42,8 @@ mkdir -p .cache
 
 # Verify main app loads (exactly like working example)
 echo "Testing main app import..."
-python3 -c "from app import APP; print('✓ PBI MCP app loads successfully')" || exit 1
+python3 -c "from app_simple import APP; print('✓ PBI MCP app loads successfully')" || exit 1
 
-# Start the app (using the exact same pattern as working example)
+# Start the app (FIXED: Use sync worker for Flask, not aiohttp)
 echo "Starting PBI MCP Bot on port 8000..."
-exec python3 -m gunicorn --bind 0.0.0.0:8000 --worker-class sync --timeout 600 --workers 1 app:APP
+exec python3 -m gunicorn --bind 0.0.0.0:8000 --worker-class sync --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info app_simple:APP

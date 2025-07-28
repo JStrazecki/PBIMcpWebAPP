@@ -1,0 +1,58 @@
+2025-07-28T12:47:30.4683193Z
+2025-07-28T12:47:30.4794506Z [notice] A new release of pip is available: 24.0 -> 25.1.1
+2025-07-28T12:47:30.5559389Z [notice] To update, run: pip install --upgrade pip
+2025-07-28T12:47:30.7186838Z Not a vso image, so not writing build commands
+2025-07-28T12:47:30.8200543Z Preparing output...
+2025-07-28T12:47:30.8774281Z
+2025-07-28T12:47:30.9736036Z Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
+2025-07-28T12:48:17.3334109Z .........................................
+2025-07-28T12:48:17.3366807Z Done in 61 sec(s).
+2025-07-28T12:48:17.5227208Z Compressing content of directory '/tmp/_preCompressedDestinationDir'...
+2025-07-28T12:49:08.5157380Z ..............................................
+2025-07-28T12:49:08.5171555Z Copied the compressed output to '/home/site/wwwroot'
+2025-07-28T12:49:08.6453403Z
+2025-07-28T12:49:08.6798299Z Removing existing manifest file
+2025-07-28T12:49:08.6990289Z Creating a manifest file...
+2025-07-28T12:49:08.7278354Z Manifest file created.
+2025-07-28T12:49:08.7565182Z Copying .ostype to manifest output directory.
+2025-07-28T12:49:08.7818141Z
+2025-07-28T12:49:08.7926480Z Done in 466 sec(s).
+2025-07-28T12:50:20.9793022Z     __ __          __      __    _ __
+2025-07-28T12:50:20.9794439Z    / //_/_  _ ____/ /_  __/ /   (_) /____
+2025-07-28T12:50:20.9794497Z   / ,< / / / / __  / / / / /   / / __/ _
+2025-07-28T12:50:20.9794521Z  / /| / /_/ / /_/ / /_/ / /___/ / /_/  __/
+2025-07-28T12:50:20.9794545Z /_/ |_\__,_/\__,_/\__,_/_____/_/\__/\___/
+2025-07-28T12:50:20.9794580Z
+2025-07-28T12:50:20.9794610Z
+2025-07-28T12:50:20.9794682Z DEBUG CONSOLE | AZURE APP SERVICE ON LINUX
+2025-07-28T12:50:20.9794704Z
+2025-07-28T12:50:20.9794732Z Documentation: http://aka.ms/webapp-linux
+2025-07-28T12:50:20.9794924Z Kudu Version : 20250623.5
+2025-07-28T12:50:20.9794950Z Commit       : 353543ec4c45fcbfd4750522d32c94e23b31927a
+2025-07-28T12:50:20.9794971Z
+2025-07-28T12:50:21.1984333Z chown: changing ownership of '/temp': Operation not permitted
+2025-07-28T12:50:21.1984711Z chmod: changing permissions of '/temp': Operation not permitted
+2025-07-28T12:50:23.6726163Z Restarting OpenBSD Secure Shell server: sshd.
+2025-07-28T12:50:23.9494268Z node not running, starting node /opt/webssh/index.js
+2025-07-28T12:50:44.0022902Z Mon Jul 28 12:50:44 UTC 2025 running .net core
+2025-07-28T12:50:49.1029495Z Startup : 12.50.49.056050
+2025-07-28T12:50:49.1816004Z Configure Services : 12.50.49.181393
+2025-07-28T12:50:51.2023671Z Configure : 12.50.51.183861
+2025-07-28T12:50:52.3861657Z Setting Up Routes : 12.50.52.370049
+2025-07-28T12:50:53.9653052Z Exiting Configure : 12.50.53.965087
+2025-07-28T12:50:54.8615593Z Hosting environment: Production
+2025-07-28T12:50:54.8633662Z Content root path: /opt/Kudu
+2025-07-28T12:50:54.8642318Z Now listening on: http://0.0.0.0:8181
+2025-07-28T12:50:54.8787817Z Application started. Press Ctrl+C to shut down.
+2025-07-28T12:51:20  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
+2025-07-28T12:50:44.0022902Z Mon Jul 28 12:50:44 UTC 2025 running .net core
+2025-07-28T12:50:49.1029495Z Startup : 12.50.49.056050
+2025-07-28T12:50:49.1816004Z Configure Services : 12.50.49.181393
+2025-07-28T12:50:51.2023671Z Configure : 12.50.51.183861
+2025-07-28T12:50:52.3861657Z Setting Up Routes : 12.50.52.370049
+2025-07-28T12:50:53.9653052Z Exiting Configure : 12.50.53.965087
+2025-07-28T12:50:54.8615593Z Hosting environment: Production
+2025-07-28T12:50:54.8633662Z Content root path: /opt/Kudu
+2025-07-28T12:50:54.8642318Z Now listening on: http://0.0.0.0:8181
+2025-07-28T12:50:54.8787817Z Application started. Press Ctrl+C to shut down.Ending Log Tail of existing logs ---Starting Live Log Stream ---
+2025-07-28T12:52:21  No new trace in the past 1 min(s).

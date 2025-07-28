@@ -1,69 +1,38 @@
-Unable to open a connection to your app. This may be due to any network security groups or IP restriction rules that you have placed on your app. To use log streaming, please make sure you are able to access your app directly from your current network.
-2025-07-28T13:51:42  No new trace in the past 1 min(s).
-2025-07-28T13:51:39.4919159Z Container start method called.
-2025-07-28T13:51:39.5013510Z Establishing network.
-2025-07-28T13:51:39.5190000Z Pulling image: appsvc/python:3.11_20250506.5.tuxprod.
-2025-07-28T13:51:40.9986323Z Container is starting.
-2025-07-28T13:51:41.0005173Z Establishing user namespace if not established already.
-2025-07-28T13:51:41.0082608Z Establishing network if not established already.
-2025-07-28T13:51:41.0090346Z Mounting volumes.
-2025-07-28T13:51:41.0278669Z Nested mountpoint
-2025-07-28T13:51:41.1411584Z Nested mountpoint volatile/logs
-2025-07-28T13:51:41.1597241Z Nested mountpoint
-2025-07-28T13:51:41.2534099Z Nested mountpoint
-2025-07-28T13:51:41.2996813Z Nested mountpoint
-2025-07-28T13:51:43.1445053Z Creating container.
-2025-07-28T13:51:43.1449838Z Creating pipes for streaming container io.
-2025-07-28T13:51:43.1451991Z Creating stdout named pipe at /podr/container/pipe/7a8ab2765e38_pbimcp/stdout_00c2d2d0bb004f8387327dacd77fe421.
-2025-07-28T13:51:43.1623828Z Successfully created stdout named pipe at: /podr/container/pipe/7a8ab2765e38_pbimcp/stdout_00c2d2d0bb004f8387327dacd77fe421.
-2025-07-28T13:51:43.1625088Z Opening named pipe /podr/container/pipe/7a8ab2765e38_pbimcp/stdout_00c2d2d0bb004f8387327dacd77fe421 for reading in non-blocking mode.
-2025-07-28T13:51:43.2013248Z Successfully opened named pipe: /podr/container/pipe/7a8ab2765e38_pbimcp/stdout_00c2d2d0bb004f8387327dacd77fe421.
-2025-07-28T13:51:43.2104218Z Successfully removed non-blocking flag from /podr/container/pipe/7a8ab2765e38_pbimcp/stdout_00c2d2d0bb004f8387327dacd77fe421.
-2025-07-28T13:51:43.2175646Z Creating stderr named pipe at /podr/container/pipe/7a8ab2765e38_pbimcp/stderr_f8194e28828f41f09250323f05aa944a.
-2025-07-28T13:51:43.2186357Z Successfully created stderr named pipe at: /podr/container/pipe/7a8ab2765e38_pbimcp/stderr_f8194e28828f41f09250323f05aa944a.
-2025-07-28T13:51:43.2191865Z Opening named pipe /podr/container/pipe/7a8ab2765e38_pbimcp/stderr_f8194e28828f41f09250323f05aa944a for reading in non-blocking mode.
-2025-07-28T13:51:43.2198391Z Successfully opened named pipe: /podr/container/pipe/7a8ab2765e38_pbimcp/stderr_f8194e28828f41f09250323f05aa944a.
-2025-07-28T13:51:43.2265350Z Successfully removed non-blocking flag from /podr/container/pipe/7a8ab2765e38_pbimcp/stderr_f8194e28828f41f09250323f05aa944a.
-2025-07-28T13:51:43.2282639Z Creating container with image: appsvc/python:3.11_20250506.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20250506.5.tuxprod
-2025-07-28T13:51:44.3206317Z Starting container: 7a8ab2765e38_pbimcp.
-2025-07-28T13:51:44.4295945Z Starting watchers and probes.
-2025-07-28T13:51:44.4676887Z Starting metrics collection.
-2025-07-28T13:51:44.4705368Z Container is running.
-2025-07-28T13:51:45.5602980Z Container start method finished after 6061 ms.
-2025-07-28T13:53:15.8334999Z Site startup probe succeeded after 90.2069597 seconds.
-2025-07-28T13:53:15.9906081Z Site started.
-2025-07-28T13:53:16.0148026Z Site is running with deployment version: d0508a99-7d89-4502-9a42-5e2111934db7
-2025-07-28T13:53:19.5577704Z Container start method called.
-2025-07-28T13:53:19.5655744Z Establishing network.
-2025-07-28T13:53:19.5666283Z Pulling image: appsvc/python:3.11_20250506.5.tuxprod.
-2025-07-28T13:53:22.6814733Z Container is starting.
-2025-07-28T13:53:22.6823779Z Establishing user namespace if not established already.
-2025-07-28T13:53:22.6833131Z Establishing network if not established already.
-2025-07-28T13:53:22.6839107Z Mounting volumes.
-2025-07-28T13:53:22.6909385Z Nested mountpoint
-2025-07-28T13:53:22.7190215Z Nested mountpoint volatile/logs
-2025-07-28T13:53:22.7359419Z Nested mountpoint
-2025-07-28T13:53:22.7465777Z Nested mountpoint
-2025-07-28T13:53:22.9483986Z Nested mountpoint
-2025-07-28T13:53:26.0312506Z Creating container.
-2025-07-28T13:53:26.0496284Z Creating pipes for streaming container io.
-2025-07-28T13:53:26.0819552Z Creating stdout named pipe at /podr/container/pipe/eaa0b831c855_pbimcp/stdout_c19ace36d7e4446ba21bc411c8b42fdd.
-2025-07-28T13:53:26.1073901Z Successfully created stdout named pipe at: /podr/container/pipe/eaa0b831c855_pbimcp/stdout_c19ace36d7e4446ba21bc411c8b42fdd.
-2025-07-28T13:53:26.1179364Z Opening named pipe /podr/container/pipe/eaa0b831c855_pbimcp/stdout_c19ace36d7e4446ba21bc411c8b42fdd for reading in non-blocking mode.
-2025-07-28T13:53:26.1185141Z Successfully opened named pipe: /podr/container/pipe/eaa0b831c855_pbimcp/stdout_c19ace36d7e4446ba21bc411c8b42fdd.
-2025-07-28T13:53:26.1367384Z Successfully removed non-blocking flag from /podr/container/pipe/eaa0b831c855_pbimcp/stdout_c19ace36d7e4446ba21bc411c8b42fdd.
-2025-07-28T13:53:26.1383561Z Creating stderr named pipe at /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e.
-2025-07-28T13:53:26.1457455Z Successfully created stderr named pipe at: /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e.
-2025-07-28T13:53:26.1463001Z Opening named pipe /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e for reading in non-blocking mode.
-2025-07-28T13:53:26.1464723Z Successfully opened named pipe: /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e.
-2025-07-28T13:53:26.1465956Z Successfully removed non-blocking flag from /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e.
-2025-07-28T13:53:26.1480636Z Creating container with image: appsvc/python:3.11_20250506.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20250506.5.tuxprod
-2025-07-28T13:53:35.6025797Z Starting container: eaa0b831c855_pbimcp.
-2025-07-28T13:53:35.7740224Z Starting watchers and probes.
-2025-07-28T13:53:35.8179705Z Starting metrics collection.
-2025-07-28T13:53:35.8421513Z Container is running.
-2025-07-28T13:53:36.3190866Z Container start method finished after 16760 ms.
-2025-07-28T13:54:41  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/home/LogFiles/__lastCheckTime.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/__lastCheckTime.txt)07/28/2025 13:28:03/home/LogFiles/kudu/trace/pbimcp-kudu-042ed03f-e8b3165d-cb92-4707-b931-f78c9ac21ef8.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-042ed03f-e8b3165d-cb92-4707-b931-f78c9ac21ef8.txt)
+Startup Request, url: /api/logstream/, method: GET, type: request, pid: 774,1,16, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/2025_07_27_lw1sdlwk0000K8_docker.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/2025_07_27_lw1sdlwk0000K8_docker.log)
+2025-07-27T12:37:00.9426660Z Container is terminated. Total time elapsed: 6911 ms.
+2025-07-27T12:37:00.9449166Z Site container: pbimcp terminated during site startup.
+2025-07-27T12:37:00.9524234Z Site: pbimcp stopped.
+2025-07-27T12:37:21.9012939Z Container is terminating. Grace period: 5 seconds.
+2025-07-27T12:37:21.9690256Z Stop and delete container. Retry count = 0
+2025-07-27T12:37:22.0445413Z Stopping container: 677cb7b61c9c_pbimcp.
+2025-07-27T12:37:28.1440824Z Deleting container: 677cb7b61c9c_pbimcp. Retry count = 0
+2025-07-27T12:37:28.7274686Z Container spec TerminationMessagePolicy  path
+2025-07-27T12:37:28.7470056Z Container is terminated. Total time elapsed: 6827 ms.
+2025-07-27T12:37:28.7470539Z Site: pbimcp stopped./home/LogFiles/2025_07_28_lw1sdlwk0000K8_default_docker.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/2025_07_28_lw1sdlwk0000K8_default_docker.log)
+2025-07-28T13:28:38.564604322Z Running PBI MCP Assistant
+2025-07-28T13:28:38.572493570Z startup.sh: line 8: $'\r': command not found
+2025-07-28T13:28:38.574348882Z startup.sh: line 9: cd: $'/home/site/wwwroot\r': No such file or directory
+2025-07-28T13:28:38.581572225Z startup.sh: line 10: $'\r': command not found
+2025-07-28T13:28:38.590480480Z startup.sh: line 14: $'\r': command not found
+2025-07-28T13:28:38.601426646Z Python: /opt/python/3.11.12/bin/python3
+2025-07-28T13:28:38.619747957Z Python version: Python 3.11.12
+2025-07-28T13:28:38.629582717Z startup.sh: line 17: $'\r': command not found
+2025-07-28T13:28:38.629599817Z startup.sh: line 50: syntax error: unexpected end of file/home/LogFiles/2025_07_28_lw1sdlwk0000K8_docker.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/2025_07_28_lw1sdlwk0000K8_docker.log)
+2025-07-28T14:53:36.7280678Z Container spec TerminationMessagePolicy  path
+2025-07-28T14:53:36.7296472Z Container is terminated. Total time elapsed: 2114 ms.
+2025-07-28T14:53:36.7367605Z Site: pbimcp stopped.
+2025-07-28T14:54:34.0614838Z Container is terminating. Grace period: 5 seconds.
+2025-07-28T14:54:34.1381073Z Stop and delete container. Retry count = 0
+2025-07-28T14:54:34.1388784Z Stopping container: 58523b7d937e_pbimcp.
+2025-07-28T14:54:39.5853523Z Deleting container: 58523b7d937e_pbimcp. Retry count = 0
+2025-07-28T14:54:45.4668144Z Container spec TerminationMessagePolicy  path
+2025-07-28T14:54:45.4676705Z Container is terminated. Total time elapsed: 11357 ms.
+2025-07-28T14:54:45.4678335Z Site: pbimcp stopped./home/LogFiles/AppServiceAppLogs_Feature_Installer/startup_728.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/AppServiceAppLogs_Feature_Installer/startup_728.log)
+2025-07-27 11:03:47,919  [MainThread] [DEBUG] : Initializating AppServiceAppLogging
+2025-07-27 11:03:47,920  [Thread-1 (] [DEBUG] : Did not find any previously bound socket
+2025-07-27 11:03:47,920  [MainThread] [DEBUG] : Initialized AppServiceAppLogging
+2025-07-27 11:03:50,329  [Thread-3 (] [DEBUG] : Waiting for the logs flag to be set/home/LogFiles/CodeProfiler/d0cde2_debug.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/CodeProfiler/d0cde2_debug.log)[2025_07_27_11_03_50] [appsvc_profiler.installer] [INFO] Code Profiler Installer is starting up[2025_07_27_11_03_50] [appsvc_profiler.installer] [INFO] Cleaning up any existing status file which indicated signal handlers initialized status[2025_07_27_11_03_50] [appsvc_profiler.installer] [DEBUG] APPSETTING_WEBSITE_ENABLE_DEFAULT_CODE_PROFILER : None[2025_07_27_11_03_51] [appsvc_profiler.installer] [INFO] Attempting to install the default code profiler.[2025_07_27_11_03_51] [appsvc_profiler.installer] [DEBUG] viztracer would save traces to /tmp/d0cde2_profiler_trace.json[2025_07_27_11_03_51] [appsvc_profiler.installer] [INFO] Successfully installed code profiler.[2025_07_27_11_03_51] [appsvc_profiler.installer] [INFO] Signal Handlers SIGUSR for needed code-profiler have been initialized for gunicorn process on instance d0cde28736e5c1d3a440595e581ee6705e5b0295d317a5142ddf15c6269c1f4d[2025_07_27_11_03_51] [appsvc_profiler.installer] [DEBUG] Code Profiler Installer is exiting as installation is completedEnding Log Tail of existing logs ---Starting Live Log Stream ---
+2025-07-28T14:56:05  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/home/LogFiles/__lastCheckTime.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/__lastCheckTime.txt)07/28/2025 13:28:03/home/LogFiles/kudu/trace/pbimcp-kudu-042ed03f-e8b3165d-cb92-4707-b931-f78c9ac21ef8.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-042ed03f-e8b3165d-cb92-4707-b931-f78c9ac21ef8.txt)
 2025-07-27T21:15:06  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 770,1,7, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-086410eb-6dbad837-3816-4ad6-988d-e2560d665749.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-086410eb-6dbad837-3816-4ad6-988d-e2560d665749.txt)
 2025-07-27T19:38:34  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 770,1,7, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-0ae22d51-b11d2736-cfa7-47f4-86cd-6db417c4336d.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-0ae22d51-b11d2736-cfa7-47f4-86cd-6db417c4336d.txt)
 2025-07-27T21:31:32  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 821,1,15, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-0ee393a9-fea3b79b-8385-4b89-9ac2-280cef262dc6.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-0ee393a9-fea3b79b-8385-4b89-9ac2-280cef262dc6.txt)
@@ -84,14 +53,17 @@ Unable to open a connection to your app. This may be due to any network security
 2025-07-27T20:58:46  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 770,1,15, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-44a48d3f-1e7588fb-6a3e-4847-be5c-348de0d8f4af.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-44a48d3f-1e7588fb-6a3e-4847-be5c-348de0d8f4af.txt)
 2025-07-27T20:20:22  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 768,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-4e5f10a5-2c13d664-6fce-46b1-89fc-3373c81b83cc.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-4e5f10a5-2c13d664-6fce-46b1-89fc-3373c81b83cc.txt)
 2025-07-27T12:52:43  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 770,1,7, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-538afa46-c77393ea-8027-4569-89cf-8c2b63e99443.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-538afa46-c77393ea-8027-4569-89cf-8c2b63e99443.txt)
-2025-07-28T09:03:06  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 768,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-598bf4ae-059e6ad1-5361-4309-974c-ca74791cdd68.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-598bf4ae-059e6ad1-5361-4309-974c-ca74791cdd68.txt)
+2025-07-28T09:03:06  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 768,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-576cdd9c-d95919a9-8751-4358-bd50-457778d8047a.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-576cdd9c-d95919a9-8751-4358-bd50-457778d8047a.txt)
+2025-07-28T14:28:53  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 776,1,18, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-598bf4ae-059e6ad1-5361-4309-974c-ca74791cdd68.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-598bf4ae-059e6ad1-5361-4309-974c-ca74791cdd68.txt)
 2025-07-25T13:11:20  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 768,1,15, ScmType: None/home/LogFiles/kudu/trace/pbimcp-kudu-5de9b299-56daec2a-90c1-4aca-adae-91c694da41e0.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-5de9b299-56daec2a-90c1-4aca-adae-91c694da41e0.txt)
 2025-07-28T09:05:16  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 770,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-6072831d-85d82b41-13ac-4991-a390-0b4e66597413.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-6072831d-85d82b41-13ac-4991-a390-0b4e66597413.txt)
 2025-07-27T21:26:59  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 821,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-62721308-701c121f-1841-4514-a87e-6cde97f5cd0b.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-62721308-701c121f-1841-4514-a87e-6cde97f5cd0b.txt)
 2025-07-27T14:03:04  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 770,1,7, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-63ad462b-4cfd4171-6dbc-4179-8559-34f5aac401a8.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-63ad462b-4cfd4171-6dbc-4179-8559-34f5aac401a8.txt)
 2025-07-28T08:58:34  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 770,1,15, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-6665f776-88d8ad45-655f-465c-8b03-2fd0d34bcf97.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-6665f776-88d8ad45-655f-465c-8b03-2fd0d34bcf97.txt)
 2025-07-28T12:14:50  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 768,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-6824224a-d9e0eaf1-c210-4f58-b5d1-0c027f3deb20.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-6824224a-d9e0eaf1-c210-4f58-b5d1-0c027f3deb20.txt)
-2025-07-28T09:04:33  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 770,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: None/home/LogFiles/kudu/trace/pbimcp-kudu-72b2df17-11a0068f-596f-4d77-8706-ae9e00b9a6f7.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-72b2df17-11a0068f-596f-4d77-8706-ae9e00b9a6f7.txt)
+2025-07-28T09:04:33  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 770,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: None/home/LogFiles/kudu/trace/pbimcp-kudu-6efa4269-ff0967db-fa87-447a-90f6-d0ded429a339.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-6efa4269-ff0967db-fa87-447a-90f6-d0ded429a339.txt)
+2025-07-28T14:55:15  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 772,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-71ddba50-357799c8-8d24-4f08-b146-3ee5df31f052.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-71ddba50-357799c8-8d24-4f08-b146-3ee5df31f052.txt)
+2025-07-28T14:18:55  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 768,1,7, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-72b2df17-11a0068f-596f-4d77-8706-ae9e00b9a6f7.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-72b2df17-11a0068f-596f-4d77-8706-ae9e00b9a6f7.txt)
 2025-07-28T09:09:51  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 768,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-76464cc2-6a7e0573-ea16-49bb-9926-a1d22aec9f4e.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-76464cc2-6a7e0573-ea16-49bb-9926-a1d22aec9f4e.txt)
 2025-07-28T09:06:31  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 770,1,15, ScmType: None, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-79879ec1-fb1379e5-81f6-423b-b7d8-74e005f6f9a9.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-79879ec1-fb1379e5-81f6-423b-b7d8-74e005f6f9a9.txt)
 2025-07-27T23:30:32  Startup Request, url: /diagnostics/runtime, method: GET, type: request, pid: 767,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-7bb2dc9b-f50ab623-2f86-45c7-b03c-d6ad75e66e8a.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-7bb2dc9b-f50ab623-2f86-45c7-b03c-d6ad75e66e8a.txt)
@@ -117,7 +89,8 @@ Unable to open a connection to your app. This may be due to any network security
 2025-07-27T22:17:52  Startup Request, url: /api/deployments/latest?deployer=OneDeploy&time=2025-07-27_22-17-20Z, method: GET, type: request, pid: 825,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-c507e52f-72385d19-5a49-445b-af76-d74b8591cb79.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-c507e52f-72385d19-5a49-445b-af76-d74b8591cb79.txt)
 2025-07-28T08:57:38  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 768,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-c649b5f1-a59a5143-343d-4a52-b1e7-4859dfcb3d41.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-c649b5f1-a59a5143-343d-4a52-b1e7-4859dfcb3d41.txt)
 2025-07-27T18:51:00  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 774,1,7, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-c8698b76-ab67681a-3d11-4e8a-8412-1cc50d863066.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-c8698b76-ab67681a-3d11-4e8a-8412-1cc50d863066.txt)
-2025-07-27T20:37:56  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 770,1,15, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-d4097bb3-a6e7c45f-77ba-467e-9b34-acc43954f475.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-d4097bb3-a6e7c45f-77ba-467e-9b34-acc43954f475.txt)
+2025-07-27T20:37:56  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 770,1,15, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-ccfcc28a-7738c197-598d-4359-84a0-f3315ab40832.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-ccfcc28a-7738c197-598d-4359-84a0-f3315ab40832.txt)
+2025-07-28T14:32:18  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 774,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-d4097bb3-a6e7c45f-77ba-467e-9b34-acc43954f475.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-d4097bb3-a6e7c45f-77ba-467e-9b34-acc43954f475.txt)
 2025-07-28T09:11:34  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 767,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-d6c5f82c-8b745365-2c29-4c0b-804f-bd9982d8cf47.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-d6c5f82c-8b745365-2c29-4c0b-804f-bd9982d8cf47.txt)
 2025-07-27T18:36:20  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 769,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-e6a7f086-ee9585a8-7a8a-42e0-9242-243f8876a2c6.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-e6a7f086-ee9585a8-7a8a-42e0-9242-243f8876a2c6.txt)
 2025-07-27T13:47:24  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 770,1,5, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-f047e0ed-0161c33d-a274-4776-b6ab-f616ed56df85.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-f047e0ed-0161c33d-a274-4776-b6ab-f616ed56df85.txt)
@@ -131,7 +104,9 @@ Unable to open a connection to your app. This may be due to any network security
 2025-07-28T13:41:22  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 767,1,16, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-faabcb9e-7ce9099a-ffc3-45c1-b1a7-6021e4571b26.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-faabcb9e-7ce9099a-ffc3-45c1-b1a7-6021e4571b26.txt)
 2025-07-27T14:16:36  Startup Request, url: /api/deployments/8cff7085-90a1-41ca-ad0f-c0dfd0d71088/log?api-version=2018-11-01, method: GET, type: request, pid: 767,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-fadc3de8-75aee22d-afaa-4136-9212-a37d750afec0.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-fadc3de8-75aee22d-afaa-4136-9212-a37d750afec0.txt)
 2025-07-27T18:35:25  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 770,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: 1, ScmType: GitHubAction/home/LogFiles/kudu/trace/pbimcp-kudu-fba33647-31d18b65-a00f-424b-babc-c0fe612b8d72.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-fba33647-31d18b65-a00f-424b-babc-c0fe612b8d72.txt)
-2025-07-27T13:53:21  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 767,1,7, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/2025_07_27_lw1sdlwk0000K8_docker.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/2025_07_27_lw1sdlwk0000K8_docker.log)
+2025-07-27T13:53:21  Startup Request, url: /api/deployments/?$orderby=ReceivedTime%20desc&$top=20&api-version=2022-03-01, method: GET, type: request, pid: 767,1,7, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-fceedaf9-6ad3a2aa-2c8e-4792-b1d1-7405283667ee.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-fceedaf9-6ad3a2aa-2c8e-4792-b1d1-7405283667ee.txt)
+2025-07-28T14:54:23  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 774,1,16, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/pbimcp-kudu-ff026d61-24f8467d-b462-4985-a9cd-a16ed626c649.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/pbimcp-kudu-ff026d61-24f8467d-b462-4985-a9cd-a16ed626c649.txt)
+2025-07-28T14:56:05  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 768,1,7, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/2025_07_27_lw1sdlwk0000K8_docker.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/2025_07_27_lw1sdlwk0000K8_docker.log)
 2025-07-27T12:37:00.9426660Z Container is terminated. Total time elapsed: 6911 ms.
 2025-07-27T12:37:00.9449166Z Site container: pbimcp terminated during site startup.
 2025-07-27T12:37:00.9524234Z Site: pbimcp stopped.
@@ -151,39 +126,52 @@ Unable to open a connection to your app. This may be due to any network security
 2025-07-28T13:28:38.619747957Z Python version: Python 3.11.12
 2025-07-28T13:28:38.629582717Z startup.sh: line 17: $'\r': command not found
 2025-07-28T13:28:38.629599817Z startup.sh: line 50: syntax error: unexpected end of file/home/LogFiles/2025_07_28_lw1sdlwk0000K8_docker.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/2025_07_28_lw1sdlwk0000K8_docker.log)
-2025-07-28T13:53:26.1457455Z Successfully created stderr named pipe at: /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e.
-2025-07-28T13:53:26.1463001Z Opening named pipe /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e for reading in non-blocking mode.
-2025-07-28T13:53:26.1464723Z Successfully opened named pipe: /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e.
-2025-07-28T13:53:26.1465956Z Successfully removed non-blocking flag from /podr/container/pipe/eaa0b831c855_pbimcp/stderr_76f1ca312afc463cabdf3c2551838e4e.
-2025-07-28T13:53:26.1480636Z Creating container with image: appsvc/python:3.11_20250506.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20250506.5.tuxprod
-2025-07-28T13:53:35.6025797Z Starting container: eaa0b831c855_pbimcp.
-2025-07-28T13:53:35.7740224Z Starting watchers and probes.
-2025-07-28T13:53:35.8179705Z Starting metrics collection.
-2025-07-28T13:53:35.8421513Z Container is running.
-2025-07-28T13:53:36.3190866Z Container start method finished after 16760 ms./home/LogFiles/AppServiceAppLogs_Feature_Installer/startup_728.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/AppServiceAppLogs_Feature_Installer/startup_728.log)
+2025-07-28T14:53:36.7280678Z Container spec TerminationMessagePolicy  path
+2025-07-28T14:53:36.7296472Z Container is terminated. Total time elapsed: 2114 ms.
+2025-07-28T14:53:36.7367605Z Site: pbimcp stopped.
+2025-07-28T14:54:34.0614838Z Container is terminating. Grace period: 5 seconds.
+2025-07-28T14:54:34.1381073Z Stop and delete container. Retry count = 0
+2025-07-28T14:54:34.1388784Z Stopping container: 58523b7d937e_pbimcp.
+2025-07-28T14:54:39.5853523Z Deleting container: 58523b7d937e_pbimcp. Retry count = 0
+2025-07-28T14:54:45.4668144Z Container spec TerminationMessagePolicy  path
+2025-07-28T14:54:45.4676705Z Container is terminated. Total time elapsed: 11357 ms.
+2025-07-28T14:54:45.4678335Z Site: pbimcp stopped./home/LogFiles/AppServiceAppLogs_Feature_Installer/startup_728.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/AppServiceAppLogs_Feature_Installer/startup_728.log)
 2025-07-27 11:03:47,919  [MainThread] [DEBUG] : Initializating AppServiceAppLogging
 2025-07-27 11:03:47,920  [Thread-1 (] [DEBUG] : Did not find any previously bound socket
 2025-07-27 11:03:47,920  [MainThread] [DEBUG] : Initialized AppServiceAppLogging
 2025-07-27 11:03:50,329  [Thread-3 (] [DEBUG] : Waiting for the logs flag to be set/home/LogFiles/CodeProfiler/d0cde2_debug.log  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/CodeProfiler/d0cde2_debug.log)[2025_07_27_11_03_50] [appsvc_profiler.installer] [INFO] Code Profiler Installer is starting up[2025_07_27_11_03_50] [appsvc_profiler.installer] [INFO] Cleaning up any existing status file which indicated signal handlers initialized status[2025_07_27_11_03_50] [appsvc_profiler.installer] [DEBUG] APPSETTING_WEBSITE_ENABLE_DEFAULT_CODE_PROFILER : None[2025_07_27_11_03_51] [appsvc_profiler.installer] [INFO] Attempting to install the default code profiler.[2025_07_27_11_03_51] [appsvc_profiler.installer] [DEBUG] viztracer would save traces to /tmp/d0cde2_profiler_trace.json[2025_07_27_11_03_51] [appsvc_profiler.installer] [INFO] Successfully installed code profiler.[2025_07_27_11_03_51] [appsvc_profiler.installer] [INFO] Signal Handlers SIGUSR for needed code-profiler have been initialized for gunicorn process on instance d0cde28736e5c1d3a440595e581ee6705e5b0295d317a5142ddf15c6269c1f4d[2025_07_27_11_03_51] [appsvc_profiler.installer] [DEBUG] Code Profiler Installer is exiting as installation is completedEnding Log Tail of existing logs ---Starting Live Log Stream ---
-2025-07-28T13:54:55.1119431Z Site startup probe succeeded after 78.7333155 seconds.
-2025-07-28T13:54:55.2224883Z Site started.
-2025-07-28T13:54:55.2482375Z Site is running with deployment version: d0508a99-7d89-4502-9a42-5e2111934db7
-2025-07-28T13:55:15.4449677Z Container is terminating. Grace period: 5 seconds.
-2025-07-28T13:55:15.4945887Z Stop and delete container. Retry count = 0
-2025-07-28T13:55:15.5056195Z Stopping container: 7a8ab2765e38_pbimcp.
-2025-07-28T13:55:16.9632861Z Deleting container: 7a8ab2765e38_pbimcp. Retry count = 0
-2025-07-28T13:55:18.7670180Z Container spec TerminationMessagePolicy  path
-2025-07-28T13:55:18.7773806Z Container is terminated. Total time elapsed: 3321 ms.
-2025-07-28T13:55:18.7857509Z Site: pbimcp stopped.
-2025-07-28T13:56:43  No new trace in the past 1 min(s).
-2025-07-28T13:57:43  No new trace in the past 2 min(s).
-2025-07-28T13:58:43  No new trace in the past 3 min(s).
-2025-07-28T13:59:43  No new trace in the past 4 min(s).
-2025-07-28T14:00:43  No new trace in the past 5 min(s).
-2025-07-28T14:01:43  No new trace in the past 6 min(s).
-2025-07-28T14:02:43  No new trace in the past 7 min(s).
-2025-07-28T14:03:43  No new trace in the past 8 min(s).
-2025-07-28T14:04:43  No new trace in the past 9 min(s).
-2025-07-28T14:05:43  No new trace in the past 10 min(s).
-2025-07-28T14:06:43  No new trace in the past 11 min(s).
-2025-07-28T14:07:43  No new trace in the past 12 min(s).
+2025-07-28T14:57:06  No new trace in the past 1 min(s).
+2025-07-28T14:57:43.3810387Z Container start method called.
+2025-07-28T14:57:43.3916736Z Establishing network.
+2025-07-28T14:57:43.3925065Z Pulling image: appsvc/python:3.11_20250506.5.tuxprod.
+2025-07-28T14:57:44.3954766Z Container is starting.
+2025-07-28T14:57:44.3960099Z Establishing user namespace if not established already.
+2025-07-28T14:57:44.4019789Z Establishing network if not established already.
+2025-07-28T14:57:44.4024200Z Mounting volumes.
+2025-07-28T14:57:44.4027695Z Nested mountpoint
+2025-07-28T14:57:44.4493090Z Nested mountpoint volatile/logs
+2025-07-28T14:57:44.4771869Z Nested mountpoint
+2025-07-28T14:57:44.4952792Z Nested mountpoint
+2025-07-28T14:57:44.5414508Z Nested mountpoint
+2025-07-28T14:57:45.6421610Z Creating container.
+2025-07-28T14:57:45.6443930Z Creating pipes for streaming container io.
+2025-07-28T14:57:45.6656895Z Creating stdout named pipe at /podr/container/pipe/81b4da02bccc_pbimcp/stdout_876b200f52f84c5884460b4c9e5640f4.
+2025-07-28T14:57:45.6817831Z Successfully created stdout named pipe at: /podr/container/pipe/81b4da02bccc_pbimcp/stdout_876b200f52f84c5884460b4c9e5640f4.
+2025-07-28T14:57:45.6825879Z Opening named pipe /podr/container/pipe/81b4da02bccc_pbimcp/stdout_876b200f52f84c5884460b4c9e5640f4 for reading in non-blocking mode.
+2025-07-28T14:57:45.6837011Z Successfully opened named pipe: /podr/container/pipe/81b4da02bccc_pbimcp/stdout_876b200f52f84c5884460b4c9e5640f4.
+2025-07-28T14:57:45.7097345Z Successfully removed non-blocking flag from /podr/container/pipe/81b4da02bccc_pbimcp/stdout_876b200f52f84c5884460b4c9e5640f4.
+2025-07-28T14:57:45.7114029Z Creating stderr named pipe at /podr/container/pipe/81b4da02bccc_pbimcp/stderr_97858c50bdf94e519109e143d32f22f3.
+2025-07-28T14:57:45.7188874Z Successfully created stderr named pipe at: /podr/container/pipe/81b4da02bccc_pbimcp/stderr_97858c50bdf94e519109e143d32f22f3.
+2025-07-28T14:57:45.7207774Z Opening named pipe /podr/container/pipe/81b4da02bccc_pbimcp/stderr_97858c50bdf94e519109e143d32f22f3 for reading in non-blocking mode.
+2025-07-28T14:57:45.7290764Z Successfully opened named pipe: /podr/container/pipe/81b4da02bccc_pbimcp/stderr_97858c50bdf94e519109e143d32f22f3.
+2025-07-28T14:57:45.7403137Z Successfully removed non-blocking flag from /podr/container/pipe/81b4da02bccc_pbimcp/stderr_97858c50bdf94e519109e143d32f22f3.
+2025-07-28T14:57:45.7480508Z Creating container with image: appsvc/python:3.11_20250506.5.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/python:3.11_20250506.5.tuxprod
+2025-07-28T14:57:47.0763593Z Starting container: 81b4da02bccc_pbimcp.
+2025-07-28T14:57:47.2286784Z Starting watchers and probes.
+2025-07-28T14:57:47.2291912Z Starting metrics collection.
+2025-07-28T14:57:47.2302047Z Container is running.
+2025-07-28T14:57:48.1385557Z Container start method finished after 4747 ms.
+2025-07-28T14:58:33.9099470Z Site startup probe succeeded after 45.72244 seconds.
+2025-07-28T14:58:34.1774010Z Site started.
+2025-07-28T14:58:34.2322390Z Site is running with deployment version: bd0a6fed-d6e1-40d8-800e-7fdcb4532af9
+2025-07-28T15:00:06  No new trace in the past 1 min(s).

@@ -47,6 +47,6 @@ jobs:
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'sqlbottest'
+          app-name: 'pbimcp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9F32AA6E60224F2390156C5CB2702CB4 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_417201659C8746E7AC792504BBFDA6BC }}

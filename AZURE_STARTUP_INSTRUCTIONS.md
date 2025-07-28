@@ -1,57 +1,74 @@
-# Azure Startup Configuration Instructions
+# Azure Startup Configuration - DIRECT GUNICORN OPTIMIZED
 
-## CRITICAL: startupcommand.txt is NOT used by Azure
+## RECOMMENDED: Use Direct Gunicorn Command
 
-Azure Web App **IGNORES** the `startupcommand.txt` file. You must configure the startup command through the Azure Portal.
+Your app has been optimized for direct gunicorn startup. This bypasses potential startup script issues.
 
-## Step-by-Step Fix:
+## Step-by-Step Configuration:
 
-### 1. Configure Startup Command in Azure Portal
+### 1. Configure Direct Startup Command in Azure Portal
 1. Go to **Azure Portal** → Your Web App `pbimcp` → **Configuration** → **General Settings**
 2. In the **Startup Command** field, enter:
    ```bash
-   bash startup.sh
+   gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info app:APP
    ```
 3. Click **Save**
 4. **Restart** your Web App
 
-### 2. Alternative: Use Procfile (Updated)
-Your `Procfile` has been updated to:
+### 2. Alternative: Use startup.sh (if needed)
+If you prefer the startup script approach:
+```bash
+bash startup.sh
 ```
-web: gunicorn --bind=0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info app_simple:APP
-```
 
-### 3. Verify Configuration Files
-- ✅ `startup.sh` - Fixed to use `app_simple:APP`
-- ✅ `Procfile` - Updated to use `app_simple:APP`  
-- ✅ `app_simple.py` - Simplified Flask app (no FastMCP conflicts)
-- ✅ `requirements.txt` - Simplified dependencies
+### 3. Full MCP Server Restored
+Your configuration has been restored to use the **complete MCP server**:
 
-## What Was Wrong:
+- ✅ `app.py` - **Full FastMCP server** with all Power BI tools
+- ✅ `requirements.txt` - **FastMCP included** for complete MCP functionality  
+- ✅ `startup.sh` - **FastMCP verification** and `app:APP` startup
+- ✅ `Procfile` - **Updated** to use `app:APP`
+- ✅ `startupcommand.txt` - **Updated** with direct gunicorn command
 
-1. **`startupcommand.txt` ignored** - Azure doesn't use this file
-2. **Azure defaulted to .NET mode** - Because no valid Python startup command found
-3. **No Python app traces in logs** - Because startup.sh never executed
+## MCP Tools Available:
+
+Your full MCP server now includes these tools:
+1. `get_powerbi_status` - Power BI authentication status
+2. `health_check` - Complete system health check
+3. `list_powerbi_workspaces` - List Power BI workspaces
+4. `get_powerbi_datasets` - Get datasets from workspaces
+5. `execute_powerbi_query` - Execute DAX/M queries
 
 ## Expected Behavior After Fix:
 
-You should see these messages in Azure logs:
+You should see these messages in Azure logs with direct gunicorn startup:
 ```
-=== PBI MCP Bot Startup ===
-Time: [timestamp]
-Directory: /home/site/wwwroot
-Python: /opt/python/3.11.*/bin/python3
-✓ flask installed
-✓ msal installed
-✓ requests installed
-✓ gunicorn installed
-✓ PBI MCP app loads successfully
-Starting PBI MCP Bot on port 8000...
+FastMCP imported successfully
+Flask and CORS imported successfully
+FastMCP server initialized successfully
+Flask app and CORS initialized successfully
+=== Power BI MCP Server Direct Startup ===
+Python version: 3.11.*
+Working directory: /home/site/wwwroot
+Running on Azure: True
+Azure hostname: pbimcp.azurewebsites.net
+Power BI auth status: {'status': 'not_configured', 'type': 'none'}
+Available MCP tools: get_powerbi_status, health_check, list_powerbi_workspaces, get_powerbi_datasets, execute_powerbi_query
+Flask app created successfully: app
+App routes available: ['/static/<path:filename>', '/', '/health', '/api/powerbi/workspaces']
+Power BI MCP Server ready for gunicorn startup
 ```
 
-## Backup Options:
+## Power BI Configuration:
 
-If startup.sh still doesn't work, try setting this as Azure startup command:
-```bash
-cd /home/site/wwwroot && python3 -m gunicorn --bind=0.0.0.0:8000 --workers 1 --timeout 600 app_simple:APP
+Set these environment variables in Azure Portal → Configuration → Application Settings:
+```
+POWERBI_CLIENT_ID=<your-client-id>
+POWERBI_CLIENT_SECRET=<your-client-secret>
+POWERBI_TENANT_ID=<your-tenant-id>
+```
+
+Or use a manual token:
+```
+POWERBI_TOKEN=<your-bearer-token>
 ```

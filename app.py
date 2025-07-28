@@ -657,9 +657,13 @@ def initialize_for_gunicorn():
     if is_azure:
         logger.info(f"Azure hostname: {os.environ.get('WEBSITE_HOSTNAME')}")
     
-    # Verify Power BI configuration
-    auth_status = check_powerbi_auth()
-    logger.info(f"Power BI auth status: {auth_status}")
+    # Verify OAuth configuration
+    oauth_configured = bool(msal_app)
+    logger.info(f"OAuth configured: {oauth_configured}")
+    if oauth_configured:
+        logger.info("Microsoft OAuth authentication enabled")
+    else:
+        logger.warning("OAuth not configured - set AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID")
     
     # Log available MCP tools
     logger.info("Available MCP tools: get_powerbi_status, health_check, list_powerbi_workspaces, get_powerbi_datasets, execute_powerbi_query")

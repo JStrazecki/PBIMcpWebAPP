@@ -18,7 +18,10 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(dos2unix:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:modelcontextprotocol.io)"
     ],
     "deny": []
   }

@@ -7,14 +7,14 @@
       "authentication": {
         "type": "oauth2",
         "provider": "microsoft",
-        "authorization_url": "https://your-apim-gateway.azure-api.net/powerbi-mcp/authorize",
+        "authorization_url": "https://pbimcp.azurewebsites.net/powerbi-mcp/authorize",
         "token_url": "https://login.microsoftonline.com/YOUR-TENANT-ID/oauth2/v2.0/token",
         "client_id": "5bdb10bc-bb29-4af9-8cb5-062690e6be15",
         "scopes": ["https://analysis.windows.net/powerbi/api/.default"],
         "redirect_uri": "https://claude.ai/api/mcp/auth_callback"
       },
       "endpoints": {
-        "base_url": "https://your-apim-gateway.azure-api.net/powerbi-mcp",
+        "base_url": "https://pbimcp.azurewebsites.net/powerbi-mcp",
         "health": "/health",
         "status": "/mcp/status",
         "workspaces": "/mcp/workspaces",

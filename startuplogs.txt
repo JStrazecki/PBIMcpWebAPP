@@ -1,0 +1,975 @@
+2025-07-29T15:29:02.8180691Z    _____
+2025-07-29T15:29:02.8193563Z   /  _  \ __________ _________   ____
+2025-07-29T15:29:02.8193683Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-07-29T15:29:02.8193713Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-07-29T15:29:02.8193740Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-29T15:29:02.8193774Z         \/      \/                  \/
+2025-07-29T15:29:02.8193841Z A P P   S E R V I C E   O N   L I N U X
+2025-07-29T15:29:02.8193873Z
+2025-07-29T15:29:02.8193903Z Documentation: http://aka.ms/webapp-linux
+2025-07-29T15:29:02.8193931Z Python 3.11.12
+2025-07-29T15:29:02.8193960Z Note: Any data outside '/home' is not persisted
+2025-07-29T15:29:03.8585594Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-29T15:29:03.8958340Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-29T15:29:03.9541768Z Updating certificates in /etc/ssl/certs...
+2025-07-29T15:29:18.4821338Z 2 added, 0 removed; done.
+2025-07-29T15:29:18.4832771Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-29T15:29:18.5087162Z done.
+2025-07-29T15:29:18.5285856Z CA certificates copied and updated successfully.
+2025-07-29T15:29:18.9887959Z Site's appCommandLine: gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP
+2025-07-29T15:29:20.0499551Z Starting periodic command scheduler: cron.
+2025-07-29T15:29:20.0673603Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP'
+2025-07-29T15:29:20.7381555Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-07-29T15:29:20.7853425Z Could not find operation ID in manifest. Generating an operation id...
+2025-07-29T15:29:20.8039654Z Build Operation ID: 74513a43-ad95-4687-8e3e-3805be7673d9
+2025-07-29T15:29:22.6187974Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-07-29T15:29:22.6667227Z Writing output script to '/opt/startup/startup.sh'
+2025-07-29T15:29:22.7973057Z WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv.
+2025-07-29T15:29:22.7987552Z WARNING: Could not find package directory /home/site/wwwroot/__oryx_packages__.
+2025-07-29T15:29:26.1005363Z [2025-07-29 15:29:26 +0000] [1023] [INFO] Starting gunicorn 23.0.0
+2025-07-29T15:29:26.1012420Z [2025-07-29 15:29:26 +0000] [1023] [INFO] Listening at: http://0.0.0.0:8000 (1023)
+2025-07-29T15:29:26.1014524Z [2025-07-29 15:29:26 +0000] [1023] [INFO] Using worker: sync
+2025-07-29T15:29:26.1468506Z [2025-07-29 15:29:26 +0000] [1024] [INFO] Booting worker with pid: 1024
+2025-07-29T15:29:26.1872548Z [2025-07-29 15:29:26 +0000] [1024] [ERROR] Exception in worker process
+2025-07-29T15:29:26.1873034Z Traceback (most recent call last):
+2025-07-29T15:29:26.1873080Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-07-29T15:29:26.1873118Z     worker.init_process()
+2025-07-29T15:29:26.1873242Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-07-29T15:29:26.1873269Z     self.load_wsgi()
+2025-07-29T15:29:26.1873297Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-07-29T15:29:26.1873321Z     self.wsgi = self.app.wsgi()
+2025-07-29T15:29:26.1873346Z                 ^^^^^^^^^^^^^^^
+2025-07-29T15:29:26.1873373Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-07-29T15:29:26.1873423Z     self.callable = self.load()
+2025-07-29T15:29:26.1873448Z                     ^^^^^^^^^^^
+2025-07-29T15:29:26.1873474Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-07-29T15:29:26.1873520Z     return self.load_wsgiapp()
+2025-07-29T15:29:26.1873545Z            ^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:29:26.1873572Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-07-29T15:29:26.1873623Z     return util.import_app(self.app_uri)
+2025-07-29T15:29:26.1873648Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:29:26.1873674Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+2025-07-29T15:29:26.1873699Z     mod = importlib.import_module(module)
+2025-07-29T15:29:26.1873724Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:29:26.1873775Z   File "/opt/python/3.11.12/lib/python3.11/importlib/__init__.py", line 126, in import_module
+2025-07-29T15:29:26.1873805Z     return _bootstrap._gcd_import(name[level:], package, level)
+2025-07-29T15:29:26.1873832Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:29:26.1873858Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+2025-07-29T15:29:26.1873886Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+2025-07-29T15:29:26.1873913Z   File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+2025-07-29T15:29:26.1874067Z ModuleNotFoundError: No module named 'mcp_bridge'
+2025-07-29T15:29:26.1936948Z [2025-07-29 15:29:26 +0000] [1024] [INFO] Worker exiting (pid: 1024)
+2025-07-29T15:29:26.5720932Z [2025-07-29 15:29:26 +0000] [1023] [ERROR] Worker (pid:1024) exited with code 3
+2025-07-29T15:29:26.5897734Z [2025-07-29 15:29:26 +0000] [1023] [ERROR] Shutting down: Master
+2025-07-29T15:29:26.5900848Z [2025-07-29 15:29:26 +0000] [1023] [ERROR] Reason: Worker failed to boot.
+2025-07-29T15:29:26.4018000Z Deploy Async
+2025-07-29T15:29:31.3836047Z Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+2025-07-29T15:29:32.0656335Z You can report issues at https://github.com/Microsoft/Oryx/issues
+2025-07-29T15:29:32.0656498Z
+2025-07-29T15:29:32.0656528Z Oryx Version: 0.2.20250611.1+0649de32f1279969c9023dd41b389cce4bb94493, Commit: 0649de32f1279969c9023dd41b389cce4bb94493, ReleaseTagName: 20250611.1
+2025-07-29T15:29:32.0656544Z
+2025-07-29T15:29:32.0656563Z Build Operation ID: 11461c53f22cd6ad
+2025-07-29T15:29:32.0656616Z Repository Commit : dc4c073f-a6d4-4047-8b75-93e9191febdf
+2025-07-29T15:29:32.0656634Z OS Type           : bullseye
+2025-07-29T15:29:32.0656651Z Image Type        : githubactions
+2025-07-29T15:29:32.0656666Z
+2025-07-29T15:29:32.0656689Z Primary SDK Storage URL: https://oryx-cdn.microsoft.io
+2025-07-29T15:29:32.0656708Z Backup SDK Storage URL: https://oryxsdks-cdn.azureedge.net
+2025-07-29T15:29:32.0656726Z Detecting platforms...
+2025-07-29T15:29:32.0656744Z External SDK provider is enabled.
+2025-07-29T15:29:32.0656763Z Requesting metadata for platform python from external SDK provider
+2025-07-29T15:29:34.8305606Z Requesting metadata for platform python from external SDK provider
+2025-07-29T15:29:36.6908168Z Detected following platforms:
+2025-07-29T15:29:36.7353504Z   python: 3.11.13
+2025-07-29T15:29:37.2237829Z
+2025-07-29T15:29:37.3306912Z Using intermediate directory '/tmp/8ddceb4b4f45a05'.
+2025-07-29T15:29:37.3680649Z
+2025-07-29T15:29:37.3971462Z Copying files to the intermediate directory...
+2025-07-29T15:29:40.7462450Z Done in 3 sec(s).
+2025-07-29T15:29:40.7994708Z
+2025-07-29T15:29:40.8282557Z Source directory     : /tmp/8ddceb4b4f45a05
+2025-07-29T15:29:40.8677744Z Destination directory: /home/site/wwwroot
+2025-07-29T15:29:40.9223546Z
+2025-07-29T15:29:41.3706458Z Python Version: /tmp/oryx/platforms/python/3.11.13/bin/python3.11
+2025-07-29T15:29:41.3968195Z Creating directory for command manifest file if it does not exist
+2025-07-29T15:29:41.4433959Z Removing existing manifest file
+2025-07-29T15:29:41.4936941Z Python Virtual Environment: antenv
+2025-07-29T15:29:41.5231267Z Creating virtual environment...
+2025-07-29T15:29:56.2153295Z [2025-07-29 15:29:56 +0000] [1034] [INFO] Worker exiting (pid: 1034)
+2025-07-29T15:29:56.2168716Z [2025-07-29 15:29:56 +0000] [1027] [INFO] Handling signal: term
+2025-07-29T15:30:12.9653453Z ...........................
+2025-07-29T15:30:12.9668334Z Activating virtual environment...
+2025-07-29T15:30:13.1303439Z Running pip install...
+2025-07-29T15:31:16.6995835Z ..........................................................
+2025-07-29T15:31:16.7011427Z [15:30:20+0000] Collecting fastmcp>=0.1.0 (from -r requirements.txt (line 5))
+2025-07-29T15:31:16.7560446Z [15:30:20+0000]   Using cached fastmcp-2.10.6-py3-none-any.whl.metadata (17 kB)
+2025-07-29T15:31:16.7940429Z [15:30:20+0000] Collecting flask>=2.3.0 (from -r requirements.txt (line 8))
+2025-07-29T15:31:16.8606100Z [15:30:20+0000]   Using cached flask-3.1.1-py3-none-any.whl.metadata (3.0 kB)
+2025-07-29T15:31:16.8980521Z [15:30:20+0000] Collecting flask-cors>=4.0.0 (from -r requirements.txt (line 9))
+2025-07-29T15:31:16.9382022Z [15:30:20+0000]   Using cached flask_cors-6.0.1-py3-none-any.whl.metadata (5.3 kB)
+2025-07-29T15:31:16.9833713Z [15:30:20+0000] Collecting gunicorn>=20.1.0 (from -r requirements.txt (line 10))
+2025-07-29T15:31:17.0303042Z [15:30:20+0000]   Using cached gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+2025-07-29T15:31:17.0437925Z [15:30:20+0000] Collecting msal>=1.24.0 (from -r requirements.txt (line 13))
+2025-07-29T15:31:17.0874666Z [15:30:20+0000]   Using cached msal-1.33.0-py3-none-any.whl.metadata (11 kB)
+2025-07-29T15:31:17.1246796Z [15:30:20+0000] Collecting requests>=2.31.0 (from -r requirements.txt (line 14))
+2025-07-29T15:31:17.1647855Z [15:30:20+0000]   Using cached requests-2.32.4-py3-none-any.whl.metadata (4.9 kB)
+2025-07-29T15:31:17.2063286Z [15:30:21+0000] Collecting pyjwt>=2.8.0 (from -r requirements.txt (line 17))
+2025-07-29T15:31:17.2336855Z [15:30:21+0000]   Using cached PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
+2025-07-29T15:31:17.2548103Z [15:30:21+0000] Collecting python-dotenv>=1.0.0 (from -r requirements.txt (line 20))
+2025-07-29T15:31:17.3109380Z [15:30:21+0000]   Using cached python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+2025-07-29T15:31:17.3378509Z [15:30:21+0000] Collecting authlib>=1.5.2 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.3666522Z [15:30:21+0000]   Using cached authlib-1.6.1-py2.py3-none-any.whl.metadata (1.6 kB)
+2025-07-29T15:31:17.3851960Z [15:30:21+0000] Collecting cyclopts>=3.0.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.4032363Z [15:30:21+0000]   Using cached cyclopts-3.22.3-py3-none-any.whl.metadata (11 kB)
+2025-07-29T15:31:17.4224876Z [15:30:21+0000] Collecting exceptiongroup>=1.2.2 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.4406250Z [15:30:21+0000]   Using cached exceptiongroup-1.3.0-py3-none-any.whl.metadata (6.7 kB)
+2025-07-29T15:31:17.4540269Z [15:30:21+0000] Collecting httpx>=0.28.1 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.4710246Z [15:30:21+0000]   Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2025-07-29T15:31:17.5001552Z [15:30:22+0000] Collecting mcp>=1.10.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.5111175Z [15:30:22+0000]   Using cached mcp-1.12.2-py3-none-any.whl.metadata (60 kB)
+2025-07-29T15:31:17.5245991Z [15:30:22+0000] Collecting openapi-pydantic>=0.5.1 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.5524811Z [15:30:22+0000]   Using cached openapi_pydantic-0.5.1-py3-none-any.whl.metadata (10 kB)
+2025-07-29T15:31:17.5911179Z [15:30:22+0000] Collecting pydantic>=2.11.7 (from pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.6339677Z [15:30:22+0000]   Using cached pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
+2025-07-29T15:31:17.6727556Z [15:30:22+0000] Collecting pyperclip>=1.9.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.7109425Z [15:30:22+0000]   Using cached pyperclip-1.9.0-py3-none-any.whl
+2025-07-29T15:31:17.7397870Z [15:30:23+0000] Collecting rich>=13.9.4 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:17.8028259Z [15:30:23+0000]   Using cached rich-14.1.0-py3-none-any.whl.metadata (18 kB)
+2025-07-29T15:31:17.8575667Z [15:30:23+0000] Collecting blinker>=1.9.0 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T15:31:17.9066035Z [15:30:23+0000]   Using cached blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+2025-07-29T15:31:17.9913192Z [15:30:23+0000] Collecting click>=8.1.3 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T15:31:18.1227685Z [15:30:23+0000]   Using cached click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
+2025-07-29T15:31:18.1328895Z [15:30:23+0000] Collecting itsdangerous>=2.2.0 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T15:31:18.1894507Z [15:30:23+0000]   Using cached itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+2025-07-29T15:31:18.2263927Z [15:30:23+0000] Collecting jinja2>=3.1.2 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T15:31:18.2726909Z [15:30:23+0000]   Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+2025-07-29T15:31:18.3030970Z [15:30:24+0000] Collecting markupsafe>=2.1.1 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T15:31:18.3290656Z [15:30:24+0000]   Using cached MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+2025-07-29T15:31:18.3476429Z [15:30:24+0000] Collecting werkzeug>=3.1.0 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T15:31:18.3677874Z [15:30:24+0000]   Using cached werkzeug-3.1.3-py3-none-any.whl.metadata (3.7 kB)
+2025-07-29T15:31:18.4044369Z [15:30:24+0000] Collecting packaging (from gunicorn>=20.1.0->-r requirements.txt (line 10))
+2025-07-29T15:31:18.4778423Z [15:30:24+0000]   Using cached packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+2025-07-29T15:31:18.5148590Z [15:30:25+0000] Collecting cryptography<48,>=2.5 (from msal>=1.24.0->-r requirements.txt (line 13))
+2025-07-29T15:31:18.5361913Z [15:30:25+0000]   Using cached cryptography-45.0.5-cp311-abi3-manylinux_2_28_x86_64.whl.metadata (5.7 kB)
+2025-07-29T15:31:18.5701575Z [15:30:26+0000] Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->-r requirements.txt (line 14))
+2025-07-29T15:31:18.6450850Z [15:30:26+0000]   Using cached charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
+2025-07-29T15:31:18.6734922Z [15:30:27+0000] Collecting idna<4,>=2.5 (from requests>=2.31.0->-r requirements.txt (line 14))
+2025-07-29T15:31:18.7110229Z [15:30:27+0000]   Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)
+2025-07-29T15:31:18.7424365Z [15:30:27+0000] Collecting urllib3<3,>=1.21.1 (from requests>=2.31.0->-r requirements.txt (line 14))
+2025-07-29T15:31:18.7585597Z [15:30:27+0000]   Using cached urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
+2025-07-29T15:31:18.7700818Z [15:30:27+0000] Collecting certifi>=2017.4.17 (from requests>=2.31.0->-r requirements.txt (line 14))
+2025-07-29T15:31:18.8348259Z [15:30:27+0000]   Using cached certifi-2025.7.14-py3-none-any.whl.metadata (2.4 kB)
+2025-07-29T15:31:18.8544984Z [15:30:30+0000] Collecting cffi>=1.14 (from cryptography<48,>=2.5->msal>=1.24.0->-r requirements.txt (line 13))
+2025-07-29T15:31:18.8830648Z [15:30:30+0000]   Using cached cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+2025-07-29T15:31:18.9194715Z [15:30:30+0000] Collecting attrs>=23.1.0 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:18.9470830Z [15:30:30+0000]   Using cached attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+2025-07-29T15:31:18.9670994Z [15:30:30+0000] Collecting docstring-parser>=0.15 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.0321346Z [15:30:30+0000]   Using cached docstring_parser-0.17.0-py3-none-any.whl.metadata (3.5 kB)
+2025-07-29T15:31:19.0782774Z [15:30:31+0000] Collecting rich-rst<2.0.0,>=1.3.1 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.0901173Z [15:30:31+0000]   Using cached rich_rst-1.3.1-py3-none-any.whl.metadata (6.0 kB)
+2025-07-29T15:31:19.1198558Z [15:30:31+0000] Collecting typing-extensions>=4.6.0 (from exceptiongroup>=1.2.2->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.1661288Z [15:30:31+0000]   Using cached typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+2025-07-29T15:31:19.1998413Z [15:30:32+0000] Collecting anyio (from httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.2391014Z [15:30:32+0000]   Using cached anyio-4.9.0-py3-none-any.whl.metadata (4.7 kB)
+2025-07-29T15:31:19.2672046Z [15:30:32+0000] Collecting httpcore==1.* (from httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.3450648Z [15:30:32+0000]   Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2025-07-29T15:31:19.4089066Z [15:30:33+0000] Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.4823211Z [15:30:33+0000]   Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2025-07-29T15:31:19.5321703Z [15:30:33+0000] Collecting httpx-sse>=0.4 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.6044768Z [15:30:33+0000]   Using cached httpx_sse-0.4.1-py3-none-any.whl.metadata (9.4 kB)
+2025-07-29T15:31:19.6703334Z [15:30:33+0000] Collecting jsonschema>=4.20.0 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.7461951Z [15:30:33+0000]   Using cached jsonschema-4.25.0-py3-none-any.whl.metadata (7.7 kB)
+2025-07-29T15:31:19.7926595Z [15:30:33+0000] Collecting pydantic-settings>=2.5.2 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.8306926Z [15:30:33+0000]   Using cached pydantic_settings-2.10.1-py3-none-any.whl.metadata (3.4 kB)
+2025-07-29T15:31:19.8674515Z [15:30:33+0000] Collecting python-multipart>=0.0.9 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.9047568Z [15:30:33+0000]   Using cached python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+2025-07-29T15:31:19.9408461Z [15:30:33+0000] Collecting sse-starlette>=1.6.1 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:19.9628011Z [15:30:33+0000]   Using cached sse_starlette-3.0.2-py3-none-any.whl.metadata (11 kB)
+2025-07-29T15:31:20.0244425Z [15:30:34+0000] Collecting starlette>=0.27 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.0908685Z [15:30:34+0000]   Using cached starlette-0.47.2-py3-none-any.whl.metadata (6.2 kB)
+2025-07-29T15:31:20.1799088Z [15:30:34+0000] Collecting uvicorn>=0.23.1 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.2257992Z [15:30:34+0000]   Using cached uvicorn-0.35.0-py3-none-any.whl.metadata (6.5 kB)
+2025-07-29T15:31:20.2529886Z [15:30:34+0000] Collecting annotated-types>=0.6.0 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.2809508Z [15:30:34+0000]   Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+2025-07-29T15:31:20.3199451Z [15:30:39+0000] Collecting pydantic-core==2.33.2 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.3572068Z [15:30:39+0000]   Using cached pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+2025-07-29T15:31:20.3934043Z [15:30:39+0000] Collecting typing-inspection>=0.4.0 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.4315697Z [15:30:39+0000]   Using cached typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
+2025-07-29T15:31:20.4860467Z [15:30:40+0000] Collecting email-validator>=2.0.0 (from pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.5446143Z [15:30:40+0000]   Using cached email_validator-2.2.0-py3-none-any.whl.metadata (25 kB)
+2025-07-29T15:31:20.5825882Z [15:30:40+0000] Collecting markdown-it-py>=2.2.0 (from rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.6129958Z [15:30:40+0000]   Using cached markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
+2025-07-29T15:31:20.6327697Z [15:30:40+0000] Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.7228205Z [15:30:40+0000]   Using cached pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+2025-07-29T15:31:20.7498134Z [15:30:40+0000] Collecting sniffio>=1.1 (from anyio->httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.7687050Z [15:30:40+0000]   Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+2025-07-29T15:31:20.8054535Z [15:30:41+0000] Collecting pycparser (from cffi>=1.14->cryptography<48,>=2.5->msal>=1.24.0->-r requirements.txt (line 13))
+2025-07-29T15:31:20.8339188Z [15:30:41+0000]   Using cached pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
+2025-07-29T15:31:20.8622908Z [15:30:41+0000] Collecting dnspython>=2.0.0 (from email-validator>=2.0.0->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.8744378Z [15:30:41+0000]   Using cached dnspython-2.7.0-py3-none-any.whl.metadata (5.8 kB)
+2025-07-29T15:31:20.9032688Z [15:30:41+0000] Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:20.9552186Z [15:30:41+0000]   Using cached jsonschema_specifications-2025.4.1-py3-none-any.whl.metadata (2.9 kB)
+2025-07-29T15:31:21.0195073Z [15:30:41+0000] Collecting referencing>=0.28.4 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:21.0767747Z [15:30:41+0000]   Using cached referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+2025-07-29T15:31:21.1160272Z [15:30:43+0000] Collecting rpds-py>=0.7.1 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:21.1528564Z [15:30:43+0000]   Using cached rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+2025-07-29T15:31:21.1913971Z [15:30:43+0000] Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:21.2311895Z [15:30:43+0000]   Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+2025-07-29T15:31:21.2436211Z [15:30:43+0000] Collecting docutils (from rich-rst<2.0.0,>=1.3.1->cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T15:31:21.2812368Z [15:30:43+0000]   Using cached docutils-0.22-py3-none-any.whl.metadata (15 kB)
+2025-07-29T15:31:21.3446752Z [15:30:44+0000] Using cached fastmcp-2.10.6-py3-none-any.whl (202 kB)
+2025-07-29T15:31:21.3716516Z [15:30:44+0000] Using cached flask-3.1.1-py3-none-any.whl (103 kB)
+2025-07-29T15:31:21.3996622Z [15:30:44+0000] Using cached flask_cors-6.0.1-py3-none-any.whl (13 kB)
+2025-07-29T15:31:21.4118611Z [15:30:44+0000] Using cached gunicorn-23.0.0-py3-none-any.whl (85 kB)
+2025-07-29T15:31:21.4553013Z [15:30:44+0000] Using cached msal-1.33.0-py3-none-any.whl (116 kB)
+2025-07-29T15:31:21.4930500Z [15:30:44+0000] Using cached requests-2.32.4-py3-none-any.whl (64 kB)
+2025-07-29T15:31:21.5200163Z [15:30:44+0000] Using cached PyJWT-2.10.1-py3-none-any.whl (22 kB)
+2025-07-29T15:31:21.5479540Z [15:30:44+0000] Using cached python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+2025-07-29T15:31:21.5773927Z [15:30:44+0000] Using cached authlib-1.6.1-py2.py3-none-any.whl (239 kB)
+2025-07-29T15:31:21.6253633Z [15:30:44+0000] Using cached blinker-1.9.0-py3-none-any.whl (8.5 kB)
+2025-07-29T15:31:21.6501893Z [15:30:44+0000] Using cached certifi-2025.7.14-py3-none-any.whl (162 kB)
+2025-07-29T15:31:21.6615734Z [15:30:44+0000] Using cached charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (147 kB)
+2025-07-29T15:31:21.6873915Z [15:30:44+0000] Using cached click-8.2.1-py3-none-any.whl (102 kB)
+2025-07-29T15:31:21.7243766Z [15:30:44+0000] Using cached cryptography-45.0.5-cp311-abi3-manylinux_2_28_x86_64.whl (4.5 MB)
+2025-07-29T15:31:21.8102984Z [15:30:45+0000] Using cached cyclopts-3.22.3-py3-none-any.whl (84 kB)
+2025-07-29T15:31:21.8555162Z [15:30:45+0000] Using cached exceptiongroup-1.3.0-py3-none-any.whl (16 kB)
+2025-07-29T15:31:21.8953733Z [15:30:45+0000] Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+2025-07-29T15:31:21.9292565Z [15:30:45+0000] Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+2025-07-29T15:31:21.9669684Z [15:30:45+0000] Using cached idna-3.10-py3-none-any.whl (70 kB)
+2025-07-29T15:31:21.9793110Z [15:30:45+0000] Using cached itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+2025-07-29T15:31:22.0490109Z [15:30:45+0000] Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+2025-07-29T15:31:22.0969179Z [15:30:45+0000] Using cached MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+2025-07-29T15:31:22.1319049Z [15:30:45+0000] Using cached mcp-1.12.2-py3-none-any.whl (158 kB)
+2025-07-29T15:31:22.1795469Z [15:30:45+0000] Using cached openapi_pydantic-0.5.1-py3-none-any.whl (96 kB)
+2025-07-29T15:31:22.2024841Z [15:30:45+0000] Using cached pydantic-2.11.7-py3-none-any.whl (444 kB)
+2025-07-29T15:31:22.2577184Z [15:30:45+0000] Using cached pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+2025-07-29T15:31:22.2700228Z [15:30:45+0000] Using cached rich-14.1.0-py3-none-any.whl (243 kB)
+2025-07-29T15:31:22.3068591Z [15:30:45+0000] Using cached urllib3-2.5.0-py3-none-any.whl (129 kB)
+2025-07-29T15:31:22.3603905Z [15:30:45+0000] Using cached werkzeug-3.1.3-py3-none-any.whl (224 kB)
+2025-07-29T15:31:22.4344383Z [15:30:45+0000] Using cached packaging-25.0-py3-none-any.whl (66 kB)
+2025-07-29T15:31:22.4891614Z [15:30:45+0000] Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+2025-07-29T15:31:22.5367441Z [15:30:45+0000] Using cached anyio-4.9.0-py3-none-any.whl (100 kB)
+2025-07-29T15:31:22.5733800Z [15:30:45+0000] Using cached attrs-25.3.0-py3-none-any.whl (63 kB)
+2025-07-29T15:31:22.6110581Z [15:30:45+0000] Using cached cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467 kB)
+2025-07-29T15:31:22.6345160Z [15:30:45+0000] Using cached docstring_parser-0.17.0-py3-none-any.whl (36 kB)
+2025-07-29T15:31:22.6620092Z [15:30:45+0000] Using cached email_validator-2.2.0-py3-none-any.whl (33 kB)
+2025-07-29T15:31:22.7045508Z [15:30:45+0000] Using cached httpx_sse-0.4.1-py3-none-any.whl (8.1 kB)
+2025-07-29T15:31:22.7174374Z [15:30:45+0000] Using cached jsonschema-4.25.0-py3-none-any.whl (89 kB)
+2025-07-29T15:31:22.7632140Z [15:30:45+0000] Using cached markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+2025-07-29T15:31:22.8168382Z [15:30:45+0000] Using cached pydantic_settings-2.10.1-py3-none-any.whl (45 kB)2025-07-29T15:31:22.8910425Z [15:30:45+0000] Using cached pygments-2.19.2-py3-none-any.whl (1.2 MB)
+2025-07-29T15:31:22.9296464Z [15:30:45+0000] Using cached python_multipart-0.0.20-py3-none-any.whl (24 kB)
+2025-07-29T15:31:22.9576069Z [15:30:45+0000] Using cached rich_rst-1.3.1-py3-none-any.whl (11 kB)
+2025-07-29T15:31:22.9878296Z [15:30:45+0000] Using cached sse_starlette-3.0.2-py3-none-any.whl (11 kB)
+2025-07-29T15:31:23.0249954Z [15:30:45+0000] Using cached starlette-0.47.2-py3-none-any.whl (72 kB)
+2025-07-29T15:31:23.0722555Z [15:30:45+0000] Using cached typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+2025-07-29T15:31:23.0937625Z [15:30:45+0000] Using cached typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+2025-07-29T15:31:23.1365951Z [15:30:45+0000] Using cached uvicorn-0.35.0-py3-none-any.whl (66 kB)
+2025-07-29T15:31:23.1491490Z [15:30:45+0000] Using cached dnspython-2.7.0-py3-none-any.whl (313 kB)
+2025-07-29T15:31:23.1842818Z [15:30:45+0000] Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+2025-07-29T15:31:23.2502949Z [15:30:45+0000] Using cached jsonschema_specifications-2025.4.1-py3-none-any.whl (18 kB)
+2025-07-29T15:31:23.2923804Z [15:30:45+0000] Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+2025-07-29T15:31:23.3325190Z [15:30:45+0000] Using cached referencing-0.36.2-py3-none-any.whl (26 kB)
+2025-07-29T15:31:23.3721707Z [15:30:45+0000] Using cached rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (383 kB)
+2025-07-29T15:31:23.4076901Z [15:30:45+0000] Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+2025-07-29T15:31:23.4437014Z [15:30:45+0000] Using cached docutils-0.22-py3-none-any.whl (630 kB)
+2025-07-29T15:31:23.5053647Z [15:30:45+0000] Using cached pycparser-2.22-py3-none-any.whl (117 kB)
+2025-07-29T15:31:23.5465074Z [15:30:47+0000] Installing collected packages: pyperclip, urllib3, typing-extensions, sniffio, rpds-py, python-multipart, python-dotenv, pyjwt, pygments, pycparser, packaging, mdurl, markupsafe, itsdangerous, idna, httpx-sse, h11, docutils, docstring-parser, dnspython, click, charset_normalizer, certifi, blinker, attrs, annotated-types, werkzeug, uvicorn, typing-inspection, requests, referencing, pydantic-core, markdown-it-py, jinja2, httpcore, gunicorn, exceptiongroup, email-validator, cffi, anyio, starlette, sse-starlette, rich, pydantic, jsonschema-specifications, httpx, flask, cryptography, rich-rst, pydantic-settings, openapi-pydantic, jsonschema, flask-cors, authlib, msal, mcp, cyclopts, fastmcp
+2025-07-29T15:31:23.5936748Z [15:31:13+0000] Successfully installed annotated-types-0.7.0 anyio-4.9.0 attrs-25.3.0 authlib-1.6.1 blinker-1.9.0 certifi-2025.7.14 cffi-1.17.1 charset_normalizer-3.4.2 click-8.2.1 cryptography-45.0.5 cyclopts-3.22.3 dnspython-2.7.0 docstring-parser-0.17.0 docutils-0.22 email-validator-2.2.0 exceptiongroup-1.3.0 fastmcp-2.10.6 flask-3.1.1 flask-cors-6.0.1 gunicorn-23.0.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 httpx-sse-0.4.1 idna-3.10 itsdangerous-2.2.0 jinja2-3.1.6 jsonschema-4.25.0 jsonschema-specifications-2025.4.1 markdown-it-py-3.0.0 markupsafe-3.0.2 mcp-1.12.2 mdurl-0.1.2 msal-1.33.0 openapi-pydantic-0.5.1 packaging-25.0 pycparser-2.22 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.19.2 pyjwt-2.10.1 pyperclip-1.9.0 python-dotenv-1.1.1 python-multipart-0.0.20 referencing-0.36.2 requests-2.32.4 rich-14.1.0 rich-rst-1.3.1 rpds-py-0.26.0 sniffio-1.3.1 sse-starlette-3.0.2 starlette-0.47.2 typing-extensions-4.14.1 typing-inspection-0.4.1 urllib3-2.5.0 uvicorn-0.35.0 werkzeug-3.1.3
+2025-07-29T15:31:23.6606551Z
+2025-07-29T15:31:23.9284070Z [notice] A new release of pip is available: 24.0 -> 25.1.1
+2025-07-29T15:31:24.0585492Z [notice] To update, run: pip install --upgrade pip
+2025-07-29T15:31:24.0797832Z Not a vso image, so not writing build commands
+2025-07-29T15:31:24.1362948Z Preparing output...
+2025-07-29T15:31:24.1652391Z
+2025-07-29T15:31:24.2787159Z Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
+2025-07-29T15:31:34.6107213Z ......
+2025-07-29T15:31:34.6177116Z Done in 12 sec(s).
+2025-07-29T15:31:34.6618938Z Compressing content of directory '/tmp/_preCompressedDestinationDir'...
+2025-07-29T15:32:00.5888202Z .....................
+2025-07-29T15:32:00.5892666Z Copied the compressed output to '/home/site/wwwroot'
+2025-07-29T15:32:00.8292959Z
+2025-07-29T15:32:00.8601956Z Removing existing manifest file
+2025-07-29T15:32:00.9034623Z Creating a manifest file...
+2025-07-29T15:32:00.9416742Z Manifest file created.
+2025-07-29T15:32:00.9666894Z Copying .ostype to manifest output directory.
+2025-07-29T15:32:01.0120555Z
+2025-07-29T15:32:01.0510256Z Done in 143 sec(s).
+2025-07-29T15:33:09  No new trace in the past 1 min(s).
+2025-07-29T15:33:15.1239806Z    _____
+2025-07-29T15:33:15.1240075Z   /  _  \ __________ _________   ____
+2025-07-29T15:33:15.1240105Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-07-29T15:33:15.1240122Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-07-29T15:33:15.1240140Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-29T15:33:15.1305712Z         \/      \/                  \/
+2025-07-29T15:33:15.1305755Z A P P   S E R V I C E   O N   L I N U X
+2025-07-29T15:33:15.1305787Z
+2025-07-29T15:33:15.1305809Z Documentation: http://aka.ms/webapp-linux
+2025-07-29T15:33:15.1305868Z Python 3.11.12
+2025-07-29T15:33:15.1305889Z Note: Any data outside '/home' is not persisted
+2025-07-29T15:33:16.5027247Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-29T15:33:16.5148863Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-29T15:33:16.6025690Z Updating certificates in /etc/ssl/certs...
+2025-07-29T15:33:24.8919654Z 2 added, 0 removed; done.
+2025-07-29T15:33:24.8919961Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-29T15:33:24.8919990Z done.
+2025-07-29T15:33:24.8920091Z CA certificates copied and updated successfully.
+2025-07-29T15:33:25.3391386Z Site's appCommandLine: gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP
+2025-07-29T15:33:25.8906695Z Starting periodic command scheduler: cron.
+2025-07-29T15:33:25.8986254Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP'
+2025-07-29T15:33:26.2557499Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-29T15:33:26.2756632Z Build Operation ID: 11461c53f22cd6ad
+2025-07-29T15:33:26.2760872Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-07-29T15:33:26.3011636Z Output is compressed. Extracting it...
+2025-07-29T15:33:26.3029177Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddceb4b4f45a05'...
+2025-07-29T15:33:45.1228861Z App path is set to '/tmp/8ddceb4b4f45a05'
+2025-07-29T15:33:45.1518375Z Writing output script to '/opt/startup/startup.sh'
+2025-07-29T15:33:45.7760835Z Using packages from virtual environment antenv located at /tmp/8ddceb4b4f45a05/antenv.
+2025-07-29T15:33:45.7831987Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages'
+2025-07-29T15:33:46.5476196Z [2025-07-29 15:33:46 +0000] [1032] [INFO] Starting gunicorn 23.0.0
+2025-07-29T15:33:46.5503712Z [2025-07-29 15:33:46 +0000] [1032] [INFO] Listening at: http://0.0.0.0:8000 (1032)
+2025-07-29T15:33:46.5575132Z [2025-07-29 15:33:46 +0000] [1032] [INFO] Using worker: sync
+2025-07-29T15:33:46.5976528Z [2025-07-29 15:33:46 +0000] [1033] [INFO] Booting worker with pid: 1033
+2025-07-29T15:33:53.7606608Z 2025-07-29 15:33:53,760 - mcp-bridge - INFO - All required libraries imported successfully
+2025-07-29T15:33:53.9550221Z 2025-07-29 15:33:53,954 - msal.application - WARNING - Region configured (None) != region detected ('uksouth')
+2025-07-29T15:33:53.9565459Z 2025-07-29 15:33:53,956 - mcp-bridge - INFO - MSAL OAuth client initialized successfully
+2025-07-29T15:33:54.0217709Z 169.254.132.1 - - [29/Jul/2025:15:33:54 +0000] "GET /robots933456.txt HTTP/1.1" 404 200 "-" "HealthCheck/1.0"
+2025-07-29T15:35:09  No new trace in the past 1 min(s).
+2025-07-29T15:36:00.7048340Z 2025-07-29 15:36:00,695 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:36:00.7048799Z Traceback (most recent call last):
+2025-07-29T15:36:00.7048834Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:36:00.7048868Z     rv = self.dispatch_request()
+2025-07-29T15:36:00.7048888Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:36:00.7048911Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:36:00.7048931Z     self.raise_routing_exception(req)
+2025-07-29T15:36:00.7048953Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:36:00.7048974Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:36:00.7049021Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:36:00.7049044Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:36:00.7049065Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:36:00.7049086Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:36:00.7049108Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:36:00.7049129Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:36:00.7049151Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:36:00.7220238Z 169.254.132.1 - - [29/Jul/2025:15:36:00 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:36:01.1811223Z 169.254.132.1 - - [29/Jul/2025:15:36:01 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:36:28.3961168Z 2025-07-29 15:36:28,395 - mcp-bridge - INFO - Successfully acquired Power BI token
+2025-07-29T15:36:28.4014522Z 169.254.132.1 - - [29/Jul/2025:15:36:28 +0000] "GET /health HTTP/1.1" 200 341 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:36:29.4589020Z 2025-07-29 15:36:29,454 - mcp-bridge - INFO - Successfully acquired Power BI token
+2025-07-29T15:36:29.4620965Z 169.254.132.1 - - [29/Jul/2025:15:36:29 +0000] "GET /mcp/status HTTP/1.1" 200 199 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:36:36.3203267Z 169.254.132.1 - - [29/Jul/2025:15:36:36 +0000] "GET /authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https%3A%2F%2Fclaude.ai%2Fapi%2Fmcp%2Fauth_callback&code_challenge=eF4wY4oBSo_XBc0oE7w0q5hdpdcXm2EbQPtsVi8o6b0&code_challenge_method=S256&state=ZS8m90qf4fthZfEdqbSfN45_5wyiaCOw5AGNB7PpgP8&scope=claudeai HTTP/1.1" 302 971 "https://claude.ai/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:36:38.2001855Z 2025-07-29 15:36:38,193 - mcp-bridge - INFO - Successfully acquired Power BI token
+2025-07-29T15:36:38.3820961Z 169.254.132.1 - - [29/Jul/2025:15:36:38 +0000] "GET /mcp/workspaces HTTP/1.1" 200 399 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:36:42.8967560Z 169.254.132.1 - - [29/Jul/2025:15:36:42 +0000] "GET /auth/callback?code=1.ATEAw7meqq-yIkWWnILLnvwOiLwQ21spu_lKjLUGJpDmvhVNAXgxAA.AgABBAIAAABVrSpeuWamRam2jAF1XRQEAwDs_wUA9P8q9UKGZ8MHN8tCpC-GkT0-XeaP8IoWjyNBxovO6OvzCDPLGQ8Fp8A7nRCxXbd9FzLYRqyIcZOzgsYJVGau9JWWqGifcaC9LDtBpj8LdqWG8YMh2Sttc7AR9G9mu1YKVS0WZ9qv9j6OrC0xuVrOYlOCbltELRV4l9DTRaUzFS-m7wAyJIFqFfS82k5Cbj-2SZZar7JzAA-aMxmecwImLvFnC6P3xLuQ0L1l0q6Rn19zKVJxdOPYcmDpGMsUHmIcJOqkdgZyektPJc0cFfKolWB7zvzonX3X5Vo_2XOOt7DEMkn7nhPPTKl53vMvP18zbLtru4URtDojPoLACJahVIhHoJ43D8Uv4tyGzcc4hR0u-YLW7UnscxRQ5hTmqQOZRevdI1LOEj7BEBEcDSKGCiNf-DqZv9v-ah-y2AMrBVrnFkdJm-F1k0lPju-_M8CDe8v6Pe696iltp1BuW7tINZMrur5KBFjuGDmnjan4gsVh6k9OkUz730VD3rTWgpj3Gn-IqLC1R9V_2sjUYuuSm2O9FmJjpLouJf8Hzqu3emK6nR6GgLt30-td-6zg_4AzOAK1fWxqewBEklJS8JKe-AkKGLE30ILWy09t20A1doFmugG6JA-SdYw6EubpmnhipvNqwWX6OL7pr6V6oBOm3IYmBVW3tNugPI1b4Ywut80s2VYvs7IzE5pL24xsohOYsbiPqlh5v83rpdJ5wg564j0Uznvn9baunbHHTsTKRyLfEFrSfbHFX_F4cXh9H7U4zJFkNQG6xNoEqp_WZrLHHAK2z-E3RjRAzxkx-ojWk17QzHG8eEfQWJhwtoaxhjxU-TyB96LbVw&state=ZS8m90qf4fthZfEdqbSfN45_5wyiaCOw5AGNB7PpgP8&session_state=004ec429-76f3-e688-b972-5dbf68eff880 HTTP/1.1" 302 2263 "https://login.microsoftonline.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:38:09  No new trace in the past 1 min(s).
+2025-07-29T15:38:51.9620525Z 169.254.132.1 - - [29/Jul/2025:15:38:51 +0000] "HEAD / HTTP/1.1" 200 0 "-" "python-httpx/0.27.0"
+2025-07-29T15:38:52.4783648Z 169.254.132.1 - - [29/Jul/2025:15:38:52 +0000] "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T15:38:52.9145464Z 169.254.132.1 - - [29/Jul/2025:15:38:52 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T15:38:56.8654202Z 169.254.132.1 - - [29/Jul/2025:15:38:56 +0000] "GET /authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https%3A%2F%2Fclaude.ai%2Fapi%2Fmcp%2Fauth_callback&code_challenge=yL7G4jMXqmo1VgX8e1kCVVavnOdy6ZrRLGe9RBeQLg8&code_challenge_method=S256&state=SjsjYXINby4BQFVIp8qrajdZHhUcboo0aAg5xRbV-hI&scope=claudeai HTTP/1.1" 302 971 "https://claude.ai/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36"
+2025-07-29T15:38:58.4361830Z 169.254.132.1 - - [29/Jul/2025:15:38:58 +0000] "GET /auth/callback?error=invalid_client&error_description=AADSTS650057%3a+Invalid+resource.+The+client+has+requested+access+to+a+resource+which+is+not+listed+in+the+requested+permissions+in+the+client%27s+application+registration.+Client+app+ID%3a+5bdb10bc-bb29-4af9-8cb5-062690e6be15(Assistant+Power+BI).+Resource+value+from+request%3a+https%3a%2f%2fanalysis.windows.net%2fpowerbi%2fapi.+Resource+app+ID%3a+00000009-0000-0000-c000-000000000000.+List+of+valid+resources+from+app+registration%3a+00000003-0000-0000-c000-000000000000.+Trace+ID%3a+923c2682-6ee4-4470-ab8a-4b1bd9301400+Correlation+ID%3a+9fc841e9-ab07-445e-8617-4069de7acf53+Timestamp%3a+2025-07-29+15%3a38%3a58Z&state=SjsjYXINby4BQFVIp8qrajdZHhUcboo0aAg5xRbV-hI HTTP/1.1" 400 674 "https://claude.ai/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36"
+2025-07-29T15:38:59.0865711Z 169.254.132.1 - - [29/Jul/2025:15:38:59 +0000] "GET /favicon.ico HTTP/1.1" 404 200 "https://pbimcp.azurewebsites.net/auth/callback?error=invalid_client&error_description=AADSTS650057%3a+Invalid+resource.+The+client+has+requested+access+to+a+resource+which+is+not+listed+in+the+requested+permissions+in+the+client%27s+application+registration.+Client+app+ID%3a+5bdb10bc-bb29-4af9-8cb5-062690e6be15(Assistant+Power+BI).+Resource+value+from+request%3a+https%3a%2f%2fanalysis.windows.net%2fpowerbi%2fapi.+Resource+app+ID%3a+00000009-0000-0000-c000-000000000000.+List+of+valid+resources+from+app+registration%3a+00000003-0000-0000-c000-000000000000.+Trace+ID%3a+923c2682-6ee4-4470-ab8a-4b1bd9301400+Correlation+ID%3a+9fc841e9-ab07-445e-8617-4069de7acf53+Timestamp%3a+2025-07-29+15%3a38%3a58Z&state=SjsjYXINby4BQFVIp8qrajdZHhUcboo0aAg5xRbV-hI" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36"
+2025-07-29T15:39:54.0709500Z 2025-07-29 15:39:54,068 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:39:54.0710266Z Traceback (most recent call last):
+2025-07-29T15:39:54.0710309Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:39:54.0710341Z     rv = self.dispatch_request()
+2025-07-29T15:39:54.0710361Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:39:54.0710385Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:39:54.0710406Z     self.raise_routing_exception(req)
+2025-07-29T15:39:54.0710430Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:39:54.0710452Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:39:54.0710504Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:39:54.0710529Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:39:54.0710551Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:39:54.0710572Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:39:54.0710595Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:39:54.0710619Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:39:54.0710643Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:39:54.0733424Z 169.254.132.1 - - [29/Jul/2025:15:39:54 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:39:54.5266819Z 169.254.132.1 - - [29/Jul/2025:15:39:54 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:40:07.2009829Z 2025-07-29 15:40:07,200 - mcp-bridge - INFO - Successfully acquired Power BI token
+2025-07-29T15:40:07.4932165Z 169.254.132.1 - - [29/Jul/2025:15:40:07 +0000] "GET /mcp/workspaces HTTP/1.1" 200 399 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:41:09  No new trace in the past 1 min(s).
+2025-07-29T15:42:09  No new trace in the past 2 min(s).
+2025-07-29T15:43:09  No new trace in the past 3 min(s).
+2025-07-29T15:44:09  No new trace in the past 4 min(s).
+2025-07-29T15:45:09  No new trace in the past 5 min(s).
+2025-07-29T15:45:11.8754723Z 2025-07-29 15:45:11,873 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:45:11.8763540Z Traceback (most recent call last):
+2025-07-29T15:45:11.8763637Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:45:11.8763669Z     rv = self.dispatch_request()
+2025-07-29T15:45:11.8763689Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:45:11.8763712Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:45:11.8763733Z     self.raise_routing_exception(req)
+2025-07-29T15:45:11.8763756Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:45:11.8763777Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:45:11.8763834Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:45:11.8763928Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:45:11.8763951Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:45:11.8763971Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:45:11.8763994Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:45:11.8764015Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:45:11.8764038Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:45:11.8911981Z 169.254.132.1 - - [29/Jul/2025:15:45:11 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:45:12.5630659Z 169.254.132.1 - - [29/Jul/2025:15:45:12 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:45:15.6997323Z 2025-07-29 15:45:15,697 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:45:15.6997784Z Traceback (most recent call last):
+2025-07-29T15:45:15.6997894Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:45:15.6997927Z     rv = self.dispatch_request()
+2025-07-29T15:45:15.6997946Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:45:15.6997970Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:45:15.6997990Z     self.raise_routing_exception(req)
+2025-07-29T15:45:15.6998014Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:45:15.6998037Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:45:15.6998057Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:45:15.6998080Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:45:15.6998132Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:45:15.6998155Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:45:15.6998385Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:45:15.6998406Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:45:15.6998429Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:45:15.7088347Z 169.254.132.1 - - [29/Jul/2025:15:45:15 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:45:16.1436245Z 169.254.132.1 - - [29/Jul/2025:15:45:16 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:47:09  No new trace in the past 1 min(s).
+2025-07-29T15:48:09  No new trace in the past 2 min(s).
+2025-07-29T15:49:09  No new trace in the past 3 min(s).
+2025-07-29T15:50:09  No new trace in the past 4 min(s).
+2025-07-29T15:51:09  No new trace in the past 5 min(s).
+2025-07-29T15:52:09  No new trace in the past 6 min(s).
+2025-07-29T15:53:09  No new trace in the past 7 min(s).
+2025-07-29T15:53:21.8656610Z 169.254.132.1 - - [29/Jul/2025:15:53:21 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:53:21.8652823Z 2025-07-29 15:53:21,857 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:53:21.8785890Z Traceback (most recent call last):
+2025-07-29T15:53:21.8785950Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:53:21.8785985Z     rv = self.dispatch_request()
+2025-07-29T15:53:21.8786006Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:53:21.8786031Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:53:21.8786052Z     self.raise_routing_exception(req)
+2025-07-29T15:53:21.8786075Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:53:21.8786102Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:53:21.8786165Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:53:21.8786190Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:53:21.8786211Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:53:21.8786232Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:53:21.8786258Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:53:21.8786280Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:53:21.8786303Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:53:22.3116772Z 169.254.132.1 - - [29/Jul/2025:15:53:22 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:53:24.7558360Z 2025-07-29 15:53:24,749 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:53:24.7558666Z Traceback (most recent call last):
+2025-07-29T15:53:24.7567948Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:53:24.7568200Z     rv = self.dispatch_request()
+2025-07-29T15:53:24.7568220Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:53:24.7568243Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:53:24.7568261Z     self.raise_routing_exception(req)
+2025-07-29T15:53:24.7568282Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:53:24.7568301Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:53:24.7568319Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:53:24.7568339Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:53:24.7568672Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:53:24.7568695Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:53:24.7568715Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:53:24.7568734Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:53:24.7568754Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:53:24.7587530Z 169.254.132.1 - - [29/Jul/2025:15:53:24 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:53:26.6234378Z 169.254.132.1 - - [29/Jul/2025:15:53:25 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:55:09  No new trace in the past 1 min(s).
+2025-07-29T15:56:09  No new trace in the past 2 min(s).
+2025-07-29T15:56:35.6725213Z 2025-07-29 15:56:35,671 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:56:35.6726007Z Traceback (most recent call last):
+2025-07-29T15:56:35.6726045Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:56:35.6726078Z     rv = self.dispatch_request()
+2025-07-29T15:56:35.6726097Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:56:35.6726122Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:56:35.6726143Z     self.raise_routing_exception(req)
+2025-07-29T15:56:35.6726166Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:56:35.6726188Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:56:35.6726236Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:56:35.6726260Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:56:35.6726282Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:56:35.6726302Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:56:35.6726330Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:56:35.6726352Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:56:35.6726374Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:56:35.6808408Z 169.254.132.1 - - [29/Jul/2025:15:56:35 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:56:36.1154379Z 169.254.132.1 - - [29/Jul/2025:15:56:36 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:57:09.7972313Z 2025-07-29 15:57:09,793 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:57:09.7972631Z Traceback (most recent call last):
+2025-07-29T15:57:09.7972732Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:57:09.7972768Z     rv = self.dispatch_request()
+2025-07-29T15:57:09.7972787Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:57:09.7972811Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:57:09.7972831Z     self.raise_routing_exception(req)
+2025-07-29T15:57:09.7972854Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:57:09.7972876Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:57:09.7972895Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:57:09.7972918Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:57:09.7972967Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:57:09.7972988Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:57:09.7973010Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:57:09.7973031Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:57:09.7973053Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:57:09.7973481Z 169.254.132.1 - - [29/Jul/2025:15:57:09 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:57:10.3103026Z 169.254.132.1 - - [29/Jul/2025:15:57:10 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:59:09  No new trace in the past 1 min(s).
+2025-07-29T15:59:19.1671763Z 2025-07-29 15:59:19,166 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:59:19.1672377Z Traceback (most recent call last):
+2025-07-29T15:59:19.1672412Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:59:19.1672443Z     rv = self.dispatch_request()
+2025-07-29T15:59:19.1672462Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:59:19.1672486Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:59:19.1672507Z     self.raise_routing_exception(req)
+2025-07-29T15:59:19.1672531Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:59:19.1672553Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:59:19.1672600Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:59:19.1672624Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:59:19.1672646Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:59:19.1672666Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:59:19.1672690Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:59:19.1672713Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:59:19.1672736Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:59:19.1764641Z 169.254.132.1 - - [29/Jul/2025:15:59:19 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:59:19.6257284Z 169.254.132.1 - - [29/Jul/2025:15:59:19 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:59:30.9816710Z 2025-07-29 15:59:30,981 - mcp-bridge - INFO - Successfully acquired Power BI token
+2025-07-29T15:59:30.9843757Z 169.254.132.1 - - [29/Jul/2025:15:59:30 +0000] "GET /health HTTP/1.1" 200 341 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:59:32.5440389Z 2025-07-29 15:59:32,543 - mcp-bridge - INFO - Successfully acquired Power BI token
+2025-07-29T15:59:32.5606853Z 169.254.132.1 - - [29/Jul/2025:15:59:32 +0000] "GET /mcp/status HTTP/1.1" 200 199 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:59:34.2037914Z 2025-07-29 15:59:34,203 - mcp-bridge - INFO - Successfully acquired Power BI token
+2025-07-29T15:59:34.4901762Z 169.254.132.1 - - [29/Jul/2025:15:59:34 +0000] "GET /mcp/workspaces HTTP/1.1" 200 399 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:59:38.4314582Z 169.254.132.1 - - [29/Jul/2025:15:59:38 +0000] "HEAD / HTTP/1.1" 200 0 "-" "python-httpx/0.27.0"
+2025-07-29T15:59:38.8461128Z 169.254.132.1 - - [29/Jul/2025:15:59:38 +0000] "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T15:59:39.3027716Z 169.254.132.1 - - [29/Jul/2025:15:59:39 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T15:59:39.5024642Z 169.254.132.1 - - [29/Jul/2025:15:59:39 +0000] "GET /authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https%3A%2F%2Fclaude.ai%2Fapi%2Fmcp%2Fauth_callback&code_challenge=9MhwH_Rme0AakyYY8JHLpdIaMNZ2ZAebj34JNMqR6q0&code_challenge_method=S256&state=68soAoGCoN0qp4c-DBIrSYEL3tTf9PpKQ--FF5IXr4o&scope=claudeai HTTP/1.1" 302 971 "https://claude.ai/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:59:41.7768276Z 169.254.132.1 - - [29/Jul/2025:15:59:41 +0000] "GET /auth/callback?code=1.ATEAw7meqq-yIkWWnILLnvwOiLwQ21spu_lKjLUGJpDmvhVNAXgxAA.AgABBAIAAABVrSpeuWamRam2jAF1XRQEAwDs_wUA9P-ZLxZPbeL2cNzxWlE-VaKtMsowNPb4SHsP6cytHPRCv-4U3qbwkMXZN4ks42aExcVnoNaAluiJn3SSNcqp6vDZHA0xy9M7k9_pOCxvN6l3-Q8sRYF0iSRIV6VY0rPg6C4gPrpGUxUfOqKZtbHY2zPpCFOsJU1S0gpHdULi5kHcMdXuyeEX5i2eq8wxBsZbjTp_3js00AXyvKhOdDS5hLQ67oP6edMeMhVGpDCpiR3jned6y6kbVJkVAQ1bckllb6C0ltw76mW_Cw3woIgm5Rl-7_Ab0IgWCc9RImtai_EBqzOG0NTIP1bhhjAxUcwM6IweGhUguAYrIEJ-McqsCFhjS-PxnZBQ698vt-AKWlsHMIzTjQM-C-ectiFdQ5KcGM-COgNhE434r-7j94l9NgzH_Puh_JeSxn3Gwq3XXMHHM9zkXKBbZixC8yEpaEzSMdrWL7HHyEXAukyLsskB5SnlS_8vmeqEYJEDcuIrnxc-6qEZ_qx2JyTqDGpY1aUgosEIT3bgMZlsN5VAzXATEOhrMOWeOHmgj3zB4u1hKaP3qhNcsom40_dQ3x0Q5ue4xuLgnY68hDSN-va2Q6j-1ESA_htKSWsp94GUiUhXXbNkbrO_-tObBai_JvNOcPb3izpPNP6E3NG3Ew_Y-5qD0pzbTGJDUKjTGFnbZwUoteHw22WdMyfW1Hd0z-_1QRqGLeS6EG1rn-rgRUhBHDg4aiN-ZYlgDMvX8BO-oiFN8LgnooKJU8Drlrw-SLU1eVaatVn_qYC8rJoO__NDUr9QDkJuil3cfFoRgW2h5JByJR_K8f5Ms5tG97Leff2xh32UXEZL0aCa8LU&state=68soAoGCoN0qp4c-DBIrSYEL3tTf9PpKQ--FF5IXr4o&session_state=004ec429-76f3-e688-b972-5dbf68eff880 HTTP/1.1" 302 2265 "https://login.microsoftonline.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:59:42.8910105Z 169.254.132.1 - - [29/Jul/2025:15:59:42 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T15:59:43.3790877Z 169.254.132.1 - - [29/Jul/2025:15:59:43 +0000] "POST /token HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T15:59:46.5744402Z 2025-07-29 15:59:46,573 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:59:46.5744756Z Traceback (most recent call last):
+2025-07-29T15:59:46.5745034Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T15:59:46.5745064Z     rv = self.dispatch_request()
+2025-07-29T15:59:46.5745080Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:59:46.5745136Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T15:59:46.5745155Z     self.raise_routing_exception(req)
+2025-07-29T15:59:46.5745177Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T15:59:46.5745195Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T15:59:46.5745212Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:59:46.5745233Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T15:59:46.5745252Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T15:59:46.5745270Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T15:59:46.5745291Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T15:59:46.5745329Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T15:59:46.5745350Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T15:59:46.5841188Z 169.254.132.1 - - [29/Jul/2025:15:59:46 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T15:59:47.2000304Z 169.254.132.1 - - [29/Jul/2025:15:59:47 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T16:00:06.8860556Z 169.254.132.1 - - [29/Jul/2025:16:00:06 +0000] "HEAD / HTTP/1.1" 200 0 "-" "python-httpx/0.27.0"
+2025-07-29T16:00:07.5355062Z 169.254.132.1 - - [29/Jul/2025:16:00:07 +0000] "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T16:00:08.1979842Z 169.254.132.1 - - [29/Jul/2025:16:00:08 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T16:00:08.5652872Z 169.254.132.1 - - [29/Jul/2025:16:00:08 +0000] "GET /authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https%3A%2F%2Fclaude.ai%2Fapi%2Fmcp%2Fauth_callback&code_challenge=qwGCw83C1DWJ0N_BN0piMznDnMl76_-FX_PHKvCyMZc&code_challenge_method=S256&state=H_j4Az7BMYrUp4BKEOgDMBOiKPXULljn8G95u8MkW_M&scope=claudeai HTTP/1.1" 302 971 "https://claude.ai/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T16:00:11.0504715Z 169.254.132.1 - - [29/Jul/2025:16:00:11 +0000] "GET /auth/callback?code=1.ATEAw7meqq-yIkWWnILLnvwOiLwQ21spu_lKjLUGJpDmvhVNAXgxAA.AgABBAIAAABVrSpeuWamRam2jAF1XRQEAwDs_wUA9P8b_MGkQSrmpTv79ZCaLd6W3lsMFTi3ZHvgPMYgPfVyY7VTq3quyWs6Ol9yj97PrGoC4qEoofkmZTzqCuxVodEJtuX0oM6z2APZlen7VrCq1vkZbYfsQ6ZQl4cqXwKUpbbDW6pa8o9ppZzVrtUQx4u7_UugjQ9ryDb-f-r1SIoBV7VDb2e0MhG7OrjgKPQoi_ygkYHwNW-uwbtanNgXavVsIjmwD_azY7P9KPSy-ui68C5M6-oq5CVh-aYIYtV8r-CE68RNIEPlMcKvDLvmqtxh8xYEAN0iTQ-fN7ld4xavL-qQ2e5kBDiWUh9LLyowV4nSNAYePkWmnWchsqy7mGXZNWZbNzrABmdmQ0zd8URCfJsG9vxbYssWKah99Ml64B_XaTMmAN0WWxISUqcTNrBtiErMkcuPVw9LeAaFtav06CDMSd6TBvN7Zf6ebSIK7rL0nKXn6ItA9ZFwV4795ZN_3CJT0cqROlpm3--H8oPFImihKLUFtESUWvL-zJWXkux_tEQyuq12vZC1Om4ZIORTuCFsV2vcJWsi0KfO_ZCPil9M8gRrhEqKtErAVHiPe1XB6akUV1vXygWgNimJWjZojivaQCZ4WEbB4hEiL-vFtFpxi1JHA5wrwFw3RHWhzOs0Dn0n0SUQpA8blERIOxswaeFE90NVBLGgxHqu_0NA3zSRcNaWLMEgZVpRaSHbDN_kvaW_txxHfxc3pwSWKICMoTcZ0sNYBBMWM3cc1arKQ4BnP8CeA6CnyEBNhWS-tX8qSbGzXI2t7sqjfbcwkNG0Fiu0GH18QcB1ID0WIf2X4TMkW5SQ2CPdRA67IG6QD-VzatpMWg&state=H_j4Az7BMYrUp4BKEOgDMBOiKPXULljn8G95u8MkW_M&session_state=004ec429-76f3-e688-b972-5dbf68eff880 HTTP/1.1" 302 2263 "https://login.microsoftonline.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T16:00:11.5761895Z 169.254.132.1 - - [29/Jul/2025:16:00:11 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T16:00:12.0112921Z 169.254.132.1 - - [29/Jul/2025:16:00:12 +0000] "POST /token HTTP/1.1" 404 200 "-" "python-httpx/0.27.0"
+2025-07-29T16:00:14.7792483Z 2025-07-29 16:00:14,775 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:00:14.7792865Z Traceback (most recent call last):
+2025-07-29T16:00:14.7792902Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T16:00:14.7792937Z     rv = self.dispatch_request()
+2025-07-29T16:00:14.7792960Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:00:14.7792983Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T16:00:14.7793005Z     self.raise_routing_exception(req)
+2025-07-29T16:00:14.7793085Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T16:00:14.7793110Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T16:00:14.7793131Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:00:14.7793154Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T16:00:14.7793176Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T16:00:14.7793198Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:00:14.7793221Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T16:00:14.7793243Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T16:00:14.7793470Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:00:14.7795892Z 169.254.132.1 - - [29/Jul/2025:16:00:14 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T16:00:15.1599454Z 169.254.132.1 - - [29/Jul/2025:16:00:15 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T16:01:43.1966778Z 2025-07-29 16:01:43,186 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:01:43.1967206Z Traceback (most recent call last):
+2025-07-29T16:01:43.1967244Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T16:01:43.1967276Z     rv = self.dispatch_request()
+2025-07-29T16:01:43.1967296Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:01:43.1967319Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T16:01:43.1967340Z     self.raise_routing_exception(req)
+2025-07-29T16:01:43.1967363Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T16:01:43.1967384Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T16:01:43.2637912Z 169.254.132.1 - - [29/Jul/2025:16:01:43 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T16:01:43.2640265Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:01:43.2640355Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T16:01:43.2640382Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T16:01:43.2640405Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:01:43.2640429Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T16:01:43.2640450Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T16:01:43.2640474Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:01:43.6729904Z 169.254.132.1 - - [29/Jul/2025:16:01:43 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T16:01:51.6519740Z 2025-07-29 16:01:51,644 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:01:51.6520151Z Traceback (most recent call last):
+2025-07-29T16:01:51.6520361Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T16:01:51.6520391Z     rv = self.dispatch_request()
+2025-07-29T16:01:51.6520409Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:01:51.6520432Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T16:01:51.6520450Z     self.raise_routing_exception(req)
+2025-07-29T16:01:51.6520471Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T16:01:51.6520490Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T16:01:51.6520538Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:01:51.6520560Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T16:01:51.6520579Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T16:01:51.6520598Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:01:51.6520619Z   File "/tmp/8ddceb4b4f45a05/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T16:01:51.6520639Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T16:01:51.6520660Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:01:51.6521023Z 169.254.132.1 - - [29/Jul/2025:16:01:51 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T16:01:52.0576575Z 169.254.132.1 - - [29/Jul/2025:16:01:52 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T16:03:09  No new trace in the past 1 min(s).
+2025-07-29T16:04:09  No new trace in the past 2 min(s).
+2025-07-29T16:05:09  No new trace in the past 3 min(s).
+2025-07-29T16:06:09  No new trace in the past 4 min(s).
+2025-07-29T16:06:15.5670668Z Deploy Async
+2025-07-29T16:06:21.3271956Z Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+2025-07-29T16:06:21.3657944Z You can report issues at https://github.com/Microsoft/Oryx/issues
+2025-07-29T16:06:21.4058961Z
+2025-07-29T16:06:21.4244799Z Oryx Version: 0.2.20250611.1+0649de32f1279969c9023dd41b389cce4bb94493, Commit: 0649de32f1279969c9023dd41b389cce4bb94493, ReleaseTagName: 20250611.1
+2025-07-29T16:06:21.4802998Z
+2025-07-29T16:06:21.4941886Z Build Operation ID: 8286695f18d1c8d9
+2025-07-29T16:06:21.5376480Z Repository Commit : 4879f3df-d42c-406f-800f-605ef18fcbe8
+2025-07-29T16:06:21.5669312Z OS Type           : bullseye
+2025-07-29T16:06:21.5821895Z Image Type        : githubactions
+2025-07-29T16:06:21.6016494Z
+2025-07-29T16:06:21.6260197Z Primary SDK Storage URL: https://oryx-cdn.microsoft.io
+2025-07-29T16:06:21.6459891Z Backup SDK Storage URL: https://oryxsdks-cdn.azureedge.net
+2025-07-29T16:06:21.6814427Z Detecting platforms...
+2025-07-29T16:06:21.7011209Z External SDK provider is enabled.
+2025-07-29T16:06:21.7374608Z Requesting metadata for platform python from external SDK provider
+2025-07-29T16:06:23.1458208Z Requesting metadata for platform python from external SDK provider
+2025-07-29T16:06:24.4061805Z Detected following platforms:
+2025-07-29T16:06:25.1963387Z   python: 3.11.13
+2025-07-29T16:06:25.1963631Z
+2025-07-29T16:06:25.1963654Z Using intermediate directory '/tmp/8ddceb9d9f7e44d'.
+2025-07-29T16:06:25.1963669Z
+2025-07-29T16:06:25.1963686Z Copying files to the intermediate directory...
+2025-07-29T16:06:26.9158062Z Done in 2 sec(s).
+2025-07-29T16:06:26.9503969Z
+2025-07-29T16:06:26.9632255Z Source directory     : /tmp/8ddceb9d9f7e44d
+2025-07-29T16:06:26.9745579Z Destination directory: /home/site/wwwroot
+2025-07-29T16:06:26.9818189Z
+2025-07-29T16:06:27.5786778Z Python Version: /tmp/oryx/platforms/python/3.11.13/bin/python3.11
+2025-07-29T16:06:27.6240914Z Creating directory for command manifest file if it does not exist
+2025-07-29T16:06:27.6639455Z Removing existing manifest file
+2025-07-29T16:06:27.6834855Z Python Virtual Environment: antenv
+2025-07-29T16:06:27.7060209Z Creating virtual environment...
+2025-07-29T16:06:43.3770413Z ...........
+2025-07-29T16:06:43.3782267Z Activating virtual environment...
+2025-07-29T16:06:43.4526915Z Running pip install...
+2025-07-29T16:08:00.1777863Z ........................................................................
+2025-07-29T16:08:00.1865261Z [16:06:45+0000] Collecting fastmcp>=0.1.0 (from -r requirements.txt (line 5))
+2025-07-29T16:08:00.2287357Z [16:06:45+0000]   Using cached fastmcp-2.10.6-py3-none-any.whl.metadata (17 kB)
+2025-07-29T16:08:00.2635479Z [16:06:45+0000] Collecting flask>=2.3.0 (from -r requirements.txt (line 8))
+2025-07-29T16:08:00.2927932Z [16:06:45+0000]   Using cached flask-3.1.1-py3-none-any.whl.metadata (3.0 kB)
+2025-07-29T16:08:00.3215663Z [16:06:46+0000] Collecting flask-cors>=4.0.0 (from -r requirements.txt (line 9))
+2025-07-29T16:08:00.3483552Z [16:06:46+0000]   Using cached flask_cors-6.0.1-py3-none-any.whl.metadata (5.3 kB)
+2025-07-29T16:08:00.3953213Z [16:06:46+0000] Collecting gunicorn>=20.1.0 (from -r requirements.txt (line 10))
+2025-07-29T16:08:00.4330349Z [16:06:46+0000]   Using cached gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+2025-07-29T16:08:00.4986807Z [16:06:46+0000] Collecting msal>=1.24.0 (from -r requirements.txt (line 13))
+2025-07-29T16:08:00.5345147Z [16:06:46+0000]   Using cached msal-1.33.0-py3-none-any.whl.metadata (11 kB)
+2025-07-29T16:08:00.5852682Z [16:06:46+0000] Collecting requests>=2.31.0 (from -r requirements.txt (line 14))
+2025-07-29T16:08:00.6665853Z [16:06:46+0000]   Using cached requests-2.32.4-py3-none-any.whl.metadata (4.9 kB)
+2025-07-29T16:08:00.7141674Z [16:06:46+0000] Collecting pyjwt>=2.8.0 (from -r requirements.txt (line 17))
+2025-07-29T16:08:00.7974285Z [16:06:46+0000]   Using cached PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
+2025-07-29T16:08:00.8563340Z [16:06:46+0000] Collecting python-dotenv>=1.0.0 (from -r requirements.txt (line 20))
+2025-07-29T16:08:00.9112477Z [16:06:46+0000]   Using cached python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+2025-07-29T16:08:00.9504829Z [16:06:46+0000] Collecting authlib>=1.5.2 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.0167429Z [16:06:46+0000]   Using cached authlib-1.6.1-py2.py3-none-any.whl.metadata (1.6 kB)
+2025-07-29T16:08:01.0663820Z [16:06:47+0000] Collecting cyclopts>=3.0.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.1273585Z [16:06:47+0000]   Using cached cyclopts-3.22.3-py3-none-any.whl.metadata (11 kB)
+2025-07-29T16:08:01.1551807Z [16:06:47+0000] Collecting exceptiongroup>=1.2.2 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.2187731Z [16:06:47+0000]   Using cached exceptiongroup-1.3.0-py3-none-any.whl.metadata (6.7 kB)
+2025-07-29T16:08:01.2745259Z [16:06:47+0000] Collecting httpx>=0.28.1 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.2854814Z [16:06:47+0000]   Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2025-07-29T16:08:01.3583873Z [16:06:47+0000] Collecting mcp>=1.10.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.3702172Z [16:06:47+0000]   Using cached mcp-1.12.2-py3-none-any.whl.metadata (60 kB)
+2025-07-29T16:08:01.4036237Z [16:06:47+0000] Collecting openapi-pydantic>=0.5.1 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.4507389Z [16:06:47+0000]   Using cached openapi_pydantic-0.5.1-py3-none-any.whl.metadata (10 kB)
+2025-07-29T16:08:01.4681398Z [16:06:48+0000] Collecting pydantic>=2.11.7 (from pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.5074299Z [16:06:48+0000]   Using cached pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
+2025-07-29T16:08:01.5429003Z [16:06:48+0000] Collecting pyperclip>=1.9.0 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.6464985Z [16:06:48+0000]   Using cached pyperclip-1.9.0-py3-none-any.whl
+2025-07-29T16:08:01.6859773Z [16:06:48+0000] Collecting rich>=13.9.4 (from fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:01.7588996Z [16:06:48+0000]   Using cached rich-14.1.0-py3-none-any.whl.metadata (18 kB)
+2025-07-29T16:08:01.7774170Z [16:06:48+0000] Collecting blinker>=1.9.0 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T16:08:01.8348248Z [16:06:48+0000]   Using cached blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+2025-07-29T16:08:01.9065357Z [16:06:48+0000] Collecting click>=8.1.3 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T16:08:01.9847930Z [16:06:48+0000]   Using cached click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
+2025-07-29T16:08:02.0000241Z [16:06:48+0000] Collecting itsdangerous>=2.2.0 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T16:08:02.0384617Z [16:06:48+0000]   Using cached itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+2025-07-29T16:08:02.1497585Z [16:06:48+0000] Collecting jinja2>=3.1.2 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T16:08:02.1756294Z [16:06:48+0000]   Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+2025-07-29T16:08:02.3070503Z [16:06:49+0000] Collecting markupsafe>=2.1.1 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T16:08:02.3657863Z [16:06:49+0000]   Using cached MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+2025-07-29T16:08:02.3864259Z [16:06:49+0000] Collecting werkzeug>=3.1.0 (from flask>=2.3.0->-r requirements.txt (line 8))
+2025-07-29T16:08:02.4156740Z [16:06:49+0000]   Using cached werkzeug-3.1.3-py3-none-any.whl.metadata (3.7 kB)
+2025-07-29T16:08:02.4707703Z [16:06:49+0000] Collecting packaging (from gunicorn>=20.1.0->-r requirements.txt (line 10))
+2025-07-29T16:08:02.5264986Z [16:06:49+0000]   Using cached packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+2025-07-29T16:08:02.6103051Z [16:06:51+0000] Collecting cryptography<48,>=2.5 (from msal>=1.24.0->-r requirements.txt (line 13))
+2025-07-29T16:08:02.6503177Z [16:06:51+0000]   Using cached cryptography-45.0.5-cp311-abi3-manylinux_2_28_x86_64.whl.metadata (5.7 kB)
+2025-07-29T16:08:02.7878983Z [16:06:51+0000] Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->-r requirements.txt (line 14))
+2025-07-29T16:08:02.9367215Z [16:06:51+0000]   Using cached charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
+2025-07-29T16:08:02.9867061Z [16:06:52+0000] Collecting idna<4,>=2.5 (from requests>=2.31.0->-r requirements.txt (line 14))
+2025-07-29T16:08:03.0501492Z [16:06:52+0000]   Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)
+2025-07-29T16:08:03.1184015Z [16:06:52+0000] Collecting urllib3<3,>=1.21.1 (from requests>=2.31.0->-r requirements.txt (line 14))
+2025-07-29T16:08:03.2261291Z [16:06:52+0000]   Using cached urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
+2025-07-29T16:08:03.3607651Z [16:06:52+0000] Collecting certifi>=2017.4.17 (from requests>=2.31.0->-r requirements.txt (line 14))
+2025-07-29T16:08:03.4057340Z [16:06:52+0000]   Using cached certifi-2025.7.14-py3-none-any.whl.metadata (2.4 kB)
+2025-07-29T16:08:03.5021519Z [16:06:53+0000] Collecting cffi>=1.14 (from cryptography<48,>=2.5->msal>=1.24.0->-r requirements.txt (line 13))
+2025-07-29T16:08:03.5964529Z [16:06:53+0000]   Using cached cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+2025-07-29T16:08:03.6324825Z [16:06:53+0000] Collecting attrs>=23.1.0 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:03.7357625Z [16:06:53+0000]   Using cached attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+2025-07-29T16:08:03.8476694Z [16:06:53+0000] Collecting docstring-parser>=0.15 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:03.9054234Z [16:06:53+0000]   Using cached docstring_parser-0.17.0-py3-none-any.whl.metadata (3.5 kB)
+2025-07-29T16:08:03.9573203Z [16:06:53+0000] Collecting rich-rst<2.0.0,>=1.3.1 (from cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:04.1969595Z [16:06:53+0000]   Using cached rich_rst-1.3.1-py3-none-any.whl.metadata (6.0 kB)
+2025-07-29T16:08:04.1970242Z [16:06:54+0000] Collecting typing-extensions>=4.6.0 (from exceptiongroup>=1.2.2->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:04.3220901Z [16:06:54+0000]   Using cached typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+2025-07-29T16:08:04.3500199Z [16:06:54+0000] Collecting anyio (from httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:04.3667073Z [16:06:54+0000]   Using cached anyio-4.9.0-py3-none-any.whl.metadata (4.7 kB)
+2025-07-29T16:08:04.3864738Z [16:06:54+0000] Collecting httpcore==1.* (from httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:04.3996278Z [16:06:54+0000]   Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2025-07-29T16:08:04.4325821Z [16:06:54+0000] Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:04.5694937Z [16:06:54+0000]   Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2025-07-29T16:08:04.6149923Z [16:06:54+0000] Collecting httpx-sse>=0.4 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:04.6265499Z [16:06:54+0000]   Using cached httpx_sse-0.4.1-py3-none-any.whl.metadata (9.4 kB)
+2025-07-29T16:08:04.6341798Z [16:06:54+0000] Collecting jsonschema>=4.20.0 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:04.6517630Z [16:06:54+0000]   Using cached jsonschema-4.25.0-py3-none-any.whl.metadata (7.7 kB)
+2025-07-29T16:08:04.7318943Z [16:06:55+0000] Collecting pydantic-settings>=2.5.2 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:04.7953341Z [16:06:55+0000]   Using cached pydantic_settings-2.10.1-py3-none-any.whl.metadata (3.4 kB)
+2025-07-29T16:08:05.0397748Z [16:06:55+0000] Collecting python-multipart>=0.0.9 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:05.1979254Z [16:06:55+0000]   Using cached python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+2025-07-29T16:08:05.2971377Z [16:06:55+0000] Collecting sse-starlette>=1.6.1 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:05.4403961Z [16:06:55+0000]   Using cached sse_starlette-3.0.2-py3-none-any.whl.metadata (11 kB)
+2025-07-29T16:08:05.5131022Z [16:06:55+0000] Collecting starlette>=0.27 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:05.5883762Z [16:06:55+0000]   Using cached starlette-0.47.2-py3-none-any.whl.metadata (6.2 kB)
+2025-07-29T16:08:05.6535315Z [16:06:56+0000] Collecting uvicorn>=0.23.1 (from mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:05.6666284Z [16:06:56+0000]   Using cached uvicorn-0.35.0-py3-none-any.whl.metadata (6.5 kB)
+2025-07-29T16:08:05.7121325Z [16:06:56+0000] Collecting annotated-types>=0.6.0 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:05.7866485Z [16:06:56+0000]   Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+2025-07-29T16:08:05.8642006Z [16:07:00+0000] Collecting pydantic-core==2.33.2 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:05.9295871Z [16:07:00+0000]   Using cached pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+2025-07-29T16:08:06.0062156Z [16:07:00+0000] Collecting typing-inspection>=0.4.0 (from pydantic>=2.11.7->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:06.0666869Z [16:07:00+0000]   Using cached typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
+2025-07-29T16:08:06.1111622Z [16:07:00+0000] Collecting email-validator>=2.0.0 (from pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:06.1769993Z [16:07:00+0000]   Using cached email_validator-2.2.0-py3-none-any.whl.metadata (25 kB)
+2025-07-29T16:08:06.1863485Z [16:07:01+0000] Collecting markdown-it-py>=2.2.0 (from rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:06.2750278Z [16:07:01+0000]   Using cached markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
+2025-07-29T16:08:07.1435747Z [16:07:01+0000] Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:07.1436362Z [16:07:01+0000]   Using cached pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+2025-07-29T16:08:07.1436393Z [16:07:01+0000] Collecting sniffio>=1.1 (from anyio->httpx>=0.28.1->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:07.1436415Z [16:07:01+0000]   Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+2025-07-29T16:08:07.1436437Z [16:07:02+0000] Collecting pycparser (from cffi>=1.14->cryptography<48,>=2.5->msal>=1.24.0->-r requirements.txt (line 13))
+2025-07-29T16:08:07.1436457Z [16:07:02+0000]   Using cached pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
+2025-07-29T16:08:07.1436482Z [16:07:02+0000] Collecting dnspython>=2.0.0 (from email-validator>=2.0.0->pydantic[email]>=2.11.7->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:07.1436501Z [16:07:02+0000]   Using cached dnspython-2.7.0-py3-none-any.whl.metadata (5.8 kB)
+2025-07-29T16:08:07.1436524Z [16:07:03+0000] Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:07.1436546Z [16:07:04+0000]   Using cached jsonschema_specifications-2025.4.1-py3-none-any.whl.metadata (2.9 kB)
+2025-07-29T16:08:07.1436594Z [16:07:04+0000] Collecting referencing>=0.28.4 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:07.1436616Z [16:07:04+0000]   Using cached referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+2025-07-29T16:08:07.1707994Z [16:07:07+0000] Collecting rpds-py>=0.7.1 (from jsonschema>=4.20.0->mcp>=1.10.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:07.2721921Z [16:07:07+0000]   Using cached rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+2025-07-29T16:08:07.3554562Z [16:07:07+0000] Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.9.4->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:07.4177096Z [16:07:07+0000]   Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+2025-07-29T16:08:07.4933861Z [16:07:08+0000] Collecting docutils (from rich-rst<2.0.0,>=1.3.1->cyclopts>=3.0.0->fastmcp>=0.1.0->-r requirements.txt (line 5))
+2025-07-29T16:08:07.5667309Z [16:07:08+0000]   Using cached docutils-0.22-py3-none-any.whl.metadata (15 kB)
+2025-07-29T16:08:07.6137743Z [16:07:10+0000] Using cached fastmcp-2.10.6-py3-none-any.whl (202 kB)
+2025-07-29T16:08:07.6619979Z [16:07:10+0000] Using cached flask-3.1.1-py3-none-any.whl (103 kB)
+2025-07-29T16:08:07.7061667Z [16:07:10+0000] Using cached flask_cors-6.0.1-py3-none-any.whl (13 kB)
+2025-07-29T16:08:07.8105848Z [16:07:10+0000] Using cached gunicorn-23.0.0-py3-none-any.whl (85 kB)
+2025-07-29T16:08:07.8785567Z [16:07:10+0000] Using cached msal-1.33.0-py3-none-any.whl (116 kB)
+2025-07-29T16:08:07.9153856Z [16:07:10+0000] Using cached requests-2.32.4-py3-none-any.whl (64 kB)
+2025-07-29T16:08:07.9815461Z [16:07:10+0000] Using cached PyJWT-2.10.1-py3-none-any.whl (22 kB)
+2025-07-29T16:08:08.0641567Z [16:07:10+0000] Using cached python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+2025-07-29T16:08:08.0969738Z [16:07:10+0000] Using cached authlib-1.6.1-py2.py3-none-any.whl (239 kB)
+2025-07-29T16:08:08.1419133Z [16:07:10+0000] Using cached blinker-1.9.0-py3-none-any.whl (8.5 kB)
+2025-07-29T16:08:08.2011317Z [16:07:10+0000] Using cached certifi-2025.7.14-py3-none-any.whl (162 kB)
+2025-07-29T16:08:08.2468675Z [16:07:10+0000] Using cached charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (147 kB)
+2025-07-29T16:08:08.2706523Z [16:07:10+0000] Using cached click-8.2.1-py3-none-any.whl (102 kB)
+2025-07-29T16:08:08.3370836Z [16:07:10+0000] Using cached cryptography-45.0.5-cp311-abi3-manylinux_2_28_x86_64.whl (4.5 MB)
+2025-07-29T16:08:08.5238823Z [16:07:10+0000] Using cached cyclopts-3.22.3-py3-none-any.whl (84 kB)
+2025-07-29T16:08:08.7001593Z [16:07:10+0000] Using cached exceptiongroup-1.3.0-py3-none-any.whl (16 kB)
+2025-07-29T16:08:08.7655891Z [16:07:10+0000] Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+2025-07-29T16:08:08.8692163Z [16:07:10+0000] Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+2025-07-29T16:08:08.8983404Z [16:07:10+0000] Using cached idna-3.10-py3-none-any.whl (70 kB)
+2025-07-29T16:08:08.9694895Z [16:07:10+0000] Using cached itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+2025-07-29T16:08:09.0246824Z [16:07:10+0000] Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+2025-07-29T16:08:09.0556912Z [16:07:10+0000] Using cached MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+2025-07-29T16:08:09.0736879Z [16:07:10+0000] Using cached mcp-1.12.2-py3-none-any.whl (158 kB)
+2025-07-29T16:08:09.6894489Z [16:07:10+0000] Using cached openapi_pydantic-0.5.1-py3-none-any.whl (96 kB)
+2025-07-29T16:08:09.6894677Z [16:07:10+0000] Using cached pydantic-2.11.7-py3-none-any.whl (444 kB)
+2025-07-29T16:08:09.6894704Z [16:07:10+0000] Using cached pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+2025-07-29T16:08:09.6894723Z [16:07:10+0000] Using cached rich-14.1.0-py3-none-any.whl (243 kB)
+2025-07-29T16:08:09.6894742Z [16:07:10+0000] Using cached urllib3-2.5.0-py3-none-any.whl (129 kB)
+2025-07-29T16:08:09.6894788Z [16:07:10+0000] Using cached werkzeug-3.1.3-py3-none-any.whl (224 kB)
+2025-07-29T16:08:09.6894806Z [16:07:10+0000] Using cached packaging-25.0-py3-none-any.whl (66 kB)
+2025-07-29T16:08:09.6894826Z [16:07:10+0000] Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+2025-07-29T16:08:09.6894845Z [16:07:10+0000] Using cached anyio-4.9.0-py3-none-any.whl (100 kB)
+2025-07-29T16:08:09.6894863Z [16:07:10+0000] Using cached attrs-25.3.0-py3-none-any.whl (63 kB)
+2025-07-29T16:08:09.6894885Z [16:07:10+0000] Using cached cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467 kB)
+2025-07-29T16:08:09.7527774Z [16:07:10+0000] Using cached docstring_parser-0.17.0-py3-none-any.whl (36 kB)
+2025-07-29T16:08:09.7880302Z [16:07:10+0000] Using cached email_validator-2.2.0-py3-none-any.whl (33 kB)
+2025-07-29T16:08:09.9031509Z [16:07:10+0000] Using cached httpx_sse-0.4.1-py3-none-any.whl (8.1 kB)
+2025-07-29T16:08:09.9418104Z [16:07:10+0000] Using cached jsonschema-4.25.0-py3-none-any.whl (89 kB)
+2025-07-29T16:08:09.9531671Z [16:07:10+0000] Using cached markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+2025-07-29T16:08:10.0259346Z [16:07:10+0000] Using cached pydantic_settings-2.10.1-py3-none-any.whl (45 kB)
+2025-07-29T16:08:10.0648220Z [16:07:10+0000] Using cached pygments-2.19.2-py3-none-any.whl (1.2 MB)
+2025-07-29T16:08:10.1118856Z [16:07:10+0000] Using cached python_multipart-0.0.20-py3-none-any.whl (24 kB)
+2025-07-29T16:08:10.2223698Z [16:07:10+0000] Using cached rich_rst-1.3.1-py3-none-any.whl (11 kB)
+2025-07-29T16:08:10.2726492Z [16:07:10+0000]Using cached sse_starlette-3.0.2-py3-none-any.whl (11 kB)
+2025-07-29T16:08:10.3681625Z [16:07:10+0000] Using cached starlette-0.47.2-py3-none-any.whl (72 kB)
+2025-07-29T16:08:10.3979144Z [16:07:10+0000] Using cached typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+2025-07-29T16:08:10.5560661Z [16:07:11+0000] Using cached typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+2025-07-29T16:08:10.5822963Z [16:07:11+0000] Using cached uvicorn-0.35.0-py3-none-any.whl (66 kB)
+2025-07-29T16:08:10.6854573Z [16:07:11+0000] Using cached dnspython-2.7.0-py3-none-any.whl (313 kB)
+2025-07-29T16:08:10.7038296Z [16:07:11+0000] Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+2025-07-29T16:08:10.7308642Z [16:07:11+0000] Using cached jsonschema_specifications-2025.4.1-py3-none-any.whl (18 kB)
+2025-07-29T16:08:10.7791188Z [16:07:11+0000] Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+2025-07-29T16:08:10.8653055Z [16:07:11+0000] Using cached referencing-0.36.2-py3-none-any.whl (26 kB)
+2025-07-29T16:08:10.9214741Z [16:07:11+0000] Using cached rpds_py-0.26.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (383 kB)
+2025-07-29T16:08:11.7489278Z [16:07:11+0000] Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+2025-07-29T16:08:11.7489455Z [16:07:11+0000] Using cached docutils-0.22-py3-none-any.whl (630 kB)
+2025-07-29T16:08:11.7489480Z [16:07:11+0000] Using cached pycparser-2.22-py3-none-any.whl (117 kB)
+2025-07-29T16:08:11.7489609Z [16:07:14+0000] Installing collected packages: pyperclip, urllib3, typing-extensions, sniffio, rpds-py, python-multipart, python-dotenv, pyjwt, pygments, pycparser, packaging, mdurl, markupsafe, itsdangerous, idna, httpx-sse, h11, docutils, docstring-parser, dnspython, click, charset_normalizer, certifi, blinker, attrs, annotated-types, werkzeug, uvicorn, typing-inspection, requests, referencing, pydantic-core, markdown-it-py, jinja2, httpcore, gunicorn, exceptiongroup, email-validator, cffi, anyio, starlette, sse-starlette, rich, pydantic, jsonschema-specifications, httpx, flask, cryptography, rich-rst, pydantic-settings, openapi-pydantic, jsonschema, flask-cors, authlib, msal, mcp, cyclopts, fastmcp
+2025-07-29T16:08:11.7489670Z [16:07:56+0000] Successfully installed annotated-types-0.7.0 anyio-4.9.0 attrs-25.3.0 authlib-1.6.1 blinker-1.9.0 certifi-2025.7.14 cffi-1.17.1 charset_normalizer-3.4.2 click-8.2.1 cryptography-45.0.5 cyclopts-3.22.3 dnspython-2.7.0 docstring-parser-0.17.0 docutils-0.22 email-validator-2.2.0 exceptiongroup-1.3.0 fastmcp-2.10.6 flask-3.1.1 flask-cors-6.0.1 gunicorn-23.0.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 httpx-sse-0.4.1 idna-3.10 itsdangerous-2.2.0 jinja2-3.1.6 jsonschema-4.25.0 jsonschema-specifications-2025.4.1 markdown-it-py-3.0.0 markupsafe-3.0.2 mcp-1.12.2 mdurl-0.1.2 msal-1.33.0 openapi-pydantic-0.5.1 packaging-25.0 pycparser-2.22 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.19.2 pyjwt-2.10.1 pyperclip-1.9.0 python-dotenv-1.1.1 python-multipart-0.0.20 referencing-0.36.2 requests-2.32.4 rich-14.1.0 rich-rst-1.3.1 rpds-py-0.26.0 sniffio-1.3.1 sse-starlette-3.0.2 starlette-0.47.2 typing-extensions-4.14.1 typing-inspection-0.4.1 urllib3-2.5.0 uvicorn-0.35.0 werkzeug-3.1.3
+2025-07-29T16:08:11.7489693Z
+2025-07-29T16:08:11.7489711Z [notice] A new release of pip is available: 24.0 -> 25.1.1
+2025-07-29T16:08:11.7489729Z [notice] To update, run: pip install --upgrade pip
+2025-07-29T16:08:11.7489744Z Not a vso image, so not writing build commands
+2025-07-29T16:08:11.8815038Z Preparing output...
+2025-07-29T16:08:12.2450007Z
+2025-07-29T16:08:12.2726563Z Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
+2025-07-29T16:08:35.4650788Z ..................
+2025-07-29T16:08:35.4722756Z Done in 23 sec(s).
+2025-07-29T16:08:35.5178479Z Compressing content of directory '/tmp/_preCompressedDestinationDir'...
+2025-07-29T16:09:16.8892245Z .....................................
+2025-07-29T16:09:16.8907516Z Copied the compressed output to '/home/site/wwwroot'
+2025-07-29T16:09:16.9378512Z
+2025-07-29T16:09:16.9681417Z Removing existing manifest file
+2025-07-29T16:09:16.9895567Z Creating a manifest file...
+2025-07-29T16:09:17.0386043Z Manifest file created.
+2025-07-29T16:09:17.0885907Z Copying .ostype to manifest output directory.
+2025-07-29T16:09:17.1273547Z
+2025-07-29T16:09:17.1536948Z Done in 173 sec(s).
+2025-07-29T16:09:31.5997624Z    _____
+2025-07-29T16:09:31.6130641Z   /  _  \ __________ _________   ____
+2025-07-29T16:09:31.6130988Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-07-29T16:09:31.6131022Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-07-29T16:09:31.6131087Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-29T16:09:31.6131111Z         \/      \/                  \/
+2025-07-29T16:09:31.6131145Z A P P   S E R V I C E   O N   L I N U X
+2025-07-29T16:09:31.6131174Z
+2025-07-29T16:09:31.6131204Z Documentation: http://aka.ms/webapp-linux
+2025-07-29T16:09:31.6131227Z Python 3.11.12
+2025-07-29T16:09:31.6131274Z Note: Any data outside '/home' is not persisted
+2025-07-29T16:09:34.6390874Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-29T16:09:34.6407477Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-29T16:09:34.7055206Z Updating certificates in /etc/ssl/certs...
+2025-07-29T16:09:44.9437205Z 2 added, 0 removed; done.
+2025-07-29T16:09:44.9437604Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-29T16:09:44.9437856Z done.
+2025-07-29T16:09:44.9538273Z CA certificates copied and updated successfully.
+2025-07-29T16:09:45.1106076Z Site's appCommandLine: gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP
+2025-07-29T16:09:45.6659947Z Starting periodic command scheduler: cron.
+2025-07-29T16:09:45.6672024Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP'
+2025-07-29T16:09:45.9617472Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-29T16:09:45.9930167Z Output is compressed. Extracting it...
+2025-07-29T16:09:45.9930536Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddceb9d9f7e44d'...
+2025-07-29T16:09:45.9930915Z Build Operation ID: 8286695f18d1c8d9
+2025-07-29T16:09:45.9931078Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-07-29T16:10:12.6160070Z App path is set to '/tmp/8ddceb9d9f7e44d'
+2025-07-29T16:10:12.6477528Z Writing output script to '/opt/startup/startup.sh'
+2025-07-29T16:10:13.3859816Z Using packages from virtual environment antenv located at /tmp/8ddceb9d9f7e44d/antenv.
+2025-07-29T16:10:13.4031374Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages'
+2025-07-29T16:10:15.2345813Z [2025-07-29 16:10:15 +0000] [1035] [INFO] Starting gunicorn 23.0.0
+2025-07-29T16:10:15.2360995Z [2025-07-29 16:10:15 +0000] [1035] [INFO] Listening at: http://0.0.0.0:8000 (1035)
+2025-07-29T16:10:15.2365844Z [2025-07-29 16:10:15 +0000] [1035] [INFO] Using worker: sync
+2025-07-29T16:10:15.2466502Z [2025-07-29 16:10:15 +0000] [1038] [INFO] Booting worker with pid: 1038
+2025-07-29T16:10:24.2331037Z 2025-07-29 16:10:24,232 - mcp-bridge - INFO - All required libraries imported successfully
+2025-07-29T16:10:24.3940015Z 2025-07-29 16:10:24,393 - msal.application - WARNING - Region configured (None) != region detected ('uksouth')
+2025-07-29T16:10:24.3945719Z 2025-07-29 16:10:24,394 - mcp-bridge - INFO - MSAL OAuth client initialized successfully
+2025-07-29T16:10:24.4559326Z 169.254.132.1 - - [29/Jul/2025:16:10:24 +0000] "GET /robots933456.txt HTTP/1.1" 404 200 "-" "HealthCheck/1.0"
+2025-07-29T16:10:45.8424729Z [2025-07-29 16:10:45 +0000] [1033] [INFO] Worker exiting (pid: 1033)
+2025-07-29T16:10:45.8610212Z [2025-07-29 16:10:45 +0000] [1032] [INFO] Handling signal: term
+2025-07-29T16:10:46.0098051Z [2025-07-29 16:10:46 +0000] [1032] [ERROR] Worker (pid:1033) was sent SIGTERM!
+2025-07-29T16:10:46.0230823Z [2025-07-29 16:10:46 +0000] [1032] [INFO] Shutting down: Master
+2025-07-29T16:11:21.3617086Z 2025-07-29 16:11:21,227 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:11:21.3617251Z Traceback (most recent call last):
+2025-07-29T16:11:21.3617283Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T16:11:21.3617314Z     rv = self.dispatch_request()
+2025-07-29T16:11:21.3617335Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:11:21.3617359Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T16:11:21.3616477Z 169.254.132.1 - - [29/Jul/2025:16:11:21 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T16:11:21.3617379Z     self.raise_routing_exception(req)
+2025-07-29T16:11:21.3628216Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T16:11:21.3628249Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T16:11:21.3628296Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:11:21.3628320Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T16:11:21.3628341Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T16:11:21.3628361Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:11:21.3628383Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T16:11:21.3628404Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T16:11:21.3628425Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:11:21.6685767Z 169.254.132.1 - - [29/Jul/2025:16:11:21 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T16:13:09  No new trace in the past 1 min(s).
+2025-07-29T16:13:40.2631140Z 2025-07-29 16:13:40,262 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:13:40.2631763Z Traceback (most recent call last):
+2025-07-29T16:13:40.2631802Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T16:13:40.2631832Z     rv = self.dispatch_request()
+2025-07-29T16:13:40.2631849Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:13:40.2631871Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T16:13:40.2631889Z     self.raise_routing_exception(req)
+2025-07-29T16:13:40.2631909Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T16:13:40.2631928Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T16:13:40.2631978Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:13:40.2631999Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T16:13:40.2632018Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T16:13:40.2632036Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:13:40.2632056Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T16:13:40.2632075Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T16:13:40.2632096Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:13:40.2707433Z 169.254.132.1 - - [29/Jul/2025:16:13:40 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T16:13:40.6583214Z 169.254.132.1 - - [29/Jul/2025:16:13:40 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T16:14:19.3671395Z 2025-07-29 16:14:19,362 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:14:19.3671999Z Traceback (most recent call last):
+2025-07-29T16:14:19.3672035Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T16:14:19.3672181Z     rv = self.dispatch_request()
+2025-07-29T16:14:19.3672201Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:14:19.3672225Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T16:14:19.3672245Z     self.raise_routing_exception(req)
+2025-07-29T16:14:19.3672328Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T16:14:19.3672531Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T16:14:19.3672554Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:14:19.3672577Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T16:14:19.3672599Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T16:14:19.3672619Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:14:19.3672643Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T16:14:19.3672665Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T16:14:19.3672689Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:14:19.3702072Z 169.254.132.1 - - [29/Jul/2025:16:14:19 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T16:14:19.9365623Z 169.254.132.1 - - [29/Jul/2025:16:14:19 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T16:16:09  No new trace in the past 1 min(s).
+2025-07-29T16:17:09  No new trace in the past 2 min(s).
+2025-07-29T16:17:52.3748657Z 2025-07-29 16:17:52,373 - mcp-bridge - ERROR - Uncaught exception: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:17:52.3752792Z Traceback (most recent call last):
+2025-07-29T16:17:52.3752839Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+2025-07-29T16:17:52.3752871Z     rv = self.dispatch_request()
+2025-07-29T16:17:52.3752888Z          ^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:17:52.3752908Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 891, in dispatch_request
+2025-07-29T16:17:52.3752926Z     self.raise_routing_exception(req)
+2025-07-29T16:17:52.3752947Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/app.py", line 500, in raise_routing_exception
+2025-07-29T16:17:52.3752967Z     raise request.routing_exception  # type: ignore[misc]
+2025-07-29T16:17:52.3753019Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:17:52.3753040Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/flask/ctx.py", line 362, in match_request
+2025-07-29T16:17:52.3753060Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+2025-07-29T16:17:52.3753078Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-07-29T16:17:52.3753098Z   File "/tmp/8ddceb9d9f7e44d/antenv/lib/python3.11/site-packages/werkzeug/routing/map.py", line 624, in match
+2025-07-29T16:17:52.3753117Z     raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
+2025-07-29T16:17:52.3753137Z werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+2025-07-29T16:17:52.3833080Z 169.254.132.1 - - [29/Jul/2025:16:17:52 +0000] "POST / HTTP/1.1" 500 140 "-" "Claude-User"
+2025-07-29T16:17:53.0198580Z 169.254.132.1 - - [29/Jul/2025:16:17:53 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T16:19:09  No new trace in the past 1 min(s).

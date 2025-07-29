@@ -19,7 +19,7 @@ logging.basicConfig(
 logger = logging.getLogger("mcp-bridge")
 
 try:
-    from flask import Flask, jsonify, request, session, redirect, url_for
+    from flask import Flask, jsonify, request, session, redirect, url_for, Response
     from flask_cors import CORS
     from mcp.server.fastmcp import FastMCP
     import requests
@@ -34,6 +34,24 @@ except ImportError as e:
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev-key-change-in-production')
 CORS(app)
+
+# Request logging middleware
+@app.before_request
+def log_request_info():
+    """Log all incoming requests to help debug 405 errors"""
+    logger.info(f"Request: {request.method} {request.url} from {request.remote_addr or 'unknown'}")
+
+# Handle CORS preflight requests to reduce 405 errors
+@app.before_request
+def handle_preflight():
+    """Handle OPTIONS requests for CORS preflight"""
+    if request.method == "OPTIONS":
+        response = Response()
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        logger.info(f"CORS preflight handled for {request.url}")
+        return response
 
 # Initialize MCP server internally
 mcp = FastMCP("powerbi-financial-server")
@@ -549,15 +567,30 @@ def mcp_query():
 
 @app.errorhandler(404)
 def not_found_error(error):
-    """Handle 404 errors"""
+    """Handle 404 errors with detailed logging"""
+    logger.warning(f"404 Error: {request.method} {request.url} from {request.remote_addr or 'unknown'}")
     return jsonify({
         "error": "Not Found",
-        "message": "The requested endpoint was not found",
+        "message": f"The requested endpoint '{request.path}' was not found",
+        "method": request.method,
+        "url": str(request.url),
         "available_endpoints": [
             "/", "/health", "/mcp/status", "/mcp/workspaces", 
             "/mcp/datasets", "/authorize", "/auth/callback", "/mcp/query"
         ]
     }), 404
+
+@app.errorhandler(405)
+def method_not_allowed_error(error):
+    """Handle 405 Method Not Allowed errors with detailed logging"""
+    logger.warning(f"405 Error: {request.method} {request.url} from {request.remote_addr or 'unknown'} - Method not allowed")
+    return jsonify({
+        "error": "Method Not Allowed",
+        "message": f"The method '{request.method}' is not allowed for endpoint '{request.path}'",
+        "method": request.method,
+        "url": str(request.url),
+        "allowed_methods": ["GET", "POST", "OPTIONS"]
+    }), 405
 
 @app.errorhandler(500)
 def internal_error(error):

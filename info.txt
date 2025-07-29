@@ -1,174 +1,102 @@
 https://pbimcp.azurewebsites.net/health
-{"authentication":{"authentication_required":true,"oauth_configured":true,"type":"microsoft_oauth2"},"database_required":false,"environment":"azure","mcp_tools_protected":true,"status":"healthy","timestamp":"2025-07-29T14:41:30.860053"}
+
+{"authentication":{"configured":true,"powerbi_access":false,"type":"client_credentials"},"environment":"azure","features":{"http_bridge":true,"mcp_tools":true,"powerbi_integration":true},"protocol":"http_mcp_bridge","service":"Power BI MCP Finance Server","status":"healthy","timestamp":"2025-07-29T15:19:40.655731","version":"3.0.0-bridge"}
 
 https://pbimcp.azurewebsites.net/mcp/status
-Not Found
-The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+{"authentication":"client_credentials","powerbi_access":"denied","server_status":"running","service":"Power BI MCP Finance Server","timestamp":"2025-07-29T15:10:13.506908","version":"3.0.0-bridge"}
 
 https://pbimcp.azurewebsites.net/mcp/workspaces
+{"error":"Unable to access Power BI","message":"Failed to acquire Power BI access token"}
+
+https://pbimcp.azurewebsites.net/authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https%3A%2F%2Fclaude.ai%2Fapi%2Fmcp%2Fauth_callback&code_challenge=eF4wY4oBSo_XBc0oE7w0q5hdpdcXm2EbQPtsVi8o6b0&code_challenge_method=S256&state=ZS8m90qf4fthZfEdqbSfN45_5wyiaCOw5AGNB7PpgP8&scope=claudeai
 Not Found
 The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
 
-
-
-Startuplogs
-2025-07-29T14:45:13  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
-2025-07-29T14:44:47.6668159Z Tue Jul 29 14:44:47 UTC 2025 running .net core
-2025-07-29T14:44:54.5386942Z Startup : 02.44.54.445891
-2025-07-29T14:44:54.7153093Z Configure Services : 02.44.54.715037
-2025-07-29T14:44:58.7053539Z Configure : 02.44.58.705127
-2025-07-29T14:45:01.2090985Z Setting Up Routes : 02.45.01.208870
-2025-07-29T14:45:04.0932496Z Exiting Configure : 02.45.04.085547
-2025-07-29T14:45:05.6646936Z Hosting environment: Production
-2025-07-29T14:45:05.6829138Z Content root path: /opt/Kudu
-2025-07-29T14:45:05.7013532Z Now listening on: http://0.0.0.0:8181
-2025-07-29T14:45:05.7018333Z Application started. Press Ctrl+C to shut down.Ending Log Tail of existing logs ---Starting Live Log Stream ---
-2025-07-29T14:45:27.3968030Z    _____
-2025-07-29T14:45:27.4035990Z   /  _  \ __________ _________   ____
-2025-07-29T14:45:27.4036190Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
-2025-07-29T14:45:27.4038428Z /    |    \/    /|  |  /|  | \/\  ___/
-2025-07-29T14:45:27.4038561Z \____|__  /_____ \____/ |__|    \___  >
-2025-07-29T14:45:27.4038604Z         \/      \/                  \/
-2025-07-29T14:45:27.4038677Z A P P   S E R V I C E   O N   L I N U X
-2025-07-29T14:45:27.4038722Z
-2025-07-29T14:45:27.4038769Z Documentation: http://aka.ms/webapp-linux
-2025-07-29T14:45:27.4039004Z Python 3.11.12
-2025-07-29T14:45:27.4039053Z Note: Any data outside '/home' is not persisted
-2025-07-29T14:45:29.3503055Z Starting OpenBSD Secure Shell server: sshd.
-2025-07-29T14:45:29.4145468Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
-2025-07-29T14:45:29.5368240Z Updating certificates in /etc/ssl/certs...
-2025-07-29T14:45:41.4108224Z 2 added, 0 removed; done.
-2025-07-29T14:45:41.4110093Z Running hooks in /etc/ca-certificates/update.d...
-2025-07-29T14:45:41.4110367Z done.
-2025-07-29T14:45:41.4110549Z CA certificates copied and updated successfully.
-2025-07-29T14:45:41.6210087Z Site's appCommandLine: gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info app:APP
-2025-07-29T14:45:42.7215380Z Starting periodic command scheduler: cron.
-2025-07-29T14:45:42.7407097Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info app:APP'
-2025-07-29T14:45:43.2068582Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
-2025-07-29T14:45:43.2531869Z Build Operation ID: 772253d5da7ebff2
-2025-07-29T14:45:43.2536757Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
-2025-07-29T14:45:43.2538515Z Output is compressed. Extracting it...
-2025-07-29T14:45:43.2557326Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddceacd7660cbf'...
-2025-07-29T14:46:03.1925197Z App path is set to '/tmp/8ddceacd7660cbf'
-2025-07-29T14:46:03.2670616Z Writing output script to '/opt/startup/startup.sh'
-2025-07-29T14:46:04.8756122Z Using packages from virtual environment antenv located at /tmp/8ddceacd7660cbf/antenv.
-2025-07-29T14:46:04.8769323Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddceacd7660cbf/antenv/lib/python3.11/site-packages'
-2025-07-29T14:46:09.7054923Z [2025-07-29 14:46:09 +0000] [1027] [INFO] Starting gunicorn 23.0.0
-2025-07-29T14:46:09.7222590Z [2025-07-29 14:46:09 +0000] [1027] [INFO] Listening at: http://0.0.0.0:8000 (1027)
-2025-07-29T14:46:09.7227524Z [2025-07-29 14:46:09 +0000] [1027] [INFO] Using worker: sync
-2025-07-29T14:46:09.7232475Z [2025-07-29 14:46:09 +0000] [1034] [INFO] Booting worker with pid: 1034
-2025-07-29T14:46:17.5837677Z 2025-07-29 14:46:17,583 - pbi-mcp-server - INFO - FastMCP imported successfully
-2025-07-29T14:46:19.8857095Z 2025-07-29 14:46:19,885 - pbi-mcp-server - INFO - Flask, CORS, and OAuth libraries imported successfully
-2025-07-29T14:46:19.9008475Z 2025-07-29 14:46:19,900 - pbi-mcp-server - INFO - FastMCP server initialized successfully
-2025-07-29T14:46:19.9027062Z 2025-07-29 14:46:19,902 - pbi-mcp-server - INFO - Flask app and CORS initialized successfully
-2025-07-29T14:46:20.0035552Z 2025-07-29 14:46:20,003 - msal.application - WARNING - Region configured (None) != region detected ('uksouth')
-2025-07-29T14:46:20.0043209Z 2025-07-29 14:46:20,004 - pbi-mcp-server - INFO - MSAL OAuth client initialized successfully
-2025-07-29T14:46:20.0323813Z 2025-07-29 14:46:20,031 - pbi-mcp-server - INFO - === Power BI MCP Server Direct Startup ===
-2025-07-29T14:46:20.0329471Z 2025-07-29 14:46:20,032 - pbi-mcp-server - INFO - Python version: 3.11.12 (main, May  2 2025, 12:56:39) [GCC 10.2.1 20210110]
-2025-07-29T14:46:20.0333593Z 2025-07-29 14:46:20,033 - pbi-mcp-server - INFO - Working directory: /tmp/8ddceacd7660cbf
-2025-07-29T14:46:20.0340063Z 2025-07-29 14:46:20,033 - pbi-mcp-server - INFO - Running on Azure: True
-2025-07-29T14:46:20.0499521Z 2025-07-29 14:46:20,040 - pbi-mcp-server - INFO - Azure hostname: pbimcp.azurewebsites.net
-2025-07-29T14:46:20.0499998Z 2025-07-29 14:46:20,040 - pbi-mcp-server - INFO - OAuth configured: True
-2025-07-29T14:46:20.0500124Z 2025-07-29 14:46:20,040 - pbi-mcp-server - INFO - Microsoft OAuth authentication enabled
-2025-07-29T14:46:20.0500218Z 2025-07-29 14:46:20,040 - pbi-mcp-server - INFO - Available MCP tools: get_powerbi_status, health_check, list_powerbi_workspaces, get_powerbi_datasets, execute_powerbi_query
-2025-07-29T14:46:20.0500260Z 2025-07-29 14:46:20,040 - pbi-mcp-server - INFO - Flask app created successfully: app
-2025-07-29T14:46:20.0500377Z 2025-07-29 14:46:20,040 - pbi-mcp-server - INFO - App routes available: ['/static/<path:filename>', '/authorize', '/auth/url', '/auth/callback', '/', '/health', '/api/powerbi/workspaces']
-2025-07-29T14:46:20.0500418Z 2025-07-29 14:46:20,040 - pbi-mcp-server - INFO - Power BI MCP Server ready for gunicorn startup
-2025-07-29T14:46:20.3324315Z 169.254.132.1 - - [29/Jul/2025:14:46:20 +0000] "GET /robots933456.txt HTTP/1.1" 404 207 "-" "HealthCheck/1.0"
-2025-07-29T14:46:21.5890270Z 169.254.132.1 - - [29/Jul/2025:14:46:21 +0000] "GET /health HTTP/1.1" 200 237 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:46:33.4828960Z 169.254.132.1 - - [29/Jul/2025:14:46:33 +0000] "GET /mcp/status HTTP/1.1" 404 207 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:46:35.8725947Z 169.254.132.1 - - [29/Jul/2025:14:46:35 +0000] "GET /mcp/workspaces HTTP/1.1" 404 207 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:46:39.2803637Z     __ __          __      __    _ __
-2025-07-29T14:46:39.3284064Z    / //_/_  _ ____/ /_  __/ /   (_) /____
-2025-07-29T14:46:39.3342496Z   / ,< / / / / __  / / / / /   / / __/ _
-2025-07-29T14:46:39.3343749Z  / /| / /_/ / /_/ / /_/ / /___/ / /_/  __/
-2025-07-29T14:46:39.3343803Z /_/ |_\__,_/\__,_/\__,_/_____/_/\__/\___/
-2025-07-29T14:46:39.3344492Z
-2025-07-29T14:46:39.3345672Z
-2025-07-29T14:46:39.3345750Z DEBUG CONSOLE | AZURE APP SERVICE ON LINUX
-2025-07-29T14:46:39.3345783Z
-2025-07-29T14:46:39.3345864Z Documentation: http://aka.ms/webapp-linux
-2025-07-29T14:46:39.3345891Z Kudu Version : 20250623.5
-2025-07-29T14:46:39.3348976Z Commit       : 353543ec4c45fcbfd4750522d32c94e23b31927a
-2025-07-29T14:46:39.3349087Z
-2025-07-29T14:46:40.8157611Z chown: changing ownership of '/temp': Operation not permitted
-2025-07-29T14:46:40.8429792Z chmod: changing permissions of '/temp': Operation not permitted
-2025-07-29T14:46:44.5215159Z    _____
-2025-07-29T14:46:44.5217157Z   /  _  \ __________ _________   ____
-2025-07-29T14:46:44.5217238Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
-2025-07-29T14:46:44.5217270Z /    |    \/    /|  |  /|  | \/\  ___/
-2025-07-29T14:46:44.5217308Z \____|__  /_____ \____/ |__|    \___  >
-2025-07-29T14:46:44.5217341Z         \/      \/                  \/
-2025-07-29T14:46:44.5217397Z A P P   S E R V I C E   O N   L I N U X
-2025-07-29T14:46:44.5217432Z
-2025-07-29T14:46:44.5217468Z Documentation: http://aka.ms/webapp-linux
-2025-07-29T14:46:44.5217497Z Python 3.11.12
-2025-07-29T14:46:44.5217525Z Note: Any data outside '/home' is not persisted
-2025-07-29T14:46:50.1119883Z Restarting OpenBSD Secure Shell server: sshd.
-2025-07-29T14:46:50.3298060Z node not running, starting node /opt/webssh/index.js
-2025-07-29T14:46:54.2367373Z Starting OpenBSD Secure Shell server: sshd.
-2025-07-29T14:46:54.2933145Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
-2025-07-29T14:46:55.2995719Z Updating certificates in /etc/ssl/certs...
-2025-07-29T14:47:23.2203412Z 2 added, 0 removed; done.
-2025-07-29T14:47:23.2406776Z Running hooks in /etc/ca-certificates/update.d...
-2025-07-29T14:47:23.2867550Z done.
-2025-07-29T14:47:23.3597843Z CA certificates copied and updated successfully.
-2025-07-29T14:47:23.8370225Z Site's appCommandLine: gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info app:APP
-2025-07-29T14:47:28.4871814Z Starting periodic command scheduler: cron.
-2025-07-29T14:47:28.5138218Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info app:APP'
-2025-07-29T14:47:31.3198110Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
-2025-07-29T14:47:31.4129309Z Build Operation ID: 772253d5da7ebff2
-2025-07-29T14:47:31.4399952Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
-2025-07-29T14:47:31.4421389Z Output is compressed. Extracting it...
-2025-07-29T14:47:31.4767420Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddceacd7660cbf'...
-2025-07-29T14:47:38.8852704Z 169.254.132.1 - - [29/Jul/2025:14:47:38 +0000] "GET /mcp/status HTTP/1.1" 404 207 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:47:40.0100520Z Tue Jul 29 14:47:39 UTC 2025 running .net core
-2025-07-29T14:47:57.6044760Z Startup : 02.47.57.389301
-2025-07-29T14:47:58.4171197Z Configure Services : 02.47.58.415335
-2025-07-29T14:48:02.0135855Z Configure : 02.48.02.013347
-2025-07-29T14:48:05.8810841Z Setting Up Routes : 02.48.05.863151
-2025-07-29T14:48:11.0492553Z Exiting Configure : 02.48.11.042877
-2025-07-29T14:48:15.1657369Z Hosting environment: Production
-2025-07-29T14:48:15.1657936Z Content root path: /opt/Kudu
-2025-07-29T14:48:15.1657988Z Now listening on: http://0.0.0.0:8181
-2025-07-29T14:48:15.1658026Z Application started. Press Ctrl+C to shut down.
-2025-07-29T14:48:21.7229382Z App path is set to '/tmp/8ddceacd7660cbf'
-2025-07-29T14:48:21.7912451Z Writing output script to '/opt/startup/startup.sh'
-2025-07-29T14:48:22.4408579Z Using packages from virtual environment antenv located at /tmp/8ddceacd7660cbf/antenv.
-2025-07-29T14:48:22.4424755Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddceacd7660cbf/antenv/lib/python3.11/site-packages'
-2025-07-29T14:48:25.1032074Z 169.254.132.1 - - [29/Jul/2025:14:48:25 +0000] "GET /health HTTP/1.1" 200 237 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:48:26.9625291Z 169.254.132.1 - - [29/Jul/2025:14:48:26 +0000] "GET /mcp/status HTTP/1.1" 404 207 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:48:28.3384323Z [2025-07-29 14:48:28 +0000] [1027] [INFO] Starting gunicorn 23.0.0
-2025-07-29T14:48:28.3385113Z [2025-07-29 14:48:28 +0000] [1027] [INFO] Listening at: http://0.0.0.0:8000 (1027)
-2025-07-29T14:48:28.3485959Z [2025-07-29 14:48:28 +0000] [1027] [INFO] Using worker: sync
-2025-07-29T14:48:28.4099218Z [2025-07-29 14:48:28 +0000] [1033] [INFO] Booting worker with pid: 1033
-2025-07-29T14:48:42  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
-2025-07-29T14:48:21.7912451Z Writing output script to '/opt/startup/startup.sh'
-2025-07-29T14:48:22.4408579Z Using packages from virtual environment antenv located at /tmp/8ddceacd7660cbf/antenv.
-2025-07-29T14:48:22.4424755Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddceacd7660cbf/antenv/lib/python3.11/site-packages'
-2025-07-29T14:48:25.1032074Z 169.254.132.1 - - [29/Jul/2025:14:48:25 +0000] "GET /health HTTP/1.1" 200 237 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:48:26.9625291Z 169.254.132.1 - - [29/Jul/2025:14:48:26 +0000] "GET /mcp/status HTTP/1.1" 404 207 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:48:28.3384323Z [2025-07-29 14:48:28 +0000] [1027] [INFO] Starting gunicorn 23.0.0
-2025-07-29T14:48:28.3385113Z [2025-07-29 14:48:28 +0000] [1027] [INFO] Listening at: http://0.0.0.0:8000 (1027)
-2025-07-29T14:48:28.3485959Z [2025-07-29 14:48:28 +0000] [1027] [INFO] Using worker: sync
-2025-07-29T14:48:28.4099218Z [2025-07-29 14:48:28 +0000] [1033] [INFO] Booting worker with pid: 1033
-2025-07-29T14:48:41.8984620Z 2025-07-29 14:48:41,873 - pbi-mcp-server - INFO - FastMCP imported successfullyEnding Log Tail of existing logs ---Starting Live Log Stream ---
-2025-07-29T14:48:47.3555075Z 2025-07-29 14:48:47,355 - pbi-mcp-server - INFO - Flask, CORS, and OAuth libraries imported successfully
-2025-07-29T14:48:47.3713273Z 2025-07-29 14:48:47,371 - pbi-mcp-server - INFO - FastMCP server initialized successfully
-2025-07-29T14:48:47.3797174Z 2025-07-29 14:48:47,379 - pbi-mcp-server - INFO - Flask app and CORS initialized successfully
-2025-07-29T14:48:47.5041750Z 2025-07-29 14:48:47,503 - msal.application - WARNING - Region configured (None) != region detected ('uksouth')
-2025-07-29T14:48:47.5303072Z 2025-07-29 14:48:47,510 - pbi-mcp-server - INFO - MSAL OAuth client initialized successfully
-2025-07-29T14:48:47.5696832Z 2025-07-29 14:48:47,569 - pbi-mcp-server - INFO - === Power BI MCP Server Direct Startup ===
-2025-07-29T14:48:47.5771856Z 2025-07-29 14:48:47,576 - pbi-mcp-server - INFO - Python version: 3.11.12 (main, May  2 2025, 12:56:39) [GCC 10.2.1 20210110]
-2025-07-29T14:48:47.5794175Z 2025-07-29 14:48:47,578 - pbi-mcp-server - INFO - Working directory: /tmp/8ddceacd7660cbf
-2025-07-29T14:48:47.5802857Z 2025-07-29 14:48:47,580 - pbi-mcp-server - INFO - Running on Azure: True
-2025-07-29T14:48:47.5806184Z 2025-07-29 14:48:47,580 - pbi-mcp-server - INFO - Azure hostname: pbimcp.azurewebsites.net
-2025-07-29T14:48:47.5953456Z 2025-07-29 14:48:47,580 - pbi-mcp-server - INFO - OAuth configured: True
-2025-07-29T14:48:47.5953698Z 2025-07-29 14:48:47,585 - pbi-mcp-server - INFO - Microsoft OAuth authentication enabled
-2025-07-29T14:48:47.5953829Z 2025-07-29 14:48:47,586 - pbi-mcp-server - INFO - Available MCP tools: get_powerbi_status, health_check, list_powerbi_workspaces, get_powerbi_datasets, execute_powerbi_query
-2025-07-29T14:48:47.5953862Z 2025-07-29 14:48:47,586 - pbi-mcp-server - INFO - Flask app created successfully: app
-2025-07-29T14:48:47.5953897Z 2025-07-29 14:48:47,586 - pbi-mcp-server - INFO - App routes available: ['/static/<path:filename>', '/authorize', '/auth/url', '/auth/callback', '/', '/health', '/api/powerbi/workspaces']
-2025-07-29T14:48:47.5953927Z 2025-07-29 14:48:47,586 - pbi-mcp-server - INFO - Power BI MCP Server ready for gunicorn startup
-2025-07-29T14:48:47.7865318Z 169.254.132.1 - - [29/Jul/2025:14:48:47 +0000] "GET /robots933456.txt HTTP/1.1" 404 207 "-" "HealthCheck/1.0"
-2025-07-29T14:49:01.1807590Z 169.254.132.1 - - [29/Jul/2025:14:49:01 +0000] "GET /mcp/workspaces HTTP/1.1" 404 207 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-07-29T14:49:02.8700409Z 169.254.132.1 - - [29/Jul/2025:14:49:02 +0000] "GET /mcp/status HTTP/1.1" 404 207 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+Startup logs:
+2025-07-29T15:19:33  No new trace in the past 1 min(s).
+2025-07-29T15:19:40.6629718Z 169.254.132.1 - - [29/Jul/2025:15:19:40 +0000] "GET /health HTTP/1.1" 200 342 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:19:40.6843047Z 2025-07-29 15:19:40,655 - mcp-bridge - ERROR - Failed to acquire Power BI token: AADSTS1002012: The provided value for scope https://analysis.windows.net/powerbi/api/Content.Create https://analysis.windows.net/powerbi/api/Dataset.Read.All https://analysis.windows.net/powerbi/api/Report.Read.All https://analysis.windows.net/powerbi/api/Workspace.Read.All is not valid. Client credential flows must have a scope value with /.default suffixed to the resource identifier (application ID URI). Trace ID: 22b22f65-d81a-4b61-ae46-8084e8bd0a00 Correlation ID: d8565642-0163-41ce-9205-838453706eba Timestamp: 2025-07-29 15:19:40Z
+2025-07-29T15:19:45.2033618Z     __ __          __      __    _ __
+2025-07-29T15:19:45.2058198Z    / //_/_  _ ____/ /_  __/ /   (_) /____
+2025-07-29T15:19:45.2059006Z   / ,< / / / / __  / / / / /   / / __/ _
+2025-07-29T15:19:45.2059060Z  / /| / /_/ / /_/ / /_/ / /___/ / /_/  __/
+2025-07-29T15:19:45.2059081Z /_/ |_\__,_/\__,_/\__,_/_____/_/\__/\___/
+2025-07-29T15:19:45.2059106Z
+2025-07-29T15:19:45.2059171Z
+2025-07-29T15:19:45.2059194Z DEBUG CONSOLE | AZURE APP SERVICE ON LINUX
+2025-07-29T15:19:45.2059212Z
+2025-07-29T15:19:45.2059234Z Documentation: http://aka.ms/webapp-linux
+2025-07-29T15:19:45.2059257Z Kudu Version : 20250623.5
+2025-07-29T15:19:45.2059279Z Commit       : 353543ec4c45fcbfd4750522d32c94e23b31927a
+2025-07-29T15:19:45.2059297Z
+2025-07-29T15:19:46.1354205Z chown: changing ownership of '/temp': Operation not permitted
+2025-07-29T15:19:46.1445902Z chmod: changing permissions of '/temp': Operation not permitted
+2025-07-29T15:19:49.9936332Z    _____
+2025-07-29T15:19:49.9937601Z   /  _  \ __________ _________   ____
+2025-07-29T15:19:49.9937663Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-07-29T15:19:49.9937691Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-07-29T15:19:49.9937719Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-29T15:19:49.9937779Z         \/      \/                  \/
+2025-07-29T15:19:49.9937806Z A P P   S E R V I C E   O N   L I N U X
+2025-07-29T15:19:49.9937836Z
+2025-07-29T15:19:49.9937866Z Documentation: http://aka.ms/webapp-linux
+2025-07-29T15:19:49.9937893Z Python 3.11.12
+2025-07-29T15:19:49.9937920Z Note: Any data outside '/home' is not persisted
+2025-07-29T15:19:50.0715610Z Restarting OpenBSD Secure Shell server: sshd.
+2025-07-29T15:19:50.2459606Z node not running, starting node /opt/webssh/index.js
+2025-07-29T15:19:54.5684372Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-29T15:19:54.6460362Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-29T15:19:54.7447992Z Updating certificates in /etc/ssl/certs...
+2025-07-29T15:19:56.5286685Z 169.254.132.1 - - [29/Jul/2025:15:19:56 +0000] "POST / HTTP/1.1" 405 153 "-" "Claude-User"
+2025-07-29T15:19:57.0586660Z 169.254.132.1 - - [29/Jul/2025:15:19:57 +0000] "GET / HTTP/1.1" 200 571 "-" "Claude-User"
+2025-07-29T15:20:23.0269533Z 2 added, 0 removed; done.
+2025-07-29T15:20:23.0474503Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-29T15:20:23.0474731Z done.
+2025-07-29T15:20:23.1779061Z CA certificates copied and updated successfully.
+2025-07-29T15:20:23.5339952Z Site's appCommandLine: gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP
+2025-07-29T15:20:24.9882350Z Starting periodic command scheduler: cron.
+2025-07-29T15:20:24.9882785Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind 0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP'
+2025-07-29T15:20:27.2385287Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-29T15:20:27.3861362Z Build Operation ID: 82c5ade9ccb59bec
+2025-07-29T15:20:27.3861862Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-07-29T15:20:27.4214012Z Output is compressed. Extracting it...
+2025-07-29T15:20:27.4231966Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddceb03fc7304f'...
+2025-07-29T15:20:30.8239426Z Tue Jul 29 15:20:30 UTC 2025 running .net core
+2025-07-29T15:20:36.3994024Z Startup : 03.20.36.333532
+2025-07-29T15:20:36.5390763Z Configure Services : 03.20.36.538851
+2025-07-29T15:20:38.3499852Z Configure : 03.20.38.349614
+2025-07-29T15:20:39.3697063Z Setting Up Routes : 03.20.39.369476
+2025-07-29T15:20:42.0727726Z Exiting Configure : 03.20.42.056167
+2025-07-29T15:20:43.3092515Z Hosting environment: Production
+2025-07-29T15:20:43.3101625Z Content root path: /opt/Kudu
+2025-07-29T15:20:43.3249526Z Now listening on: http://0.0.0.0:8181
+2025-07-29T15:20:43.3249738Z Application started. Press Ctrl+C to shut down.
+2025-07-29T15:20:51.4020422Z App path is set to '/tmp/8ddceb03fc7304f'
+2025-07-29T15:20:51.4788917Z Writing output script to '/opt/startup/startup.sh'
+2025-07-29T15:20:52.4343845Z Using packages from virtual environment antenv located at /tmp/8ddceb03fc7304f/antenv.
+2025-07-29T15:20:52.4352927Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddceb03fc7304f/antenv/lib/python3.11/site-packages'
+2025-07-29T15:20:56.1685115Z [2025-07-29 15:20:56 +0000] [1027] [INFO] Starting gunicorn 23.0.0
+2025-07-29T15:20:56.1694663Z [2025-07-29 15:20:56 +0000] [1027] [INFO] Listening at: http://0.0.0.0:8000 (1027)
+2025-07-29T15:20:56.1697461Z [2025-07-29 15:20:56 +0000] [1027] [INFO] Using worker: sync
+2025-07-29T15:20:56.1853815Z [2025-07-29 15:20:56 +0000] [1034] [INFO] Booting worker with pid: 1034
+2025-07-29T15:21:09  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
+2025-07-29T15:20:52.4343845Z Using packages from virtual environment antenv located at /tmp/8ddceb03fc7304f/antenv.
+2025-07-29T15:20:52.4352927Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddceb03fc7304f/antenv/lib/python3.11/site-packages'
+2025-07-29T15:20:56.1685115Z [2025-07-29 15:20:56 +0000] [1027] [INFO] Starting gunicorn 23.0.0
+2025-07-29T15:20:56.1694663Z [2025-07-29 15:20:56 +0000] [1027] [INFO] Listening at: http://0.0.0.0:8000 (1027)
+2025-07-29T15:20:56.1697461Z [2025-07-29 15:20:56 +0000] [1027] [INFO] Using worker: sync
+2025-07-29T15:20:56.1853815Z [2025-07-29 15:20:56 +0000] [1034] [INFO] Booting worker with pid: 1034
+2025-07-29T15:21:04.9170827Z 2025-07-29 15:21:04,916 - mcp-bridge - INFO - All required libraries imported successfully
+2025-07-29T15:21:05.1026450Z 2025-07-29 15:21:05,102 - msal.application - WARNING - Region configured (None) != region detected ('uksouth')
+2025-07-29T15:21:05.1036206Z 2025-07-29 15:21:05,103 - mcp-bridge - INFO - MSAL OAuth client initialized successfully
+2025-07-29T15:21:05.1957950Z 169.254.132.1 - - [29/Jul/2025:15:21:05 +0000] "GET /robots933456.txt HTTP/1.1" 404 207 "-" "HealthCheck/1.0"Ending Log Tail of existing logs ---Starting Live Log Stream ---
+2025-07-29T15:21:26.3539067Z [2025-07-29 15:21:26 +0000] [1034] [INFO] Worker exiting (pid: 1034)
+2025-07-29T15:21:26.3539365Z [2025-07-29 15:21:26 +0000] [1030] [INFO] Handling signal: term
+2025-07-29T15:21:26.3539744Z [2025-07-29 15:21:26 +0000] [1030] [ERROR] Worker (pid:1034) was sent SIGTERM!
+2025-07-29T15:21:26.4265077Z [2025-07-29 15:21:26 +0000] [1030] [INFO] Shutting down: Master
+2025-07-29T15:21:34.8555462Z 2025-07-29 15:21:34,855 - mcp-bridge - ERROR - Failed to acquire Power BI token: AADSTS1002012: The provided value for scope https://analysis.windows.net/powerbi/api/Content.Create https://analysis.windows.net/powerbi/api/Dataset.Read.All https://analysis.windows.net/powerbi/api/Report.Read.All https://analysis.windows.net/powerbi/api/Workspace.Read.All is not valid. Client credential flows must have a scope value with /.default suffixed to the resource identifier (application ID URI). Trace ID: 230fe1aa-a3d8-4a4d-99eb-3097ef760c00 Correlation ID: e6235b63-4fe7-4381-8b75-25ca86b1da55 Timestamp: 2025-07-29 15:21:34Z
+2025-07-29T15:21:34.8588604Z 169.254.132.1 - - [29/Jul/2025:15:21:34 +0000] "GET /health HTTP/1.1" 200 342 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:21:35.9708774Z 2025-07-29 15:21:35,970 - mcp-bridge - ERROR - Failed to acquire Power BI token: AADSTS1002012: The provided value for scope https://analysis.windows.net/powerbi/api/Content.Create https://analysis.windows.net/powerbi/api/Dataset.Read.All https://analysis.windows.net/powerbi/api/Report.Read.All https://analysis.windows.net/powerbi/api/Workspace.Read.All is not valid. Client credential flows must have a scope value with /.default suffixed to the resource identifier (application ID URI). Trace ID: 230fe1aa-a3d8-4a4d-99eb-3097ef760c00 Correlation ID: e6235b63-4fe7-4381-8b75-25ca86b1da55 Timestamp: 2025-07-29 15:21:34Z
+2025-07-29T15:21:35.9745501Z 169.254.132.1 - - [29/Jul/2025:15:21:35 +0000] "GET /mcp/status HTTP/1.1" 200 198 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-29T15:21:37.5359049Z 2025-07-29 15:21:37,535 - mcp-bridge - ERROR - Failed to acquire Power BI token: AADSTS1002012: The provided value for scope https://analysis.windows.net/powerbi/api/Content.Create https://analysis.windows.net/powerbi/api/Dataset.Read.All https://analysis.windows.net/powerbi/api/Report.Read.All https://analysis.windows.net/powerbi/api/Workspace.Read.All is not valid. Client credential flows must have a scope value with /.default suffixed to the resource identifier (application ID URI). Trace ID: 230fe1aa-a3d8-4a4d-99eb-3097ef760c00 Correlation ID: e6235b63-4fe7-4381-8b75-25ca86b1da55 Timestamp: 2025-07-29 15:21:34Z
+2025-07-29T15:21:37.5379041Z 169.254.132.1 - - [29/Jul/2025:15:21:37 +0000] "GET /mcp/workspaces HTTP/1.1" 200 90 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"

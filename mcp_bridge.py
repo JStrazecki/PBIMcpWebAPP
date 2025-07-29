@@ -32,7 +32,7 @@ except ImportError as e:
 
 # Initialize Flask app
 app = Flask(__name__)
-app.secret_key = os.environ.get('FLASK_SECRET_KEY', os.urandom(24))
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev-key-change-in-production')
 CORS(app)
 
 # Initialize MCP server internally
@@ -524,6 +524,16 @@ def mcp_query():
     dax_query = data.get('dax_query')
     workspace_id = data.get('workspace_id')
     
+    # Input validation
+    if not dataset_id or not isinstance(dataset_id, str):
+        return jsonify({"error": "dataset_id is required and must be a string"}), 400
+    
+    if not dax_query or not isinstance(dax_query, str):
+        return jsonify({"error": "dax_query is required and must be a string"}), 400
+    
+    if len(dax_query) > 10000:  # Reasonable limit for DAX queries
+        return jsonify({"error": "dax_query is too long (max 10000 characters)"}), 400
+    
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     try:
@@ -536,6 +546,38 @@ def mcp_query():
         return jsonify(result)
     finally:
         loop.close()
+
+@app.errorhandler(404)
+def not_found_error(error):
+    """Handle 404 errors"""
+    return jsonify({
+        "error": "Not Found",
+        "message": "The requested endpoint was not found",
+        "available_endpoints": [
+            "/", "/health", "/mcp/status", "/mcp/workspaces", 
+            "/mcp/datasets", "/authorize", "/auth/callback", "/mcp/query"
+        ]
+    }), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    """Handle 500 errors"""
+    logger.error(f"Internal server error: {error}")
+    return jsonify({
+        "error": "Internal Server Error",
+        "message": "An unexpected error occurred",
+        "status": "error"
+    }), 500
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    """Handle uncaught exceptions"""
+    logger.error(f"Uncaught exception: {e}", exc_info=True)
+    return jsonify({
+        "error": "Unexpected Error",
+        "message": str(e),
+        "type": type(e).__name__
+    }), 500
 
 def create_app():
     """Create Flask app for Azure deployment"""

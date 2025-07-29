@@ -32,7 +32,40 @@ Your Power BI Workspaces & Datasets
 - **Client Secret:** From your app registration
 - **Your Power BI Account:** With workspace access
 
-## 🚀 Quick Start (5 Steps)
+## 🚀 Deployment Options
+
+### Option 1: Automated Deployment (Recommended) ⚡
+**Single command deploys everything in 18-35 minutes**
+
+```bash
+# Windows PowerShell
+.\deploy_complete_automation.ps1 -TenantId "your-tenant-id" -ClientId "5bdb10bc-bb29-4af9-8cb5-062690e6be15" -ClientSecret "your-client-secret"
+
+# Linux/Mac Bash  
+./deploy_complete_automation.sh "your-tenant-id" "5bdb10bc-bb29-4af9-8cb5-062690e6be15" "your-client-secret"
+```
+
+**✅ What gets automated:**
+- Resource group creation
+- API Management deployment 
+- OAuth 2.0 configuration
+- API creation with all endpoints
+- Security policies (JWT, CORS, rate limiting)
+- Configuration file generation
+- Integration testing
+
+**📄 Generated files:**
+- `claude_enterprise_config_automated.json` - Ready for Claude.ai Enterprise
+- `DEPLOYMENT_SUCCESS_REPORT.md` - Complete setup details with your specific URLs
+
+**🎯 Result:** Complete enterprise-grade setup with all URLs and configuration values ready!
+
+---
+
+### Option 2: Manual Step-by-Step Deployment 🔧
+**For learning, customization, or troubleshooting**
+
+## Manual Setup (5 Steps)
 
 ### Step 1: Deploy Azure API Management
 ```bash
@@ -51,6 +84,21 @@ chmod +x deploy_apim.sh
 - Creates Azure API Management instance
 - Sets up resource group `rg-pbi-mcp-enterprise`
 - Provides gateway URL for next steps
+
+**🔍 Getting Your Gateway URL:**
+After deployment completes, get your gateway URL:
+
+```bash
+# Method 1: Azure CLI
+az apim show --name "your-apim-name" --resource-group "rg-pbi-mcp-enterprise" --query "gatewayUrl" -o tsv
+
+# Method 2: Azure Portal
+# Go to: API Management → Overview → Gateway URL
+```
+
+**📝 Example Gateway URL:** `https://pbi-mcp-apim-1234.azure-api.net`
+
+**❗ Important:** This is YOUR unique gateway URL - you don't create it, Azure generates it automatically when API Management is deployed.
 
 ### Step 2: Configure OAuth 2.0
 ```bash
@@ -102,16 +150,39 @@ chmod +x apply_policies.sh
 - Adds security headers and audit logging
 
 ### Step 5: Update App Registration
-In Azure Portal, add these redirect URIs to your app registration:
-1. `https://YOUR-GATEWAY-URL/powerbi-mcp/auth/callback`
-2. `https://claude.ai/api/mcp/auth_callback`
+
+**🔍 Using your actual Gateway URL:**
+
+1. Get your gateway URL:
+   ```bash
+   az apim show --name "your-apim-name" --resource-group "rg-pbi-mcp-enterprise" --query "gatewayUrl" -o tsv
+   ```
+
+2. In Azure Portal → App Registrations → Your App → Authentication → Redirect URIs, add:
+   - `https://pbi-mcp-apim-1234.azure-api.net/powerbi-mcp/auth/callback` (your actual gateway URL)
+   - `https://claude.ai/api/mcp/auth_callback`
+
+**📝 Example with real URL:**
+If your gateway URL is `https://pbi-mcp-apim-1234.azure-api.net`, then add:
+- `https://pbi-mcp-apim-1234.azure-api.net/powerbi-mcp/auth/callback`
 
 ## 🧪 Testing Your Setup
 
 ### Test 1: Verify API Management
+
+**🔍 First, get your actual Gateway URL:**
+
 ```bash
-# Edit test_apim_integration.sh with your values
-GATEWAY_URL="https://your-apim-gateway.azure-api.net"
+# Get your gateway URL from Azure
+GATEWAY_URL=$(az apim show --name "your-apim-name" --resource-group "rg-pbi-mcp-enterprise" --query "gatewayUrl" -o tsv)
+echo "Your Gateway URL: $GATEWAY_URL"
+```
+
+**Then edit and run the test:**
+```bash
+# Edit test_apim_integration.sh with your ACTUAL values:
+# Replace "your-apim-gateway.azure-api.net" with your real gateway URL from above
+GATEWAY_URL="https://pbi-mcp-apim-1234.azure-api.net"  # Your actual URL
 TENANT_ID="your-tenant-id"
 
 # Run tests
@@ -126,37 +197,101 @@ chmod +x test_apim_integration.sh
 - ✅ OAuth URL generated
 
 ### Test 2: Manual API Testing
-```bash
-# Test health endpoint (no auth)
-curl https://YOUR-GATEWAY-URL/powerbi-mcp/health
 
-# Test OAuth flow
-# Visit: https://YOUR-GATEWAY-URL/powerbi-mcp/authorize?response_type=code&client_id=YOUR-CLIENT-ID&redirect_uri=https://claude.ai/api/mcp/auth_callback&scope=https://analysis.windows.net/powerbi/api/.default
+**🔍 Using your actual Gateway URL:**
+```bash
+# Replace with your ACTUAL gateway URL from Step 1
+GATEWAY_URL="https://pbi-mcp-apim-1234.azure-api.net"  # Your real URL
+
+# Test health endpoint (no auth)
+curl $GATEWAY_URL/powerbi-mcp/health
+
+# Test OAuth flow (visit in browser)
+echo "Visit this URL in your browser:"
+echo "$GATEWAY_URL/powerbi-mcp/authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https://claude.ai/api/mcp/auth_callback&scope=https://analysis.windows.net/powerbi/api/.default"
 ```
 
 ## ⚙️ Configure Claude.ai Enterprise
 
-### Option A: Via Claude.ai Interface
-1. Go to Claude.ai Enterprise settings
-2. Navigate to Integrations
-3. Add new MCP server integration
-4. Use configuration from `claude_enterprise_config.json`
+### Option A: Use Generated Configuration File (Recommended)
 
-### Option B: Configuration Values
+**From Web App Automation:**
+1. Use the generated `claude_enterprise_config_webapp.json` file
+2. All values are automatically filled from your Web App configuration
+3. Go to Claude.ai Enterprise → Settings → Integrations → Add MCP Server
+4. Copy values from the generated configuration file
+
+### Option B: Manual Configuration Values
+
+**🔍 Get configuration from your Web App:**
+```bash
+# Get all values automatically
+./configure_oauth_from_webapp.sh "pbimcp"
+# This creates oauth_configuration_summary.json with all your values
+```
+
+**Configuration Template:**
 ```json
 {
   "name": "Power BI MCP Enterprise",
   "type": "remote_mcp_server", 
   "authentication": {
     "type": "oauth2",
-    "authorization_url": "https://YOUR-GATEWAY-URL/powerbi-mcp/authorize",
-    "token_url": "https://login.microsoftonline.com/YOUR-TENANT-ID/oauth2/v2.0/token",
+    "authorization_url": "https://your-apim-gateway.azure-api.net/powerbi-mcp/authorize",
+    "token_url": "https://login.microsoftonline.com/your-tenant-id/oauth2/v2.0/token",
     "client_id": "5bdb10bc-bb29-4af9-8cb5-062690e6be15",
     "scopes": ["https://analysis.windows.net/powerbi/api/.default"]
   },
-  "base_url": "https://YOUR-GATEWAY-URL/powerbi-mcp"
+  "base_url": "https://your-apim-gateway.azure-api.net/powerbi-mcp"
 }
 ```
+
+**✅ Values are automatically retrieved from your Web App environment variables:**
+- `your-apim-gateway.azure-api.net` → From API Management deployment
+- `your-tenant-id` → From `AZURE_TENANT_ID` Web App setting
+- Client ID → From `AZURE_CLIENT_ID` Web App setting
+
+## 🔐 Environment Variables Reference
+
+### Required Web App Environment Variables
+
+Your Azure Web App **must have** these environment variables set:
+
+| Variable | Description | Where to Get It |
+|----------|-------------|-----------------|
+| `AZURE_TENANT_ID` | Your Azure tenant ID | Azure Portal → App Registrations → Your App → Overview → "Directory (tenant) ID" |
+| `AZURE_CLIENT_ID` | Your app registration client ID | Azure Portal → App Registrations → Your App → Overview → "Application (client) ID" |
+| `AZURE_CLIENT_SECRET` | Your app registration client secret | Azure Portal → App Registrations → Your App → Certificates & secrets → Client secrets |
+
+### Setting Environment Variables
+
+**Method 1: Azure Portal**
+1. Go to Azure Portal → App Services → `pbimcp`
+2. Settings → Configuration → Application settings
+3. Click "New application setting" for each variable
+
+**Method 2: Azure CLI**
+```bash
+az webapp config appsettings set --name "pbimcp" --resource-group "your-webapp-rg" \
+  --settings AZURE_TENANT_ID="your-tenant-id" \
+             AZURE_CLIENT_ID="5bdb10bc-bb29-4af9-8cb5-062690e6be15" \
+             AZURE_CLIENT_SECRET="your-client-secret"
+```
+
+**Method 3: Verify Current Settings**
+```bash
+# Check if variables are set
+az webapp config appsettings list --name "pbimcp" --resource-group "your-webapp-rg" \
+  --query "[?name=='AZURE_TENANT_ID' || name=='AZURE_CLIENT_ID' || name=='AZURE_CLIENT_SECRET'].{Name:name, Value:value}" -o table
+```
+
+### ✅ Benefits of Using Web App Environment Variables
+
+- **🔒 Security**: Secrets stored securely in Azure
+- **🔄 Automation**: Scripts automatically pull configuration
+- **📝 Consistency**: Same config used by Web App and API Management
+- **🚀 Simplicity**: No manual value entry required
+- **🔧 Maintenance**: Update once, applies everywhere
 
 ## 🔧 Configuration Files Reference
 

@@ -41,10 +41,10 @@ echo "Creating directories..."
 mkdir -p logs
 mkdir -p .cache
 
-# Verify main app loads (original app with full MCP)
-echo "Testing main app import..."
-python3 -c "from app import APP; print('✓ Full PBI MCP app loads successfully')" || exit 1
+# Verify main app loads (MCP bridge app)
+echo "Testing MCP bridge app import..."
+python3 -c "from mcp_bridge import APP; print('✓ MCP Bridge app loads successfully')" || exit 1
 
-# Start the app (FIXED: Use sync worker for Flask, not aiohttp)
-echo "Starting PBI MCP Bot on port 8000..."
-exec python3 -m gunicorn --bind 0.0.0.0:8000 --worker-class sync --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info app:APP
+# Start the MCP bridge app
+echo "Starting MCP Bridge Server on port 8000..."
+exec python3 -m gunicorn --bind 0.0.0.0:8000 --worker-class sync --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP

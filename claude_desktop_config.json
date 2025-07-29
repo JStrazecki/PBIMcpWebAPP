@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "powerbi-financial-server": {
+      "command": "python",
+      "args": ["-m", "mcp.server.stdio", "--", "python", "mcp_server.py"],
+      "env": {
+        "AZURE_CLIENT_ID": "${AZURE_CLIENT_ID}",
+        "AZURE_CLIENT_SECRET": "${AZURE_CLIENT_SECRET}",
+        "AZURE_TENANT_ID": "${AZURE_TENANT_ID}"
+      }
+    }
+  },
+  "integrations": {
+    "powerbi-web-server": {
+      "type": "http",
+      "url": "https://pbimcp.azurewebsites.net",
+      "auth": {
+        "type": "oauth2",
+        "authorization_url": "https://pbimcp.azurewebsites.net/authorize",
+        "token_url": "https://pbimcp.azurewebsites.net/auth/callback",
+        "client_id": "${AZURE_CLIENT_ID}",
+        "scopes": ["powerbi", "datasets", "workspaces"]
+      }
+    }
+  }
+}

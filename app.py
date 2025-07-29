@@ -438,6 +438,53 @@ def execute_powerbi_query(dataset_id: str, dax_query: str, workspace_id: str = N
         }
 
 # OAuth 2.0 Authentication Endpoints
+@flask_app.route('/authorize')
+def authorize():
+    """OAuth authorization endpoint for Claude.ai MCP integration"""
+    if not msal_app:
+        return jsonify({
+            "error": "OAuth not configured",
+            "message": "Server missing OAuth configuration. Please configure AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID"
+        }), 500
+    
+    # Get OAuth parameters from query string
+    response_type = request.args.get('response_type')
+    client_id = request.args.get('client_id')
+    redirect_uri = request.args.get('redirect_uri')
+    code_challenge = request.args.get('code_challenge')
+    code_challenge_method = request.args.get('code_challenge_method')
+    state = request.args.get('state')
+    scope = request.args.get('scope')
+    
+    # Validate required OAuth parameters
+    if not all([response_type, client_id, redirect_uri]):
+        return jsonify({
+            "error": "Missing required OAuth parameters",
+            "required": "response_type, client_id, redirect_uri"
+        }), 400
+    
+    try:
+        # Store Claude.ai redirect URI in session for callback
+        if 'claude.ai' in redirect_uri:
+            session['claude_redirect_uri'] = redirect_uri
+            
+        # Generate Microsoft authorization URL
+        auth_url = msal_app.get_authorization_request_url(
+            scopes=SCOPES,
+            redirect_uri=REDIRECT_URI,  # Use our configured redirect URI
+            state=state or "claude-mcp-oauth"
+        )
+        
+        # Redirect user to Microsoft OAuth
+        return redirect(auth_url)
+        
+    except Exception as e:
+        logger.error(f"Error in /authorize endpoint: {e}")
+        return jsonify({
+            "error": "Failed to initiate OAuth flow",
+            "message": str(e)
+        }), 500
+
 @flask_app.route('/auth/url')
 def get_auth_url():
     """Get Microsoft OAuth authorization URL for user authentication"""
@@ -471,7 +518,7 @@ def get_auth_url():
 
 @flask_app.route('/auth/callback')
 def auth_callback():
-    """Handle OAuth callback from Microsoft"""
+    """Handle OAuth callback from Microsoft and forward to Claude.ai"""
     if not msal_app:
         return jsonify({"error": "OAuth not configured"}), 500
     
@@ -506,7 +553,15 @@ def auth_callback():
             user_info = validate_microsoft_token(result["access_token"])
             
             if user_info:
-                # Successful authentication
+                # Check if this is a Claude.ai callback (has claude.ai redirect_uri)
+                original_redirect_uri = request.args.get('redirect_uri') or session.get('claude_redirect_uri')
+                if original_redirect_uri and 'claude.ai' in original_redirect_uri:
+                    # Forward to Claude.ai with authorization code
+                    import urllib.parse
+                    claude_callback_url = f"{original_redirect_uri}?code={code}&state={request.args.get('state', '')}"
+                    return redirect(claude_callback_url)
+                
+                # Regular callback - return token info
                 return jsonify({
                     "status": "authenticated",
                     "access_token": result["access_token"],
@@ -625,14 +680,13 @@ def main():
     else:
         logger.info("Running locally")
     
-    # Check authentication
-    auth_status = check_powerbi_auth()
-    logger.info(f"Power BI authentication: {auth_status}")
+    # Check OAuth configuration
+    oauth_configured = bool(msal_app)
+    logger.info(f"OAuth authentication configured: {oauth_configured}")
     
-    if auth_status["status"] == "not_configured":
-        logger.warning("Power BI authentication not configured!")
-        logger.info("Set POWERBI_CLIENT_ID, POWERBI_CLIENT_SECRET, POWERBI_TENANT_ID")
-        logger.info("Or set POWERBI_TOKEN for manual authentication")
+    if not oauth_configured:
+        logger.warning("OAuth authentication not configured!")
+        logger.info("Set AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID")
     
     if is_azure:
         # For Azure deployment, return Flask app

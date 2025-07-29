@@ -1,0 +1,4 @@
+Web: https://pbimcp.azurewebsites.net/authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https%3A%2F%2Fclaude.ai%2Fapi%2Fmcp%2Fauth_callback&code_challenge=BFe5-22L67OE_3ISHLKxbGQPcaNtO1_IipokAZK0F6Q&code_challenge_method=S256&state=KQE9q4EMiq3KT54Dthliv_xgZNroaPGgzSKpSPaDZCk&scope=claudeai
+
+Not Found
+The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.

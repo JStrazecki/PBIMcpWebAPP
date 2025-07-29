@@ -1,254 +1,224 @@
-# Power BI MCP Finance Server
+# Power BI MCP Server for Claude.ai Enterprise
 
-An enhanced Model Context Protocol (MCP) server providing intelligent Power BI integration for financial data analysis.
+Enterprise-grade Model Context Protocol (MCP) server that provides secure access to Power BI workspaces and datasets through Claude.ai Enterprise, powered by Azure API Management.
 
-## 🚀 Quick Start
+## 🎯 What This Does
 
-### Option 1: Simplified Deployment (Recommended)
-**Perfect for Azure Web App - No database dependencies**
-
-```bash
-# 1. Set critical environment variables
-export POWERBI_CLIENT_ID=your-client-id
-export POWERBI_CLIENT_SECRET=your-client-secret
-export POWERBI_TENANT_ID=your-tenant-id
-export FLASK_SECRET_KEY=$(python -c "import secrets; print(secrets.token_urlsafe(32))")
-
-# 2. Install minimal dependencies
-pip install -r requirements_simple.txt
-
-# 3. Run simplified server
-python main_simple.py
-```
-
-### Option 2: Full Features
-**Complete functionality with conversation tracking**
-
-```bash
-# 1. Copy environment template
-cp .env.template .env
-
-# 2. Fill in your credentials in .env file
-
-# 3. Install all dependencies
-pip install -r requirements.txt
-
-# 4. Run full server
-python pbi_mcp_finance/main.py
-```
-
-### Option 3: Azure Web App Deployment
-```bash
-# Automated deployment via GitHub Actions
-git push origin main
-
-# Or manual deployment
-az webapp up --name your-app-name --resource-group your-rg --runtime "PYTHON:3.11"
-```
-
-## 📚 Documentation
-
-| File | Description |
-|------|-------------|
-| `AZURE_DEPLOYMENT_GUIDE.md` | Complete step-by-step deployment to Azure |
-| `DEPLOYMENT_CHECKLIST.md` | Verification checklist for successful deployment |
-| `ENVIRONMENT_SETUP.md` | Environment variables and configuration |
+Enables Claude.ai Enterprise users to:
+- 📊 **Query Power BI workspaces and datasets** using natural language
+- 🔍 **Execute DAX queries** directly from Claude.ai conversations  
+- 📈 **Analyze Power BI data** with AI-powered insights
+- 🔐 **Secure enterprise access** through OAuth 2.0 and Azure API Management
 
 ## 🏗️ Architecture
 
-### Simplified Mode (Recommended for Azure)
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Claude/MCP    │───▶│   Flask + MCP    │───▶│   Power BI API  │
-│   Client        │    │   (main_simple)  │    │                 │
-│                 │◀───│   No Database    │◀───│ OAuth2/Token    │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
+Claude.ai Enterprise → Azure API Management → Azure Web App → Power BI REST API
+                      (OAuth + Security)    (MCP Bridge)    (Your Data)
 ```
 
-### Full Mode (Local/Advanced)
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Claude/MCP    │───▶│ FastMCP + Flask  │───▶│   Power BI API  │
-│   Client        │    │ + SQLite Tracking│    │                 │
-│ Web Interface   │◀───│ + Monitoring     │◀───│ OAuth2/Token    │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-```
+## 🚀 Quick Start
 
-### Technology Stack
-- **Core**: FastMCP for Model Context Protocol
-- **Web**: Flask for HTTP endpoints and optional authentication
-- **Deployment**: Azure Web App (Linux, Python 3.11)
-- **Database**: SQLite (full mode) or None (simplified mode)
-- **Authentication**: Power BI OAuth2 + optional Azure AD web auth
+### Prerequisites
+- Azure subscription
+- Claude.ai Enterprise account
+- Power BI workspaces with data
+- Azure App Registration (OAuth configured)
 
-## 🔧 Environment Variables
-
-### 🚨 Critical Variables (App won't start without these)
+### 5-Minute Setup
 ```bash
-# Power BI Authentication (choose one method)
-POWERBI_CLIENT_ID=your-powerbi-app-client-id
-POWERBI_CLIENT_SECRET=your-powerbi-app-client-secret  
-POWERBI_TENANT_ID=your-azure-tenant-id
+# 1. Deploy API Management (15-30 minutes)
+.\deploy_apim.bat
 
-# OR use manual token instead
-POWERBI_TOKEN=your-manual-bearer-token
+# 2. Configure OAuth
+./configure_oauth_apim.sh
 
-# Security (required)
-FLASK_SECRET_KEY=generate-32-char-random-string
+# 3. Create MCP API
+./create_mcp_api.sh
+
+# 4. Apply security policies
+./apply_policies.sh
+
+# 5. Test integration
+./test_apim_integration.sh
 ```
 
-### Optional Web Authentication
-```bash
-AUTH_ENABLED=true  # Enable web UI authentication
-AZURE_CLIENT_ID=azure-ad-app-client-id
-AZURE_CLIENT_SECRET=azure-ad-app-secret
-AZURE_REDIRECT_URI=https://your-app.azurewebsites.net/auth/callback
+**📚 [Complete Setup Guide](COMPLETE_SETUP_GUIDE.md)** - Detailed step-by-step instructions
+
+## 📁 Repository Structure
+
+### 🎯 Core Application
+```
+mcp_bridge.py           # Main HTTP-to-MCP bridge server (production)
+mcp_server.py          # Pure MCP server (local development)
+requirements.txt       # Python dependencies
+startup.sh            # Azure Web App startup script
 ```
 
-### Generate Flask Secret Key
-```bash
-python -c "import secrets; print(secrets.token_urlsafe(32))"
+### 🏗️ Azure API Management (Enterprise Solution)
+```
+deploy_apim.bat/.sh           # Deploy API Management instance
+configure_oauth_apim.sh       # Configure OAuth 2.0 with Entra ID
+create_mcp_api.sh            # Create MCP API and endpoints
+apply_policies.sh            # Apply security policies
+mcp_api_policies.xml         # Security policy definitions
+test_apim_integration.sh     # Integration testing
 ```
 
-See `.env.template` for complete configuration options.
-
-## 🛡️ Security Features
-
-- ✅ **OAuth2 Authorization Code Flow** with PKCE
-- ✅ **CSRF Protection** with state validation
-- ✅ **Secure Session Management** with configurable expiration
-- ✅ **HTTPS Enforcement** with security headers
-- ✅ **Token Isolation** between Power BI API and user authentication
-- ✅ **Environment-based Configuration** (no hardcoded secrets)
-
-## 🌐 Available Endpoints
-
-### Core Endpoints (Both Modes)
-| Endpoint | Description | Authentication |
-|----------|-------------|----------------|
-| `/` | Service status and configuration | None |
-| `/health` | Health check with Power BI status | None |
-| `/api/powerbi/workspaces` | List Power BI workspaces | None* |
-
-### Web Authentication (Full Mode Only)
-| Endpoint | Description | Authentication |
-|----------|-------------|----------------|
-| `/auth/login` | Start Microsoft OAuth login | None |
-| `/auth/callback` | OAuth callback handler | None |
-| `/auth/status` | Current authentication status | None |
-| `/auth/logout` | Sign out and clear session | Authenticated |
-
-### MCP Tools (Available via MCP protocol)
-- Workspace discovery and management
-- Dataset schema exploration  
-- Financial data analysis tools
-- Query optimization and recommendations
-
-*Requires Power BI credentials to be configured
-
-## 📁 Project Structure
-
+### ⚙️ Configuration
 ```
-├── main_simple.py              # 🚨 Simplified server (no database) - RECOMMENDED
-├── requirements_simple.txt     # 🚨 Minimal dependencies for Azure
-├── pbi_mcp_finance/            # Full server with all features
-│   ├── main.py                 # Full MCP server with database
-│   ├── auth/                   # Authentication modules
-│   ├── mcp/tools/              # MCP tool implementations
-│   └── database/               # SQLite database modules
-├── requirements.txt            # Full dependencies (includes database)
-├── .env.template              # Environment variables template
-├── startup.sh                 # Azure startup script (auto-detects mode)
-├── web.config                 # Azure Web App configuration
-└── .github/workflows/         # GitHub Actions for deployment
+claude_enterprise_config.json    # Claude.ai Enterprise integration config
+claude_desktop_config.json      # Claude Desktop local config  
+setup_local_mcp.bat             # Local development setup
+gunicorn.conf.py                # Web server configuration
 ```
 
-## 🚀 Deployment Modes
-
-### Mode 1: Simplified (Recommended for Azure)
-✅ **No database dependencies**  
-✅ **Faster startup and deployment**  
-✅ **Perfect for cloud environments**  
-❌ No conversation tracking  
-❌ No performance metrics  
-
-### Mode 2: Full Featured (Local/Advanced)
-✅ **Complete MCP functionality**  
-✅ **SQLite conversation tracking**  
-✅ **Performance monitoring**  
-❌ Requires SQLite database setup  
-❌ More complex deployment  
-
-### Local Development
-```bash
-# Option 1: Test simplified version
-python main_simple.py
-
-# Option 2: Test full version
-cp .env.template .env
-# Fill in credentials
-python pbi_mcp_finance/main.py
+### 📚 Documentation
 ```
+COMPLETE_SETUP_GUIDE.md         # Step-by-step setup instructions
+ARCHITECTURE_AND_WORKFLOW.md    # Technical architecture details
+APIM_DEPLOYMENT_COMPLETE.md     # Enterprise deployment guide
+```
+
+### 🧩 Power BI Integration
+```
+pbi_mcp_finance/               # Core business logic package
+├── auth/                      # OAuth and authentication
+├── config/                    # Configuration management  
+├── mcp/tools/                # MCP tool implementations
+├── powerbi/                  # Power BI API client
+└── utils/                    # Utilities and helpers
+```
+
+## 🔐 Security Features
+
+- ✅ **OAuth 2.0 Authentication** with Microsoft Entra ID
+- ✅ **JWT Token Validation** for all API calls
+- ✅ **Rate Limiting** (100 req/min, 10K req/day)
+- ✅ **CORS Configuration** for Claude.ai domains
+- ✅ **Security Headers** (XSS, CSRF protection)
+- ✅ **Audit Logging** for all requests and responses
+- ✅ **HTTPS Only** communication
+
+## 🛠️ Available MCP Tools
+
+| Tool | Description | Example Usage |
+|------|-------------|---------------|
+| `get_powerbi_status` | Server health and auth status | "Check Power BI connection status" |
+| `list_powerbi_workspaces` | List accessible workspaces | "Show me all Power BI workspaces" |
+| `get_powerbi_datasets` | List datasets in workspaces | "What datasets are in my workspace?" |
+| `execute_powerbi_query` | Run DAX queries | "Execute this DAX query: EVALUATE..." |
+| `health_check` | System health monitoring | Automatic health monitoring |
 
 ## 🧪 Testing
 
-### Test Environment Configuration
+### Local Testing
 ```bash
-# Test your environment setup
-python test_env_simple.py
+# Test MCP bridge locally
+python -c "from mcp_bridge import app; print('MCP bridge working!')"
 
-# Expected output: Shows which variables are set/missing
+# Test pure MCP server
+python mcp_server.py
 ```
 
-### Test Endpoints
+### Production Testing
 ```bash
-# Test health endpoint
-curl http://localhost:8000/health
+# Test API Management endpoints
+curl https://your-gateway-url/powerbi-mcp/health
 
-# Test Power BI status (requires credentials)
-curl http://localhost:8000/api/powerbi/workspaces
+# Run full integration test
+./test_apim_integration.sh
 ```
 
-## 🔧 Troubleshooting
+## 📊 Monitoring
 
-### Deployment Issues
+Access via Azure Portal:
+- **API Analytics:** Request volume, response times, error rates
+- **Security Events:** OAuth flows, JWT validation, rate limiting
+- **Audit Logs:** Complete request/response tracking
+- **Performance Metrics:** P50/P95/P99 response times
 
-**GitHub Actions Artifact Storage Quota**
-- ✅ **Fixed**: Updated workflow deploys directly without artifacts
+## 🔧 Configuration
 
-**Azure Web App Won't Start**
-- Check Application Logs in Azure Portal
-- Verify environment variables are set correctly
-- Ensure startup command is `/home/site/wwwroot/startup.sh`
+### Environment Variables (Azure App Service)
+```
+AZURE_CLIENT_ID=your-app-registration-client-id
+AZURE_CLIENT_SECRET=your-app-registration-client-secret  
+AZURE_TENANT_ID=your-azure-tenant-id
+FLASK_SECRET_KEY=your-flask-secret-key
+```
 
-**Database Errors**
-- ✅ **Fixed**: Use simplified mode (`main_simple.py`) - no database required
+### Claude.ai Enterprise Setup
+1. Navigate to Claude.ai Enterprise → Integrations
+2. Add MCP Server integration
+3. Use OAuth configuration from `claude_enterprise_config.json`
+4. Test connection with "Show me Power BI workspaces"
 
-### Authentication Issues
+## 🆘 Troubleshooting
 
-**Power BI Authentication Failed**
-- Verify `POWERBI_CLIENT_ID`, `POWERBI_CLIENT_SECRET`, `POWERBI_TENANT_ID`
-- Check Azure AD app registration permissions
-- Try manual token: Set `POWERBI_TOKEN` instead
+### Common Issues
 
-**Flask Secret Key Missing**
-- Generate: `python -c "import secrets; print(secrets.token_urlsafe(32))"`
-- Add to Azure App Settings or .env file
+**"Error connecting to PowerBIMCP"**
+- Check OAuth redirect URIs in app registration
+- Verify API Management security policies applied
+- Test backend server health: `/health` endpoint
 
-## 🎯 Next Steps
+**"Authentication failed"**  
+- Verify app registration permissions
+- Check JWT token validation in API Management
+- Confirm OAuth 2.0 server configuration
 
-1. **Quick Test**: Run `python main_simple.py` locally
-2. **Configure**: Set the 4 critical environment variables 🚨
-3. **Deploy**: Push to main branch or use Azure CLI
-4. **Verify**: Check `/health` endpoint after deployment
-5. **Use**: Connect Claude with MCP to your deployed server
+**"Rate limit exceeded"**
+- Monitor API Management analytics
+- Adjust rate limits in `mcp_api_policies.xml`
+- Consider upgrading API Management tier
 
-## 📚 Additional Documentation
+### Debug Commands
+```bash
+# Check backend server
+curl https://pbimcp.azurewebsites.net/health
 
-- [Environment Setup Guide](ENVIRONMENT_SETUP.md) - Detailed variable configuration
-- [Azure Deployment Guide](AZURE_DEPLOYMENT_GUIDE.md) - Step-by-step deployment
-- [Deployment Checklist](DEPLOYMENT_CHECKLIST.md) - Pre-deployment verification
+# Test OAuth flow manually  
+curl "https://your-gateway/powerbi-mcp/authorize?response_type=code&client_id=YOUR-ID"
+
+# View API Management logs
+az apim logger show --resource-group rg-pbi-mcp-enterprise --service-name YOUR-APIM-NAME
+```
+
+## 🚀 Production Deployment Checklist
+
+- ✅ Azure API Management deployed with security policies
+- ✅ App registration redirect URIs updated
+- ✅ Environment variables configured in Azure App Service
+- ✅ Claude.ai Enterprise integration configured
+- ✅ End-to-end authentication tested
+- ✅ Power BI workspace access verified
+- ✅ Monitoring and alerting configured
+
+## 📈 Enterprise Benefits
+
+- **🔒 Security:** Multi-layer security with OAuth, JWT, and API Management
+- **📊 Analytics:** Complete API usage and performance monitoring
+- **⚡ Scale:** Handle enterprise-level traffic and concurrent users
+- **🛡️ Compliance:** Audit logging for security and compliance requirements
+- **🔧 Management:** Centralized API management and policy enforcement
+
+## 🤝 Contributing
+
+This is an enterprise production system. For modifications:
+1. Test changes locally with `mcp_server.py`
+2. Update security policies if needed
+3. Test with API Management before production
+4. Update documentation for any new features
+
+## 📄 License
+
+Enterprise deployment for internal use. Ensure compliance with:
+- Microsoft Power BI licensing terms
+- Claude.ai Enterprise agreement terms
+- Azure service agreements
 
 ---
 
-**🚀 Ready to deploy your Power BI MCP server to Azure!**
+**🎉 Ready to connect your Power BI data to Claude.ai Enterprise?**  
+Start with the **[Complete Setup Guide](COMPLETE_SETUP_GUIDE.md)** for step-by-step instructions!

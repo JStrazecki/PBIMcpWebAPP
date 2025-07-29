@@ -22,7 +22,8 @@
       "Bash(curl:*)",
       "Bash(find:*)",
       "WebFetch(domain:modelcontextprotocol.io)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }

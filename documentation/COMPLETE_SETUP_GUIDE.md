@@ -32,10 +32,29 @@ Your Power BI Workspaces & Datasets
 - **Client Secret:** From your app registration
 - **Your Power BI Account:** With workspace access
 
+## 📁 **NEW: Organized API Management Scripts**
+
+All API Management scripts are now organized in the `api-management/` directory with clear naming:
+
+- **No suffix** = Fully automated (pulls from Web App environment variables) 
+- **0 suffix** = Requires manual editing before running
+
+```bash
+cd api-management/   # All scripts are here now
+ls -la              # See all available scripts
+```
+
 ## 🚀 Deployment Options
 
-### Option 1: Automated Deployment (Recommended) ⚡
-**Single command deploys everything in 18-35 minutes**
+### Option 1: Fully Automated Deployment (Recommended) ⚡
+**Zero manual configuration required - pulls everything from Web App environment variables**
+
+```bash
+cd api-management
+./deploy_complete_automation.sh
+```
+
+**That's it!** Everything is auto-detected from your Web App environment variables.
 
 ```bash
 # Windows PowerShell

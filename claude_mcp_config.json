@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "powerbi-financial-server": {
+      "command": "python",
+      "args": ["mcp_server.py"],
+      "env": {
+        "AZURE_CLIENT_ID": "${AZURE_CLIENT_ID}",
+        "AZURE_CLIENT_SECRET": "${AZURE_CLIENT_SECRET}",
+        "AZURE_TENANT_ID": "${AZURE_TENANT_ID}"
+      }
+    }
+  }
+}

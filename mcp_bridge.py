@@ -44,13 +44,8 @@ CLIENT_SECRET = os.environ.get('AZURE_CLIENT_SECRET')
 TENANT_ID = os.environ.get('AZURE_TENANT_ID')
 REDIRECT_URI = os.environ.get('REDIRECT_URI', 'https://pbimcp.azurewebsites.net/auth/callback')
 
-# Power BI OAuth scopes
-SCOPES = [
-    "https://analysis.windows.net/powerbi/api/Dataset.Read.All",
-    "https://analysis.windows.net/powerbi/api/Report.Read.All", 
-    "https://analysis.windows.net/powerbi/api/Workspace.Read.All",
-    "https://analysis.windows.net/powerbi/api/Content.Create"
-]
+# Power BI OAuth scopes - for client credentials flow, use /.default
+SCOPES = ["https://analysis.windows.net/powerbi/api/.default"]
 
 # MSAL Confidential Client
 msal_app = None
@@ -363,6 +358,115 @@ def index():
         },
         "timestamp": datetime.utcnow().isoformat()
     })
+
+@app.route('/authorize')
+def authorize():
+    """OAuth authorization endpoint for Claude.ai MCP integration"""
+    if not msal_app:
+        return jsonify({
+            "error": "OAuth not configured",
+            "message": "Server missing OAuth configuration. Please configure AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID"
+        }), 500
+    
+    # Get OAuth parameters from query string
+    response_type = request.args.get('response_type')
+    client_id = request.args.get('client_id')
+    redirect_uri = request.args.get('redirect_uri')
+    code_challenge = request.args.get('code_challenge')
+    code_challenge_method = request.args.get('code_challenge_method')
+    state = request.args.get('state')
+    scope = request.args.get('scope')
+    
+    # Validate required OAuth parameters
+    if not all([response_type, client_id, redirect_uri]):
+        return jsonify({
+            "error": "Missing required OAuth parameters",
+            "required": "response_type, client_id, redirect_uri"
+        }), 400
+    
+    try:
+        # Store Claude.ai redirect URI in session for callback
+        if 'claude.ai' in redirect_uri:
+            session['claude_redirect_uri'] = redirect_uri
+            
+        # Generate Microsoft authorization URL
+        auth_url = msal_app.get_authorization_request_url(
+            scopes=SCOPES,
+            redirect_uri=REDIRECT_URI,  # Use our configured redirect URI
+            state=state or "claude-mcp-oauth"
+        )
+        
+        # Redirect user to Microsoft OAuth
+        return redirect(auth_url)
+        
+    except Exception as e:
+        logger.error(f"Error in /authorize endpoint: {e}")
+        return jsonify({
+            "error": "Failed to initiate OAuth flow",
+            "message": str(e)
+        }), 500
+
+@app.route('/auth/callback')
+def auth_callback():
+    """Handle OAuth callback from Microsoft and forward to Claude.ai"""
+    if not msal_app:
+        return jsonify({"error": "OAuth not configured"}), 500
+    
+    # Get authorization code from callback
+    code = request.args.get('code')
+    error = request.args.get('error')
+    error_description = request.args.get('error_description')
+    
+    if error:
+        return jsonify({
+            "error": f"OAuth error: {error}",
+            "description": error_description,
+            "status": "authentication_failed"
+        }), 400
+    
+    if not code:
+        return jsonify({
+            "error": "No authorization code received",
+            "message": "OAuth callback missing authorization code"
+        }), 400
+    
+    try:
+        # Exchange authorization code for access token
+        result = msal_app.acquire_token_by_authorization_code(
+            code,
+            scopes=SCOPES,
+            redirect_uri=REDIRECT_URI
+        )
+        
+        if "access_token" in result:
+            # Check if this is a Claude.ai callback
+            original_redirect_uri = session.get('claude_redirect_uri')
+            if original_redirect_uri and 'claude.ai' in original_redirect_uri:
+                # Forward to Claude.ai with authorization code
+                claude_callback_url = f"{original_redirect_uri}?code={code}&state={request.args.get('state', '')}"
+                return redirect(claude_callback_url)
+            
+            # Regular callback - return success
+            return jsonify({
+                "status": "authenticated",
+                "message": "Authentication successful!",
+                "access_token": result["access_token"][:50] + "...",  # Truncated for security
+                "token_type": "Bearer"
+            })
+        else:
+            error_desc = result.get('error_description', 'Unknown authentication error')
+            return jsonify({
+                "error": "Authentication failed",
+                "description": error_desc,
+                "details": result.get('error')
+            }), 400
+            
+    except Exception as e:
+        logger.error(f"OAuth callback error: {e}")
+        return jsonify({
+            "error": "Authentication processing failed",
+            "message": str(e)
+        }), 500
 
 @app.route('/health')
 def health():

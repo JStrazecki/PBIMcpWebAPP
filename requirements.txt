@@ -1,24 +1,14 @@
-# Full Power BI MCP Server Requirements
-# For Azure Web App deployment with complete MCP functionality
+# MCP Server Requirements
 
-# Core MCP framework
-fastmcp>=0.1.0
-
-# Web framework for Azure deployment
+# Web framework
 flask>=2.3.0
 flask-cors>=4.0.0
-gunicorn>=20.1.0
 
-# Power BI authentication and APIs  
-msal>=1.24.0
+# HTTP requests for authentication
 requests>=2.31.0
 
-# Security
-pyjwt>=2.8.0
+# Production server
+gunicorn>=20.1.0
 
 # Utilities
 python-dotenv>=1.0.0
-
-# Optional enhancements
-# azure-identity>=1.15.0  # Alternative auth method
-# pandas>=2.0.0  # Data processing if needed

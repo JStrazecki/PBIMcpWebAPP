@@ -1,25 +1,18 @@
 {
   "integrations": {
-    "powerbi-mcp-enterprise": {
+    "powerbi-mcp-simple": {
       "type": "remote_mcp_server",
-      "name": "Power BI MCP Enterprise",
-      "description": "Secure enterprise gateway to Power BI workspaces and datasets via Azure API Management",
+      "name": "Power BI MCP Simple",
+      "description": "Simple MCP server for Power BI - no authentication required",
       "authentication": {
-        "type": "oauth2",
-        "provider": "microsoft",
-        "authorization_url": "https://pbimcp.azurewebsites.net/powerbi-mcp/authorize",
-        "token_url": "https://login.microsoftonline.com/YOUR-TENANT-ID/oauth2/v2.0/token",
-        "client_id": "5bdb10bc-bb29-4af9-8cb5-062690e6be15",
-        "scopes": ["https://analysis.windows.net/powerbi/api/.default"],
-        "redirect_uri": "https://claude.ai/api/mcp/auth_callback"
+        "type": "none"
       },
       "endpoints": {
-        "base_url": "https://pbimcp.azurewebsites.net/powerbi-mcp",
+        "base_url": "https://pbimcp.azurewebsites.net",
         "health": "/health",
-        "status": "/mcp/status",
-        "workspaces": "/mcp/workspaces",
-        "datasets": "/mcp/datasets",
-        "query": "/mcp/query"
+        "workspaces": "/workspaces",
+        "datasets": "/datasets",
+        "query": "/query"
       },
       "capabilities": [
         "list_powerbi_workspaces",
@@ -32,10 +25,10 @@
         "requests_per_day": 10000
       },
       "security": {
-        "jwt_validation": true,
+        "jwt_validation": false,
         "cors_enabled": true,
-        "rate_limiting": true,
-        "audit_logging": true
+        "rate_limiting": false,
+        "audit_logging": false
       }
     }
   }

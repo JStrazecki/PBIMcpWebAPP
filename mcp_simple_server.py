@@ -32,6 +32,14 @@ TENANT_ID = os.environ.get('AZURE_TENANT_ID', '')
 # Power BI OAuth scopes for client credentials
 POWERBI_SCOPES = ["https://analysis.windows.net/powerbi/api/.default"]
 
+def check_claude_auth():
+    """Check if request has a valid bearer token from Claude (always accept)"""
+    auth_header = request.headers.get('Authorization')
+    if auth_header and auth_header.startswith('Bearer '):
+        # Any bearer token is valid for this simple server
+        return True
+    return False
+
 def get_powerbi_token() -> Optional[str]:
     """Get Power BI access token using client credentials flow"""
     if not all([CLIENT_ID, CLIENT_SECRET, TENANT_ID]):
@@ -88,10 +96,14 @@ def home():
 @app.route('/.well-known/mcp')
 def mcp_discovery():
     """MCP discovery endpoint"""
+    base_url = request.base_url.replace('/.well-known/mcp', '')
     return jsonify({
         "version": "2024-11-05",
         "authentication": {
-            "type": "none"
+            "type": "oauth2",
+            "authorization_url": f"{base_url}/authorize",
+            "token_url": f"{base_url}/token",
+            "scopes": ["powerbi"]
         },
         "capabilities": {
             "tools": True,
@@ -125,6 +137,11 @@ def health():
 @app.route('/workspaces')
 def workspaces():
     """List Power BI workspaces (real data if configured, demo otherwise)"""
+    # Check Claude auth if present (but don't require it for backwards compatibility)
+    has_claude_auth = check_claude_auth()
+    if has_claude_auth:
+        logger.info("Request authenticated via Claude bearer token")
+    
     token = get_powerbi_token()
     
     if token:
@@ -207,6 +224,11 @@ def workspaces():
 @app.route('/datasets')
 def datasets():
     """Get Power BI datasets (real data if configured, demo otherwise)"""
+    # Check Claude auth if present (but don't require it for backwards compatibility)
+    has_claude_auth = check_claude_auth()
+    if has_claude_auth:
+        logger.info("Request authenticated via Claude bearer token")
+    
     workspace_id = request.args.get('workspace_id')
     token = get_powerbi_token()
     
@@ -303,6 +325,11 @@ def datasets():
 @app.route('/query', methods=['POST'])
 def query():
     """Execute Power BI query (real DAX if configured, demo otherwise)"""
+    # Check Claude auth if present (but don't require it for backwards compatibility)
+    has_claude_auth = check_claude_auth()
+    if has_claude_auth:
+        logger.info("Request authenticated via Claude bearer token")
+    
     data = request.get_json()
     
     if not data:
@@ -412,17 +439,67 @@ def query():
 
 @app.route('/authorize')
 def authorize():
-    """Handle Claude's OAuth attempt - redirect to explain no auth needed"""
+    """Handle Claude's OAuth authorize request - always approve"""
+    # Get OAuth parameters from Claude
+    client_id = request.args.get('client_id')
+    redirect_uri = request.args.get('redirect_uri')
+    state = request.args.get('state')
+    code_challenge = request.args.get('code_challenge')
+    
+    # Log the attempt for debugging
+    logger.info(f"OAuth authorize request: client_id={client_id}, redirect_uri={redirect_uri}")
+    
+    if not redirect_uri or not state:
+        return jsonify({
+            "error": "invalid_request",
+            "error_description": "Missing required parameters"
+        }), 400
+    
+    # Generate a dummy authorization code
+    import secrets
+    auth_code = secrets.token_urlsafe(32)
+    
+    # Redirect back to Claude with the authorization code
+    redirect_url = f"{redirect_uri}?code={auth_code}&state={state}"
+    
+    from flask import redirect
+    return redirect(redirect_url)
+
+@app.route('/token', methods=['POST'])
+def token():
+    """Handle Claude's OAuth token request - always provide a dummy token"""
+    # Get token request parameters
+    grant_type = request.form.get('grant_type')
+    code = request.form.get('code')
+    client_id = request.form.get('client_id')
+    client_secret = request.form.get('client_secret')
+    redirect_uri = request.form.get('redirect_uri')
+    code_verifier = request.form.get('code_verifier')
+    
+    logger.info(f"OAuth token request: grant_type={grant_type}, client_id={client_id}")
+    
+    if grant_type != 'authorization_code':
+        return jsonify({
+            "error": "unsupported_grant_type",
+            "error_description": "Only authorization_code grant type is supported"
+        }), 400
+    
+    if not code:
+        return jsonify({
+            "error": "invalid_request",
+            "error_description": "Missing authorization code"
+        }), 400
+    
+    # Generate a dummy access token
+    import secrets
+    access_token = secrets.token_urlsafe(64)
+    
+    # Return OAuth token response
     return jsonify({
-        "error": "Authentication not required",
-        "message": "This is a simple MCP server that doesn't require authentication",
-        "instructions": {
-            "1": "In Claude AI, when adding this MCP server",
-            "2": "Set Authentication to 'None' instead of OAuth",
-            "3": "Server URL: " + request.base_url.replace('/authorize', ''),
-            "4": "No client ID or secret needed"
-        },
-        "redirect_to_setup": request.base_url.replace('/authorize', '/claude-config')
+        "access_token": access_token,
+        "token_type": "bearer",
+        "expires_in": 3600,
+        "scope": "powerbi"
     })
 
 @app.route('/claude-config')
@@ -435,13 +512,18 @@ def claude_config():
             "step_1": "Open Claude AI Settings > Connectors",
             "step_2": "Click 'Add Remote MCP Server'",
             "step_3": f"Enter URL: {base_url}",
-            "step_4": "Set Authentication: None (NOT OAuth2)",
-            "step_5": "Leave Client ID and Secret empty", 
-            "step_6": "Save and test connection"
+            "step_4": "Set Authentication: OAuth2",
+            "step_5": "Client ID: any-client-id (not validated)", 
+            "step_6": "Client Secret: any-secret (not validated)",
+            "step_7": "Save and test connection"
         },
         "server_url": base_url,
-        "authentication": "none",
-        "note": "This server does NOT require authentication - select 'None' in Claude",
+        "authentication": "oauth2_dummy",
+        "oauth_endpoints": {
+            "authorization_url": f"{base_url}/authorize",
+            "token_url": f"{base_url}/token"
+        },
+        "note": "This server accepts any OAuth credentials - uses dummy authentication",
         "test_command": "Ask Claude: 'Can you check the Power BI server health?'"
     })
 

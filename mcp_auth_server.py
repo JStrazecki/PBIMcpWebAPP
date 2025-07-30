@@ -60,9 +60,21 @@ def home():
 def auth():
     """Microsoft OAuth authentication"""
     if not all([CLIENT_ID, CLIENT_SECRET, TENANT_ID]):
+        missing_vars = [
+            var for var, val in [
+                ("AZURE_CLIENT_ID", CLIENT_ID),
+                ("AZURE_CLIENT_SECRET", CLIENT_SECRET),
+                ("AZURE_TENANT_ID", TENANT_ID)
+            ] if not val
+        ]
         return jsonify({
             "error": "OAuth not configured",
-            "message": "Set AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID"
+            "message": f"Missing environment variables: {', '.join(missing_vars)}",
+            "required_setup": {
+                "1": "Set AZURE_CLIENT_ID in Azure App Service Configuration",
+                "2": "Set AZURE_CLIENT_SECRET in Azure App Service Configuration", 
+                "3": "Set AZURE_TENANT_ID in Azure App Service Configuration"
+            }
         }), 500
     
     # Generate secure state
@@ -165,14 +177,18 @@ def logout():
     return jsonify({"message": "Logged out successfully"})
 
 @app.route('/health')
-@require_auth
 def health():
-    """Health check"""
+    """Health check - no auth required for monitoring"""
+    oauth_configured = all([CLIENT_ID, CLIENT_SECRET, TENANT_ID])
+    user_authenticated = session.get('authenticated', False)
+    
     return jsonify({
         "status": "healthy",
         "service": "Power BI MCP Server (Authenticated)",
-        "user": session.get('user_name', 'Unknown'),
-        "authenticated": True,
+        "oauth_configured": oauth_configured,
+        "user_authenticated": user_authenticated,
+        "user": session.get('user_name', 'Not logged in'),
+        "environment": "Azure" if os.environ.get('WEBSITE_HOSTNAME') else "Local",
         "timestamp": datetime.utcnow().isoformat()
     })
 
@@ -245,8 +261,25 @@ def query():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
     
-    if not all([CLIENT_ID, CLIENT_SECRET, TENANT_ID]):
-        logger.warning("OAuth not configured - set AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID")
-    
     logger.info(f"Starting Authenticated MCP Server on port {port}")
+    logger.info(f"Environment: {'Azure' if os.environ.get('WEBSITE_HOSTNAME') else 'Local'}")
+    
+    # Azure compatibility
+    if os.environ.get('WEBSITE_HOSTNAME'):
+        logger.info(f"Azure deployment detected: {os.environ.get('WEBSITE_HOSTNAME')}")
+    
+    # OAuth configuration check
+    oauth_configured = all([CLIENT_ID, CLIENT_SECRET, TENANT_ID])
+    logger.info(f"OAuth configured: {oauth_configured}")
+    
+    if not oauth_configured:
+        logger.warning("OAuth not fully configured - some features may not work")
+        logger.warning("Missing variables: " + ", ".join([
+            var for var, val in [
+                ("AZURE_CLIENT_ID", CLIENT_ID),
+                ("AZURE_CLIENT_SECRET", CLIENT_SECRET), 
+                ("AZURE_TENANT_ID", TENANT_ID)
+            ] if not val
+        ]))
+    
     app.run(host='0.0.0.0', port=port, debug=False)

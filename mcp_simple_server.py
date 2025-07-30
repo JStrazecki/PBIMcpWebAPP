@@ -191,10 +191,13 @@ def claude_config():
     })
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8001))
+    port = int(os.environ.get('PORT', 8000))  # Use 8000 as default for Azure
     
     logger.info(f"Starting Simple MCP Server on port {port}")
-    logger.info(f"Server URL: http://localhost:{port}")
-    logger.info(f"Claude config: http://localhost:{port}/claude-config")
+    logger.info(f"Environment: {'Azure' if os.environ.get('WEBSITE_HOSTNAME') else 'Local'}")
+    
+    # Azure compatibility
+    if os.environ.get('WEBSITE_HOSTNAME'):
+        logger.info(f"Azure deployment detected: {os.environ.get('WEBSITE_HOSTNAME')}")
     
     app.run(host='0.0.0.0', port=port, debug=False)

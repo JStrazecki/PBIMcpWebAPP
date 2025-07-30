@@ -1,0 +1,27 @@
+# MCP Server Startup Commands (CORRECTED)
+
+## Azure Deployment Commands:
+
+# Simple server (no auth) - WORKS WITHOUT ENVIRONMENT VARIABLES:
+gunicorn --bind=0.0.0.0:$PORT --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_simple_server:app
+
+# Authenticated server - REQUIRES AZURE ENVIRONMENT VARIABLES:
+gunicorn --bind=0.0.0.0:$PORT --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_auth_server:app
+
+## Required Environment Variables for Auth Server:
+# AZURE_CLIENT_ID=your-app-registration-client-id
+# AZURE_CLIENT_SECRET=your-app-registration-secret
+# AZURE_TENANT_ID=your-tenant-id
+
+## Local Development:
+# Simple server (no auth):
+gunicorn --bind=0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_simple_server:app
+
+# Authenticated server:
+gunicorn --bind=0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_auth_server:app
+
+## AZURE FIXES APPLIED:
+# ✅ Changed hardcoded port 8001 to $PORT
+# ✅ Added Azure environment detection
+# ✅ Improved error handling for missing OAuth config
+# ✅ Made /health endpoint work without authentication for monitoring

@@ -1,12 +1,20 @@
-✅ FIXED: MCP Server now supports Claude.ai OAuth2 authentication!
+✅ SECURED: MCP Server now validates client credentials!
 
 CLAUDE.AI SETUP INSTRUCTIONS:
 1. Open Claude AI Settings > Connectors
 2. Click 'Add Remote MCP Server'  
 3. Enter URL: https://pbimcp.azurewebsites.net
 4. Set Authentication: OAuth2
-5. Client ID: any-value (server accepts any client ID)
-6. Client Secret: any-value (server accepts any secret)
+5. Client ID: demo-client-id (or your custom MCP_CLIENT_ID)
+6. Client Secret: demo-client-secret (or your custom MCP_CLIENT_SECRET)
 7. Save and test connection
 
-The server now implements dummy OAuth2 authentication that always succeeds, allowing Claude Enterprise users to connect without restrictions while maintaining the simple architecture.
+SECURITY MODEL:
+- Server validates client ID/secret during OAuth token exchange
+- Only authorized clients can connect (prevents random URL access)
+- After authentication, no additional auth needed for API calls
+- Server uses Azure client credentials internally for Power BI access
+
+ENVIRONMENT VARIABLES (for custom credentials):
+- MCP_CLIENT_ID: Your desired client ID (default: demo-client-id)
+- MCP_CLIENT_SECRET: Your desired client secret (default: demo-client-secret)

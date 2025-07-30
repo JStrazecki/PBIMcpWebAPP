@@ -29,6 +29,10 @@ CLIENT_ID = os.environ.get('AZURE_CLIENT_ID', '')
 CLIENT_SECRET = os.environ.get('AZURE_CLIENT_SECRET', '')
 TENANT_ID = os.environ.get('AZURE_TENANT_ID', '')
 
+# MCP Server Access Control - Set these to control who can connect
+MCP_ALLOWED_CLIENT_ID = os.environ.get('MCP_CLIENT_ID', 'demo-client-id')
+MCP_ALLOWED_CLIENT_SECRET = os.environ.get('MCP_CLIENT_SECRET', 'demo-client-secret')
+
 # Power BI OAuth scopes for client credentials
 POWERBI_SCOPES = ["https://analysis.windows.net/powerbi/api/.default"]
 
@@ -86,10 +90,16 @@ def home():
             "name": "powerbi-simple-mcp",
             "version": "1.0.0"
         },
+        "authentication": {
+            "type": "oauth2",
+            "client_validation": "enabled",
+            "allowed_client_id": MCP_ALLOWED_CLIENT_ID,
+            "powerbi_configured": bool(CLIENT_ID and CLIENT_SECRET and TENANT_ID)
+        },
         "instructions": [
             "This server provides Power BI integration tools",
             "Available tools: health, workspaces, datasets, query",
-            "No authentication required for Claude connection"
+            "OAuth2 authentication required with valid client credentials"
         ]
     })
 
@@ -467,7 +477,7 @@ def authorize():
 
 @app.route('/token', methods=['POST'])
 def token():
-    """Handle Claude's OAuth token request - always provide a dummy token"""
+    """Handle Claude's OAuth token request - validate client credentials"""
     # Get token request parameters
     grant_type = request.form.get('grant_type')
     code = request.form.get('code')
@@ -490,7 +500,24 @@ def token():
             "error_description": "Missing authorization code"
         }), 400
     
-    # Generate a dummy access token
+    # VALIDATE CLIENT CREDENTIALS
+    if not client_id or not client_secret:
+        logger.warning("Token request missing client credentials")
+        return jsonify({
+            "error": "invalid_client",
+            "error_description": "Client authentication required"
+        }), 401
+    
+    if client_id != MCP_ALLOWED_CLIENT_ID or client_secret != MCP_ALLOWED_CLIENT_SECRET:
+        logger.warning(f"Invalid client credentials: {client_id}")
+        return jsonify({
+            "error": "invalid_client", 
+            "error_description": "Invalid client credentials"
+        }), 401
+    
+    logger.info(f"Client {client_id} authenticated successfully")
+    
+    # Generate access token for valid client
     import secrets
     access_token = secrets.token_urlsafe(64)
     
@@ -513,17 +540,26 @@ def claude_config():
             "step_2": "Click 'Add Remote MCP Server'",
             "step_3": f"Enter URL: {base_url}",
             "step_4": "Set Authentication: OAuth2",
-            "step_5": "Client ID: any-client-id (not validated)", 
-            "step_6": "Client Secret: any-secret (not validated)",
+            "step_5": f"Client ID: {MCP_ALLOWED_CLIENT_ID}", 
+            "step_6": f"Client Secret: {MCP_ALLOWED_CLIENT_SECRET}",
             "step_7": "Save and test connection"
         },
         "server_url": base_url,
-        "authentication": "oauth2_dummy",
+        "authentication": "oauth2_validated",
         "oauth_endpoints": {
             "authorization_url": f"{base_url}/authorize",
             "token_url": f"{base_url}/token"
         },
-        "note": "This server accepts any OAuth credentials - uses dummy authentication",
+        "security": {
+            "client_validation": "enabled",
+            "allowed_client_id": MCP_ALLOWED_CLIENT_ID,
+            "note": "Only clients with valid credentials can connect"
+        },
+        "environment_variables": {
+            "MCP_CLIENT_ID": "Set this to your desired client ID",
+            "MCP_CLIENT_SECRET": "Set this to your desired client secret",
+            "note": "Default values are 'demo-client-id' and 'demo-client-secret'"
+        },
         "test_command": "Ask Claude: 'Can you check the Power BI server health?'"
     })
 

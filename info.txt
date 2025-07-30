@@ -1,0 +1,12 @@
+https://pbimcp.azurewebsites.net/health
+
+{"authentication":{"configured":true,"powerbi_access":true,"type":"client_credentials"},"environment":"azure","features":{"http_bridge":true,"mcp_tools":true,"powerbi_integration":true},"protocol":"http_mcp_bridge","service":"Power BI MCP Finance Server","status":"healthy","timestamp":"2025-07-29T19:43:55.582649","version":"3.0.0-bridge"}
+
+https://pbimcp.azurewebsites.net/mcp/status
+{"authentication":"client_credentials","powerbi_access":"granted","server_status":"running","service":"Power BI MCP Finance Server","timestamp":"2025-07-29T19:43:46.456218","version":"3.0.0-bridge"}
+
+https://pbimcp.azurewebsites.net/pbi-mcp
+{"available_endpoints":["/","/health","/mcp/status","/mcp/workspaces","/mcp/datasets","/authorize","/auth/callback","/mcp/query"],"error":"Not Found","message":"The requested endpoint '/pbi-mcp' was not found","method":"GET","url":"http://pbimcp.azurewebsites.net/pbi-mcp"}
+
+https://pbimcp.azurewebsites.net/mcp/workspaces
+{"timestamp":"2025-07-29T19:43:44.284198","total_count":2,"workspaces":[{"id":"6d40d0dc-7eb0-44a1-9979-0de51f73c71c","is_on_dedicated_capacity":false,"is_read_only":false,"name":"Onetribe Demo","state":"Active","type":"Workspace"},{"id":"92506d9a-cc47-4356-a280-e624addba9f2","is_on_dedicated_capacity":false,"is_read_only":false,"name":"RMC Demo Application","state":"Active","type":"Workspace"}]}

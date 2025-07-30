@@ -67,13 +67,40 @@ def home():
     """MCP Server information"""
     return jsonify({
         "name": "Power BI MCP Server (Simple)",
-        "version": "1.0.0",
-        "type": "remote_mcp_server",
-        "authentication": "none",
-        "capabilities": ["powerbi_workspaces", "powerbi_datasets", "powerbi_queries"],
-        "claude_config": {
-            "url": request.base_url.rstrip('/'),
-            "authentication": "none"
+        "version": "1.0.0", 
+        "protocol_version": "2024-11-05",
+        "capabilities": {
+            "tools": True,
+            "resources": False,
+            "prompts": False
+        },
+        "server_info": {
+            "name": "powerbi-simple-mcp",
+            "version": "1.0.0"
+        },
+        "instructions": [
+            "This server provides Power BI integration tools",
+            "Available tools: health, workspaces, datasets, query",
+            "No authentication required for Claude connection"
+        ]
+    })
+
+@app.route('/.well-known/mcp')
+def mcp_discovery():
+    """MCP discovery endpoint"""
+    return jsonify({
+        "version": "2024-11-05",
+        "authentication": {
+            "type": "none"
+        },
+        "capabilities": {
+            "tools": True,
+            "resources": False,
+            "prompts": False
+        },
+        "server": {
+            "name": "powerbi-simple-mcp",
+            "version": "1.0.0"
         }
     })
 
@@ -383,6 +410,21 @@ def query():
         "status": "success"
     })
 
+@app.route('/authorize')
+def authorize():
+    """Handle Claude's OAuth attempt - redirect to explain no auth needed"""
+    return jsonify({
+        "error": "Authentication not required",
+        "message": "This is a simple MCP server that doesn't require authentication",
+        "instructions": {
+            "1": "In Claude AI, when adding this MCP server",
+            "2": "Set Authentication to 'None' instead of OAuth",
+            "3": "Server URL: " + request.base_url.replace('/authorize', ''),
+            "4": "No client ID or secret needed"
+        },
+        "redirect_to_setup": request.base_url.replace('/authorize', '/claude-config')
+    })
+
 @app.route('/claude-config')
 def claude_config():
     """Claude AI configuration helper"""
@@ -393,11 +435,13 @@ def claude_config():
             "step_1": "Open Claude AI Settings > Connectors",
             "step_2": "Click 'Add Remote MCP Server'",
             "step_3": f"Enter URL: {base_url}",
-            "step_4": "Set Authentication: None",
-            "step_5": "Save and test connection"
+            "step_4": "Set Authentication: None (NOT OAuth2)",
+            "step_5": "Leave Client ID and Secret empty", 
+            "step_6": "Save and test connection"
         },
         "server_url": base_url,
         "authentication": "none",
+        "note": "This server does NOT require authentication - select 'None' in Claude",
         "test_command": "Ask Claude: 'Can you check the Power BI server health?'"
     })
 

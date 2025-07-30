@@ -1,20 +1,25 @@
-✅ SECURED: MCP Server now validates client credentials!
+✅ FIXED: Server now uses Power BI app registration credentials for MCP access!
 
 CLAUDE.AI SETUP INSTRUCTIONS:
 1. Open Claude AI Settings > Connectors
 2. Click 'Add Remote MCP Server'  
 3. Enter URL: https://pbimcp.azurewebsites.net
 4. Set Authentication: OAuth2
-5. Client ID: demo-client-id (or your custom MCP_CLIENT_ID)
-6. Client Secret: demo-client-secret (or your custom MCP_CLIENT_SECRET)
+5. Client ID: [Your AZURE_CLIENT_ID - same as Power BI app registration]
+6. Client Secret: [Your AZURE_CLIENT_SECRET - same as Power BI app registration]
 7. Save and test connection
 
-SECURITY MODEL:
-- Server validates client ID/secret during OAuth token exchange
-- Only authorized clients can connect (prevents random URL access)
-- After authentication, no additional auth needed for API calls
-- Server uses Azure client credentials internally for Power BI access
+SOLUTION APPLIED:
+- Server now validates MCP connections using your existing Power BI app registration credentials
+- Same client ID/secret you use for Power BI access
+- No need for separate MCP_CLIENT_ID/MCP_CLIENT_SECRET environment variables
+- Matches your local testing setup
 
-ENVIRONMENT VARIABLES (for custom credentials):
-- MCP_CLIENT_ID: Your desired client ID (default: demo-client-id)
-- MCP_CLIENT_SECRET: Your desired client secret (default: demo-client-secret)
+ENVIRONMENT VARIABLES NEEDED:
+- AZURE_CLIENT_ID (your Power BI app registration client ID)
+- AZURE_CLIENT_SECRET (your Power BI app registration client secret)  
+- AZURE_TENANT_ID (your Azure tenant ID)
+
+The server uses these same credentials for both Power BI access AND MCP authentication.
+
+

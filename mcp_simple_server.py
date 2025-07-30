@@ -93,8 +93,9 @@ def home():
         "authentication": {
             "type": "oauth2",
             "client_validation": "enabled",
-            "allowed_client_id": MCP_ALLOWED_CLIENT_ID,
-            "powerbi_configured": bool(CLIENT_ID and CLIENT_SECRET and TENANT_ID)
+            "allowed_client_id": CLIENT_ID,
+            "powerbi_configured": bool(CLIENT_ID and CLIENT_SECRET and TENANT_ID),
+            "note": "Uses Power BI app registration for both MCP access and Power BI integration"
         },
         "instructions": [
             "This server provides Power BI integration tools",
@@ -508,7 +509,8 @@ def token():
             "error_description": "Client authentication required"
         }), 401
     
-    if client_id != MCP_ALLOWED_CLIENT_ID or client_secret != MCP_ALLOWED_CLIENT_SECRET:
+    # Validate against Power BI app registration credentials
+    if client_id != CLIENT_ID or client_secret != CLIENT_SECRET:
         logger.warning(f"Invalid client credentials: {client_id}")
         return jsonify({
             "error": "invalid_client", 
@@ -540,8 +542,8 @@ def claude_config():
             "step_2": "Click 'Add Remote MCP Server'",
             "step_3": f"Enter URL: {base_url}",
             "step_4": "Set Authentication: OAuth2",
-            "step_5": f"Client ID: {MCP_ALLOWED_CLIENT_ID}", 
-            "step_6": f"Client Secret: {MCP_ALLOWED_CLIENT_SECRET}",
+            "step_5": f"Client ID: {CLIENT_ID}", 
+            "step_6": f"Client Secret: {CLIENT_SECRET}",
             "step_7": "Save and test connection"
         },
         "server_url": base_url,
@@ -552,13 +554,14 @@ def claude_config():
         },
         "security": {
             "client_validation": "enabled",
-            "allowed_client_id": MCP_ALLOWED_CLIENT_ID,
-            "note": "Only clients with valid credentials can connect"
+            "allowed_client_id": CLIENT_ID,
+            "note": "Uses Power BI app registration credentials for MCP access"
         },
-        "environment_variables": {
-            "MCP_CLIENT_ID": "Set this to your desired client ID",
-            "MCP_CLIENT_SECRET": "Set this to your desired client secret",
-            "note": "Default values are 'demo-client-id' and 'demo-client-secret'"
+        "power_bi_integration": {
+            "AZURE_CLIENT_ID": "Your Power BI app registration client ID",
+            "AZURE_CLIENT_SECRET": "Your Power BI app registration client secret", 
+            "AZURE_TENANT_ID": "Your Azure tenant ID",
+            "note": "Same credentials used for both MCP access and Power BI integration"
         },
         "test_command": "Ask Claude: 'Can you check the Power BI server health?'"
     })

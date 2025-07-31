@@ -1,5 +1,13 @@
 # MCP Server Requirements
 
+# Core MCP libraries (CRITICAL - Missing from original)
+fastmcp>=0.1.0
+mcp>=1.0.0
+
+# Authentication
+msal>=1.24.0
+keyring>=23.0.1
+
 # Web framework
 flask>=2.3.0
 flask-cors>=4.0.0

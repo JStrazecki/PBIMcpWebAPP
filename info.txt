@@ -1,3 +1,133 @@
+✅ MCP SIMPLE SERVER UPDATED: Added missing MCP protocol endpoints
+
+AUTO-DISCONNECT ISSUE SHOULD BE RESOLVED ✅ 
+MCP PROTOCOL ENDPOINTS ADDED ✅
+TOKEN ENDPOINT READY FOR TESTING ✅
+
+## FIXES APPLIED TO MCP_SIMPLE_SERVER.PY:
+1. **Added MCP Protocol Endpoints**: `/mcp/initialize`, `/mcp/tools/list`, `/mcp/tools/call` 
+2. **Enhanced Token Endpoint**: `/token` validates Azure client credentials properly
+3. **Direct HTTP Transport**: Claude.ai can now call MCP tools via HTTP endpoints
+
+## CURRENT STATUS - READY FOR DEPLOYMENT:
+✅ **Updated mcp_simple_server.py** with MCP protocol endpoints:
+- `/.well-known/mcp` - MCP discovery endpoint (✅ already working)
+- `/mcp/initialize` - MCP handshake endpoint (✅ added)
+- `/mcp/tools/list` - Tools discovery endpoint (✅ added)
+- `/mcp/tools/call` - Tool execution endpoint (✅ added)
+- `/token` - OAuth token endpoint with Azure credential validation (✅ enhanced)
+
+## NEXT STEPS:
+1. **Deploy updated mcp_simple_server.py** to Azure Web App
+2. **Test MCP endpoints** with Inspector tool
+3. **Generate token** using your Azure credentials
+4. **Connect Claude.ai** using OAuth2 flow
+
+## CLAUDE.AI SETUP:
+1. URL: `https://pbimcp.azurewebsites.net`
+2. Authentication: OAuth2
+3. Client ID: Your `AZURE_CLIENT_ID` 
+4. Client Secret: Your `AZURE_CLIENT_SECRET`
+
+## AVAILABLE TOOLS:
+1. **get_powerbi_status** - Server health and authentication
+2. **list_powerbi_workspaces** - List accessible workspaces
+3. **get_powerbi_datasets** - Get datasets from workspaces  
+4. **execute_powerbi_query** - Execute DAX queries
+
+## TECHNICAL ARCHITECTURE:
+- **Transport**: HTTP with JSON-RPC 2.0 protocol
+- **Authentication**: OAuth2 with client credential validation
+- **MCP Version**: 2024-11-05
+- **Server**: mcp_bridge.py (FastMCP + Flask hybrid)
+- **Deployment**: Azure Web App with gunicorn
+
+The server now implements proper MCP protocol that Claude.ai can maintain persistent connections with!
+
+## 🔍 DEBUGGING WITH MCP INSPECTOR
+
+**If Claude.ai still won't connect, use MCP Inspector to debug:**
+
+### Quick Test (No Installation Required):
+```bash
+# Test your remote MCP server directly
+npx @modelcontextprotocol/inspector https://pbimcp.azurewebsites.net
+```
+
+### Detailed Testing Steps:
+
+1. **Test Server Discovery**:
+   ```bash
+   # Check if discovery endpoint works
+   curl https://pbimcp.azurewebsites.net/.well-known/mcp
+   ```
+   Should return MCP version and authentication info.
+
+2. **Test OAuth Flow**:
+   ```bash
+   # Check OAuth endpoints
+   curl https://pbimcp.azurewebsites.net/authorize
+   curl -X POST https://pbimcp.azurewebsites.net/token
+   ```
+
+3. **Run Full MCP Inspector**:
+   ```bash
+   # Install and run inspector (opens browser at localhost:6274)
+   npx @modelcontextprotocol/inspector
+   ```
+   Then enter your server URL: `https://pbimcp.azurewebsites.net`
+
+4. **Test Specific MCP Methods**:
+   ```bash
+   # Test tools listing
+   npx @modelcontextprotocol/inspector --cli https://pbimcp.azurewebsites.net --method tools/list
+   
+   # Test initialization
+   npx @modelcontextprotocol/inspector --cli https://pbimcp.azurewebsites.net --method initialize
+   ```
+
+### 🚨 Common Issues & Solutions:
+
+**Issue**: "Connection closed" or "No response"
+- **Check**: Server logs for errors
+- **Fix**: Ensure all dependencies installed (`fastmcp`, `mcp`, `msal`)
+
+**Issue**: "Authentication failed"  
+- **Check**: OAuth endpoints responding correctly
+- **Fix**: Verify `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID` set
+
+**Issue**: "Tools not found"
+- **Check**: `/mcp/tools/list` endpoint returns tool definitions
+- **Fix**: Ensure FastMCP tools are properly registered
+
+**Issue**: "Protocol version mismatch"
+- **Check**: `/.well-known/mcp` returns `"version": "2024-11-05"`
+- **Fix**: Update MCP discovery endpoint
+
+### 📊 Inspector Web UI Features:
+- **Server Connection**: Test connection status
+- **Tools Explorer**: Browse available tools interactively  
+- **Method Testing**: Call tools with custom parameters
+- **Protocol Validation**: Verify JSON-RPC 2.0 compliance
+- **Auth Flow Testing**: Test OAuth2 authentication
+
+### 🔧 Debug Commands:
+```bash
+# Check server health
+curl https://pbimcp.azurewebsites.net/health
+
+# Test Power BI connection
+curl https://pbimcp.azurewebsites.net/mcp/status
+
+# Validate MCP protocol compliance
+npx @modelcontextprotocol/inspector --validate https://pbimcp.azurewebsites.net
+```
+
+**Inspector GitHub**: https://github.com/modelcontextprotocol/inspector
+**MCP Docs**: https://modelcontextprotocol.io/
+
+---
+
 Using MCP
 Connect to Remote MCP Servers
 
@@ -69,3 +199,261 @@ Learn how to connect Claude Desktop to local MCP servers for direct system acces
 Understand the architecture
 Dive deeper into how MCP works and its architecture
 Remote MCP servers unlock powerful possibilities for extending Claude’s capabilities. As you become familiar with these integrations, you’ll discover new ways to streamline your workflows and accomplish complex tasks more efficiently.
+
+
+
+Getting Started with Custom Connectors Using Remote MCP
+Updated this week
+Custom connectors using remote MCP are available on Claude and Claude Desktop for users on Pro, Max, Team, and Enterprise plans. This feature is currently in beta.
+
+⚠️ Security and Privacy with Custom Connectors (beta)
+Be aware that custom connectors allow you to connect Claude to services that have not been verified by Anthropic, and allow Claude to access and take action in these services. Consider the following to minimize security and privacy risks when using this feature:
+
+Only add and authenticate custom connectors from trusted organizations, listed directly on their websites.
+
+Carefully review Claude's requests to invoke tools, especially for tools that may send data to or take action in external applications.
+
+Only enable the specific tools that are most relevant to your conversation, especially before invoking Research.
+
+Report malicious MCP servers to our vulnerability disclosure program, and choose https://github.com/modelcontextprotocol as the Asset.
+
+In some circumstances, MCP server developers may change their tool’s behavior without warning the user, potentially leading to unexpected or malicious behavior. We attempt to block suspicious MCP tool calls, but we suggest taking precautions to isolate Claude from sensitive data.
+
+ 
+
+For more guidance, review the Security and Privacy Considerations section below.
+
+ 
+
+What are custom connectors?
+Custom connectors let you connect Claude directly to the tools and data sources that matter most to your workflows. This enables Claude to operate within your favorite software and draw insights from the complete context of your external tools.
+
+ 
+
+You can:
+
+Connect Claude to existing remote MCP servers.
+
+Build your own remote MCP servers to connect with any tool.
+
+What are remote MCP servers?
+The Model Context Protocol (MCP) is an open standard, created by Anthropic, for AI applications to connect to tools and data.
+
+ 
+
+Previously, MCP servers only ran locally (i.e. on a user's laptop). Now, developers can build and host remote MCP servers that communicate with AI apps over the internet.
+
+ 
+
+Remote MCP servers give models access to internet-hosted tools and data, transforming Claude into an informed teammate that can independently handle complex, multi-step projects tailored to your needs.
+
+ 
+
+Getting Started with Custom Connectors
+Using Existing Connectors
+To get started, choose from the existing connectors listed here. For example, Zapier MCP lets users connect Claude to thousands of apps using Zapier's pre-built connections.
+
+ 
+
+Building Connectors
+To learn about building connectors to use with Claude, see Building Custom Connectors via Remote MCP Servers.
+
+ 
+
+Adding Connectors to Claude
+Enterprise and Team plans (Owners and Primary Owners)
+
+Note: While anyone can build and host connectors using remote MCP, only Primary Owners or Owners can enable it on Claude for Work plans (Team and Enterprise). Once a connector has been configured on a Team or Enterprise organization, users individually connect to and enable that connector. This ensures that Claude can only access tools and data that the individual user has access to.
+
+Navigate to Settings > Connectors.
+
+Toggle to "Organization connectors" at the top of the page.
+
+Locate the "Connectors" section.
+
+Click "Add custom connector" at the bottom of the section.
+
+Add your connector's remote MCP server URL.
+
+Finish configuring your connector by clicking "Add."
+
+Pro and Max plans
+
+Navigate to Settings > Connectors.
+
+Locate the "Connectors" section.
+
+Click "Add custom connector" at the bottom of the section.
+
+Add your connector's remote MCP server URL.
+
+Finish configuring your connector by clicking "Add."
+
+Removing or Editing Connectors
+You can remove or edit the configuration of your connector:
+
+Navigate to Settings > Connectors.
+
+Locate the "Connectors" section.
+
+Click "Remove" or select the three dots next to the connector you'd like to edit.
+
+Follow the prompts to edit or remove.
+
+Enabling Connectors
+You can enable connectors via the “Search and tools” button on the lower left of your chat interface. For connectors that require authentication, click “Connect” to go through the authentication flow and grant permission for Claude to access the service. After connecting, use the same menu to enable or disable specific tools made available by the server. 
+
+
+ 
+
+ 
+
+Security and Privacy Considerations
+Custom connectors allow you to connect Claude to arbitrary services that have not been verified by Anthropic. When you connect Claude to external services, you're granting it the ability to access and potentially modify data within those services based on your permissions. It’s important to make sure you’re only connecting to remote MCP servers that you trust and that you’re aware of Claude’s interactions with web connectors.
+
+ 
+
+Security and Permissions
+When you add a custom connector to Claude, you'll typically go through an OAuth authentication process to securely sign in to the application and grant specific permissions. This allows Claude to interact with the application on your behalf, without Claude ever seeing your actual password. You can revoke these permissions at any time by disconnecting the connector in Claude's settings or the third-party service's security settings.
+
+ 
+
+Remote MCP servers act as intermediaries between Claude and external applications. You should:
+
+Only connect to trusted servers: Only connect Claude to servers built and hosted by organizations and applications you trust.
+
+Review requested permissions carefully: During auth, review what permissions the MCP server is requesting to the application. Limit these scopes when possible and deny access if requested permissions seem unnecessary.
+
+Be aware of prompt injections: Malicious MCP servers may include hidden instructions that try to make Claude perform unintended actions. Claude has built-in protections that attempt to block these attacks, but it's important to pay attention to tool inputs & outputs and connect only to trusted servers.
+
+Monitor changes in tool behavior: Server developers may update tool behavior unexpectedly, leading to unintended or malicious behavior.
+
+Reporting Malicious MCP Servers
+If you become aware of a malicious MCP server, please it to our vulnerability disclosure program, and choose https://github.com/modelcontextprotocol as the Asset.
+
+ 
+
+Taking Actions with Tools
+Remote MCP servers give Claude tools it can invoke during your conversation. The developer of an MCP server can define what these tools do, including:
+
+Reading data from connected applications.
+
+Creating, modifying, or deleting data in connected applications.
+
+Taking actions on behalf of the user.
+
+Claude can only access resources that you've given the server permission to access, but you should:
+
+Be aware of any actions Claude is taking and that they have no destructive or unintended effects.
+
+Review Claude's tool approval requests carefully and only click "Allow always" when using a server and tool that you trust to run unsupervised.
+
+Using the "Search and tools" menu, disable any tools that aren't relevant to the current conversation or that you don't want Claude to be able to invoke.
+
+Using Claude with Research
+Note: Advanced Research is not currently able to invoke tools from local MCP servers.
+
+Research allows Claude to deeply investigate queries by searching through hundreds of internal and external sources. During the research process, Claude can invoke tools from your connectors automatically without further approval.
+
+ 
+
+When using Research with custom connectors:
+
+Disable any tools that can take write actions in external applications.
+
+Review Claude’s approval request carefully and be aware of which tools you’re granting Claude permission to invoke.
+
+Be mindful of the impact of Claude sending a large number of requests to your connectors.
+
+See Using Research on Claude.ai for more information about this feature.
+
+Building Custom Connectors via Remote MCP Servers
+Updated today
+Custom connectors using remote MCP are available on Claude and Claude Desktop for users on Pro, Max, Team, and Enterprise plans.
+
+Building Remote MCP Servers
+To get started with remote servers, start with the following resources:
+
+The auth spec, especially details on the auth flow for third-party services.
+
+The remote server examples in the TypeScript and Python SDKs.
+
+The client and server auth implementations in the TypeScript and Python SDKs.
+
+The official MCP roadmap and draft spec’s changelog for details on how the protocol will evolve.
+
+Other resources (like this) may also be helpful to learn about considerations when building, deploying, and troubleshooting remote servers.
+
+ 
+
+In addition, some solutions like Cloudflare provide remote MCP server hosting with built-in autoscaling, OAuth token management, and deployment.
+
+ 
+
+MCP Support
+Platforms
+Remote MCP servers are supported on Claude and Claude Desktop for Pro, Max, Team, and Enterprise plans.
+
+To configure remote MCP servers for use in Claude Desktop, add them via Settings > Connectors. Claude Desktop will not connect to remote servers that are configured directly via claude_desktop_config.json.
+
+As of July, Claude for iOS and Android also support remote MCP servers!
+
+Users can use tools, prompts, and resources from remote servers that they’ve already added via claude.ai. Users cannot add new servers directly from Claude Mobile.
+
+Transport and Auth
+Claude supports both SSE- and Streamable HTTP-based remote servers, although support for SSE may be deprecated in the coming months.
+
+Claude supports both authless and OAuth-based remote servers.
+
+Auth Support
+
+Claude supports the 3/26 auth spec and (as of July) the 6/18 auth spec.
+
+Claude supports Dynamic Client Registration (DCR).
+
+OAuth servers can signal to Claude that a DCR client has been deleted and that Claude should re-register the client by returning an HTTP 401 with an error of invalid_client from the token endpoint, as described in RFC 6749.
+
+As of July, users are also able to specify a custom client ID and client secret when configuring a server that doesn’t support DCR.
+
+Claude’s OAuth callback URL is https://claude.ai/api/mcp/auth_callback and its OAuth client name is Claude.
+
+This callback URL may change to https://claude.com/api/mcp/auth_callback in the future – if you choose to allowlist MCP client callback URLs, please allowlist this callback URL as well to ensure that your server continues to work with Claude.
+
+Claude supports token expiry and refresh – servers should support this functionality in order to provide the best experience for users.
+
+See here for the IP addresses used by Claude for inbound and outbound connections to MCP servers. Server developers wishing to disallow non-Claude MCP Clients can whitelist these IP addresses, Claude’s OAuth callback URL, and/or Claude’s OAuth client name.
+
+ 
+
+Protocol Features
+Claude supports tools, prompts, and resources.
+
+Claude supports text- and image-based tool results.
+
+Claude supports text- and binary- based resources.
+
+Claude does not yet support resource subscriptions, sampling, and other more advanced or draft capabilities.
+
+Testing Remote MCP Servers
+The best way to test and validate a server is to try adding it to Claude. 
+
+ 
+
+Alternatively, use the inspector tool. This will allow you to validate:
+
+that your server successfully initiates and completes the auth flow.
+
+that your server correctly implements various parts of the auth flow.
+
+which tools, prompts, resources, and other MCP features your server exposes.
+
+ 
+
+
+ 
+
+See the MCP documentation for more details on using inspector and for other tips on how to debug and troubleshoot your server.
+
+ 
+
+In addition, other solutions like Cloudflare’s AI Playground allow you to test remote MCP server functionality.

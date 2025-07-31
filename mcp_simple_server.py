@@ -884,6 +884,245 @@ def message_endpoint():
             }
         }), 400
 
+# Direct MCP protocol endpoints for Claude.ai (HTTP transport)
+@app.route('/mcp/initialize', methods=['POST'])
+def mcp_initialize():
+    """MCP protocol initialize endpoint for Claude.ai"""
+    data = request.get_json() or {}
+    request_id = data.get('id', 1)
+    
+    return jsonify({
+        "jsonrpc": "2.0",
+        "id": request_id,
+        "result": {
+            "protocolVersion": "2024-11-05",
+            "capabilities": {
+                "tools": {},
+                "logging": {}
+            },
+            "serverInfo": {
+                "name": "powerbi-mcp-server",
+                "version": "1.0.0"
+            }
+        }
+    })
+
+@app.route('/mcp/tools/list', methods=['POST'])
+def mcp_tools_list():
+    """MCP protocol tools list endpoint for Claude.ai"""
+    data = request.get_json() or {}
+    request_id = data.get('id', 1)
+    
+    tools = [
+        {
+            "name": "powerbi_health",
+            "description": "Check Power BI server health and configuration status",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_workspaces",
+            "description": "List Power BI workspaces accessible to the server",
+            "inputSchema": {
+                "type": "object", 
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_datasets",
+            "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "Optional workspace ID to filter datasets"
+                    }
+                },
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_query",
+            "description": "Execute a DAX query against a Power BI dataset",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "dataset_id": {
+                        "type": "string",
+                        "description": "The Power BI dataset ID to query"
+                    },
+                    "dax_query": {
+                        "type": "string", 
+                        "description": "The DAX query to execute"
+                    },
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "Optional workspace ID if dataset is in a specific workspace"
+                    }
+                },
+                "required": ["dataset_id", "dax_query"]
+            }
+        }
+    ]
+    
+    return jsonify({
+        "jsonrpc": "2.0",
+        "id": request_id,
+        "result": {
+            "tools": tools
+        }
+    })
+
+@app.route('/mcp/tools/call', methods=['POST'])
+def mcp_tools_call():
+    """MCP protocol tools call endpoint for Claude.ai"""
+    data = request.get_json()
+    if not data:
+        return jsonify({
+            "jsonrpc": "2.0",
+            "error": {
+                "code": -32600,
+                "message": "Invalid Request"
+            }
+        }), 400
+    
+    tool_name = data.get('params', {}).get('name')
+    arguments = data.get('params', {}).get('arguments', {})
+    request_id = data.get('id', 1)
+    
+    logger.info(f"MCP tool call: {tool_name} with args: {arguments}")
+    
+    if tool_name == 'powerbi_health':
+        # Call the existing health endpoint logic
+        token = get_powerbi_token()
+        powerbi_configured = bool(token)
+        
+        result = {
+            "status": "healthy",
+            "service": "Power BI MCP Server (Simple)",
+            "authentication": "client_credentials",
+            "powerbi_configured": powerbi_configured,
+            "powerbi_access": "granted" if token else "using_demo_data",
+            "client_id_configured": bool(CLIENT_ID),
+            "environment": "Azure" if os.environ.get('WEBSITE_HOSTNAME') else "Local",
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+        return jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {
+                "content": [
+                    {
+                        "type": "text",
+                        "text": json.dumps(result, indent=2)
+                    }
+                ]
+            }
+        })
+    
+    elif tool_name == 'powerbi_workspaces':
+        # Call workspaces logic
+        with app.test_request_context():
+            response = workspaces()
+            if hasattr(response, 'get_json'):
+                workspace_data = response.get_json()
+            else:
+                workspace_data = response
+        
+        return jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {
+                "content": [
+                    {
+                        "type": "text", 
+                        "text": json.dumps(workspace_data, indent=2)
+                    }
+                ]
+            }
+        })
+    
+    elif tool_name == 'powerbi_datasets':
+        # Call datasets logic
+        workspace_id = arguments.get('workspace_id')
+        with app.test_request_context(query_string={'workspace_id': workspace_id} if workspace_id else None):
+            response = datasets()
+            if hasattr(response, 'get_json'):
+                dataset_data = response.get_json()
+            else:
+                dataset_data = response
+        
+        return jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {
+                "content": [
+                    {
+                        "type": "text",
+                        "text": json.dumps(dataset_data, indent=2)
+                    }
+                ]
+            }
+        })
+    
+    elif tool_name == 'powerbi_query':
+        # Call query logic
+        dataset_id = arguments.get('dataset_id')
+        dax_query = arguments.get('dax_query')
+        workspace_id = arguments.get('workspace_id')
+        
+        if not dataset_id or not dax_query:
+            return jsonify({
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "error": {
+                    "code": -32602,
+                    "message": "dataset_id and dax_query are required"
+                }
+            }), 400
+        
+        query_data = {
+            'dataset_id': dataset_id,
+            'dax_query': dax_query,
+            'workspace_id': workspace_id
+        }
+        
+        with app.test_request_context(json=query_data, content_type='application/json'):
+            response = query()
+            if hasattr(response, 'get_json'):
+                query_data_result = response.get_json()
+            else:
+                query_data_result = response
+        
+        return jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {
+                "content": [
+                    {
+                        "type": "text",
+                        "text": json.dumps(query_data_result, indent=2)
+                    }
+                ]
+            }
+        })
+    
+    else:
+        return jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "error": {
+                "code": -32601,
+                "message": f"Unknown tool: {tool_name}"
+            }
+        }), 400
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))  # Use 8000 as default for Azure
     

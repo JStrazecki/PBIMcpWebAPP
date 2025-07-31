@@ -1000,8 +1000,8 @@ message_queue = queue.Queue()
 @app.route('/mcp/tools/call', methods=['OPTIONS'])
 def handle_options():
     """Handle CORS preflight requests"""
-    response = Response('')
-    response.status_code = 200
+    from flask import make_response
+    response = make_response('', 200)
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'

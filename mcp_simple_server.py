@@ -848,10 +848,25 @@ def query():
                 })
             else:
                 logger.error(f"Power BI query API error: {response.status_code} - {response.text}")
+                
+                # Parse error for better user guidance
+                error_message = response.text[:500]
+                troubleshooting_tip = ""
+                
+                if "MSOLAP connection" in error_message or "DatasetExecuteQueriesError" in error_message:
+                    troubleshooting_tip = "⚠️ MSOLAP Connection Error: Your service principal needs to be added as a Member (not Viewer) to the Power BI workspace. Go to workspace settings > Access > Add your service principal with Member permissions."
+                elif response.status_code == 403:
+                    troubleshooting_tip = "⚠️ Permission Error: Your service principal needs 'Dataset.Read.All' API permissions and workspace Member access."
+                elif response.status_code == 401:
+                    troubleshooting_tip = "⚠️ Authentication Error: Check your AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID environment variables."
+                
                 response_obj = jsonify({
                     "error": f"Power BI API error: {response.status_code}",
-                    "message": response.text[:500],
+                    "message": error_message,
+                    "troubleshooting_tip": troubleshooting_tip,
                     "dax_query": dax_query,
+                    "dataset_id": dataset_id,
+                    "workspace_id": workspace_id,
                     "mode": "real_powerbi_query_failed",
                     "status": "failed"
                 })
@@ -901,33 +916,45 @@ def query():
         "status": "success"
     })
 
-@app.route('/authorize')
+@app.route('/authorize', methods=['GET', 'POST'])
 def authorize():
     """Handle Claude's OAuth authorize request - always approve"""
-    # Get OAuth parameters from Claude
-    client_id = request.args.get('client_id')
-    redirect_uri = request.args.get('redirect_uri')
-    state = request.args.get('state')
-    code_challenge = request.args.get('code_challenge')
+    # Get OAuth parameters from Claude (both GET and POST)
+    if request.method == 'POST':
+        data = request.get_json() or request.form
+        client_id = data.get('client_id')
+        redirect_uri = data.get('redirect_uri')
+        state = data.get('state')
+        code_challenge = data.get('code_challenge')
+    else:
+        client_id = request.args.get('client_id')
+        redirect_uri = request.args.get('redirect_uri')
+        state = request.args.get('state')
+        code_challenge = request.args.get('code_challenge')
     
     # Log the attempt for debugging
-    logger.info(f"OAuth authorize request: client_id={client_id}, redirect_uri={redirect_uri}")
+    logger.info(f"OAuth authorize request: method={request.method}, client_id={client_id}, redirect_uri={redirect_uri}, state={state}")
     
-    if not redirect_uri or not state:
-        response = jsonify({
-            "error": "invalid_request",
-            "error_description": "Missing required parameters"
-        })
-        response.status_code = 400
-        return response
+    # Be more flexible with missing parameters for Claude.ai compatibility
+    if not redirect_uri:
+        redirect_uri = "https://claude.ai/api/mcp/auth_callback"
+        logger.info(f"Using default redirect URI: {redirect_uri}")
+    
+    if not state:
+        state = "claude-auth-state"
+        logger.info(f"Using default state: {state}")
     
     # Generate a dummy authorization code
     import secrets
     auth_code = secrets.token_urlsafe(32)
     
-    # Redirect back to Claude with the authorization code
+    # Log successful authorization
+    logger.info(f"Generated auth code for client_id={client_id}, redirecting to {redirect_uri}")
+    
+    # Return authorization code by redirecting to redirect_uri
     redirect_url = f"{redirect_uri}?code={auth_code}&state={state}"
     
+    # For Claude.ai, return a redirect response
     from flask import redirect
     return redirect(redirect_url)
 

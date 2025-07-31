@@ -43,9 +43,15 @@ POWERBI_SCOPES = ["https://analysis.windows.net/powerbi/api/.default"]
 def check_claude_auth():
     """Check if request has a valid bearer token from Claude (always accept)"""
     auth_header = request.headers.get('Authorization')
-    if auth_header and auth_header.startswith('Bearer '):
-        # Any bearer token is valid for this simple server
-        return True
+    if auth_header:
+        # Handle both single and double "Bearer" prefix issues
+        if (auth_header.startswith('Bearer ') or 
+            auth_header.startswith('bearer ') or
+            'Bearer Bearer' in auth_header):
+            # Any bearer token is valid for this simple server
+            logger.info(f"Valid auth header detected: {auth_header[:20]}...")
+            return True
+    logger.warning(f"Invalid or missing auth header: {auth_header}")
     return False
 
 def get_powerbi_token() -> Optional[str]:

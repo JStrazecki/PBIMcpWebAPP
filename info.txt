@@ -1,4 +1,7 @@
-https://playground.ai.cloudflare.com/
+  1. Go to: https://playground.ai.cloudflare.com/
+  2. Server URL: https://pbimcp.azurewebsites.net/
+  3. Header Name: Authorization
+  4. Header Value: Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ
 
 [debug] Auth callback message listener added.
 [debug] useMcp mounted, initiating connection.
@@ -27,7 +30,8 @@ https://playground.ai.cloudflare.com/
 [info] Connecting client via SSE...
 [debug] About to call client.connect() with transport instance
 [debug] Transport instance type: T8
-[debug] Client connect error via SSE: {"code":200,"event":{"isTrusted":false,"code":200,"message":"Invalid content type, expected \"text/event-stream\""}}
-[debug] Connect error details: {"message":"SSE error: Invalid content type, expected \"text/event-stream\"","stack":"Error: SSE error: Invalid content type, expected \"text/event-stream\"\n at _eventSource.onerror (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:16262)\n at gu.Cl (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:4844)\n at https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:1871","name":"Error"}
-[error] Failed to connect via SSE: SSE error: Invalid content type, expected "text/event-stream" {"code":200,"event":{"isTrusted":false,"code":200,"message":"Invalid content type, expected \"text/event-stream\""}}
-[debug] Connection sequence finished with status: fallback
+
+
+When I try to connect to my server through claude.ai I get this:
+
+"There was an error connecting to test. Please check your server details and ensure your server handles auth correctly."

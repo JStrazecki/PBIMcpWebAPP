@@ -89,6 +89,17 @@ def home():
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response
     
+    # Check if this is an SSE request (GET with specific headers indicating SSE)
+    if request.method == 'GET':
+        accept_header = request.headers.get('Accept', '')
+        cache_control = request.headers.get('Cache-Control', '')
+        # Detect SSE request characteristics
+        if ('text/event-stream' in accept_header or 
+            'event-stream' in accept_header or 
+            'no-cache' in cache_control):
+            logger.info("Detected SSE request at root endpoint")
+            return handle_sse_at_root()
+    
     # If it's a POST request with JSON-RPC, treat as MCP HTTP transport
     if request.method == 'POST':
         try:
@@ -142,6 +153,61 @@ def home():
         ]
     })
     return add_cors_headers(response)
+
+def handle_sse_at_root():
+    """Handle SSE transport at root endpoint"""
+    # Check authentication
+    has_claude_auth = check_claude_auth()
+    if not has_claude_auth:
+        return Response(
+            "event: error\ndata: Authentication required\n\n",
+            mimetype='text/event-stream',
+            status=401,
+            headers={
+                'Content-Type': 'text/event-stream',
+                'Cache-Control': 'no-cache',
+                'Connection': 'keep-alive',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+            }
+        )
+    
+    def event_stream():
+        try:
+            # Send initial connection event
+            yield f"event: connection\ndata: {json.dumps({'status': 'connected', 'protocol': '2024-11-05'})}\n\n"
+            
+            # Keep connection alive with heartbeats
+            while True:
+                try:
+                    # Send keep-alive every 30 seconds
+                    yield f"event: heartbeat\ndata: {json.dumps({'timestamp': datetime.utcnow().isoformat()})}\n\n"
+                    time.sleep(30)
+                except GeneratorExit:
+                    logger.info("SSE client disconnected from root")
+                    break
+                except Exception as e:
+                    logger.error(f"SSE stream error at root: {e}")
+                    break
+        except Exception as e:
+            logger.error(f"SSE event stream error at root: {e}")
+    
+    response = Response(
+        event_stream(),
+        mimetype='text/event-stream',
+        headers={
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+        }
+    )
+    
+    logger.info("SSE endpoint accessed at root, starting event stream")
+    return response
 
 def handle_http_transport():
     """Handle HTTP transport requests at root endpoint"""
@@ -361,14 +427,16 @@ def handle_tool_call_logic(tool_name, arguments, request_id):
         workspace_id = arguments.get('workspace_id')
         
         if not dataset_id or not dax_query:
-            return jsonify({
+            response = jsonify({
                 "jsonrpc": "2.0",
                 "id": request_id,
                 "error": {
                     "code": -32602,
                     "message": "dataset_id and dax_query are required"
                 }
-            }), 400
+            })
+            response.status_code = 400
+            return response
         
         query_data = {
             'dataset_id': dataset_id,
@@ -397,14 +465,16 @@ def handle_tool_call_logic(tool_name, arguments, request_id):
         })
     
     else:
-        return jsonify({
+        response = jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
             "error": {
                 "code": -32601,
                 "message": f"Unknown tool: {tool_name}"
             }
-        }), 400
+        })
+        response.status_code = 400
+        return response
 
 @app.route('/.well-known/mcp')
 def mcp_discovery():
@@ -418,8 +488,8 @@ def mcp_discovery():
         "version": "2024-11-05",
         "transport": {
             "type": "sse",
-            "sse_url": f"{base_url}/sse",
-            "message_url": f"{base_url}/message"
+            "sse_url": f"{base_url}/",
+            "message_url": f"{base_url}/"
         },
         "authentication": {
             "type": "oauth2",
@@ -1225,14 +1295,16 @@ def message_endpoint():
     
     # Unknown method
     else:
-        return jsonify({
+        response = jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
             "error": {
                 "code": -32601,
                 "message": f"Method not found: {method}"
             }
-        }), 400
+        })
+        response.status_code = 400
+        return response
 
 # Direct MCP protocol endpoints for Claude.ai (HTTP transport)
 @app.route('/mcp/initialize', methods=['POST'])

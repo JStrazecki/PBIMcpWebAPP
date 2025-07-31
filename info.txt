@@ -8,7 +8,7 @@ https://playground.ai.cloudflare.com/
 [debug] Using auto transport mode (HTTP with SSE fallback)
 [info] Attempting connection with HTTP transport...
 [debug] Creating HTTP transport for URL: https://pbimcp.azurewebsites.net/
-[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer 8gYaKygtTApg0h0UgDOPSaPu7fBXGn28bbv8evZu9X9FiLXStmBj6-z7Ka_acbmimUuqlQs4-TQlmXI8wf9vvQ"},"url":"https://pbimcp.azurewebsites.net/"}
+[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
 [debug] Creating StreamableHTTPClientTransport...
 [debug] StreamableHTTPClientTransport created successfully
 [debug] HTTP transport created and assigned to ref.
@@ -16,11 +16,11 @@ https://playground.ai.cloudflare.com/
 [debug] About to call client.connect() with transport instance
 [debug] Transport instance type: A8
 [debug] Client connect error via HTTP: {}
-[debug] Connect error details: {"message":"Error POSTing to endpoint (HTTP 405): <!doctype html>\n<html lang=en>\n<title>405 Method Not Allowed</title>\n<h1>Method Not Allowed</h1>\n<p>The method is not allowed for the requested URL.</p>\n","stack":"Error: Error POSTing to endpoint (HTTP 405): <!doctype html>\n<html lang=en>\n<title>405 Method Not Allowed</title>\n<h1>Method Not Allowed</h1>\n<p>The method is not allowed for the requested URL.</p>\n\n at A8.send (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:23458)","name":"Error"}
-[warn] HTTP transport failed (405).
+[debug] Connect error details: {"message":"Error POSTing to endpoint (HTTP 500): {\"error\":\"Request processing failed\",\"message\":\"'tuple' object has no attribute 'headers'\"}\n","stack":"Error: Error POSTing to endpoint (HTTP 500): {\"error\":\"Request processing failed\",\"message\":\"'tuple' object has no attribute 'headers'\"}\n\n at A8.send (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:23458)\n at async A7.notification (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:30766)\n at async A7.connect (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:154613)\n at async Q (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:162970)\n at async https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:165171","name":"Error"}
+[error] Failed to connect via HTTP: Error POSTing to endpoint (HTTP 500): {"error":"Request processing failed","message":"'tuple' object has no attribute 'headers'"} {}
 [info] Attempting connection with SSE transport...
 [debug] Creating SSE transport for URL: https://pbimcp.azurewebsites.net/
-[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer 8gYaKygtTApg0h0UgDOPSaPu7fBXGn28bbv8evZu9X9FiLXStmBj6-z7Ka_acbmimUuqlQs4-TQlmXI8wf9vvQ"},"url":"https://pbimcp.azurewebsites.net/"}
+[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
 [debug] Creating SSEClientTransport...
 [debug] SSEClientTransport created successfully
 [debug] SSE transport created and assigned to ref.

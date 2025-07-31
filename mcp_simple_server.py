@@ -998,12 +998,24 @@ def token():
         response.status_code = 401
         return response
     
-    # Validate against Power BI app registration credentials
+    # Validate against Power BI app registration credentials with detailed logging
+    logger.info(f"Validating credentials - Received client_id: '{client_id}', Expected: '{CLIENT_ID}'")
+    logger.info(f"Client ID match: {client_id == CLIENT_ID}")
+    logger.info(f"Client secret provided: {'Yes' if client_secret else 'No'}")
+    logger.info(f"Client secret match: {client_secret == CLIENT_SECRET}")
+    
     if client_id != CLIENT_ID or client_secret != CLIENT_SECRET:
-        logger.warning(f"Invalid client credentials: {client_id}")
+        logger.warning(f"Invalid client credentials: client_id='{client_id}' (expected '{CLIENT_ID}'), secret_match={client_secret == CLIENT_SECRET}")
         response = jsonify({
             "error": "invalid_client", 
-            "error_description": "Invalid client credentials"
+            "error_description": "Invalid client credentials",
+            "debug_info": {
+                "received_client_id": client_id,
+                "expected_client_id": CLIENT_ID,
+                "client_id_match": client_id == CLIENT_ID,
+                "client_secret_provided": bool(client_secret),
+                "client_secret_match": client_secret == CLIENT_SECRET if client_secret else False
+            }
         })
         response.status_code = 401
         return response
@@ -1029,6 +1041,9 @@ def token():
 def claude_config():
     """Claude AI configuration helper"""
     base_url = request.base_url.replace('/claude-config', '')
+    # Force HTTPS for Azure deployment
+    if 'azurewebsites.net' in base_url:
+        base_url = base_url.replace('http://', 'https://')
     
     return jsonify({
         "claude_setup": {

@@ -30,7 +30,8 @@
       "Bash(npm run test-tools:*)",
       "Bash(npm run inspector:*)",
       "Bash(node:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(npx @modelcontextprotocol/inspector:*)"
     ],
     "deny": []
   }

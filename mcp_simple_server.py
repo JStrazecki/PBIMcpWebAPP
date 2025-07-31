@@ -82,12 +82,40 @@ def get_powerbi_token() -> Optional[str]:
 def home():
     """MCP Server root endpoint - handles both info and HTTP transport"""
     
+    # Add CORS headers for all responses
+    def add_cors_headers(response):
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        return response
+    
     # If it's a POST request with JSON-RPC, treat as MCP HTTP transport
     if request.method == 'POST':
-        return handle_http_transport()
+        try:
+            # Check if it's JSON-RPC request
+            data = request.get_json()
+            if data and 'jsonrpc' in data:
+                response = handle_http_transport()
+                return add_cors_headers(response)
+            else:
+                # Not a valid JSON-RPC request
+                response = jsonify({
+                    "error": "Invalid request",
+                    "message": "Expected JSON-RPC 2.0 request"
+                })
+                response.status_code = 400
+                return add_cors_headers(response)
+        except Exception as e:
+            logger.error(f"Error handling POST request: {e}")
+            response = jsonify({
+                "error": "Request processing failed",
+                "message": str(e)
+            })
+            response.status_code = 500
+            return add_cors_headers(response)
     
     # Otherwise return server information
-    return jsonify({
+    response = jsonify({
         "name": "Power BI MCP Server (Simple)",
         "version": "1.0.0", 
         "protocol_version": "2024-11-05",
@@ -113,29 +141,34 @@ def home():
             "OAuth2 authentication required with valid client credentials"
         ]
     })
+    return add_cors_headers(response)
 
 def handle_http_transport():
     """Handle HTTP transport requests at root endpoint"""
     # Check authentication
     has_claude_auth = check_claude_auth()
     if not has_claude_auth:
-        return jsonify({
+        response = jsonify({
             "jsonrpc": "2.0",
             "error": {
                 "code": -32001,
                 "message": "Authentication required"
             }
-        }), 401
+        })
+        response.status_code = 401
+        return response
     
     data = request.get_json()
     if not data:
-        return jsonify({
+        response = jsonify({
             "jsonrpc": "2.0",
             "error": {
                 "code": -32600,
                 "message": "Invalid Request"
             }
-        }), 400
+        })
+        response.status_code = 400
+        return response
     
     method = data.get('method')
     params = data.get('params', {})
@@ -889,6 +922,7 @@ def sse_endpoint():
             mimetype='text/event-stream',
             status=401,
             headers={
+                'Content-Type': 'text/event-stream',
                 'Cache-Control': 'no-cache',
                 'Connection': 'keep-alive',
                 'Access-Control-Allow-Origin': '*',
@@ -898,30 +932,40 @@ def sse_endpoint():
         )
     
     def event_stream():
-        # Send initial connection event
-        yield f"event: connection\ndata: {json.dumps({'status': 'connected', 'protocol': '2024-11-05'})}\n\n"
-        
-        # Keep-alive heartbeat to prevent timeouts
-        while True:
-            try:
-                # Send keep-alive every 30 seconds
-                yield f"event: heartbeat\ndata: {json.dumps({'timestamp': datetime.utcnow().isoformat()})}\n\n"
-                time.sleep(30)
-            except GeneratorExit:
-                break
+        try:
+            # Send initial connection event
+            yield f"event: connection\ndata: {json.dumps({'status': 'connected', 'protocol': '2024-11-05'})}\n\n"
+            
+            # Keep connection alive with heartbeats
+            while True:
+                try:
+                    # Send keep-alive every 30 seconds
+                    yield f"event: heartbeat\ndata: {json.dumps({'timestamp': datetime.utcnow().isoformat()})}\n\n"
+                    time.sleep(30)
+                except GeneratorExit:
+                    logger.info("SSE client disconnected")
+                    break
+                except Exception as e:
+                    logger.error(f"SSE stream error: {e}")
+                    break
+        except Exception as e:
+            logger.error(f"SSE event stream error: {e}")
     
-    return Response(
+    response = Response(
         event_stream(),
         mimetype='text/event-stream',
         headers={
+            'Content-Type': 'text/event-stream',
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'Authorization, Content-Type',
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-            'Content-Type': 'text/event-stream'
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
         }
     )
+    
+    logger.info("SSE endpoint accessed, starting event stream")
+    return response
 
 @app.route('/message', methods=['POST'])
 def message_endpoint():

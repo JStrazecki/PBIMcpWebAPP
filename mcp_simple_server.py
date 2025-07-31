@@ -6,6 +6,7 @@ No user authentication required - uses Azure client credentials for Power BI
 import os
 import sys
 import logging
+import json
 from datetime import datetime
 from typing import Optional, Dict, Any
 
@@ -565,6 +566,190 @@ def claude_config():
         },
         "test_command": "Ask Claude: 'Can you check the Power BI server health?'"
     })
+
+# MCP Protocol Endpoints
+@app.route('/mcp/tools/list', methods=['POST'])
+def mcp_tools_list():
+    """MCP protocol endpoint - list available tools"""
+    # Check authentication
+    has_claude_auth = check_claude_auth()
+    if not has_claude_auth:
+        return jsonify({"error": "Authentication required"}), 401
+    
+    tools = [
+        {
+            "name": "powerbi_health",
+            "description": "Check Power BI server health and configuration status",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_workspaces",
+            "description": "List Power BI workspaces accessible to the server",
+            "inputSchema": {
+                "type": "object", 
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_datasets",
+            "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "Optional workspace ID to filter datasets"
+                    }
+                },
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_query",
+            "description": "Execute a DAX query against a Power BI dataset",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "dataset_id": {
+                        "type": "string",
+                        "description": "The Power BI dataset ID to query"
+                    },
+                    "dax_query": {
+                        "type": "string", 
+                        "description": "The DAX query to execute"
+                    },
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "Optional workspace ID if dataset is in a specific workspace"
+                    }
+                },
+                "required": ["dataset_id", "dax_query"]
+            }
+        }
+    ]
+    
+    return jsonify({
+        "tools": tools
+    })
+
+@app.route('/mcp/tools/call', methods=['POST'])
+def mcp_tools_call():
+    """MCP protocol endpoint - call a specific tool"""
+    # Check authentication
+    has_claude_auth = check_claude_auth()
+    if not has_claude_auth:
+        return jsonify({"error": "Authentication required"}), 401
+    
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Request body required"}), 400
+    
+    tool_name = data.get('name')
+    arguments = data.get('arguments', {})
+    
+    if tool_name == 'powerbi_health':
+        # Call the existing health endpoint logic
+        token = get_powerbi_token()
+        powerbi_configured = bool(token)
+        
+        result = {
+            "status": "healthy",
+            "service": "Power BI MCP Server (Simple)",
+            "authentication": "client_credentials",
+            "powerbi_configured": powerbi_configured,
+            "powerbi_access": "granted" if token else "using_demo_data",
+            "client_id_configured": bool(CLIENT_ID),
+            "environment": "Azure" if os.environ.get('WEBSITE_HOSTNAME') else "Local",
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+        return jsonify({
+            "content": [
+                {
+                    "type": "text",
+                    "text": f"Power BI Server Health:\n{json.dumps(result, indent=2)}"
+                }
+            ]
+        })
+    
+    elif tool_name == 'powerbi_workspaces':
+        # Call workspaces logic
+        from flask import Flask
+        with app.test_request_context():
+            response = workspaces()
+            if hasattr(response, 'get_json'):
+                data = response.get_json()
+            else:
+                data = response
+        
+        return jsonify({
+            "content": [
+                {
+                    "type": "text", 
+                    "text": f"Power BI Workspaces:\n{json.dumps(data, indent=2)}"
+                }
+            ]
+        })
+    
+    elif tool_name == 'powerbi_datasets':
+        # Call datasets logic
+        workspace_id = arguments.get('workspace_id')
+        from flask import Flask
+        with app.test_request_context(query_string={'workspace_id': workspace_id} if workspace_id else None):
+            response = datasets()
+            if hasattr(response, 'get_json'):
+                data = response.get_json()
+            else:
+                data = response
+        
+        return jsonify({
+            "content": [
+                {
+                    "type": "text",
+                    "text": f"Power BI Datasets:\n{json.dumps(data, indent=2)}"
+                }
+            ]
+        })
+    
+    elif tool_name == 'powerbi_query':
+        # Call query logic
+        dataset_id = arguments.get('dataset_id')
+        dax_query = arguments.get('dax_query')
+        workspace_id = arguments.get('workspace_id')
+        
+        if not dataset_id or not dax_query:
+            return jsonify({"error": "dataset_id and dax_query are required"}), 400
+        
+        query_data = {
+            'dataset_id': dataset_id,
+            'dax_query': dax_query,
+            'workspace_id': workspace_id
+        }
+        
+        from flask import Flask
+        with app.test_request_context(json=query_data, content_type='application/json'):
+            response = query()
+            if hasattr(response, 'get_json'):
+                data = response.get_json()
+            else:
+                data = response
+        
+        return jsonify({
+            "content": [
+                {
+                    "type": "text",
+                    "text": f"Power BI Query Results:\n{json.dumps(data, indent=2)}"
+                }
+            ]
+        })
+    
+    else:
+        return jsonify({"error": f"Unknown tool: {tool_name}"}), 400
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))  # Use 8000 as default for Azure

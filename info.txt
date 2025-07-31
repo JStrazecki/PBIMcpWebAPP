@@ -1,4 +1,13 @@
-✅ FIXED: Server now uses Power BI app registration credentials for MCP access!
+✅ FIXED: MCP tools now available in Claude!
+
+CONNECTION SUCCESS ✅ 
+TOOLS ADDED ✅
+
+AVAILABLE MCP TOOLS:
+1. **powerbi_health** - Check Power BI server health and configuration
+2. **powerbi_workspaces** - List accessible Power BI workspaces  
+3. **powerbi_datasets** - Get datasets from workspaces
+4. **powerbi_query** - Execute DAX queries against datasets
 
 CLAUDE.AI SETUP INSTRUCTIONS:
 1. Open Claude AI Settings > Connectors
@@ -10,16 +19,15 @@ CLAUDE.AI SETUP INSTRUCTIONS:
 7. Save and test connection
 
 SOLUTION APPLIED:
-- Server now validates MCP connections using your existing Power BI app registration credentials
-- Same client ID/secret you use for Power BI access
-- No need for separate MCP_CLIENT_ID/MCP_CLIENT_SECRET environment variables
-- Matches your local testing setup
+- ✅ Authentication working with Power BI app registration credentials
+- ✅ Added MCP protocol endpoints (/mcp/tools/list, /mcp/tools/call)
+- ✅ Four Power BI tools now available in Claude
+- ✅ Tools authenticated with bearer tokens from OAuth flow
 
-ENVIRONMENT VARIABLES NEEDED:
-- AZURE_CLIENT_ID (your Power BI app registration client ID)
-- AZURE_CLIENT_SECRET (your Power BI app registration client secret)  
-- AZURE_TENANT_ID (your Azure tenant ID)
-
-The server uses these same credentials for both Power BI access AND MCP authentication.
+TEST COMMANDS FOR CLAUDE:
+- "Check the Power BI server health"
+- "List my Power BI workspaces"
+- "Show me datasets in my workspaces"
+- "Execute this DAX query: EVALUATE ROW("Hello", "World")"
 
 

@@ -1,21 +1,22 @@
-✅ FIXED: Proper MCP JSON-RPC 2.0 protocol implemented!
+✅ FIXED: SSE Transport implemented - Auto-disconnect issue resolved!
 
-CONNECTION ISSUE RESOLVED ✅ 
-PROPER MCP PROTOCOL ✅
-TOOLS NOW WORKING ✅
+AUTO-DISCONNECT FIXED ✅ 
+SSE TRANSPORT WORKING ✅
+PERSISTENT CONNECTION ✅
 
-ROOT CAUSE: Claude expects JSON-RPC 2.0 protocol, not REST endpoints
+ROOT CAUSE: Claude requires SSE (Server-Sent Events) transport with dual endpoints
 
 SOLUTION APPLIED:
-- ✅ Implemented proper MCP JSON-RPC 2.0 protocol at /mcp endpoint
-- ✅ Added initialize handshake with protocolVersion "2024-11-05"
-- ✅ Proper tools/list and tools/call methods
+- ✅ Implemented SSE transport with /sse and /message endpoints
+- ✅ Added keep-alive heartbeat to prevent timeouts  
+- ✅ Proper JSON-RPC 2.0 protocol with protocolVersion "2024-11-05"
+- ✅ Dual-endpoint architecture: SSE for streaming, /message for requests
 - ✅ Authentication working with Power BI app registration credentials
 
 CLAUDE.AI SETUP INSTRUCTIONS:
 1. Open Claude AI Settings > Connectors
 2. Click 'Add Remote MCP Server'  
-3. Enter URL: https://pbimcp.azurewebsites.net/mcp
+3. Enter URL: https://pbimcp.azurewebsites.net
 4. Set Authentication: OAuth2
 5. Client ID: [Your AZURE_CLIENT_ID - same as Power BI app registration]
 6. Client Secret: [Your AZURE_CLIENT_SECRET - same as Power BI app registration]
@@ -34,9 +35,11 @@ TEST COMMANDS FOR CLAUDE:
 - "Execute this DAX query: EVALUATE ROW("Hello", "World")"
 
 TECHNICAL DETAILS:
+- Transport: SSE (Server-Sent Events) with dual endpoints
 - Protocol: JSON-RPC 2.0
 - Version: 2024-11-05
-- Endpoint: /mcp (not REST endpoints)
-- Methods: initialize, tools/list, tools/call
+- SSE Endpoint: /sse (for server-to-client streaming)
+- Message Endpoint: /message (for client-to-server requests)
+- Keep-alive: 30-second heartbeat prevents disconnects
 
 

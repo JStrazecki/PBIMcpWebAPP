@@ -10,9 +10,12 @@ import json
 from datetime import datetime
 from typing import Optional, Dict, Any
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 import requests
+import time
+import threading
+import queue
 
 # Configure logging
 logging.basicConfig(
@@ -567,10 +570,47 @@ def claude_config():
         "test_command": "Ask Claude: 'Can you check the Power BI server health?'"
     })
 
-# MCP JSON-RPC 2.0 Protocol Handler
-@app.route('/mcp', methods=['POST'])
-def mcp_handler():
-    """Main MCP JSON-RPC 2.0 endpoint"""
+# Global storage for SSE connections
+sse_clients = {}
+message_queue = queue.Queue()
+
+# MCP SSE Transport Implementation
+@app.route('/sse')
+def sse_endpoint():
+    """SSE endpoint for server-to-client streaming"""
+    # Check authentication
+    has_claude_auth = check_claude_auth()
+    if not has_claude_auth:
+        return "Authentication required", 401
+    
+    def event_stream():
+        # Send initial connection event
+        yield f"data: {json.dumps({'type': 'connection', 'status': 'connected'})}\n\n"
+        
+        # Keep-alive heartbeat to prevent timeouts
+        while True:
+            try:
+                # Send keep-alive every 30 seconds
+                yield f": heartbeat\n\n"
+                time.sleep(30)
+            except GeneratorExit:
+                break
+    
+    return Response(
+        event_stream(),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+        }
+    )
+
+@app.route('/message', methods=['POST'])
+def message_endpoint():
+    """Message endpoint for client-to-server communication"""
     # Check authentication
     has_claude_auth = check_claude_auth()
     if not has_claude_auth:
@@ -606,7 +646,8 @@ def mcp_handler():
             "result": {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {
-                    "tools": {}
+                    "tools": {},
+                    "logging": {}
                 },
                 "serverInfo": {
                     "name": "powerbi-mcp-server",

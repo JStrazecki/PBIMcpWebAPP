@@ -264,15 +264,25 @@ def handle_http_transport():
     
     logger.info(f"HTTP transport MCP request: method={method}, id={request_id}")
     
+    # Log all requests for debugging
+    if method == 'tools/list':
+        logger.info("🎯 TOOLS/LIST REQUEST RECEIVED - Claude.ai is asking for tools!")
+    elif method == 'tools/call':
+        logger.info("🔧 TOOLS/CALL REQUEST RECEIVED - Claude.ai is calling a tool!")
+    
     # Route to appropriate MCP handler
     if method == 'initialize':
+        logger.info("Returning initialize response with enhanced capabilities")
         return jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
             "result": {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {
-                    "tools": {},
+                    "tools": {
+                        "listChanged": False,
+                        "supportsProgress": False
+                    },
                     "logging": {}
                 },
                 "serverInfo": {
@@ -1430,12 +1440,15 @@ def message_endpoint():
     
     # Unknown method
     else:
+        logger.warning(f"❌ UNKNOWN METHOD: {method} - Claude.ai sent an unexpected request")
+        logger.info(f"Available methods: initialize, notifications/initialized, tools/list, tools/call")
         response = jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
             "error": {
                 "code": -32601,
-                "message": f"Method not found: {method}"
+                "message": f"Method not found: {method}",
+                "available_methods": ["initialize", "notifications/initialized", "tools/list", "tools/call"]
             }
         })
         response.status_code = 400

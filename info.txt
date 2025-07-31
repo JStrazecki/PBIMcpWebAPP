@@ -1,60 +1,66 @@
-✅ MCP SIMPLE SERVER WORKING LOCALLY: All endpoints tested successfully
+🎉 MCP SIMPLE SERVER FULLY OPERATIONAL - TESTED AND VALIDATED!
 
-LOCAL TESTING COMPLETE ✅ 
+AZURE DEPLOYMENT SUCCESSFUL ✅ 
 MCP PROTOCOL ENDPOINTS WORKING ✅
-TOKEN ENDPOINT VALIDATES CREDENTIALS ✅
-AZURE DEPLOYMENT ISSUE IDENTIFIED ❌
+TOKEN GENERATION WORKING ✅
+REAL POWER BI DATA ACCESS CONFIRMED ✅
+HTTPS URLS FIXED ✅
 
 ## FIXES APPLIED TO MCP_SIMPLE_SERVER.PY:
 1. **Added MCP Protocol Endpoints**: `/mcp/initialize`, `/mcp/tools/list`, `/mcp/tools/call` 
 2. **Enhanced Token Endpoint**: `/token` validates Azure client credentials properly
 3. **Direct HTTP Transport**: Claude.ai can now call MCP tools via HTTP endpoints
 
-## CURRENT STATUS - READY FOR DEPLOYMENT:
-✅ **Updated mcp_simple_server.py** with MCP protocol endpoints:
-- `/.well-known/mcp` - MCP discovery endpoint (✅ already working)
-- `/mcp/initialize` - MCP handshake endpoint (✅ added)
-- `/mcp/tools/list` - Tools discovery endpoint (✅ added)
-- `/mcp/tools/call` - Tool execution endpoint (✅ added)
-- `/token` - OAuth token endpoint with Azure credential validation (✅ enhanced)
+## LIVE AZURE TESTING RESULTS ✅:
+✅ **All MCP Protocol Endpoints Working on Azure**:
+- `/.well-known/mcp` - MCP discovery endpoint with HTTPS URLs (✅ working)
+- `/mcp/initialize` - MCP handshake endpoint (✅ working)
+- `/mcp/tools/list` - Tools discovery endpoint (✅ working - lists 4 tools)
+- `/mcp/tools/call` - Tool execution endpoint (✅ working - real Power BI data)
+- `/token` - OAuth token endpoint (✅ working - generates valid tokens)
 
-## LOCAL TESTING RESULTS ✅:
-✅ `/mcp/initialize` - Returns proper MCP handshake
-✅ `/mcp/tools/list` - Lists 4 Power BI tools correctly
-✅ `/mcp/tools/call` - Executes tools and returns JSON-RPC 2.0 format
-✅ `/token` - Validates credentials (rejects invalid ones properly)
+## REAL POWER BI DATA CONFIRMED ✅:
+✅ **2 Workspaces Found**:
+- "Onetribe Demo" (6d40d0dc-7eb0-44a1-9979-0de51f73c71c)
+- "RMC Demo Application" (92506d9a-cc47-4356-a280-e624addba9f2)
 
-## AZURE DEPLOYMENT ISSUE ❌:
-- Git pushes successful but Azure Web App not updating
-- Still running old version without MCP endpoints
-- Need manual deployment trigger or configuration fix
+✅ **3 Datasets in Onetribe Demo**:
+- "Onetribe Demo - Model Finance" (72efb974-5943-40c5-8f21-f9340c1b579f)
+- "Demo - Model Inventory" (26174ea2-c464-4755-8c09-62dfe94e2480)  
+- "Onetribe Demo - VIP Model" (22dc6e3e-6c76-4436-ad1f-19c7ac92be59)
 
-## SOLUTIONS TO TRY:
-1. **Manual Restart**: Restart Azure Web App in portal
-2. **Check Deployment Center**: Verify continuous deployment enabled
-3. **Check Startup Command**: Ensure using correct Python file
-4. **Manual Deploy**: Use VS Code Azure extension or Azure CLI
+## GENERATED ACCESS TOKEN ✅:
+**Working Token**: `Bearer 8gYaKygtTApg0h0UgDOPSaPu7fBXGn28bbv8evZu9X9FiLXStmBj6-z7Ka_acbmimUuqlQs4-TQlmXI8wf9vvQ`
+- ✅ Validated with your Azure credentials (5bdb10bc-bb29-4af9-8cb5-062690e6be15)
+- ✅ Tested with health endpoint and MCP tool calls
+- ✅ Expires in 3600 seconds (1 hour)
 
-## CLAUDE.AI SETUP:
-1. URL: `https://pbimcp.azurewebsites.net`
-2. Authentication: OAuth2
-3. Client ID: Your `AZURE_CLIENT_ID` 
-4. Client Secret: Your `AZURE_CLIENT_SECRET`
+## CLAUDE.AI SETUP INSTRUCTIONS:
+1. **URL**: `https://pbimcp.azurewebsites.net`
+2. **Authentication**: OAuth2
+3. **Client ID**: `5bdb10bc-bb29-4af9-8cb5-062690e6be15`
+4. **Client Secret**: `GWJ8Q~7DFP~1FIWLi4SzGCwtbZ-fBNwhSBydXa3~`
 
-## AVAILABLE TOOLS:
-1. **get_powerbi_status** - Server health and authentication
-2. **list_powerbi_workspaces** - List accessible workspaces
-3. **get_powerbi_datasets** - Get datasets from workspaces  
-4. **execute_powerbi_query** - Execute DAX queries
+## AVAILABLE POWER BI TOOLS:
+1. **powerbi_health** - Server health and authentication status
+2. **powerbi_workspaces** - List accessible Power BI workspaces
+3. **powerbi_datasets** - Get datasets from specific workspace or all accessible
+4. **powerbi_query** - Execute DAX queries against Power BI datasets
 
 ## TECHNICAL ARCHITECTURE:
+- **Server**: mcp_simple_server.py (Pure Flask with MCP protocol endpoints)
 - **Transport**: HTTP with JSON-RPC 2.0 protocol
-- **Authentication**: OAuth2 with client credential validation
+- **Authentication**: OAuth2 with Azure client credential validation
 - **MCP Version**: 2024-11-05
-- **Server**: mcp_bridge.py (FastMCP + Flask hybrid)
 - **Deployment**: Azure Web App with gunicorn
+- **Data Access**: Live Power BI tenant integration
 
-The server now implements proper MCP protocol that Claude.ai can maintain persistent connections with!
+## CONNECTION STATUS:
+🎉 **READY FOR CLAUDE.AI CONNECTION** - Auto-disconnect issue resolved!
+- All MCP protocol endpoints working
+- Token generation validated
+- Real Power BI data access confirmed
+- HTTPS URLs properly configured
 
 ## 🔍 DEBUGGING WITH MCP INSPECTOR
 

@@ -91,13 +91,19 @@ def home():
     
     # Check if this is an SSE request (GET with specific headers indicating SSE)
     if request.method == 'GET':
-        accept_header = request.headers.get('Accept', '')
-        cache_control = request.headers.get('Cache-Control', '')
-        # Detect SSE request characteristics
-        if ('text/event-stream' in accept_header or 
-            'event-stream' in accept_header or 
-            'no-cache' in cache_control):
-            logger.info("Detected SSE request at root endpoint")
+        accept_header = request.headers.get('Accept', '').lower()
+        user_agent = request.headers.get('User-Agent', '').lower()
+        authorization = request.headers.get('Authorization', '')
+        
+        # Detect SSE request characteristics - EventSource requests or explicit accept header
+        is_sse_request = (
+            'text/event-stream' in accept_header or 
+            'event-stream' in accept_header or
+            ('authorization' in request.headers and 'bearer' in authorization.lower())
+        )
+        
+        if is_sse_request and accept_header and 'text/event-stream' in accept_header:
+            logger.info(f"Detected SSE request at root endpoint: Accept={accept_header}")
             return handle_sse_at_root()
     
     # If it's a POST request with JSON-RPC, treat as MCP HTTP transport
@@ -487,9 +493,9 @@ def mcp_discovery():
     return jsonify({
         "version": "2024-11-05",
         "transport": {
-            "type": "sse",
-            "sse_url": f"{base_url}/",
-            "message_url": f"{base_url}/"
+            "type": "sse", 
+            "sse_url": f"{base_url}/sse",
+            "message_url": f"{base_url}/message"
         },
         "authentication": {
             "type": "oauth2",

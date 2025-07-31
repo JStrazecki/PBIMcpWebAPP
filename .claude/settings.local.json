@@ -23,7 +23,14 @@
       "Bash(find:*)",
       "WebFetch(domain:modelcontextprotocol.io)",
       "Bash(grep:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(npm install)",
+      "Bash(npm run test-discovery:*)",
+      "Bash(npm run test-oauth:*)",
+      "Bash(npm run test-tools:*)",
+      "Bash(npm run inspector:*)",
+      "Bash(node:*)",
+      "Bash(taskkill:*)"
     ],
     "deny": []
   }

@@ -367,7 +367,8 @@ def index():
             "mcp_status": "/mcp/status",
             "mcp_workspaces": "/mcp/workspaces",
             "mcp_datasets": "/mcp/datasets",
-            "mcp_query": "/mcp/query"
+            "mcp_query": "/mcp/query",
+            "mcp_discovery": "/.well-known/mcp"
         },
         "features": {
             "powerbi_integration": True,
@@ -376,6 +377,90 @@ def index():
         },
         "timestamp": datetime.utcnow().isoformat()
     })
+
+@app.route('/.well-known/mcp')
+def mcp_discovery():
+    """MCP discovery endpoint for Claude.ai"""
+    base_url = request.base_url.replace('/.well-known/mcp', '')
+    
+    return jsonify({
+        "version": "2024-11-05",
+        "capabilities": {
+            "tools": True,
+            "resources": False,
+            "prompts": False,
+            "logging": True
+        },
+        "serverInfo": {
+            "name": "powerbi-mcp-bridge",
+            "version": "3.0.0-bridge"
+        },
+        "authentication": {
+            "type": "oauth2",
+            "authorization_url": f"{base_url}/authorize",
+            "token_url": f"{base_url}/token",
+            "scopes": ["powerbi"]
+        }
+    })
+
+@app.route('/token', methods=['POST'])
+def token_endpoint():
+    """OAuth token endpoint for Claude.ai MCP integration"""
+    if not msal_app:
+        return jsonify({
+            "error": "invalid_client",
+            "error_description": "OAuth not configured on server"
+        }), 400
+    
+    # Get token request parameters
+    grant_type = request.form.get('grant_type')
+    code = request.form.get('code')
+    client_id = request.form.get('client_id')
+    client_secret = request.form.get('client_secret')
+    redirect_uri = request.form.get('redirect_uri')
+    
+    logger.info(f"Token request: grant_type={grant_type}, client_id={client_id}")
+    
+    if grant_type != 'authorization_code':
+        return jsonify({
+            "error": "unsupported_grant_type",
+            "error_description": "Only authorization_code grant type is supported"
+        }), 400
+    
+    if not code:
+        return jsonify({
+            "error": "invalid_request",
+            "error_description": "Missing authorization code"
+        }), 400
+    
+    # For Claude.ai, validate against configured client credentials
+    if client_id != CLIENT_ID or client_secret != CLIENT_SECRET:
+        logger.warning(f"Invalid client credentials from Claude: {client_id}")
+        return jsonify({
+            "error": "invalid_client",
+            "error_description": "Invalid client credentials"
+        }), 401
+    
+    try:
+        # Generate access token for Claude.ai
+        import secrets
+        access_token = secrets.token_urlsafe(64)
+        
+        logger.info(f"Generated access token for Claude client: {client_id}")
+        
+        return jsonify({
+            "access_token": access_token,
+            "token_type": "bearer",
+            "expires_in": 3600,
+            "scope": "powerbi"
+        })
+        
+    except Exception as e:
+        logger.error(f"Token generation error: {e}")
+        return jsonify({
+            "error": "server_error",
+            "error_description": f"Failed to generate token: {str(e)}"
+        }), 500
 
 @app.route('/authorize')
 def authorize():
@@ -562,6 +647,148 @@ def mcp_query():
             workspace_id=workspace_id
         ))
         return jsonify(result)
+    finally:
+        loop.close()
+
+# MCP Protocol Endpoints for Claude.ai
+@app.route('/mcp/initialize', methods=['POST'])
+def mcp_initialize():
+    """MCP protocol initialize endpoint"""
+    return jsonify({
+        "jsonrpc": "2.0",
+        "id": request.json.get('id') if request.json else 1,
+        "result": {
+            "protocolVersion": "2024-11-05",
+            "capabilities": {
+                "tools": {},
+                "logging": {}
+            },
+            "serverInfo": {
+                "name": "powerbi-mcp-bridge",
+                "version": "3.0.0-bridge"
+            }
+        }
+    })
+
+@app.route('/mcp/tools/list', methods=['POST'])
+def mcp_tools_list():
+    """MCP protocol tools list endpoint"""
+    tools = [
+        {
+            "name": "get_powerbi_status",
+            "description": "Get Power BI server status and authentication info",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "list_powerbi_workspaces",
+            "description": "List all accessible Power BI workspaces",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "get_powerbi_datasets",
+            "description": "Get Power BI datasets from a workspace",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "Optional workspace ID to filter datasets"
+                    }
+                },
+                "required": []
+            }
+        },
+        {
+            "name": "execute_powerbi_query",
+            "description": "Execute a DAX query against a Power BI dataset",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "dataset_id": {
+                        "type": "string",
+                        "description": "The Power BI dataset ID"
+                    },
+                    "dax_query": {
+                        "type": "string",
+                        "description": "The DAX query to execute"
+                    },
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "Optional workspace ID"
+                    }
+                },
+                "required": ["dataset_id", "dax_query"]
+            }
+        }
+    ]
+    
+    return jsonify({
+        "jsonrpc": "2.0",
+        "id": request.json.get('id') if request.json else 1,
+        "result": {
+            "tools": tools
+        }
+    })
+
+@app.route('/mcp/tools/call', methods=['POST'])
+def mcp_tools_call():
+    """MCP protocol tools call endpoint"""
+    data = request.get_json()
+    if not data:
+        return jsonify({
+            "jsonrpc": "2.0",
+            "error": {
+                "code": -32600,
+                "message": "Invalid Request"
+            }
+        }), 400
+    
+    tool_name = data.get('params', {}).get('name')
+    arguments = data.get('params', {}).get('arguments', {})
+    request_id = data.get('id', 1)
+    
+    # Map MCP tool calls to our async functions
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    try:
+        if tool_name == "get_powerbi_status":
+            result = loop.run_until_complete(call_mcp_tool("get_powerbi_status"))
+        elif tool_name == "list_powerbi_workspaces":
+            result = loop.run_until_complete(call_mcp_tool("list_powerbi_workspaces"))
+        elif tool_name == "get_powerbi_datasets":
+            result = loop.run_until_complete(call_mcp_tool("get_powerbi_datasets", **arguments))
+        elif tool_name == "execute_powerbi_query":
+            result = loop.run_until_complete(call_mcp_tool("execute_powerbi_query", **arguments))
+        else:
+            return jsonify({
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "error": {
+                    "code": -32601,
+                    "message": f"Unknown tool: {tool_name}"
+                }
+            }), 400
+        
+        return jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {
+                "content": [
+                    {
+                        "type": "text",
+                        "text": json.dumps(result, indent=2)
+                    }
+                ]
+            }
+        })
     finally:
         loop.close()
 

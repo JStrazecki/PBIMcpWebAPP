@@ -14,8 +14,8 @@
 [debug] About to call client.connect() with transport instance
 [debug] Transport instance type: A8
 [debug] Client connect error via HTTP: {}
-[debug] Connect error details: {"message":"Error POSTing to endpoint (HTTP 500): {\"error\":\"Request processing failed\",\"message\":\"'tuple' object has no attribute 'headers'\"}\n","stack":"Error: Error POSTing to endpoint (HTTP 500): {\"error\":\"Request processing failed\",\"message\":\"'tuple' object has no attribute 'headers'\"}\n\n at A8.send (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:23458)\n at async A7.notification (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:30766)\n at async A7.connect (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:154613)\n at async Q (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:162970)\n at async https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:165171","name":"Error"}
-[error] Failed to connect via HTTP: Error POSTing to endpoint (HTTP 500): {"error":"Request processing failed","message":"'tuple' object has no attribute 'headers'"} {}
+[debug] Connect error details: {"message":"Error POSTing to endpoint (HTTP 400): {\"error\":{\"code\":-32601,\"message\":\"Method not found: notifications/initialized\"},\"id\":null,\"jsonrpc\":\"2.0\"}\n","stack":"Error: Error POSTing to endpoint (HTTP 400): {\"error\":{\"code\":-32601,\"message\":\"Method not found: notifications/initialized\"},\"id\":null,\"jsonrpc\":\"2.0\"}\n\n at A8.send (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:23458)\n at async A7.notification (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:30766)\n at async A7.connect (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:154613)\n at async Q (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:162970)\n at async https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:165171","name":"Error"}
+[error] Failed to connect via HTTP: Error POSTing to endpoint (HTTP 400): {"error":{"code":-32601,"message":"Method not found: notifications/initialized"},"id":null,"jsonrpc":"2.0"} {}
 [info] Attempting connection with SSE transport...
 [debug] Creating SSE transport for URL: https://pbimcp.azurewebsites.net/
 [debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
@@ -25,9 +25,3 @@
 [info] Connecting client via SSE...
 [debug] About to call client.connect() with transport instance
 [debug] Transport instance type: T8
-
-When I try to connect in claude.ai I get this information:
-I can see this is an error message that reads:
-"There was an error connecting to test. Please check your server details and ensure your server handles auth correctly."
-
-two deployments ago I could see message successfully connected but I couldnt see the tools and it was disconecting me again. 

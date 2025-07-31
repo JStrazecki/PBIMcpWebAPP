@@ -272,6 +272,30 @@ def handle_http_transport():
             }
         })
     
+    elif method == 'notifications/initialized':
+        # Handle the initialized notification (no response required for notifications)
+        logger.info("Received initialized notification - client ready")
+        # For notifications, we don't return a response (id is null)
+        if request_id is None:
+            # This is a notification, return empty response
+            return jsonify({})
+        else:
+            # If it has an id, return a simple acknowledgment
+            return jsonify({
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "result": {}
+            })
+    
+    elif method == 'initialized':
+        # Alternative form of initialized notification
+        logger.info("Received initialized notification (alternative form)")
+        return jsonify({}) if request_id is None else jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {}
+        })
+    
     elif method == 'tools/list':
         tools = [
             {
@@ -1126,6 +1150,30 @@ def message_endpoint():
                     "version": "1.0.0"
                 }
             }
+        })
+    
+    elif method == 'notifications/initialized':
+        # Handle the initialized notification (no response required for notifications)
+        logger.info("Received initialized notification via SSE - client ready")
+        # For notifications, we don't return a response (id is null)
+        if request_id is None:
+            # This is a notification, return empty response
+            return jsonify({})
+        else:
+            # If it has an id, return a simple acknowledgment
+            return jsonify({
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "result": {}
+            })
+    
+    elif method == 'initialized':
+        # Alternative form of initialized notification
+        logger.info("Received initialized notification via SSE (alternative form)")
+        return jsonify({}) if request_id is None else jsonify({
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {}
         })
     
     # List available tools

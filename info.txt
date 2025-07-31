@@ -1,7 +1,25 @@
-✅ FIXED: MCP tools now available in Claude!
+✅ FIXED: Proper MCP JSON-RPC 2.0 protocol implemented!
 
-CONNECTION SUCCESS ✅ 
-TOOLS ADDED ✅
+CONNECTION ISSUE RESOLVED ✅ 
+PROPER MCP PROTOCOL ✅
+TOOLS NOW WORKING ✅
+
+ROOT CAUSE: Claude expects JSON-RPC 2.0 protocol, not REST endpoints
+
+SOLUTION APPLIED:
+- ✅ Implemented proper MCP JSON-RPC 2.0 protocol at /mcp endpoint
+- ✅ Added initialize handshake with protocolVersion "2024-11-05"
+- ✅ Proper tools/list and tools/call methods
+- ✅ Authentication working with Power BI app registration credentials
+
+CLAUDE.AI SETUP INSTRUCTIONS:
+1. Open Claude AI Settings > Connectors
+2. Click 'Add Remote MCP Server'  
+3. Enter URL: https://pbimcp.azurewebsites.net/mcp
+4. Set Authentication: OAuth2
+5. Client ID: [Your AZURE_CLIENT_ID - same as Power BI app registration]
+6. Client Secret: [Your AZURE_CLIENT_SECRET - same as Power BI app registration]
+7. Save and test connection
 
 AVAILABLE MCP TOOLS:
 1. **powerbi_health** - Check Power BI server health and configuration
@@ -9,25 +27,16 @@ AVAILABLE MCP TOOLS:
 3. **powerbi_datasets** - Get datasets from workspaces
 4. **powerbi_query** - Execute DAX queries against datasets
 
-CLAUDE.AI SETUP INSTRUCTIONS:
-1. Open Claude AI Settings > Connectors
-2. Click 'Add Remote MCP Server'  
-3. Enter URL: https://pbimcp.azurewebsites.net
-4. Set Authentication: OAuth2
-5. Client ID: [Your AZURE_CLIENT_ID - same as Power BI app registration]
-6. Client Secret: [Your AZURE_CLIENT_SECRET - same as Power BI app registration]
-7. Save and test connection
-
-SOLUTION APPLIED:
-- ✅ Authentication working with Power BI app registration credentials
-- ✅ Added MCP protocol endpoints (/mcp/tools/list, /mcp/tools/call)
-- ✅ Four Power BI tools now available in Claude
-- ✅ Tools authenticated with bearer tokens from OAuth flow
-
 TEST COMMANDS FOR CLAUDE:
 - "Check the Power BI server health"
 - "List my Power BI workspaces"
 - "Show me datasets in my workspaces"
 - "Execute this DAX query: EVALUATE ROW("Hello", "World")"
+
+TECHNICAL DETAILS:
+- Protocol: JSON-RPC 2.0
+- Version: 2024-11-05
+- Endpoint: /mcp (not REST endpoints)
+- Methods: initialize, tools/list, tools/call
 
 

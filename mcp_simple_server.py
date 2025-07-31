@@ -147,11 +147,22 @@ def health():
     return jsonify({
         "status": "healthy",
         "service": "Power BI MCP Server (Simple)",
+        "version": "2.0.0-updated",  # Updated version to verify deployment
         "authentication": "client_credentials",
         "powerbi_configured": powerbi_configured,
         "powerbi_access": "granted" if token else "using_demo_data",
         "client_id_configured": bool(CLIENT_ID),
         "environment": "Azure" if os.environ.get('WEBSITE_HOSTNAME') else "Local",
+        "mcp_endpoints_added": True,  # New field to verify deployment
+        "timestamp": datetime.utcnow().isoformat()
+    })
+
+@app.route('/test-deployment')
+def test_deployment():
+    """Test endpoint to verify deployment worked"""
+    return jsonify({
+        "message": "Deployment successful! MCP endpoints should be available.",
+        "endpoints": ["/mcp/initialize", "/mcp/tools/list", "/mcp/tools/call"],
         "timestamp": datetime.utcnow().isoformat()
     })
 

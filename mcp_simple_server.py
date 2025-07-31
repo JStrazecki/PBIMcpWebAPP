@@ -112,6 +112,10 @@ def home():
 def mcp_discovery():
     """MCP discovery endpoint - advertises SSE transport"""
     base_url = request.base_url.replace('/.well-known/mcp', '')
+    # Force HTTPS for Azure deployment
+    if 'azurewebsites.net' in base_url:
+        base_url = base_url.replace('http://', 'https://')
+    
     return jsonify({
         "version": "2024-11-05",
         "transport": {

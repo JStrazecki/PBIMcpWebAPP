@@ -529,7 +529,8 @@ def mcp_discovery():
     return jsonify({
         "version": "2024-11-05",
         "transport": {
-            "type": "sse", 
+            "type": "http", 
+            "http_url": f"{base_url}/",
             "sse_url": f"{base_url}/sse",
             "message_url": f"{base_url}/message"
         },

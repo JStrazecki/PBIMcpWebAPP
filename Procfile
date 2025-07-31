@@ -1,1 +1,1 @@
-web: gunicorn --bind=0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP
+web: gunicorn --bind=0.0.0.0:8000 --workers 1 --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_simple_server:app

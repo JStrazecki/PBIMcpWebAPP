@@ -465,6 +465,16 @@ def test_deployment():
     return jsonify({
         "message": "Deployment successful! MCP endpoints should be available.",
         "endpoints": ["/mcp/initialize", "/mcp/tools/list", "/mcp/tools/call"],
+        "root_methods": "GET, POST should both work",
+        "timestamp": datetime.utcnow().isoformat()
+    })
+
+@app.route('/test-post', methods=['POST'])
+def test_post():
+    """Simple test endpoint for POST requests"""
+    return jsonify({
+        "message": "POST request successful!",
+        "method": request.method,
         "timestamp": datetime.utcnow().isoformat()
     })
 

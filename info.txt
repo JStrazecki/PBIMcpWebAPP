@@ -1,27 +1,32 @@
+Available Tools (4)
+powerbi_health
+Check Power BI server health and configuration status
+
+powerbi_workspaces
+List Power BI workspaces accessible to the server
+
+powerbi_datasets
+Get Power BI datasets from a specific workspace or all accessible workspaces
+
+powerbi_query
+Execute a DAX query against a Power BI dataset
+
+Debug Log
 [debug] Auth callback message listener added.
 [debug] useMcp mounted, initiating connection.
 [debug] BrowserOAuthClientProvider initialized/updated on mount/option change.
-[info] Connecting attempt #1 to https://pbimcp.azurewebsites.net/...
+[info] Connecting attempt #1 to https://pbimcp.azurewebsites.net...
 [debug] MCP Client initialized in connect.
 [debug] Using auto transport mode (HTTP with SSE fallback)
 [info] Attempting connection with HTTP transport...
 [debug] Creating HTTP transport for URL: https://pbimcp.azurewebsites.net/
-[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
+[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
 [debug] Creating StreamableHTTPClientTransport...
 [debug] StreamableHTTPClientTransport created successfully
 [debug] HTTP transport created and assigned to ref.
 [info] Connecting client via HTTP...
 [debug] About to call client.connect() with transport instance
 [debug] Transport instance type: A8
-[debug] Client connect error via HTTP: {}
-[debug] Connect error details: {"message":"Error POSTing to endpoint (HTTP 400): {\"error\":{\"code\":-32601,\"message\":\"Method not found: notifications/initialized\"},\"id\":null,\"jsonrpc\":\"2.0\"}\n","stack":"Error: Error POSTing to endpoint (HTTP 400): {\"error\":{\"code\":-32601,\"message\":\"Method not found: notifications/initialized\"},\"id\":null,\"jsonrpc\":\"2.0\"}\n\n at A8.send (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:23458)\n at async A7.notification (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:30766)\n at async A7.connect (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:154613)\n at async Q (https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:162970)\n at async https://playground.ai.cloudflare.com/assets/index-Bq1d3hWR.js:93:165171","name":"Error"}
-[error] Failed to connect via HTTP: Error POSTing to endpoint (HTTP 400): {"error":{"code":-32601,"message":"Method not found: notifications/initialized"},"id":null,"jsonrpc":"2.0"} {}
-[info] Attempting connection with SSE transport...
-[debug] Creating SSE transport for URL: https://pbimcp.azurewebsites.net/
-[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
-[debug] Creating SSEClientTransport...
-[debug] SSEClientTransport created successfully
-[debug] SSE transport created and assigned to ref.
-[info] Connecting client via SSE...
-[debug] About to call client.connect() with transport instance
-[debug] Transport instance type: T8
+[info] Client connected via HTTP. Loading tools...
+[info] Loaded 4 tools.
+[debug] Connection sequence finished with status: success

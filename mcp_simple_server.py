@@ -43,15 +43,19 @@ POWERBI_SCOPES = ["https://analysis.windows.net/powerbi/api/.default"]
 def check_claude_auth():
     """Check if request has a valid bearer token from Claude (always accept)"""
     auth_header = request.headers.get('Authorization')
+    user_agent = request.headers.get('User-Agent', 'Unknown')
+    
+    logger.info(f"Auth check - User-Agent: {user_agent}, Auth header: {auth_header[:30] if auth_header else 'None'}...")
+    
     if auth_header:
         # Handle both single and double "Bearer" prefix issues
         if (auth_header.startswith('Bearer ') or 
             auth_header.startswith('bearer ') or
             'Bearer Bearer' in auth_header):
             # Any bearer token is valid for this simple server
-            logger.info(f"Valid auth header detected: {auth_header[:20]}...")
+            logger.info(f"Valid auth header detected from {user_agent}")
             return True
-    logger.warning(f"Invalid or missing auth header: {auth_header}")
+    logger.warning(f"Invalid or missing auth header from {user_agent}: {auth_header}")
     return False
 
 def get_powerbi_token() -> Optional[str]:
@@ -983,12 +987,15 @@ def token():
     access_token = secrets.token_urlsafe(64)
     
     # Return OAuth token response
-    return jsonify({
+    token_response = {
         "access_token": access_token,
-        "token_type": "bearer",
+        "token_type": "Bearer",  # Capitalized for Claude.ai compatibility
         "expires_in": 3600,
         "scope": "powerbi"
-    })
+    }
+    
+    logger.info(f"Returning token response: {json.dumps({k: v if k != 'access_token' else 'TOKEN_HIDDEN' for k, v in token_response.items()})}")
+    return jsonify(token_response)
 
 @app.route('/claude-config')
 def claude_config():
@@ -1413,6 +1420,11 @@ def mcp_initialize():
 @app.route('/mcp/tools/list', methods=['POST'])
 def mcp_tools_list():
     """MCP protocol tools list endpoint for Claude.ai"""
+    user_agent = request.headers.get('User-Agent', 'Unknown')
+    auth_header = request.headers.get('Authorization', 'None')
+    
+    logger.info(f"Tools list request from {user_agent}, Auth: {auth_header[:30]}...")
+    
     data = request.get_json() or {}
     request_id = data.get('id', 1)
     
@@ -1473,13 +1485,17 @@ def mcp_tools_list():
         }
     ]
     
-    return jsonify({
+    logger.info(f"Returning {len(tools)} tools to {user_agent}")
+    
+    response_data = {
         "jsonrpc": "2.0",
         "id": request_id,
         "result": {
             "tools": tools
         }
-    })
+    }
+    
+    return jsonify(response_data)
 
 @app.route('/mcp/tools/call', methods=['POST'])
 def mcp_tools_call():

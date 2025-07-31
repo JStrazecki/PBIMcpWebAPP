@@ -31,7 +31,8 @@
       "Bash(npm run inspector:*)",
       "Bash(node:*)",
       "Bash(taskkill:*)",
-      "Bash(npx @modelcontextprotocol/inspector:*)"
+      "Bash(npx @modelcontextprotocol/inspector:*)",
+      "Bash(echo:*)"
     ],
     "deny": []
   }

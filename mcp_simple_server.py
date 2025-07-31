@@ -112,15 +112,21 @@ def home():
             ('authorization' in request.headers and 'bearer' in authorization.lower())
         )
         
-        # Disable SSE at root - force HTTP transport only
+        # Handle SSE gracefully - return minimal response to not break Claude.ai
         if is_sse_request and accept_header and 'text/event-stream' in accept_header:
-            logger.info(f"SSE request detected but forcing HTTP transport: Accept={accept_header}")
-            # Return error to force Claude.ai to use HTTP transport
-            return jsonify({
-                "error": "SSE not supported at root",
-                "message": "Use HTTP transport only",
-                "transport": "http"
-            }), 400
+            logger.info(f"SSE request detected - returning minimal SSE response: Accept={accept_header}")
+            # Return a basic SSE response that closes immediately
+            from flask import Response
+            return Response(
+                "event: close\ndata: {\"message\": \"Use HTTP transport for requests\"}\n\n",
+                mimetype='text/event-stream',
+                headers={
+                    'Content-Type': 'text/event-stream',
+                    'Cache-Control': 'no-cache',
+                    'Connection': 'close',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            )
     
     # If it's a POST request with JSON-RPC, treat as MCP HTTP transport
     if request.method == 'POST':
@@ -295,6 +301,7 @@ def handle_http_transport():
     elif method == 'notifications/initialized':
         # Handle the initialized notification (no response required for notifications)
         logger.info("Received initialized notification - client ready")
+        logger.info("💡 Claude.ai should now request tools/list to discover available tools")
         # For notifications, we don't return a response (id is null)
         if request_id is None:
             # This is a notification, return empty response

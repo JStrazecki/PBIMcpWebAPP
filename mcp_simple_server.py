@@ -112,9 +112,15 @@ def home():
             ('authorization' in request.headers and 'bearer' in authorization.lower())
         )
         
+        # Disable SSE at root - force HTTP transport only
         if is_sse_request and accept_header and 'text/event-stream' in accept_header:
-            logger.info(f"Detected SSE request at root endpoint: Accept={accept_header}")
-            return handle_sse_at_root()
+            logger.info(f"SSE request detected but forcing HTTP transport: Accept={accept_header}")
+            # Return error to force Claude.ai to use HTTP transport
+            return jsonify({
+                "error": "SSE not supported at root",
+                "message": "Use HTTP transport only",
+                "transport": "http"
+            }), 400
     
     # If it's a POST request with JSON-RPC, treat as MCP HTTP transport
     if request.method == 'POST':
@@ -530,9 +536,7 @@ def mcp_discovery():
         "version": "2024-11-05",
         "transport": {
             "type": "http", 
-            "http_url": f"{base_url}/",
-            "sse_url": f"{base_url}/sse",
-            "message_url": f"{base_url}/message"
+            "http_url": f"{base_url}/"
         },
         "authentication": {
             "type": "oauth2",

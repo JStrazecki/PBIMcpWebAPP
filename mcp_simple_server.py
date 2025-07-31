@@ -110,10 +110,15 @@ def home():
 
 @app.route('/.well-known/mcp')
 def mcp_discovery():
-    """MCP discovery endpoint"""
+    """MCP discovery endpoint - advertises SSE transport"""
     base_url = request.base_url.replace('/.well-known/mcp', '')
     return jsonify({
         "version": "2024-11-05",
+        "transport": {
+            "type": "sse",
+            "sse_url": f"{base_url}/sse",
+            "message_url": f"{base_url}/message"
+        },
         "authentication": {
             "type": "oauth2",
             "authorization_url": f"{base_url}/authorize",
@@ -123,10 +128,11 @@ def mcp_discovery():
         "capabilities": {
             "tools": True,
             "resources": False,
-            "prompts": False
+            "prompts": False,
+            "logging": True
         },
-        "server": {
-            "name": "powerbi-simple-mcp",
+        "serverInfo": {
+            "name": "powerbi-mcp-server",
             "version": "1.0.0"
         }
     })
@@ -573,6 +579,19 @@ def claude_config():
 # Global storage for SSE connections
 sse_clients = {}
 message_queue = queue.Queue()
+
+# CORS preflight handlers
+@app.route('/sse', methods=['OPTIONS'])
+@app.route('/message', methods=['OPTIONS'])
+@app.route('/authorize', methods=['OPTIONS'])
+@app.route('/token', methods=['OPTIONS'])
+def handle_options():
+    """Handle CORS preflight requests"""
+    return '', 200, {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+    }
 
 # MCP SSE Transport Implementation
 @app.route('/sse')

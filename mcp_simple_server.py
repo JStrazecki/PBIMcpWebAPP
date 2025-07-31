@@ -278,7 +278,66 @@ def handle_http_transport():
     
     # Route to appropriate MCP handler
     if method == 'initialize':
-        logger.info("Returning initialize response with enhanced capabilities")
+        logger.info("Returning initialize response with tools included")
+        
+        # Include tools directly in initialize response to help Claude.ai
+        tools = [
+            {
+                "name": "powerbi_health",
+                "description": "Check Power BI server health and configuration status",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "required": []
+                }
+            },
+            {
+                "name": "powerbi_workspaces", 
+                "description": "List Power BI workspaces accessible to the server",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "required": []
+                }
+            },
+            {
+                "name": "powerbi_datasets",
+                "description": "Get Power BI datasets from a specific workspace or all accessible workspaces", 
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "workspace_id": {
+                            "type": "string",
+                            "description": "Optional workspace ID to filter datasets"
+                        }
+                    },
+                    "required": []
+                }
+            },
+            {
+                "name": "powerbi_query",
+                "description": "Execute a DAX query against a Power BI dataset",
+                "inputSchema": {
+                    "type": "object", 
+                    "properties": {
+                        "dataset_id": {
+                            "type": "string",
+                            "description": "The Power BI dataset ID to query"
+                        },
+                        "dax_query": {
+                            "type": "string",
+                            "description": "The DAX query to execute"
+                        },
+                        "workspace_id": {
+                            "type": "string",
+                            "description": "Optional workspace ID if dataset is in a specific workspace"
+                        }
+                    },
+                    "required": ["dataset_id", "dax_query"]
+                }
+            }
+        ]
+        
         return jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
@@ -294,7 +353,9 @@ def handle_http_transport():
                 "serverInfo": {
                     "name": "powerbi-mcp-server",
                     "version": "1.0.0"
-                }
+                },
+                "tools": tools,
+                "instructions": "4 Power BI tools available: powerbi_health, powerbi_workspaces, powerbi_datasets, powerbi_query"
             }
         })
     

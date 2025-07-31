@@ -759,14 +759,18 @@ def query():
     data = request.get_json()
     
     if not data:
-        return jsonify({"error": "Request body required"}), 400
+        response = jsonify({"error": "Request body required"})
+        response.status_code = 400
+        return response
     
     dataset_id = data.get('dataset_id')
     dax_query = data.get('dax_query') or data.get('query', '')
     workspace_id = data.get('workspace_id')
     
     if not dataset_id:
-        return jsonify({"error": "dataset_id is required"}), 400
+        response = jsonify({"error": "dataset_id is required"})
+        response.status_code = 400
+        return response
     
     token = get_powerbi_token()
     
@@ -996,11 +1000,12 @@ message_queue = queue.Queue()
 @app.route('/mcp/tools/call', methods=['OPTIONS'])
 def handle_options():
     """Handle CORS preflight requests"""
-    return '', 200, {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
-    }
+    response = Response('')
+    response.status_code = 200
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    return response
 
 # MCP SSE Transport Implementation
 @app.route('/sse')

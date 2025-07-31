@@ -1,8 +1,3 @@
-  1. Go to: https://playground.ai.cloudflare.com/
-  2. Server URL: https://pbimcp.azurewebsites.net/
-  3. Header Name: Authorization
-  4. Header Value: Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ
-
 [debug] Auth callback message listener added.
 [debug] useMcp mounted, initiating connection.
 [debug] BrowserOAuthClientProvider initialized/updated on mount/option change.
@@ -11,7 +6,7 @@
 [debug] Using auto transport mode (HTTP with SSE fallback)
 [info] Attempting connection with HTTP transport...
 [debug] Creating HTTP transport for URL: https://pbimcp.azurewebsites.net/
-[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
+[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
 [debug] Creating StreamableHTTPClientTransport...
 [debug] StreamableHTTPClientTransport created successfully
 [debug] HTTP transport created and assigned to ref.
@@ -23,7 +18,7 @@
 [error] Failed to connect via HTTP: Error POSTing to endpoint (HTTP 500): {"error":"Request processing failed","message":"'tuple' object has no attribute 'headers'"} {}
 [info] Attempting connection with SSE transport...
 [debug] Creating SSE transport for URL: https://pbimcp.azurewebsites.net/
-[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
+[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
 [debug] Creating SSEClientTransport...
 [debug] SSEClientTransport created successfully
 [debug] SSE transport created and assigned to ref.
@@ -31,7 +26,8 @@
 [debug] About to call client.connect() with transport instance
 [debug] Transport instance type: T8
 
-
-When I try to connect to my server through claude.ai I get this:
-
+When I try to connect in claude.ai I get this information:
+I can see this is an error message that reads:
 "There was an error connecting to test. Please check your server details and ensure your server handles auth correctly."
+
+two deployments ago I could see message successfully connected but I couldnt see the tools and it was disconecting me again. 

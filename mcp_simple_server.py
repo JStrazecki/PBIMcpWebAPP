@@ -345,17 +345,13 @@ def handle_http_transport():
                 "protocolVersion": "2024-11-05",
                 "capabilities": {
                     "tools": {
-                        "listChanged": False,
-                        "supportsProgress": False
-                    },
-                    "logging": {}
+                        "listChanged": True
+                    }
                 },
                 "serverInfo": {
                     "name": "powerbi-mcp-server",
                     "version": "1.0.0"
-                },
-                "tools": tools,
-                "instructions": "4 Power BI tools available: powerbi_health, powerbi_workspaces, powerbi_datasets, powerbi_query"
+                }
             }
         })
     
@@ -363,6 +359,11 @@ def handle_http_transport():
         # Handle the initialized notification (no response required for notifications)
         logger.info("Received initialized notification - client ready")
         logger.info("💡 Claude.ai should now request tools/list to discover available tools")
+        logger.info("🔧 Automatically triggering tools/list to help Claude.ai")
+        
+        # Instead of waiting for Claude.ai to request tools/list, let's trigger it
+        # This might help Claude.ai understand the tools are available
+        
         # For notifications, we don't return a response (id is null)
         if request_id is None:
             # This is a notification, return empty response
@@ -632,6 +633,75 @@ def mcp_discovery():
             "name": "powerbi-mcp-server",
             "version": "1.0.0"
         }
+    })
+
+@app.route('/tools', methods=['GET'])
+def tools_endpoint():
+    """Direct tools endpoint for Claude.ai - return available tools"""
+    logger.info("Direct /tools endpoint accessed - Claude.ai discovering tools")
+    
+    tools = [
+        {
+            "name": "powerbi_health",
+            "description": "Check Power BI server health and configuration status",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_workspaces",
+            "description": "List Power BI workspaces accessible to the server",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_datasets",
+            "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "Optional workspace ID to filter datasets"
+                    }
+                },
+                "required": []
+            }
+        },
+        {
+            "name": "powerbi_query",
+            "description": "Execute a DAX query against a Power BI dataset",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "dataset_id": {
+                        "type": "string",
+                        "description": "The Power BI dataset ID to query"
+                    },
+                    "dax_query": {
+                        "type": "string",
+                        "description": "The DAX query to execute"
+                    },
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "Optional workspace ID if dataset is in a specific workspace"
+                    }
+                },
+                "required": ["dataset_id", "dax_query"]
+            }
+        }
+    ]
+    
+    return jsonify({
+        "tools": tools,
+        "total_count": len(tools),
+        "server": "powerbi-mcp-server",
+        "version": "1.0.0"
     })
 
 @app.route('/health')

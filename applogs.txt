@@ -1,0 +1,73 @@
+2025-07-31T17:41:59.3836016Z 169.254.132.1 - - [31/Jul/2025:17:41:59 +0000] "POST / HTTP/1.1" 401 78 "-" "Claude-User"
+2025-07-31T17:41:59.3921130Z 2025-07-31 17:41:59,370 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: None...
+2025-07-31T17:41:59.3975497Z 2025-07-31 17:41:59,370 - pbi-mcp-simple - WARNING - Invalid or missing auth header from Claude-User: None
+2025-07-31T17:41:59.8813942Z 169.254.132.1 - - [31/Jul/2025:17:41:59 +0000] "GET / HTTP/1.1" 200 67 "-" "Claude-User"
+2025-07-31T17:41:59.8814636Z 2025-07-31 17:41:59,880 - pbi-mcp-simple - INFO - SSE request detected - returning minimal SSE response: Accept=text/event-stream
+2025-07-31T17:42:34.9355910Z 169.254.132.1 - - [31/Jul/2025:17:42:34 +0000] "HEAD / HTTP/1.1" 200 0 "-" "python-httpx/0.27.0"
+2025-07-31T17:42:35.4424227Z 169.254.132.1 - - [31/Jul/2025:17:42:35 +0000] "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 207 "-" "python-httpx/0.27.0"
+2025-07-31T17:42:35.9070489Z 169.254.132.1 - - [31/Jul/2025:17:42:35 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 207 "-" "python-httpx/0.27.0"
+2025-07-31T17:42:36.3980487Z 2025-07-31 17:42:36,395 - pbi-mcp-simple - INFO - OAuth authorize request: method=GET, client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15, redirect_uri=https://claude.ai/api/mcp/auth_callback, state=5-GiKNMFL2KBuCoSMTZELHI6HKAsUKblJhYvIS4VanE
+2025-07-31T17:42:36.4238533Z 2025-07-31 17:42:36,404 - pbi-mcp-simple - INFO - Generated auth code for client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15, redirecting to https://claude.ai/api/mcp/auth_callback
+2025-07-31T17:42:36.4239309Z 169.254.132.1 - - [31/Jul/2025:17:42:36 +0000] "GET /authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https%3A%2F%2Fclaude.ai%2Fapi%2Fmcp%2Fauth_callback&code_challenge=xyymmRCAKlG8TjiAu5zjOhDi2Wd43BtENKojnPtxO1Q&code_challenge_method=S256&state=5-GiKNMFL2KBuCoSMTZELHI6HKAsUKblJhYvIS4VanE&scope=claudeai HTTP/1.1" 302 471 "https://claude.ai/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+2025-07-31T17:42:37.0867028Z 169.254.132.1 - - [31/Jul/2025:17:42:37 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 207 "-" "python-httpx/0.27.0"
+2025-07-31T17:42:37.5413216Z 2025-07-31 17:42:37,541 - pbi-mcp-simple - INFO - OAuth token request: grant_type=authorization_code, client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15
+2025-07-31T17:42:37.5427747Z 2025-07-31 17:42:37,542 - pbi-mcp-simple - INFO - Validating credentials - Received client_id: '5bdb10bc-bb29-4af9-8cb5-062690e6be15', Expected: '5bdb10bc-bb29-4af9-8cb5-062690e6be15'
+2025-07-31T17:42:37.5437720Z 2025-07-31 17:42:37,543 - pbi-mcp-simple - INFO - Client ID match: True
+2025-07-31T17:42:37.5437818Z 2025-07-31 17:42:37,543 - pbi-mcp-simple - INFO - Client secret provided: Yes
+2025-07-31T17:42:37.5437841Z 2025-07-31 17:42:37,543 - pbi-mcp-simple - INFO - Client secret match: True
+2025-07-31T17:42:37.5446976Z 2025-07-31 17:42:37,543 - pbi-mcp-simple - INFO - Client 5bdb10bc-bb29-4af9-8cb5-062690e6be15 authenticated successfully
+2025-07-31T17:42:37.5542350Z 169.254.132.1 - - [31/Jul/2025:17:42:37 +0000] "POST /token HTTP/1.1" 200 164 "-" "python-httpx/0.27.0"
+2025-07-31T17:42:37.5542858Z 2025-07-31 17:42:37,550 - pbi-mcp-simple - INFO - Returning token response: {"access_token": "TOKEN_HIDDEN", "token_type": "Bearer", "expires_in": 3600, "scope": "powerbi"}
+2025-07-31T17:42:40.7332571Z 169.254.132.1 - - [31/Jul/2025:17:42:40 +0000] "POST / HTTP/1.1" 200 1357 "-" "Claude-User"
+2025-07-31T17:42:40.7333467Z 2025-07-31 17:42:40,732 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer 4I4W72TWzVhvgIKle-QwheV...
+2025-07-31T17:42:40.7333568Z 2025-07-31 17:42:40,732 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
+2025-07-31T17:42:40.7333590Z 2025-07-31 17:42:40,732 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=initialize, id=0
+2025-07-31T17:42:40.7333609Z 2025-07-31 17:42:40,732 - pbi-mcp-simple - INFO - Returning initialize response with tools included
+2025-07-31T17:42:40.9759667Z 2025-07-31 17:42:40,970 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer 4I4W72TWzVhvgIKle-QwheV...
+2025-07-31T17:42:40.9759989Z 2025-07-31 17:42:40,970 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
+2025-07-31T17:42:40.9760023Z 2025-07-31 17:42:40,970 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=notifications/initialized, id=None
+2025-07-31T17:42:40.9760040Z 2025-07-31 17:42:40,970 - pbi-mcp-simple - INFO - Received initialized notification - client ready
+2025-07-31T17:42:40.9760064Z 2025-07-31 17:42:40,970 - pbi-mcp-simple - INFO - 💡 Claude.ai should now request tools/list to discover available tools
+2025-07-31T17:42:40.9790229Z 169.254.132.1 - - [31/Jul/2025:17:42:40 +0000] "POST / HTTP/1.1" 200 3 "-" "Claude-User"
+2025-07-31T17:42:41.4238535Z 2025-07-31 17:42:41,421 - pbi-mcp-simple - INFO - SSE request detected - returning minimal SSE response: Accept=text/event-stream
+2025-07-31T17:42:41.4241234Z 169.254.132.1 - - [31/Jul/2025:17:42:41 +0000] "GET / HTTP/1.1" 200 67 "-" "Claude-User"
+2025-07-31T17:42:42.5981867Z 169.254.132.1 - - [31/Jul/2025:17:42:42 +0000] "POST / HTTP/1.1" 200 1357 "-" "Claude-User"
+2025-07-31T17:42:42.5983004Z 2025-07-31 17:42:42,597 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer 4I4W72TWzVhvgIKle-QwheV...
+2025-07-31T17:42:42.5983046Z 2025-07-31 17:42:42,597 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
+2025-07-31T17:42:42.5983067Z 2025-07-31 17:42:42,597 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=initialize, id=0
+2025-07-31T17:42:42.5983087Z 2025-07-31 17:42:42,597 - pbi-mcp-simple - INFO - Returning initialize response with tools included
+2025-07-31T17:42:42.8434460Z 169.254.132.1 - - [31/Jul/2025:17:42:42 +0000] "POST / HTTP/1.1" 200 3 "-" "Claude-User"
+2025-07-31T17:42:42.8435541Z 2025-07-31 17:42:42,840 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer 4I4W72TWzVhvgIKle-QwheV...
+2025-07-31T17:42:42.8435592Z 2025-07-31 17:42:42,840 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
+2025-07-31T17:42:42.8435616Z 2025-07-31 17:42:42,840 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=notifications/initialized, id=None
+2025-07-31T17:42:42.8435641Z 2025-07-31 17:42:42,840 - pbi-mcp-simple - INFO - Received initialized notification - client ready
+2025-07-31T17:42:42.8435739Z 2025-07-31 17:42:42,840 - pbi-mcp-simple - INFO - 💡 Claude.ai should now request tools/list to discover available tools
+2025-07-31T17:42:43.2898076Z 2025-07-31 17:42:43,289 - pbi-mcp-simple - INFO - SSE request detected - returning minimal SSE response: Accept=text/event-stream
+2025-07-31T17:42:43.2897699Z 169.254.132.1 - - [31/Jul/2025:17:42:43 +0000] "GET / HTTP/1.1" 200 67 "-" "Claude-User"
+2025-07-31T17:42:49.3980941Z 169.254.132.1 - - [31/Jul/2025:17:42:49 +0000] "POST / HTTP/1.1" 200 1357 "-" "Claude-User"
+2025-07-31T17:42:49.3984459Z 2025-07-31 17:42:49,393 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer 4I4W72TWzVhvgIKle-QwheV...
+2025-07-31T17:42:49.3984593Z 2025-07-31 17:42:49,393 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
+2025-07-31T17:42:49.3984623Z 2025-07-31 17:42:49,393 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=initialize, id=0
+2025-07-31T17:42:49.3984644Z 2025-07-31 17:42:49,393 - pbi-mcp-simple - INFO - Returning initialize response with tools included
+2025-07-31T17:42:49.6131004Z 2025-07-31 17:42:49,612 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer 4I4W72TWzVhvgIKle-QwheV...
+2025-07-31T17:42:49.6137347Z 2025-07-31 17:42:49,613 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
+2025-07-31T17:42:49.6142650Z 2025-07-31 17:42:49,614 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=notifications/initialized, id=None
+2025-07-31T17:42:49.6146460Z 2025-07-31 17:42:49,614 - pbi-mcp-simple - INFO - Received initialized notification - client ready
+2025-07-31T17:42:49.6206364Z 2025-07-31 17:42:49,620 - pbi-mcp-simple - INFO - 💡 Claude.ai should now request tools/list to discover available tools
+2025-07-31T17:42:49.6234692Z 169.254.132.1 - - [31/Jul/2025:17:42:49 +0000] "POST / HTTP/1.1" 200 3 "-" "Claude-User"
+2025-07-31T17:42:50.0471951Z 169.254.132.1 - - [31/Jul/2025:17:42:50 +0000] "GET / HTTP/1.1" 200 67 "-" "Claude-User"
+2025-07-31T17:42:50.0472767Z 2025-07-31 17:42:50,044 - pbi-mcp-simple - INFO - SSE request detected - returning minimal SSE response: Accept=text/event-stream
+2025-07-31T17:42:51.1635425Z 169.254.132.1 - - [31/Jul/2025:17:42:51 +0000] "POST / HTTP/1.1" 200 1357 "-" "Claude-User"
+2025-07-31T17:42:51.1636038Z 2025-07-31 17:42:51,162 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer 4I4W72TWzVhvgIKle-QwheV...
+2025-07-31T17:42:51.1636112Z 2025-07-31 17:42:51,162 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
+2025-07-31T17:42:51.1636135Z 2025-07-31 17:42:51,162 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=initialize, id=0
+2025-07-31T17:42:51.1636154Z 2025-07-31 17:42:51,162 - pbi-mcp-simple - INFO - Returning initialize response with tools included
+2025-07-31T17:42:51.4056608Z 2025-07-31 17:42:51,399 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer 4I4W72TWzVhvgIKle-QwheV...
+2025-07-31T17:42:51.4057025Z 2025-07-31 17:42:51,399 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
+2025-07-31T17:42:51.4057063Z 2025-07-31 17:42:51,400 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=notifications/initialized, id=None
+2025-07-31T17:42:51.4057089Z 2025-07-31 17:42:51,400 - pbi-mcp-simple - INFO - Received initialized notification - client ready
+2025-07-31T17:42:51.4057118Z 2025-07-31 17:42:51,400 - pbi-mcp-simple - INFO - 💡 Claude.ai should now request tools/list to discover available tools
+2025-07-31T17:42:51.4057566Z 169.254.132.1 - - [31/Jul/2025:17:42:51 +0000] "POST / HTTP/1.1" 200 3 "-" "Claude-User"
+2025-07-31T17:42:51.8489699Z 2025-07-31 17:42:51,848 - pbi-mcp-simple - INFO - SSE request detected - returning minimal SSE response: Accept=text/event-stream
+2025-07-31T17:42:51.8525316Z 169.254.132.1 - - [31/Jul/2025:17:42:51 +0000] "GET / HTTP/1.1" 200 67 "-" "Claude-User"
+2025-07-31T17:43:54  No new trace in the past 1 min(s).

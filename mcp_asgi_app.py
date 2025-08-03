@@ -6,6 +6,10 @@ This allows FastMCP to run on Azure App Service with HTTP transport
 import os
 import sys
 import logging
+
+# Add the current directory to Python path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from mcp_fastmcp_server import mcp
 
 # Configure logging

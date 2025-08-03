@@ -1,0 +1,126 @@
+2025-08-03T23:07:38  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
+2025-08-03T14:56:30.5488711Z [2025-08-03 14:56:30 +0000] [1036] [INFO] Shutting down: Master
+2025-08-03T14:56:31.1925705Z Startup : 02.56.31.135565
+2025-08-03T14:56:31.2984087Z Configure Services : 02.56.31.297334
+2025-08-03T14:56:32.3028209Z Configure : 02.56.32.284233
+2025-08-03T14:56:33.0600174Z Setting Up Routes : 02.56.33.059832
+2025-08-03T14:56:34.2032156Z Exiting Configure : 02.56.34.203064
+2025-08-03T14:56:34.9703061Z Hosting environment: Production
+2025-08-03T14:56:34.9704492Z Content root path: /opt/Kudu
+2025-08-03T14:56:34.9704556Z Now listening on: http://0.0.0.0:8181
+2025-08-03T14:56:34.9704604Z Application started. Press Ctrl+C to shut down.Ending Log Tail of existing logs ---Starting Live Log Stream ---
+2025-08-03T23:07:55.3442308Z     __ __          __      __    _ __
+2025-08-03T23:07:55.3821229Z    / //_/_  _ ____/ /_  __/ /   (_) /____
+2025-08-03T23:07:55.3821490Z   / ,< / / / / __  / / / / /   / / __/ _
+2025-08-03T23:07:55.3821522Z  / /| / /_/ / /_/ / /_/ / /___/ / /_/  __/
+2025-08-03T23:07:55.3821548Z /_/ |_\__,_/\__,_/\__,_/_____/_/\__/\___/
+2025-08-03T23:07:55.3821581Z
+2025-08-03T23:07:55.3821629Z
+2025-08-03T23:07:55.3821653Z DEBUG CONSOLE | AZURE APP SERVICE ON LINUX
+2025-08-03T23:07:55.3821676Z
+2025-08-03T23:07:55.3821701Z Documentation: http://aka.ms/webapp-linux
+2025-08-03T23:07:55.3821757Z Kudu Version : 20250623.5
+2025-08-03T23:07:55.3821784Z Commit       : 353543ec4c45fcbfd4750522d32c94e23b31927a
+2025-08-03T23:07:55.3821806Z
+2025-08-03T23:07:56.1229979Z chown: changing ownership of '/temp': Operation not permitted
+2025-08-03T23:07:56.1407043Z chmod: changing permissions of '/temp': Operation not permitted
+2025-08-03T23:07:59.5305547Z Restarting OpenBSD Secure Shell server: sshd.
+2025-08-03T23:07:59.6921507Z node not running, starting node /opt/webssh/index.js
+2025-08-03T23:08:29.2768390Z Deploy Async
+2025-08-03T23:08:35.8935336Z Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+2025-08-03T23:08:35.9684217Z You can report issues at https://github.com/Microsoft/Oryx/issues
+2025-08-03T23:08:36.0274670Z
+2025-08-03T23:08:36.0436817Z Oryx Version: 0.2.20250611.1+0649de32f1279969c9023dd41b389cce4bb94493, Commit: 0649de32f1279969c9023dd41b389cce4bb94493, ReleaseTagName: 20250611.1
+2025-08-03T23:08:36.0839164Z
+2025-08-03T23:08:36.1189949Z Build Operation ID: 7ade6df9a1076609
+2025-08-03T23:08:36.1379575Z Repository Commit : 3c82e274-fca7-484a-af96-f316b8195da2
+2025-08-03T23:08:36.1600233Z OS Type           : bullseye
+2025-08-03T23:08:36.1952756Z Image Type        : githubactions
+2025-08-03T23:08:36.2350705Z
+2025-08-03T23:08:36.2688932Z Primary SDK Storage URL: https://oryx-cdn.microsoft.io
+2025-08-03T23:08:36.2974562Z Backup SDK Storage URL: https://oryxsdks-cdn.azureedge.net
+2025-08-03T23:08:36.3668418Z Detecting platforms...
+2025-08-03T23:08:36.3953371Z External SDK provider is enabled.
+2025-08-03T23:08:36.4150098Z Requesting metadata for platform python from external SDK provider
+2025-08-03T23:08:37.9450363Z Requesting metadata for platform python from external SDK provider
+2025-08-03T23:08:39.6190634Z Detected following platforms:
+2025-08-03T23:08:39.6652561Z   python: 3.11.13
+2025-08-03T23:08:39.6931880Z Requesting metadata for platform python from external SDK provider
+2025-08-03T23:08:45.0011929Z .
+2025-08-03T23:08:45.0067515Z Version '3.11.13' of platform 'python' is not installed. Generating script to install it...
+2025-08-03T23:08:45.5721176Z
+2025-08-03T23:09:39  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
+2025-08-03T23:09:31.7507067Z Sun Aug 3 23:09:31 UTC 2025 running .net core
+2025-08-03T23:09:33.9731285Z Startup : 11.09.33.954880
+2025-08-03T23:09:34.0471677Z Configure Services : 11.09.34.046908
+2025-08-03T23:09:34.7421643Z Configure : 11.09.34.741942
+2025-08-03T23:09:35.5442551Z Setting Up Routes : 11.09.35.291576
+2025-08-03T23:09:36.8814596Z Exiting Configure : 11.09.36.881101
+2025-08-03T23:09:37.4016873Z Hosting environment: Production
+2025-08-03T23:09:37.4018128Z Content root path: /opt/Kudu
+2025-08-03T23:09:37.4023998Z Now listening on: http://0.0.0.0:8181
+2025-08-03T23:09:37.4025024Z Application started. Press Ctrl+C to shut down.Ending Log Tail of existing logs ---Starting Live Log Stream ---
+2025-08-03T23:10:39  No new trace in the past 1 min(s).
+2025-08-03T23:11:39  No new trace in the past 2 min(s).
+2025-08-03T23:12:39  No new trace in the past 3 min(s).
+2025-08-03T23:13:39  No new trace in the past 4 min(s).
+2025-08-03T23:14:39  No new trace in the past 5 min(s).
+2025-08-03T23:15:39  No new trace in the past 6 min(s).
+2025-08-03T23:15:49.4089096Z    _____
+2025-08-03T23:15:49.4692711Z   /  _  \ __________ _________   ____
+2025-08-03T23:15:49.4693023Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-03T23:15:49.4693064Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-03T23:15:49.4693089Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-03T23:15:49.4693112Z         \/      \/                  \/
+2025-08-03T23:15:49.4693160Z A P P   S E R V I C E   O N   L I N U X
+2025-08-03T23:15:49.4693262Z
+2025-08-03T23:15:49.4693295Z Documentation: http://aka.ms/webapp-linux
+2025-08-03T23:15:49.4693318Z Python 3.11.12
+2025-08-03T23:15:49.4693349Z Note: Any data outside '/home' is not persisted
+2025-08-03T23:15:51.1925206Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-03T23:15:51.2099140Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-03T23:15:51.2804175Z Updating certificates in /etc/ssl/certs...
+2025-08-03T23:16:00.2533135Z 2 added, 0 removed; done.
+2025-08-03T23:16:00.2553708Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-03T23:16:00.2746313Z done.
+2025-08-03T23:16:00.3207496Z CA certificates copied and updated successfully.
+2025-08-03T23:16:00.6255865Z Site's appCommandLine: web: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application
+2025-08-03T23:16:01.1356262Z Starting periodic command scheduler: cron.
+2025-08-03T23:16:01.1357690Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'web: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application'
+2025-08-03T23:16:01.6867728Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-03T23:16:01.6945645Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-03T23:16:01.6945832Z Build Operation ID: ea9990ac-8a9c-42a8-840b-0745502d261f
+2025-08-03T23:16:02.4682617Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-08-03T23:16:02.6057731Z Writing output script to '/opt/startup/startup.sh'
+2025-08-03T23:16:02.9022930Z WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv.
+2025-08-03T23:16:02.9023386Z WARNING: Could not find package directory /home/site/wwwroot/__oryx_packages__.
+2025-08-03T23:16:02.9025459Z /opt/startup/startup.sh: 23: web:: not found
+2025-08-03T23:16:14.7612117Z    _____
+2025-08-03T23:16:14.7612399Z   /  _  \ __________ _________   ____
+2025-08-03T23:16:14.7612435Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-03T23:16:14.7612455Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-03T23:16:14.7612474Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-03T23:16:14.7612658Z         \/      \/                  \/
+2025-08-03T23:16:14.7612683Z A P P   S E R V I C E   O N   L I N U X
+2025-08-03T23:16:14.7612710Z
+2025-08-03T23:16:14.7612806Z Documentation: http://aka.ms/webapp-linux
+2025-08-03T23:16:14.7612827Z Python 3.11.12
+2025-08-03T23:16:14.7612846Z Note: Any data outside '/home' is not persisted
+2025-08-03T23:16:16.7979204Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-03T23:16:16.8175812Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-03T23:16:16.9030771Z Updating certificates in /etc/ssl/certs...
+2025-08-03T23:16:26.1264504Z 2 added, 0 removed; done.
+2025-08-03T23:16:26.1336953Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-03T23:16:26.1660463Z done.
+2025-08-03T23:16:26.1837810Z CA certificates copied and updated successfully.
+2025-08-03T23:16:26.3833943Z Site's appCommandLine: web: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application
+2025-08-03T23:16:27.1090779Z Starting periodic command scheduler: cron.
+2025-08-03T23:16:27.1110391Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'web: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application'
+2025-08-03T23:16:27.2398682Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-03T23:16:27.2419664Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-03T23:16:27.2788080Z Build Operation ID: c33a4e23-796e-462d-9553-2b7a5f9e8592
+2025-08-03T23:16:27.7168169Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-08-03T23:16:27.7169235Z Writing output script to '/opt/startup/startup.sh'
+2025-08-03T23:16:28.3627485Z WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv.
+2025-08-03T23:16:28.3896634Z /opt/startup/startup.sh: 23: web:: not found
+2025-08-03T23:16:28.3904582Z WARNING: Could not find package directory /home/site/wwwroot/__oryx_packages__.

@@ -112,21 +112,9 @@ def home():
             ('authorization' in request.headers and 'bearer' in authorization.lower())
         )
         
-        # Handle SSE gracefully - return minimal response to not break Claude.ai
         if is_sse_request and accept_header and 'text/event-stream' in accept_header:
-            logger.info(f"SSE request detected - returning minimal SSE response: Accept={accept_header}")
-            # Return a basic SSE response that closes immediately
-            from flask import Response
-            return Response(
-                "event: close\ndata: {\"message\": \"Use HTTP transport for requests\"}\n\n",
-                mimetype='text/event-stream',
-                headers={
-                    'Content-Type': 'text/event-stream',
-                    'Cache-Control': 'no-cache',
-                    'Connection': 'close',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            )
+            logger.info(f"Detected SSE request at root endpoint: Accept={accept_header}")
+            return handle_sse_at_root()
     
     # If it's a POST request with JSON-RPC, treat as MCP HTTP transport
     if request.method == 'POST':
@@ -270,83 +258,16 @@ def handle_http_transport():
     
     logger.info(f"HTTP transport MCP request: method={method}, id={request_id}")
     
-    # Log all requests for debugging
-    if method == 'tools/list':
-        logger.info("🎯 TOOLS/LIST REQUEST RECEIVED - Claude.ai is asking for tools!")
-    elif method == 'tools/call':
-        logger.info("🔧 TOOLS/CALL REQUEST RECEIVED - Claude.ai is calling a tool!")
-    
     # Route to appropriate MCP handler
     if method == 'initialize':
-        logger.info("Returning initialize response with tools included")
-        
-        # Include tools directly in initialize response to help Claude.ai
-        tools = [
-            {
-                "name": "powerbi_health",
-                "description": "Check Power BI server health and configuration status",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {},
-                    "required": []
-                }
-            },
-            {
-                "name": "powerbi_workspaces", 
-                "description": "List Power BI workspaces accessible to the server",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {},
-                    "required": []
-                }
-            },
-            {
-                "name": "powerbi_datasets",
-                "description": "Get Power BI datasets from a specific workspace or all accessible workspaces", 
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {
-                        "workspace_id": {
-                            "type": "string",
-                            "description": "Optional workspace ID to filter datasets"
-                        }
-                    },
-                    "required": []
-                }
-            },
-            {
-                "name": "powerbi_query",
-                "description": "Execute a DAX query against a Power BI dataset",
-                "inputSchema": {
-                    "type": "object", 
-                    "properties": {
-                        "dataset_id": {
-                            "type": "string",
-                            "description": "The Power BI dataset ID to query"
-                        },
-                        "dax_query": {
-                            "type": "string",
-                            "description": "The DAX query to execute"
-                        },
-                        "workspace_id": {
-                            "type": "string",
-                            "description": "Optional workspace ID if dataset is in a specific workspace"
-                        }
-                    },
-                    "required": ["dataset_id", "dax_query"]
-                }
-            }
-        ]
-        
         return jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
             "result": {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {
-                    "tools": {
-                        "listChanged": True
-                    }
+                    "tools": {},
+                    "logging": {}
                 },
                 "serverInfo": {
                     "name": "powerbi-mcp-server",
@@ -358,12 +279,6 @@ def handle_http_transport():
     elif method == 'notifications/initialized':
         # Handle the initialized notification (no response required for notifications)
         logger.info("Received initialized notification - client ready")
-        logger.info("💡 Claude.ai should now request tools/list to discover available tools")
-        logger.info("🔧 Automatically triggering tools/list to help Claude.ai")
-        
-        # Instead of waiting for Claude.ai to request tools/list, let's trigger it
-        # This might help Claude.ai understand the tools are available
-        
         # For notifications, we don't return a response (id is null)
         if request_id is None:
             # This is a notification, return empty response
@@ -615,7 +530,9 @@ def mcp_discovery():
         "version": "2024-11-05",
         "transport": {
             "type": "http", 
-            "http_url": f"{base_url}/"
+            "http_url": f"{base_url}/",
+            "sse_url": f"{base_url}/sse",
+            "message_url": f"{base_url}/message"
         },
         "authentication": {
             "type": "oauth2",
@@ -633,75 +550,6 @@ def mcp_discovery():
             "name": "powerbi-mcp-server",
             "version": "1.0.0"
         }
-    })
-
-@app.route('/tools', methods=['GET'])
-def tools_endpoint():
-    """Direct tools endpoint for Claude.ai - return available tools"""
-    logger.info("Direct /tools endpoint accessed - Claude.ai discovering tools")
-    
-    tools = [
-        {
-            "name": "powerbi_health",
-            "description": "Check Power BI server health and configuration status",
-            "inputSchema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-            }
-        },
-        {
-            "name": "powerbi_workspaces",
-            "description": "List Power BI workspaces accessible to the server",
-            "inputSchema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-            }
-        },
-        {
-            "name": "powerbi_datasets",
-            "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
-            "inputSchema": {
-                "type": "object",
-                "properties": {
-                    "workspace_id": {
-                        "type": "string",
-                        "description": "Optional workspace ID to filter datasets"
-                    }
-                },
-                "required": []
-            }
-        },
-        {
-            "name": "powerbi_query",
-            "description": "Execute a DAX query against a Power BI dataset",
-            "inputSchema": {
-                "type": "object",
-                "properties": {
-                    "dataset_id": {
-                        "type": "string",
-                        "description": "The Power BI dataset ID to query"
-                    },
-                    "dax_query": {
-                        "type": "string",
-                        "description": "The DAX query to execute"
-                    },
-                    "workspace_id": {
-                        "type": "string",
-                        "description": "Optional workspace ID if dataset is in a specific workspace"
-                    }
-                },
-                "required": ["dataset_id", "dax_query"]
-            }
-        }
-    ]
-    
-    return jsonify({
-        "tools": tools,
-        "total_count": len(tools),
-        "server": "powerbi-mcp-server",
-        "version": "1.0.0"
     })
 
 @app.route('/health')
@@ -1578,15 +1426,12 @@ def message_endpoint():
     
     # Unknown method
     else:
-        logger.warning(f"❌ UNKNOWN METHOD: {method} - Claude.ai sent an unexpected request")
-        logger.info(f"Available methods: initialize, notifications/initialized, tools/list, tools/call")
         response = jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
             "error": {
                 "code": -32601,
-                "message": f"Method not found: {method}",
-                "available_methods": ["initialize", "notifications/initialized", "tools/list", "tools/call"]
+                "message": f"Method not found: {method}"
             }
         })
         response.status_code = 400

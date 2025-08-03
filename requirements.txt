@@ -1,8 +1,8 @@
 # MCP Server Requirements
 
-# Core libraries - removed FastMCP for Azure compatibility
-# fastmcp>=0.1.0  # Causing Azure import issues
-# mcp>=1.0.0      # Not needed for simple implementation
+# Core MCP libraries (CRITICAL - Missing from original)
+fastmcp>=0.1.0
+mcp>=1.0.0
 
 # Authentication
 msal>=1.24.0

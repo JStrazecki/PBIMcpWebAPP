@@ -1,0 +1,32 @@
+Available Tools (4)
+powerbi_health
+Check Power BI server health and configuration status
+
+powerbi_workspaces
+List Power BI workspaces accessible to the server
+
+powerbi_datasets
+Get Power BI datasets from a specific workspace or all accessible workspaces
+
+powerbi_query
+Execute a DAX query against a Power BI dataset
+
+Debug Log
+[debug] Auth callback message listener added.
+[debug] useMcp mounted, initiating connection.
+[debug] BrowserOAuthClientProvider initialized/updated on mount/option change.
+[info] Connecting attempt #1 to https://pbimcp.azurewebsites.net...
+[debug] MCP Client initialized in connect.
+[debug] Using auto transport mode (HTTP with SSE fallback)
+[info] Attempting connection with HTTP transport...
+[debug] Creating HTTP transport for URL: https://pbimcp.azurewebsites.net/
+[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
+[debug] Creating StreamableHTTPClientTransport...
+[debug] StreamableHTTPClientTransport created successfully
+[debug] HTTP transport created and assigned to ref.
+[info] Connecting client via HTTP...
+[debug] About to call client.connect() with transport instance
+[debug] Transport instance type: A8
+[info] Client connected via HTTP. Loading tools...
+[info] Loaded 4 tools.
+[debug] Connection sequence finished with status: success

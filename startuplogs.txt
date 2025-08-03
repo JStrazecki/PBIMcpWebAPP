@@ -1,3 +1,4 @@
+Unable to open a connection to your app. This may be due to any network security groups or IP restriction rules that you have placed on your app. To use log streaming, please make sure you are able to access your app directly from your current network.
 2025-08-03T23:22:36  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/home/LogFiles/__lastCheckTime.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/__lastCheckTime.txt)08/03/2025 23:17:56/home/LogFiles/kudu/trace/00c653bac4fd-0e53346d-deb8-47c6-9bbf-a2a1949cdaa3.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/00c653bac4fd-0e53346d-deb8-47c6-9bbf-a2a1949cdaa3.txt)
 2025-07-29T14:56:55  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 770,1,7, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/042cb666a9ab-1d783657-a10f-4c45-b4e4-7d4722a529ca.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/042cb666a9ab-1d783657-a10f-4c45-b4e4-7d4722a529ca.txt)
 2025-07-31T19:11:05  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 776,1,15, ScmType: GitHubAction, SCM_DO_BUILD_DURING_DEPLOYMENT: 1/home/LogFiles/kudu/trace/0992ca2eef8b-4e363bf3-4ed5-4157-ab8c-68b48450dc51.txt  (https://pbimcp.scm.azurewebsites.net/api/vfs/LogFiles/kudu/trace/0992ca2eef8b-4e363bf3-4ed5-4157-ab8c-68b48450dc51.txt)
@@ -516,3 +517,170 @@
 2025-08-03T23:23:50.837Z INFO  - Logging is not enabled for this container.Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
 2025-08-03T23:23:56.452Z INFO  - Initiating warmup request to container pbimcp_0_ba9ae599 for site pbimcp
 2025-08-03T23:24:17.994Z INFO  - Waiting for response to warmup request for container pbimcp_0_ba9ae599. Elapsed time = 21.5419097 sec
+2025-08-03T23:23:54.502638184Z    _____
+2025-08-03T23:23:54.524544687Z   /  _  \ __________ _________   ____
+2025-08-03T23:23:54.524549648Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-03T23:23:54.524552436Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-03T23:23:54.524555152Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-03T23:23:54.524566321Z         \/      \/                  \/
+2025-08-03T23:23:54.524569155Z A P P   S E R V I C E   O N   L I N U X
+2025-08-03T23:23:54.524571747Z
+2025-08-03T23:23:54.524574363Z Documentation: http://aka.ms/webapp-linux
+2025-08-03T23:23:54.524576934Z Python 3.11.12
+2025-08-03T23:23:54.524579395Z Note: Any data outside '/home' is not persisted
+2025-08-03T23:23:59.359272037Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-03T23:23:59.389410049Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-03T23:23:59.457711185Z Updating certificates in /etc/ssl/certs...
+2025-08-03T23:24:16.065455561Z 2 added, 0 removed; done.
+2025-08-03T23:24:16.065477315Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-03T23:24:16.065481208Z done.
+2025-08-03T23:24:16.065484162Z CA certificates copied and updated successfully.
+2025-08-03T23:24:16.808686548Z Site's appCommandLine: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application
+2025-08-03T23:24:16.808708413Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application'
+2025-08-03T23:24:16.808713006Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-03T23:24:16.808716017Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-03T23:24:16.808718866Z Build Operation ID: 00206fc4-0832-4933-98a4-4131b3c8dfb2
+2025-08-03T23:24:17.411319510Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-08-03T23:24:17.451818817Z Writing output script to '/opt/startup/startup.sh'
+2025-08-03T23:24:17.572321144Z WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv.
+2025-08-03T23:24:17.572341885Z WARNING: Could not find package directory /home/site/wwwroot/__oryx_packages__.
+2025-08-03T23:24:19.713457400Z
+2025-08-03T23:24:19.713531331Z Error: class uri 'uvicorn.workers.UvicornWorker' invalid or not found:
+2025-08-03T23:24:19.713541584Z
+2025-08-03T23:24:19.713549297Z [Traceback (most recent call last):
+2025-08-03T23:24:19.713557232Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/util.py", line 110, in load_class
+2025-08-03T23:24:19.713589007Z     mod = importlib.import_module('.'.join(components))
+2025-08-03T23:24:19.713597667Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-03T23:24:19.713605706Z   File "/opt/python/3.11.12/lib/python3.11/importlib/__init__.py", line 126, in import_module
+2025-08-03T23:24:19.713613993Z     return _bootstrap._gcd_import(name[level:], package, level)
+2025-08-03T23:24:19.713621594Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-03T23:24:19.713629235Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+2025-08-03T23:24:19.713637742Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+2025-08-03T23:24:19.713645473Z   File "<frozen importlib._bootstrap>", line 1126, in _find_and_load_unlocked
+2025-08-03T23:24:19.713684479Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+2025-08-03T23:24:19.713693125Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+2025-08-03T23:24:19.713701001Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+2025-08-03T23:24:19.713709070Z   File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+2025-08-03T23:24:19.713717045Z ModuleNotFoundError: No module named 'uvicorn'
+2025-08-03T23:24:19.713724469Z ]
+2025-08-03T23:24:19.735522063Z
+2025-08-03T23:24:21.322Z ERROR - Container pbimcp_0_ba9ae599 for site pbimcp has exited, failing site start
+2025-08-03T23:24:21.404Z ERROR - Container pbimcp_0_ba9ae599 didn't respond to HTTP pings on port: 8000. Failing site start. See container logs for debugging.
+2025-08-03T23:24:21.475Z INFO  - Stopping site pbimcp because it failed during startup.
+2025-08-03T23:24:37.470Z INFO  - 3.11_20250506.5.tuxprod Pulling from appsvc/python
+2025-08-03T23:24:37.549Z INFO  -  Digest: sha256:c26b71577015072a7b5883addd7d1e67c89246b60ffa17b80775375736df0204
+2025-08-03T23:24:37.569Z INFO  -  Status: Image is up to date for 10.1.0.4:13209/appsvc/python:3.11_20250506.5.tuxprod
+2025-08-03T23:24:37.681Z INFO  - Pull Image successful, Time taken: 1 Seconds
+2025-08-03T23:24:39.138Z INFO  - Starting container for site
+2025-08-03T23:24:39.139Z INFO  - docker run -d --expose=8000 --name pbimcp_0_f5914a91 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e PORT=8000 -e WEBSITE_SITE_NAME=pbimcp -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=pbimcp.azurewebsites.net -e WEBSITE_INSTANCE_ID=949b2381a2836c2e50a9dff5453e2f181ebc7f1a608d18b1d30a7ddca97c246b appsvc/python:3.11_20250506.5.tuxprod REDACTED
+2025-08-03T23:24:39.140Z INFO  - Logging is not enabled for this container.Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-08-03T23:24:48.884Z INFO  - Initiating warmup request to container pbimcp_0_f5914a91 for site pbimcp
+2025-08-03T23:24:44.882935004Z    _____
+2025-08-03T23:24:44.902022282Z   /  _  \ __________ _________   ____
+2025-08-03T23:24:44.902027104Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-03T23:24:44.902030206Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-03T23:24:44.902032932Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-03T23:24:44.902035909Z         \/      \/                  \/
+2025-08-03T23:24:44.902038541Z A P P   S E R V I C E   O N   L I N U X
+2025-08-03T23:24:44.902049205Z
+2025-08-03T23:24:44.902051694Z Documentation: http://aka.ms/webapp-linux
+2025-08-03T23:24:44.902054265Z Python 3.11.12
+2025-08-03T23:24:44.902056729Z Note: Any data outside '/home' is not persisted
+2025-08-03T23:24:49.247604760Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-03T23:24:49.327847521Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-03T23:24:49.449209855Z Updating certificates in /etc/ssl/certs...
+2025-08-03T23:25:02.275205134Z 2 added, 0 removed; done.
+2025-08-03T23:25:02.276308169Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-03T23:25:02.285201418Z done.
+2025-08-03T23:25:02.397165735Z CA certificates copied and updated successfully.
+2025-08-03T23:25:03.088740283Z Site's appCommandLine: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application
+2025-08-03T23:25:03.150732794Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application'
+2025-08-03T23:25:03.964322196Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-03T23:25:03.964344332Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-03T23:25:03.973184173Z Build Operation ID: a5eb3eac-893b-4bf7-a19b-49ab722c2079
+2025-08-03T23:25:04.658759994Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-08-03T23:25:04.697409101Z Writing output script to '/opt/startup/startup.sh'
+2025-08-03T23:25:04.779476813Z WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv.
+2025-08-03T23:25:04.900276837Z WARNING: Could not find package directory /home/site/wwwroot/__oryx_packages__.
+2025-08-03T23:25:07.603191142Z
+2025-08-03T23:25:07.603239168Z Error: class uri 'uvicorn.workers.UvicornWorker' invalid or not found:
+2025-08-03T23:25:07.603242765Z
+2025-08-03T23:25:07.603245320Z [Traceback (most recent call last):
+2025-08-03T23:25:07.603249654Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/util.py", line 110, in load_class
+2025-08-03T23:25:07.603262239Z     mod = importlib.import_module('.'.join(components))
+2025-08-03T23:25:07.603265028Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-03T23:25:07.603267653Z   File "/opt/python/3.11.12/lib/python3.11/importlib/__init__.py", line 126, in import_module
+2025-08-03T23:25:07.603270555Z     return _bootstrap._gcd_import(name[level:], package, level)
+2025-08-03T23:25:07.603273182Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-03T23:25:07.603275666Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+2025-08-03T23:25:07.603278949Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+2025-08-03T23:25:07.603281968Z   File "<frozen importlib._bootstrap>", line 1126, in _find_and_load_unlocked
+2025-08-03T23:25:07.603284615Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+2025-08-03T23:25:07.603287183Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+2025-08-03T23:25:07.603289747Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+2025-08-03T23:25:07.603292506Z   File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+2025-08-03T23:25:07.603295164Z ModuleNotFoundError: No module named 'uvicorn'
+2025-08-03T23:25:07.603297653Z ]
+2025-08-03T23:25:07.603300110Z
+2025-08-03T23:25:08.637Z ERROR - Container pbimcp_0_f5914a91 for site pbimcp has exited, failing site start
+2025-08-03T23:25:08.709Z ERROR - Container pbimcp_0_f5914a91 didn't respond to HTTP pings on port: 8000. Failing site start. See container logs for debugging.
+2025-08-03T23:25:08.829Z INFO  - Stopping site pbimcp because it failed during startup.
+2025-08-03T23:25:21.952Z INFO  - 3.11_20250506.5.tuxprod Pulling from appsvc/python
+2025-08-03T23:25:22.012Z INFO  -  Digest: sha256:c26b71577015072a7b5883addd7d1e67c89246b60ffa17b80775375736df0204
+2025-08-03T23:25:22.122Z INFO  -  Status: Downloaded newer image for 10.1.0.5:13209/appsvc/python:3.11_20250506.5.tuxprod
+2025-08-03T23:25:22.403Z INFO  - Pull Image successful, Time taken: 1 Seconds
+2025-08-03T23:25:23.771Z INFO  - Starting container for site
+2025-08-03T23:25:23.773Z INFO  - docker run -d --expose=8000 --name pbimcp_0_c6d4175c -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e PORT=8000 -e WEBSITE_SITE_NAME=pbimcp -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=pbimcp.azurewebsites.net -e WEBSITE_INSTANCE_ID=949b2381a2836c2e50a9dff5453e2f181ebc7f1a608d18b1d30a7ddca97c246b appsvc/python:3.11_20250506.5.tuxprod REDACTED
+2025-08-03T23:25:23.782Z INFO  - Logging is not enabled for this container.Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-08-03T23:25:28.889Z INFO  - Initiating warmup request to container pbimcp_0_c6d4175c for site pbimcp
+2025-08-03T23:25:48.340Z INFO  - Waiting for response to warmup request for container pbimcp_0_c6d4175c. Elapsed time = 19.4518955 sec
+2025-08-03T23:25:26.949496673Z    _____
+2025-08-03T23:25:26.949559178Z   /  _  \ __________ _________   ____
+2025-08-03T23:25:26.949563003Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-03T23:25:26.949565981Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-03T23:25:26.949568685Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-03T23:25:26.949571607Z         \/      \/                  \/
+2025-08-03T23:25:26.949574516Z A P P   S E R V I C E   O N   L I N U X
+2025-08-03T23:25:26.949577044Z
+2025-08-03T23:25:26.949579562Z Documentation: http://aka.ms/webapp-linux
+2025-08-03T23:25:26.949594415Z Python 3.11.12
+2025-08-03T23:25:26.949597399Z Note: Any data outside '/home' is not persisted
+2025-08-03T23:25:31.423606201Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-03T23:25:31.482131249Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-03T23:25:31.613043644Z Updating certificates in /etc/ssl/certs...
+2025-08-03T23:25:43.576866135Z 2 added, 0 removed; done.
+2025-08-03T23:25:43.576888187Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-03T23:25:43.668715869Z done.
+2025-08-03T23:25:43.796952272Z CA certificates copied and updated successfully.
+2025-08-03T23:25:44.200728460Z Site's appCommandLine: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application
+2025-08-03T23:25:44.200752527Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application'
+2025-08-03T23:25:44.801956319Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-03T23:25:44.801990109Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-03T23:25:44.801993550Z Build Operation ID: fb5695e9-2ac6-40a0-82d5-7338cb156161
+2025-08-03T23:25:45.707543171Z Oryx Version: 0.2.20250505.1, Commit: bec89959884a7663432d6e3c4d36acc30657cb85, ReleaseTagName: 20250505.1
+2025-08-03T23:25:45.707564317Z Writing output script to '/opt/startup/startup.sh'
+2025-08-03T23:25:45.809016707Z WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv.
+2025-08-03T23:25:45.809745309Z WARNING: Could not find package directory /home/site/wwwroot/__oryx_packages__.
+2025-08-03T23:25:48.525154510Z
+2025-08-03T23:25:48.525218235Z Error: class uri 'uvicorn.workers.UvicornWorker' invalid or not found:
+2025-08-03T23:25:48.525222169Z
+2025-08-03T23:25:48.525224819Z [Traceback (most recent call last):
+2025-08-03T23:25:48.525227564Z   File "/opt/python/3.11.12/lib/python3.11/site-packages/gunicorn/util.py", line 110, in load_class
+2025-08-03T23:25:48.525240714Z     mod = importlib.import_module('.'.join(components))
+2025-08-03T23:25:48.525243668Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-03T23:25:48.525246164Z   File "/opt/python/3.11.12/lib/python3.11/importlib/__init__.py", line 126, in import_module
+2025-08-03T23:25:48.525248933Z     return _bootstrap._gcd_import(name[level:], package, level)
+2025-08-03T23:25:48.525251489Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-03T23:25:48.525254035Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+2025-08-03T23:25:48.525256897Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+2025-08-03T23:25:48.525259568Z   File "<frozen importlib._bootstrap>", line 1126, in _find_and_load_unlocked
+2025-08-03T23:25:48.525262118Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+2025-08-03T23:25:48.525264707Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+2025-08-03T23:25:48.525267195Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+2025-08-03T23:25:48.525269774Z   File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+2025-08-03T23:25:48.525277896Z ModuleNotFoundError: No module named 'uvicorn'
+2025-08-03T23:25:48.525280579Z ]
+2025-08-03T23:25:48.525283053Z
+2025-08-03T23:25:49.892Z ERROR - Container pbimcp_0_c6d4175c for site pbimcp has exited, failing site start
+2025-08-03T23:25:49.991Z ERROR - Container pbimcp_0_c6d4175c didn't respond to HTTP pings on port: 8000. Failing site start. See container logs for debugging.
+2025-08-03T23:25:50.160Z INFO  - Stopping site pbimcp because it failed during startup.

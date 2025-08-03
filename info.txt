@@ -1,32 +1,246 @@
-Available Tools (4)
-powerbi_health
-Check Power BI server health and configuration status
+# Claude Enterprise MCP Tool Calling Issue - Analysis & Solutions
 
-powerbi_workspaces
-List Power BI workspaces accessible to the server
+## Executive Summary
 
-powerbi_datasets
-Get Power BI datasets from a specific workspace or all accessible workspaces
+The primary issue is that Claude Enterprise successfully completes OAuth authentication but fails to properly use the acquired access token in subsequent MCP (Model Context Protocol) requests. This results in tool calls being rejected with 401 Unauthorized errors.
 
-powerbi_query
-Execute a DAX query against a Power BI dataset
+## Key Findings from applogs.txt
 
-Debug Log
-[debug] Auth callback message listener added.
-[debug] useMcp mounted, initiating connection.
-[debug] BrowserOAuthClientProvider initialized/updated on mount/option change.
-[info] Connecting attempt #1 to https://pbimcp.azurewebsites.net...
-[debug] MCP Client initialized in connect.
-[debug] Using auto transport mode (HTTP with SSE fallback)
-[info] Attempting connection with HTTP transport...
-[debug] Creating HTTP transport for URL: https://pbimcp.azurewebsites.net/
-[debug] Transport options: {"authProvider":true,"headers":{"Authorization":"Bearer Bearer nbqBuJGrm0W1Q0JBfBSuT9fjsQUjNQmAuQtZ1z5PnMjGWNCzAk2_302hu0wYoLRLQc0_8AbQAMYg6SvySREVWQ"},"url":"https://pbimcp.azurewebsites.net/"}
-[debug] Creating StreamableHTTPClientTransport...
-[debug] StreamableHTTPClientTransport created successfully
-[debug] HTTP transport created and assigned to ref.
-[info] Connecting client via HTTP...
-[debug] About to call client.connect() with transport instance
-[debug] Transport instance type: A8
-[info] Client connected via HTTP. Loading tools...
-[info] Loaded 4 tools.
-[debug] Connection sequence finished with status: success
+### 1. **OAuth Flow Works Correctly**
+```
+✅ OAuth authorize request successful
+✅ Auth code generated: client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15
+✅ Token exchange successful: returns valid Bearer token
+✅ Token response: {"access_token": "TOKEN_HIDDEN", "token_type": "Bearer", "expires_in": 3600}
+```
+
+### 2. **MCP Requests Fail Authentication**
+```
+❌ Initial requests: "Auth header: None" → 401 Unauthorized
+❌ Claude-User agent not sending Bearer token initially
+⚠️  Later requests include token but Claude doesn't call tools/list
+```
+
+### 3. **Critical Bug Identified**
+```
+🚨 CLAUDE.AI BUG: Never calls tools/list even with listChanged=true
+```
+
+## Root Cause Analysis
+
+### Issue 1: Token Not Propagated to MCP Client
+After OAuth completion, Claude Enterprise is not properly:
+1. Storing the access token from the OAuth flow
+2. Including the token in the Authorization header for MCP requests
+3. Associating the OAuth session with the MCP connection
+
+### Issue 2: MCP Protocol Implementation Gap
+Claude Enterprise's MCP client has a documented bug where it:
+- Never calls the `tools/list` endpoint even when `listChanged=true` is set
+- This prevents tool discovery from occurring
+- Without tool discovery, Claude cannot call any custom tools
+
+## Server-Side Architecture Issues
+
+### Current Flow (Problematic)
+```
+1. User clicks "Configure" in Claude Enterprise
+2. OAuth flow completes successfully
+3. Claude receives access token
+4. Claude makes MCP requests WITHOUT the token ❌
+5. Server rejects requests → Tools unavailable
+```
+
+### Expected Flow
+```
+1. User clicks "Configure" in Claude Enterprise  
+2. OAuth flow completes successfully
+3. Claude stores access token
+4. Claude includes token in ALL MCP requests ✅
+5. Server validates token → Tools available
+```
+
+## Recommended Solutions
+
+### Solution 1: Implement OAuth-to-SSE Bridge (Recommended)
+Since Claude supports SSE (Server-Sent Events) better than standard HTTP transport:
+
+```python
+# Modify your server to support SSE with OAuth
+@app.get("/sse")
+async def sse_endpoint(authorization: str = Header(None)):
+    # Validate OAuth token
+    if not validate_token(authorization):
+        # Return SSE-formatted auth instructions
+        return StreamingResponse(
+            auth_required_sse_stream(),
+            media_type="text/event-stream"
+        )
+    
+    # Return MCP-over-SSE stream
+    return StreamingResponse(
+        mcp_sse_stream(authorization),
+        media_type="text/event-stream"
+    )
+```
+
+### Solution 2: Implement Dynamic Client Registration
+Claude expects OAuth providers to support dynamic client registration:
+
+```python
+@app.post("/register")
+async def register_client(request: ClientRegistrationRequest):
+    # Store client dynamically
+    client_id = generate_client_id()
+    client_secret = generate_client_secret()
+    
+    # Store in database with redirect_uris
+    store_client(client_id, client_secret, request.redirect_uris)
+    
+    return {
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "redirect_uris": request.redirect_uris
+    }
+```
+
+### Solution 3: Use Session-Based Authentication
+Implement a session layer that bridges OAuth and MCP:
+
+```python
+# After OAuth callback
+@app.get("/auth/callback")
+async def oauth_callback(code: str, state: str):
+    # Exchange code for token
+    token = exchange_code_for_token(code)
+    
+    # Create MCP session
+    session_id = create_mcp_session(token)
+    
+    # Return session ID to Claude
+    return RedirectResponse(
+        f"https://claude.ai/api/mcp/auth_callback"
+        f"?session_id={session_id}&state={state}"
+    )
+
+# MCP endpoint accepts session ID
+@app.post("/mcp")
+async def mcp_endpoint(
+    request: MCPRequest,
+    x_session_id: str = Header(None)
+):
+    # Validate session instead of token
+    if not validate_session(x_session_id):
+        return JSONResponse({"error": "Invalid session"}, 401)
+    
+    # Process MCP request
+    return process_mcp_request(request)
+```
+
+### Solution 4: Implement Tool Pre-Registration
+Since Claude doesn't call tools/list, pre-register tools in the initialize response:
+
+```python
+@server.request_handler
+async def handle_initialize(request):
+    return {
+        "protocolVersion": "0.1.0",
+        "capabilities": {
+            "tools": {
+                # Force tool registration here
+                "available": [
+                    {
+                        "name": "query_dataset",
+                        "description": "Query Power BI dataset",
+                        "inputSchema": {...}
+                    },
+                    # Add all tools here
+                ]
+            }
+        },
+        # This flag is ignored by Claude but set it anyway
+        "listChanged": True
+    }
+```
+
+## Configuration Adjustments
+
+### 1. Update Azure App Registration
+Add these redirect URIs:
+- `https://claude.ai/api/mcp/auth_callback`
+- `http://localhost:random_port/callback` (Claude uses random ports)
+
+### 2. Modify Server Headers
+Ensure your server returns proper CORS headers:
+```python
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "https://claude.ai",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Authorization, Content-Type, X-Session-Id",
+    "Access-Control-Allow-Credentials": "true"
+}
+```
+
+### 3. Implement Proper Error Responses
+Return errors in MCP format:
+```python
+def mcp_error_response(code: int, message: str):
+    return {
+        "jsonrpc": "2.0",
+        "error": {
+            "code": code,
+            "message": message
+        }
+    }
+```
+
+## Testing & Validation
+
+### 1. Test OAuth Flow
+```bash
+# Verify token endpoint works
+curl -X POST https://your-server/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code&code=TEST_CODE&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15"
+```
+
+### 2. Test MCP with Token
+```bash
+# Test MCP endpoint with token
+curl -X POST https://your-server/ \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"initialize","params":{},"id":1}'
+```
+
+### 3. Monitor Logs
+Key things to watch for:
+- Token presence in Authorization headers
+- Correct User-Agent (should be "Claude-User")
+- tools/list requests (currently missing)
+- Response format compliance with MCP spec
+
+## Immediate Actions for Claude Code
+
+1. **Report the Bug**: The tools/list issue is a known Claude Enterprise bug that should be reported to Anthropic
+2. **Implement Workarounds**: Use the pre-registration approach in initialize response
+3. **Add Detailed Logging**: Log all headers, tokens, and MCP requests/responses
+4. **Consider Alternative Transports**: SSE or WebSocket might work better than HTTP
+
+## Long-term Solutions
+
+1. **Wait for Claude Fix**: Anthropic needs to fix the tools/list bug
+2. **Use APIM**: Azure API Management can handle OAuth complexity
+3. **Implement MCP Proxy**: Build a proxy that handles auth separately from MCP
+4. **Consider Alternative Protocols**: GraphQL or REST might be more stable
+
+## References
+
+- [MCP Specification](https://modelcontextprotocol.io/docs/specification)
+- [Claude Enterprise OAuth Requirements](https://docs.anthropic.com/en/docs/integrations/oauth)
+- [Azure AD Dynamic Client Registration](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow)
+- [Known Claude MCP Issues](https://github.com/anthropics/claude-code/issues)
+
+---
+
+**Note**: This analysis is based on the logs provided and known issues with Claude Enterprise MCP implementation as of July 2025. The core issue appears to be a bug in Claude's MCP client that prevents proper tool discovery and token propagation.

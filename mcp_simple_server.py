@@ -194,14 +194,57 @@ def handle_sse_at_root():
             # Send initial connection event
             yield f"event: connection\ndata: {json.dumps({'status': 'connected', 'protocol': '2024-11-05'})}\n\n"
             
-            # Keep connection alive with heartbeats
+            # Send available tools immediately after connection (workaround for Claude.ai bug)
+            tools = [
+                {
+                    "name": "powerbi_health",
+                    "description": "Check Power BI server health and configuration status",
+                    "inputSchema": {"type": "object", "properties": {}, "required": []}
+                },
+                {
+                    "name": "powerbi_workspaces",
+                    "description": "List Power BI workspaces accessible to the server",
+                    "inputSchema": {"type": "object", "properties": {}, "required": []}
+                },
+                {
+                    "name": "powerbi_datasets",
+                    "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "workspace_id": {"type": "string", "description": "Optional workspace ID to filter datasets"}
+                        },
+                        "required": []
+                    }
+                },
+                {
+                    "name": "powerbi_query",
+                    "description": "Execute a DAX query against a Power BI dataset",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "dataset_id": {"type": "string", "description": "The Power BI dataset ID to query"},
+                            "dax_query": {"type": "string", "description": "The DAX query to execute"},
+                            "workspace_id": {"type": "string", "description": "Optional workspace ID if dataset is in a specific workspace"}
+                        },
+                        "required": ["dataset_id", "dax_query"]
+                    }
+                }
+            ]
+            
+            logger.info(f"SSE: Sending tools_available event with {len(tools)} tools")
+            yield f"event: tools_available\ndata: {json.dumps({'tools': tools})}\n\n"
+            
+            # Keep connection alive with more frequent heartbeats
+            heartbeat_count = 0
             while True:
                 try:
-                    # Send keep-alive every 30 seconds
-                    yield f"event: heartbeat\ndata: {json.dumps({'timestamp': datetime.utcnow().isoformat()})}\n\n"
-                    time.sleep(30)
+                    # Send keep-alive every 15 seconds (more frequent than before)
+                    yield f"event: heartbeat\ndata: {json.dumps({'timestamp': datetime.utcnow().isoformat(), 'count': heartbeat_count})}\n\n"
+                    heartbeat_count += 1
+                    time.sleep(15)  # Reduced from 30 to 15 seconds
                 except GeneratorExit:
-                    logger.info("SSE client disconnected from root")
+                    logger.info(f"SSE client disconnected from root after {heartbeat_count} heartbeats")
                     break
                 except Exception as e:
                     logger.error(f"SSE stream error at root: {e}")
@@ -260,25 +303,90 @@ def handle_http_transport():
     
     # Route to appropriate MCP handler
     if method == 'initialize':
+        # Force tool registration in initialize response to work around Claude.ai bug
+        tools = [
+            {
+                "name": "powerbi_health",
+                "description": "Check Power BI server health and configuration status",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "required": []
+                }
+            },
+            {
+                "name": "powerbi_workspaces",
+                "description": "List Power BI workspaces accessible to the server",
+                "inputSchema": {
+                    "type": "object", 
+                    "properties": {},
+                    "required": []
+                }
+            },
+            {
+                "name": "powerbi_datasets",
+                "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "workspace_id": {
+                            "type": "string",
+                            "description": "Optional workspace ID to filter datasets"
+                        }
+                    },
+                    "required": []
+                }
+            },
+            {
+                "name": "powerbi_query",
+                "description": "Execute a DAX query against a Power BI dataset",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "dataset_id": {
+                            "type": "string",
+                            "description": "The Power BI dataset ID to query"
+                        },
+                        "dax_query": {
+                            "type": "string", 
+                            "description": "The DAX query to execute"
+                        },
+                        "workspace_id": {
+                            "type": "string",
+                            "description": "Optional workspace ID if dataset is in a specific workspace"
+                        }
+                    },
+                    "required": ["dataset_id", "dax_query"]
+                }
+            }
+        ]
+        
+        logger.info(f"Initialize request - forcing tool registration with {len(tools)} tools")
+        
         return jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
             "result": {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {
-                    "tools": {},
+                    "tools": {
+                        "listChanged": True,  # Signal that tools are available
+                        "available": tools    # Include tools directly
+                    },
                     "logging": {}
                 },
                 "serverInfo": {
                     "name": "powerbi-mcp-server",
                     "version": "1.0.0"
-                }
+                },
+                "tools": tools  # Also include at root level for compatibility
             }
         })
     
     elif method == 'notifications/initialized':
         # Handle the initialized notification (no response required for notifications)
         logger.info("Received initialized notification - client ready")
+        logger.info("Claude.ai tools/list bug workaround: Tools were already sent in initialize response")
         # For notifications, we don't return a response (id is null)
         if request_id is None:
             # This is a notification, return empty response
@@ -562,13 +670,14 @@ def health():
     return jsonify({
         "status": "healthy",
         "service": "Power BI MCP Server (Simple)",
-        "version": "2.0.0-updated",  # Updated version to verify deployment
+        "version": "2.1.0-force-tools",  # Updated version to verify deployment
         "authentication": "client_credentials",
         "powerbi_configured": powerbi_configured,
         "powerbi_access": "granted" if token else "using_demo_data",
         "client_id_configured": bool(CLIENT_ID),
         "environment": "Azure" if os.environ.get('WEBSITE_HOSTNAME') else "Local",
         "mcp_endpoints_added": True,  # New field to verify deployment
+        "changes": "Forcing tool registration in initialize response",
         "timestamp": datetime.utcnow().isoformat()
     })
 
@@ -1123,14 +1232,57 @@ def sse_endpoint():
             # Send initial connection event
             yield f"event: connection\ndata: {json.dumps({'status': 'connected', 'protocol': '2024-11-05'})}\n\n"
             
-            # Keep connection alive with heartbeats
+            # Send available tools immediately after connection (workaround for Claude.ai bug)
+            tools = [
+                {
+                    "name": "powerbi_health",
+                    "description": "Check Power BI server health and configuration status",
+                    "inputSchema": {"type": "object", "properties": {}, "required": []}
+                },
+                {
+                    "name": "powerbi_workspaces",
+                    "description": "List Power BI workspaces accessible to the server",
+                    "inputSchema": {"type": "object", "properties": {}, "required": []}
+                },
+                {
+                    "name": "powerbi_datasets",
+                    "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "workspace_id": {"type": "string", "description": "Optional workspace ID to filter datasets"}
+                        },
+                        "required": []
+                    }
+                },
+                {
+                    "name": "powerbi_query",
+                    "description": "Execute a DAX query against a Power BI dataset",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "dataset_id": {"type": "string", "description": "The Power BI dataset ID to query"},
+                            "dax_query": {"type": "string", "description": "The DAX query to execute"},
+                            "workspace_id": {"type": "string", "description": "Optional workspace ID if dataset is in a specific workspace"}
+                        },
+                        "required": ["dataset_id", "dax_query"]
+                    }
+                }
+            ]
+            
+            logger.info(f"SSE (/sse endpoint): Sending tools_available event with {len(tools)} tools")
+            yield f"event: tools_available\ndata: {json.dumps({'tools': tools})}\n\n"
+            
+            # Keep connection alive with more frequent heartbeats
+            heartbeat_count = 0
             while True:
                 try:
-                    # Send keep-alive every 30 seconds
-                    yield f"event: heartbeat\ndata: {json.dumps({'timestamp': datetime.utcnow().isoformat()})}\n\n"
-                    time.sleep(30)
+                    # Send keep-alive every 15 seconds (more frequent than before)
+                    yield f"event: heartbeat\ndata: {json.dumps({'timestamp': datetime.utcnow().isoformat(), 'count': heartbeat_count})}\n\n"
+                    heartbeat_count += 1
+                    time.sleep(15)  # Reduced from 30 to 15 seconds
                 except GeneratorExit:
-                    logger.info("SSE client disconnected")
+                    logger.info(f"SSE client disconnected after {heartbeat_count} heartbeats")
                     break
                 except Exception as e:
                     logger.error(f"SSE stream error: {e}")

@@ -122,10 +122,12 @@ def home():
             # Check if it's JSON-RPC request
             data = request.get_json()
             if data and 'jsonrpc' in data:
+                logger.info(f"Received JSON-RPC request at root: method={data.get('method')}")
                 response = handle_http_transport()
                 return add_cors_headers(response)
             else:
                 # Not a valid JSON-RPC request
+                logger.warning(f"Non-JSON-RPC POST request received: {data}")
                 response = jsonify({
                     "error": "Invalid request",
                     "message": "Expected JSON-RPC 2.0 request"
@@ -194,46 +196,8 @@ def handle_sse_at_root():
             # Send initial connection event
             yield f"event: connection\ndata: {json.dumps({'status': 'connected', 'protocol': '2024-11-05'})}\n\n"
             
-            # Send available tools immediately after connection (workaround for Claude.ai bug)
-            tools = [
-                {
-                    "name": "powerbi_health",
-                    "description": "Check Power BI server health and configuration status",
-                    "inputSchema": {"type": "object", "properties": {}, "required": []}
-                },
-                {
-                    "name": "powerbi_workspaces",
-                    "description": "List Power BI workspaces accessible to the server",
-                    "inputSchema": {"type": "object", "properties": {}, "required": []}
-                },
-                {
-                    "name": "powerbi_datasets",
-                    "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {
-                            "workspace_id": {"type": "string", "description": "Optional workspace ID to filter datasets"}
-                        },
-                        "required": []
-                    }
-                },
-                {
-                    "name": "powerbi_query",
-                    "description": "Execute a DAX query against a Power BI dataset",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {
-                            "dataset_id": {"type": "string", "description": "The Power BI dataset ID to query"},
-                            "dax_query": {"type": "string", "description": "The DAX query to execute"},
-                            "workspace_id": {"type": "string", "description": "Optional workspace ID if dataset is in a specific workspace"}
-                        },
-                        "required": ["dataset_id", "dax_query"]
-                    }
-                }
-            ]
-            
-            logger.info(f"SSE: Sending tools_available event with {len(tools)} tools")
-            yield f"event: tools_available\ndata: {json.dumps({'tools': tools})}\n\n"
+            # Don't send tools via SSE - let Claude request them properly
+            logger.info("SSE: Connection established, waiting for Claude to request tools via tools/list")
             
             # Keep connection alive with more frequent heartbeats
             heartbeat_count = 0
@@ -303,90 +267,32 @@ def handle_http_transport():
     
     # Route to appropriate MCP handler
     if method == 'initialize':
-        # Force tool registration in initialize response to work around Claude.ai bug
-        tools = [
-            {
-                "name": "powerbi_health",
-                "description": "Check Power BI server health and configuration status",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {},
-                    "required": []
-                }
-            },
-            {
-                "name": "powerbi_workspaces",
-                "description": "List Power BI workspaces accessible to the server",
-                "inputSchema": {
-                    "type": "object", 
-                    "properties": {},
-                    "required": []
-                }
-            },
-            {
-                "name": "powerbi_datasets",
-                "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {
-                        "workspace_id": {
-                            "type": "string",
-                            "description": "Optional workspace ID to filter datasets"
-                        }
-                    },
-                    "required": []
-                }
-            },
-            {
-                "name": "powerbi_query",
-                "description": "Execute a DAX query against a Power BI dataset",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {
-                        "dataset_id": {
-                            "type": "string",
-                            "description": "The Power BI dataset ID to query"
-                        },
-                        "dax_query": {
-                            "type": "string", 
-                            "description": "The DAX query to execute"
-                        },
-                        "workspace_id": {
-                            "type": "string",
-                            "description": "Optional workspace ID if dataset is in a specific workspace"
-                        }
-                    },
-                    "required": ["dataset_id", "dax_query"]
-                }
-            }
-        ]
+        logger.info(f"Initialize request received - ID: {request_id}, Params: {params}")
         
-        logger.info(f"Initialize request - forcing tool registration with {len(tools)} tools")
-        
-        return jsonify({
+        # Try simpler response structure that matches MCP spec exactly
+        response_data = {
             "jsonrpc": "2.0",
             "id": request_id,
             "result": {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {
-                    "tools": {
-                        "listChanged": True,  # Signal that tools are available
-                        "available": tools    # Include tools directly
-                    },
+                    "tools": {},  # Empty object as per spec
                     "logging": {}
                 },
                 "serverInfo": {
                     "name": "powerbi-mcp-server",
                     "version": "1.0.0"
-                },
-                "tools": tools  # Also include at root level for compatibility
+                }
             }
-        })
+        }
+        
+        logger.info(f"Initialize response: {json.dumps(response_data)}")
+        return jsonify(response_data)
     
     elif method == 'notifications/initialized':
         # Handle the initialized notification (no response required for notifications)
         logger.info("Received initialized notification - client ready")
-        logger.info("Claude.ai tools/list bug workaround: Tools were already sent in initialize response")
+        logger.info("Waiting for Claude to call tools/list...")
         # For notifications, we don't return a response (id is null)
         if request_id is None:
             # This is a notification, return empty response
@@ -409,6 +315,7 @@ def handle_http_transport():
         })
     
     elif method == 'tools/list':
+        logger.info("TOOLS/LIST CALLED! Claude is actually requesting tools!")
         tools = [
             {
                 "name": "powerbi_health",
@@ -466,23 +373,29 @@ def handle_http_transport():
             }
         ]
         
-        return jsonify({
+        response_data = {
             "jsonrpc": "2.0",
             "id": request_id,
             "result": {
                 "tools": tools
             }
-        })
+        }
+        
+        logger.info(f"Returning {len(tools)} tools to Claude")
+        return jsonify(response_data)
     
     elif method == 'tools/call':
         # Delegate to existing tool call logic
         tool_name = params.get('name')
         arguments = params.get('arguments', {})
         
+        logger.info(f"TOOL CALL! Tool: {tool_name}, Arguments: {arguments}")
+        
         # Use existing tool call implementation
         return handle_tool_call_logic(tool_name, arguments, request_id)
     
     else:
+        logger.warning(f"Unknown method requested: {method}")
         response = jsonify({
             "jsonrpc": "2.0",
             "id": request_id,
@@ -670,14 +583,14 @@ def health():
     return jsonify({
         "status": "healthy",
         "service": "Power BI MCP Server (Simple)",
-        "version": "2.1.0-force-tools",  # Updated version to verify deployment
+        "version": "2.2.0-simplified",  # Updated version to verify deployment
         "authentication": "client_credentials",
         "powerbi_configured": powerbi_configured,
         "powerbi_access": "granted" if token else "using_demo_data",
         "client_id_configured": bool(CLIENT_ID),
         "environment": "Azure" if os.environ.get('WEBSITE_HOSTNAME') else "Local",
         "mcp_endpoints_added": True,  # New field to verify deployment
-        "changes": "Forcing tool registration in initialize response",
+        "changes": "Simplified protocol, removed forced tools, enhanced logging",
         "timestamp": datetime.utcnow().isoformat()
     })
 
@@ -1232,46 +1145,8 @@ def sse_endpoint():
             # Send initial connection event
             yield f"event: connection\ndata: {json.dumps({'status': 'connected', 'protocol': '2024-11-05'})}\n\n"
             
-            # Send available tools immediately after connection (workaround for Claude.ai bug)
-            tools = [
-                {
-                    "name": "powerbi_health",
-                    "description": "Check Power BI server health and configuration status",
-                    "inputSchema": {"type": "object", "properties": {}, "required": []}
-                },
-                {
-                    "name": "powerbi_workspaces",
-                    "description": "List Power BI workspaces accessible to the server",
-                    "inputSchema": {"type": "object", "properties": {}, "required": []}
-                },
-                {
-                    "name": "powerbi_datasets",
-                    "description": "Get Power BI datasets from a specific workspace or all accessible workspaces",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {
-                            "workspace_id": {"type": "string", "description": "Optional workspace ID to filter datasets"}
-                        },
-                        "required": []
-                    }
-                },
-                {
-                    "name": "powerbi_query",
-                    "description": "Execute a DAX query against a Power BI dataset",
-                    "inputSchema": {
-                        "type": "object",
-                        "properties": {
-                            "dataset_id": {"type": "string", "description": "The Power BI dataset ID to query"},
-                            "dax_query": {"type": "string", "description": "The DAX query to execute"},
-                            "workspace_id": {"type": "string", "description": "Optional workspace ID if dataset is in a specific workspace"}
-                        },
-                        "required": ["dataset_id", "dax_query"]
-                    }
-                }
-            ]
-            
-            logger.info(f"SSE (/sse endpoint): Sending tools_available event with {len(tools)} tools")
-            yield f"event: tools_available\ndata: {json.dumps({'tools': tools})}\n\n"
+            # Don't send tools via SSE - let Claude request them properly
+            logger.info("SSE (/sse endpoint): Connection established, waiting for Claude to request tools via tools/list")
             
             # Keep connection alive with more frequent heartbeats
             heartbeat_count = 0

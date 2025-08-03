@@ -196,22 +196,75 @@ yield f"event: tools_available\ndata: {json.dumps(tools)}\n\n"
 - SSE connection should be more stable with frequent heartbeats
 - Tools should be available for use right after OAuth completion
 
+**Test Results**:
+- OAuth Flow: ✅ Success
+- Initialize: ✅ Success (tools included in response)
+- Tool Discovery: ❌ Failed (tools not showing in Claude UI)
+- Tool Usage: ❌ Failed (Claude says "tool is disabled")
+- Connection Stability (5min): ❌ Failed (SSE disconnects after 30s)
+
+**Logs Analysis**:
+```
+✅ OAuth completed successfully
+✅ Initialize request received with forced tool registration (4 tools)
+✅ SSE connection established and tools_available event sent
+❌ SSE disconnects after only 2 heartbeats (30 seconds)
+❌ Claude reconnects but tools still not available
+❌ No tools/list request (as expected due to bug)
+❌ No tool calls attempted
+```
+
+**Key Issues Identified**:
+1. SSE connection drops after exactly 30 seconds (2 heartbeats)
+2. Tools are being sent but Claude is not recognizing them
+3. Blank popup when clicking "Configure" suggests UI issue
+4. "Tool is disabled" message indicates tools aren't properly registered
+
+**Conclusion**:
+Force tool registration in initialize response did not work. Claude appears to ignore the tools in the response. The SSE connection is unstable, disconnecting after 30 seconds consistently.
+
+## Test #3: Simplified Protocol with Enhanced Logging
+**Date**: 2025-08-03
+**Commit**: Pending deployment
+**Changes Made**:
+- Simplified initialize response to match MCP spec exactly (empty tools object)
+- Removed all forced tool registration attempts
+- Removed tools from SSE events
+- Added enhanced logging:
+  - Log initialize request params
+  - Log full initialize response
+  - "TOOLS/LIST CALLED!" when tools/list is requested
+  - "TOOL CALL!" when tool is called
+  - Warning for unknown methods
+  - JSON-RPC request logging at root
+- Version updated to "2.2.0-simplified"
+
+**Hypothesis**:
+Maybe Claude actually does call tools/list but we're missing it due to protocol issues. This test will:
+1. Use the exact MCP spec structure
+2. Wait for Claude to properly request tools
+3. Log everything to see what's actually happening
+
+**Expected Behavior**:
+- Initialize should succeed with minimal response
+- IF Claude calls tools/list, we'll see "TOOLS/LIST CALLED!" in logs
+- Better understanding of what methods Claude is actually calling
+
 **Testing in Progress**: Waiting for deployment (~10 minutes)
 
 ## Next Immediate Steps
 
-1. **Deploy and Monitor** (IN PROGRESS)
-   - Commit changes
-   - Deploy to Azure
-   - Monitor logs for tool registration
+1. **Deploy Test #3** (IN PROGRESS)
+   - Simplified protocol approach
+   - Enhanced logging to understand Claude's behavior
 
-2. **If Solution 1 Fails - Try Solution 5** (Tool Pre-caching via SSE)
-   - Send tool definitions as individual SSE events
-   - Use different event types for each tool
+2. **If no tools/list call - Try HTTP-only transport**
+   - Disable SSE completely
+   - Force HTTP transport in discovery endpoint
 
-3. **If Still Failing - Try WebSocket Transport**
-   - Replace SSE with WebSocket for bidirectional communication
-   - More control over connection lifecycle
+3. **If still failing - Try different protocol version**
+   - Test with older protocol versions
+   - Check if Claude expects different response structure
 
 ## Known Issues & Workarounds
 

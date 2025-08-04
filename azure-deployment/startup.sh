@@ -42,11 +42,11 @@ echo "Creating directories..."
 mkdir -p logs
 mkdir -p .cache
 
-# Verify main app loads (FastMCP ASGI app)
-echo "Testing FastMCP ASGI app import..."
-python3 -c "from mcp_asgi_app_new import application; print('✓ FastMCP ASGI app loads successfully')" || exit 1
+# Verify main app loads (Flask MCP server)
+echo "Testing Flask MCP server import..."
+python3 -c "import mcp_simple_server; print('✓ Flask MCP server loads successfully')" || exit 1
 
-# Start the FastMCP server via ASGI
+# Start the Flask MCP server directly
 PORT=${PORT:-8000}
-echo "Starting FastMCP Server on port $PORT..."
-exec python3 -m gunicorn --bind 0.0.0.0:$PORT --worker-class uvicorn.workers.UvicornWorker --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info mcp_asgi_app_new:application
+echo "Starting Flask MCP Server on port $PORT..."
+exec python3 mcp_simple_server.py

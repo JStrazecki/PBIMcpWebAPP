@@ -1,2 +1,15 @@
-fastmcp>=2.0.0
+# FastMCP and dependencies
+fastmcp==2.11.1
+mcp>=1.10.0
+
+# Web server for Azure deployment
+gunicorn>=20.1.0
+uvicorn[standard]>=0.27.0
+starlette>=0.27.0
+
+# HTTP requests
 requests>=2.31.0
+
+# Required by FastMCP
+pydantic>=2.0.0
+typing-extensions>=4.6.0

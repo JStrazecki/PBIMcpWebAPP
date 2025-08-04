@@ -1,1 +1,1 @@
-web: python server.py
+web: gunicorn --bind=0.0.0.0:$PORT --worker-class uvicorn.workers.UvicornWorker --timeout 300 --workers 1 --access-logfile - --error-logfile - app:app

@@ -192,4 +192,15 @@ def powerbi_query(dataset_id: str, dax_query: str, workspace_id: Optional[str] =
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8000))
     logger.info(f"Starting Power BI MCP Server on port {port}")
-    mcp.run(host="0.0.0.0", port=port)
+    
+    try:
+        # Run FastMCP server
+        mcp.run(host="0.0.0.0", port=port)
+    except Exception as e:
+        logger.error(f"Failed to start server: {e}")
+        # Fallback - try with debug mode
+        try:
+            mcp.run(host="0.0.0.0", port=port, debug=True)
+        except Exception as e2:
+            logger.error(f"Server startup failed completely: {e2}")
+            raise

@@ -1,6 +1,7 @@
 """
 Simple MCP Server for Claude AI
-No user authentication required - uses Azure client credentials for Power BI
+FREE ACCESS - No authentication required for any endpoint
+Uses Azure client credentials for Power BI (if configured)
 """
 
 import os
@@ -33,30 +34,18 @@ CLIENT_ID = os.environ.get('AZURE_CLIENT_ID', '')
 CLIENT_SECRET = os.environ.get('AZURE_CLIENT_SECRET', '')
 TENANT_ID = os.environ.get('AZURE_TENANT_ID', '')
 
-# MCP Server Access Control - Set these to control who can connect
-MCP_ALLOWED_CLIENT_ID = os.environ.get('MCP_CLIENT_ID', 'demo-client-id')
-MCP_ALLOWED_CLIENT_SECRET = os.environ.get('MCP_CLIENT_SECRET', 'demo-client-secret')
+# MCP Server Access Control - DISABLED for free access
+# MCP_ALLOWED_CLIENT_ID = os.environ.get('MCP_CLIENT_ID', 'demo-client-id')
+# MCP_ALLOWED_CLIENT_SECRET = os.environ.get('MCP_CLIENT_SECRET', 'demo-client-secret')
 
 # Power BI OAuth scopes for client credentials
 POWERBI_SCOPES = ["https://analysis.windows.net/powerbi/api/.default"]
 
 def check_claude_auth():
-    """Check if request has a valid bearer token from Claude (always accept)"""
-    auth_header = request.headers.get('Authorization')
+    """No authentication required - always return True for free access"""
     user_agent = request.headers.get('User-Agent', 'Unknown')
-    
-    logger.info(f"Auth check - User-Agent: {user_agent}, Auth header: {auth_header[:30] if auth_header else 'None'}...")
-    
-    if auth_header:
-        # Handle both single and double "Bearer" prefix issues
-        if (auth_header.startswith('Bearer ') or 
-            auth_header.startswith('bearer ') or
-            'Bearer Bearer' in auth_header):
-            # Any bearer token is valid for this simple server
-            logger.info(f"Valid auth header detected from {user_agent}")
-            return True
-    logger.warning(f"Invalid or missing auth header from {user_agent}: {auth_header}")
-    return False
+    logger.info(f"Free access request from {user_agent}")
+    return True
 
 def get_powerbi_token() -> Optional[str]:
     """Get Power BI access token using client credentials flow"""
@@ -158,38 +147,23 @@ def home():
             "version": "1.0.0"
         },
         "authentication": {
-            "type": "oauth2",
-            "client_validation": "enabled",
-            "allowed_client_id": CLIENT_ID,
+            "type": "none",
+            "access": "free",
             "powerbi_configured": bool(CLIENT_ID and CLIENT_SECRET and TENANT_ID),
-            "note": "Uses Power BI app registration for both MCP access and Power BI integration"
+            "note": "No authentication required - free access to all endpoints"
         },
         "instructions": [
             "This server provides Power BI integration tools",
             "Available tools: health, workspaces, datasets, query",
-            "OAuth2 authentication required with valid client credentials"
+            "FREE ACCESS - No authentication required"
         ]
     })
     return add_cors_headers(response)
 
 def handle_sse_at_root():
     """Handle SSE transport at root endpoint"""
-    # Check authentication
-    has_claude_auth = check_claude_auth()
-    if not has_claude_auth:
-        return Response(
-            "event: error\ndata: Authentication required\n\n",
-            mimetype='text/event-stream',
-            status=401,
-            headers={
-                'Content-Type': 'text/event-stream',
-                'Cache-Control': 'no-cache',
-                'Connection': 'keep-alive',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Authorization, Content-Type',
-                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
-            }
-        )
+    # No authentication required - free access
+    logger.info("SSE connection established - no authentication required")
     
     def event_stream():
         try:
@@ -234,18 +208,8 @@ def handle_sse_at_root():
 
 def handle_http_transport():
     """Handle HTTP transport requests at root endpoint"""
-    # Check authentication
-    has_claude_auth = check_claude_auth()
-    if not has_claude_auth:
-        response = jsonify({
-            "jsonrpc": "2.0",
-            "error": {
-                "code": -32001,
-                "message": "Authentication required"
-            }
-        })
-        response.status_code = 401
-        return response
+    # No authentication required - free access
+    logger.info("HTTP transport request - no authentication required")
     
     data = request.get_json()
     if not data:
@@ -556,10 +520,8 @@ def mcp_discovery():
             "message_url": f"{base_url}/message"
         },
         "authentication": {
-            "type": "oauth2",
-            "authorization_url": f"{base_url}/authorize",
-            "token_url": f"{base_url}/token",
-            "scopes": ["powerbi"]
+            "type": "none",
+            "note": "No authentication required - free access"
         },
         "capabilities": {
             "tools": True,
@@ -583,8 +545,8 @@ def health():
     return jsonify({
         "status": "healthy",
         "service": "Power BI MCP Server (Simple)",
-        "version": "2.2.0-simplified",  # Updated version to verify deployment
-        "authentication": "client_credentials",
+        "version": "2.2.0-free-access",  # Updated version to verify deployment
+        "authentication": "none - free access",
         "powerbi_configured": powerbi_configured,
         "powerbi_access": "granted" if token else "using_demo_data",
         "client_id_configured": bool(CLIENT_ID),
@@ -616,10 +578,8 @@ def test_post():
 @app.route('/workspaces')
 def workspaces():
     """List Power BI workspaces (real data if configured, demo otherwise)"""
-    # Check Claude auth if present (but don't require it for backwards compatibility)
-    has_claude_auth = check_claude_auth()
-    if has_claude_auth:
-        logger.info("Request authenticated via Claude bearer token")
+    # Free access - no authentication required
+    logger.info("Workspaces request - free access")
     
     token = get_powerbi_token()
     
@@ -703,10 +663,8 @@ def workspaces():
 @app.route('/datasets')
 def datasets():
     """Get Power BI datasets (real data if configured, demo otherwise)"""
-    # Check Claude auth if present (but don't require it for backwards compatibility)
-    has_claude_auth = check_claude_auth()
-    if has_claude_auth:
-        logger.info("Request authenticated via Claude bearer token")
+    # Free access - no authentication required
+    logger.info("Datasets request - free access")
     
     workspace_id = request.args.get('workspace_id')
     token = get_powerbi_token()
@@ -804,10 +762,8 @@ def datasets():
 @app.route('/query', methods=['POST'])
 def query():
     """Execute Power BI query (real DAX if configured, demo otherwise)"""
-    # Check Claude auth if present (but don't require it for backwards compatibility)
-    has_claude_auth = check_claude_auth()
-    if has_claude_auth:
-        logger.info("Request authenticated via Claude bearer token")
+    # Free access - no authentication required
+    logger.info("Query request - free access")
     
     data = request.get_json()
     
@@ -941,7 +897,7 @@ def query():
 
 @app.route('/authorize', methods=['GET', 'POST'])
 def authorize():
-    """Handle Claude's OAuth authorize request - always approve"""
+    """OAuth authorize endpoint - not needed for free access but kept for compatibility"""
     # Get OAuth parameters from Claude (both GET and POST)
     if request.method == 'POST':
         data = request.get_json() or request.form
@@ -983,7 +939,7 @@ def authorize():
 
 @app.route('/token', methods=['POST'])
 def token():
-    """Handle Claude's OAuth token request - validate client credentials"""
+    """OAuth token endpoint - not needed for free access but kept for compatibility"""
     # Get token request parameters
     grant_type = request.form.get('grant_type')
     code = request.form.get('code')
@@ -1072,27 +1028,20 @@ def claude_config():
             "step_1": "Open Claude AI Settings > Connectors",
             "step_2": "Click 'Add Remote MCP Server'",
             "step_3": f"Enter URL: {base_url}",
-            "step_4": "Set Authentication: OAuth2",
-            "step_5": f"Client ID: {CLIENT_ID}", 
-            "step_6": f"Client Secret: {CLIENT_SECRET}",
-            "step_7": "Save and test connection"
+            "step_4": "Set Authentication: None (No authentication required)",
+            "step_5": "Save and test connection - that's it!"
         },
         "server_url": base_url,
-        "authentication": "oauth2_validated",
-        "oauth_endpoints": {
-            "authorization_url": f"{base_url}/authorize",
-            "token_url": f"{base_url}/token"
-        },
+        "authentication": "none - free access",
         "security": {
-            "client_validation": "enabled",
-            "allowed_client_id": CLIENT_ID,
-            "note": "Uses Power BI app registration credentials for MCP access"
+            "access_control": "disabled",
+            "note": "No authentication required - completely open access"
         },
         "power_bi_integration": {
             "AZURE_CLIENT_ID": "Your Power BI app registration client ID",
             "AZURE_CLIENT_SECRET": "Your Power BI app registration client secret", 
             "AZURE_TENANT_ID": "Your Azure tenant ID",
-            "note": "Same credentials used for both MCP access and Power BI integration"
+            "note": "Only needed for real Power BI data access (optional for demo mode)"
         },
         "test_command": "Ask Claude: 'Can you check the Power BI server health?'"
     })
@@ -1123,22 +1072,8 @@ def handle_options():
 @app.route('/sse')
 def sse_endpoint():
     """SSE endpoint for server-to-client streaming"""
-    # Check authentication
-    has_claude_auth = check_claude_auth()
-    if not has_claude_auth:
-        return Response(
-            "event: error\ndata: Authentication required\n\n",
-            mimetype='text/event-stream',
-            status=401,
-            headers={
-                'Content-Type': 'text/event-stream',
-                'Cache-Control': 'no-cache',
-                'Connection': 'keep-alive',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Authorization, Content-Type',
-                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
-            }
-        )
+    # No authentication required - free access
+    logger.info("SSE endpoint accessed - no authentication required")
     
     def event_stream():
         try:
@@ -1184,16 +1119,8 @@ def sse_endpoint():
 @app.route('/message', methods=['POST'])
 def message_endpoint():
     """Message endpoint for client-to-server communication"""
-    # Check authentication
-    has_claude_auth = check_claude_auth()
-    if not has_claude_auth:
-        return jsonify({
-            "jsonrpc": "2.0",
-            "error": {
-                "code": -32001,
-                "message": "Authentication required"
-            }
-        }), 401
+    # No authentication required - free access
+    logger.info("Message endpoint accessed - no authentication required")
     
     data = request.get_json()
     if not data:

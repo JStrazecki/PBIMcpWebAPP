@@ -505,15 +505,65 @@ def handle_tool_call_logic(tool_name, arguments, request_id):
 
 @app.route('/mcp', methods=['GET', 'POST', 'OPTIONS'])
 def mcp_endpoint():
-    """MCP endpoint for Claude.ai compatibility - delegates to main handler"""
+    """MCP endpoint for Claude.ai compatibility"""
+    # Handle CORS preflight
     if request.method == 'OPTIONS':
         return handle_options()
     
-    # Log MCP endpoint access
-    logger.info(f"MCP endpoint accessed: method={request.method}")
+    # Enhanced logging for debugging Claude connections
+    user_agent = request.headers.get('User-Agent', 'Unknown')
+    content_type = request.headers.get('Content-Type', 'None')
+    accept = request.headers.get('Accept', 'None')
     
-    # Delegate to the main home() handler which already handles MCP protocol
-    return home()
+    logger.info(f"MCP endpoint accessed: method={request.method}, UA={user_agent}, Content-Type={content_type}, Accept={accept}")
+    
+    # Add explicit CORS headers for Claude compatibility
+    def add_mcp_cors_headers(response):
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type, Accept'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Expose-Headers'] = 'Content-Type'
+        return response
+    
+    # For GET requests, Claude might be expecting server info or capability discovery
+    if request.method == 'GET':
+        # Check if Claude is requesting SSE
+        if 'text/event-stream' in accept:
+            logger.info("Claude requesting SSE at /mcp - redirecting to SSE handler")
+            return handle_sse_at_root()
+        
+        # Otherwise return server capabilities for discovery
+        response = jsonify({
+            "name": "Power BI MCP Server",
+            "version": "1.0.0", 
+            "protocol_version": "2024-11-05",
+            "capabilities": {
+                "tools": True,
+                "resources": False,
+                "prompts": False
+            },
+            "server_info": {
+                "name": "powerbi-mcp-server",
+                "version": "1.0.0"
+            },
+            "authentication": {
+                "type": "none",
+                "access": "free"
+            },
+            "tools": [
+                {"name": "powerbi_health", "description": "Check Power BI server health"},
+                {"name": "powerbi_workspaces", "description": "List Power BI workspaces"}, 
+                {"name": "powerbi_datasets", "description": "Get Power BI datasets"},
+                {"name": "powerbi_query", "description": "Execute DAX queries"}
+            ]
+        })
+        return add_mcp_cors_headers(response)
+    
+    # For POST requests, handle MCP protocol
+    elif request.method == 'POST':
+        logger.info("Claude sending POST request to /mcp - handling MCP protocol")
+        response = handle_http_transport()
+        return add_mcp_cors_headers(response)
 
 @app.route('/.well-known/mcp')
 def mcp_discovery():
@@ -527,8 +577,7 @@ def mcp_discovery():
         "version": "2024-11-05",
         "transport": {
             "type": "http", 
-            "http_url": f"{base_url}/",
-            "mcp_url": f"{base_url}/mcp",
+            "http_url": f"{base_url}/mcp",
             "sse_url": f"{base_url}/sse",
             "message_url": f"{base_url}/message"
         },

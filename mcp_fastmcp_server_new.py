@@ -1,5 +1,5 @@
 """
-Power BI MCP Server using FastMCP
+Power BI MCP Server using FastMCP (Updated for current API)
 Built with FastMCP for better Claude.ai compatibility
 """
 
@@ -10,7 +10,6 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 
 from fastmcp import FastMCP
-from fastmcp.server import Context
 import requests
 from dotenv import load_dotenv
 
@@ -30,7 +29,7 @@ CLIENT_ID = os.environ.get('AZURE_CLIENT_ID', '')
 CLIENT_SECRET = os.environ.get('AZURE_CLIENT_SECRET', '')
 TENANT_ID = os.environ.get('AZURE_TENANT_ID', '')
 
-# Create FastMCP server
+# Create FastMCP server with the new API
 mcp = FastMCP("Power BI MCP Server")
 
 # Power BI OAuth scopes
@@ -67,7 +66,7 @@ def get_powerbi_token() -> Optional[str]:
         return None
 
 @mcp.tool()
-async def powerbi_health(ctx: Context) -> str:
+def powerbi_health() -> str:
     """Check Power BI server health and configuration status"""
     token = get_powerbi_token()
     powerbi_configured = bool(token)
@@ -90,7 +89,7 @@ async def powerbi_health(ctx: Context) -> str:
     return json.dumps(result, indent=2)
 
 @mcp.tool()
-async def powerbi_workspaces(ctx: Context) -> str:
+def powerbi_workspaces() -> str:
     """List Power BI workspaces accessible to the server"""
     token = get_powerbi_token()
     
@@ -176,7 +175,7 @@ async def powerbi_workspaces(ctx: Context) -> str:
     return json.dumps(result, indent=2)
 
 @mcp.tool()
-async def powerbi_datasets(ctx: Context, workspace_id: Optional[str] = None) -> str:
+def powerbi_datasets(workspace_id: Optional[str] = None) -> str:
     """Get Power BI datasets from a specific workspace or all accessible workspaces
     
     Args:
@@ -278,8 +277,7 @@ async def powerbi_datasets(ctx: Context, workspace_id: Optional[str] = None) -> 
     return json.dumps(result, indent=2)
 
 @mcp.tool()
-async def powerbi_query(
-    ctx: Context,
+def powerbi_query(
     dataset_id: str,
     dax_query: str,
     workspace_id: Optional[str] = None
@@ -393,36 +391,11 @@ async def powerbi_query(
     import json
     return json.dumps(result, indent=2)
 
-# Add initialization handler
-@mcp.on_initialize
-async def on_initialize(ctx: Context, params):
-    """Handle initialization and log protocol details"""
-    logger.info(f"FastMCP initialization - Protocol version: {params.get('protocolVersion', 'unknown')}")
-    logger.info(f"Client info: {params.get('clientInfo', {})}")
-    logger.info("FastMCP server ready with Power BI tools")
-
 if __name__ == "__main__":
     # Get configuration from environment
-    transport = os.environ.get('MCP_TRANSPORT', 'stdio')
     port = int(os.environ.get('PORT', 8000))
     
-    logger.info(f"Starting FastMCP Power BI server with transport: {transport}")
+    logger.info(f"Starting FastMCP Power BI server on port {port}")
     
-    if transport == 'http':
-        # For Azure deployment
-        mcp.run(
-            transport="http",
-            host="0.0.0.0",
-            port=port,
-            path="/mcp"
-        )
-    elif transport == 'sse':
-        # For SSE transport
-        mcp.run(
-            transport="sse",
-            host="0.0.0.0",
-            port=port
-        )
-    else:
-        # Default to stdio for local testing
-        mcp.run(transport="stdio")
+    # Run with HTTP transport for Azure
+    mcp.run(host="0.0.0.0", port=port)

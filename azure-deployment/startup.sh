@@ -44,9 +44,9 @@ mkdir -p .cache
 
 # Verify main app loads (FastMCP ASGI app)
 echo "Testing FastMCP ASGI app import..."
-python3 -c "from mcp_asgi_app import application; print('✓ FastMCP ASGI app loads successfully')" || exit 1
+python3 -c "from mcp_asgi_app_new import application; print('✓ FastMCP ASGI app loads successfully')" || exit 1
 
 # Start the FastMCP server via ASGI
 PORT=${PORT:-8000}
 echo "Starting FastMCP Server on port $PORT..."
-exec python3 -m gunicorn --bind 0.0.0.0:$PORT --worker-class uvicorn.workers.UvicornWorker --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application
+exec python3 -m gunicorn --bind 0.0.0.0:$PORT --worker-class uvicorn.workers.UvicornWorker --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info mcp_asgi_app_new:application

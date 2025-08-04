@@ -80,6 +80,7 @@ async def powerbi_health(ctx: Context) -> str:
         "status": "healthy",
         "service": "Power BI MCP Server (FastMCP)",
         "version": "3.0.0",
+        "server_type": "FASTMCP_SERVER",
         "authentication": "client_credentials",
         "powerbi_configured": powerbi_configured,
         "powerbi_access": "granted" if token else "using_demo_data",

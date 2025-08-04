@@ -561,6 +561,7 @@ def test_deployment():
     """Test endpoint to verify deployment worked"""
     return jsonify({
         "message": "Deployment successful! MCP endpoints should be available.",
+        "server_type": "SIMPLE_FLASK_SERVER",
         "endpoints": ["/mcp/initialize", "/mcp/tools/list", "/mcp/tools/call"],
         "root_methods": "GET, POST should both work",
         "timestamp": datetime.utcnow().isoformat()

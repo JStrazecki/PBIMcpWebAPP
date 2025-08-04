@@ -35,16 +35,18 @@ python3 -c "import flask; print('✓ flask installed')" || exit 1
 python3 -c "import msal; print('✓ msal installed')" || exit 1
 python3 -c "import requests; print('✓ requests installed')" || exit 1
 python3 -c "import gunicorn; print('✓ gunicorn installed')" || exit 1
+python3 -c "import uvicorn; print('✓ uvicorn installed')" || exit 1
 
 # Create necessary directories
 echo "Creating directories..."
 mkdir -p logs
 mkdir -p .cache
 
-# Verify main app loads (MCP bridge app)
-echo "Testing MCP bridge app import..."
-python3 -c "from mcp_bridge import APP; print('✓ MCP Bridge app loads successfully')" || exit 1
+# Verify main app loads (FastMCP ASGI app)
+echo "Testing FastMCP ASGI app import..."
+python3 -c "from mcp_asgi_app import application; print('✓ FastMCP ASGI app loads successfully')" || exit 1
 
-# Start the MCP bridge app
-echo "Starting MCP Bridge Server on port 8000..."
-exec python3 -m gunicorn --bind 0.0.0.0:8000 --worker-class sync --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info mcp_bridge:APP
+# Start the FastMCP server via ASGI
+PORT=${PORT:-8000}
+echo "Starting FastMCP Server on port $PORT..."
+exec python3 -m gunicorn --bind 0.0.0.0:$PORT --worker-class uvicorn.workers.UvicornWorker --timeout 600 --workers 1 --access-logfile - --error-logfile - --log-level info mcp_asgi_app:application

@@ -503,6 +503,18 @@ def handle_tool_call_logic(tool_name, arguments, request_id):
         response.status_code = 400
         return response
 
+@app.route('/mcp', methods=['GET', 'POST', 'OPTIONS'])
+def mcp_endpoint():
+    """MCP endpoint for Claude.ai compatibility - delegates to main handler"""
+    if request.method == 'OPTIONS':
+        return handle_options()
+    
+    # Log MCP endpoint access
+    logger.info(f"MCP endpoint accessed: method={request.method}")
+    
+    # Delegate to the main home() handler which already handles MCP protocol
+    return home()
+
 @app.route('/.well-known/mcp')
 def mcp_discovery():
     """MCP discovery endpoint - advertises SSE transport"""
@@ -516,6 +528,7 @@ def mcp_discovery():
         "transport": {
             "type": "http", 
             "http_url": f"{base_url}/",
+            "mcp_url": f"{base_url}/mcp",
             "sse_url": f"{base_url}/sse",
             "message_url": f"{base_url}/message"
         },

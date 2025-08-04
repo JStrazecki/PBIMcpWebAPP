@@ -1,13 +1,14 @@
 # Power BI MCP Server
 
-Minimal FastMCP server for Power BI integration with Claude AI.
+Minimal FastMCP server for Power BI integration with Claude AI, following Azure deployment best practices.
 
 ## Features
 
 - 4 Power BI tools: health, workspaces, datasets, query
 - Works with real Power BI data (if configured) or demo data
 - No authentication required
-- Built with FastMCP for Claude compatibility
+- Built with FastMCP for native Claude compatibility
+- Azure App Service ready with ASGI deployment
 
 ## Environment Variables
 
@@ -20,7 +21,14 @@ Optional - for real Power BI data:
 
 ```bash
 pip install -r requirements.txt
-python server.py
+python main.py
+```
+
+## Azure Deployment
+
+Uses Gunicorn with Uvicorn worker for ASGI compatibility:
+```
+web: gunicorn --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT main:app
 ```
 
 ## Claude Configuration

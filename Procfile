@@ -1,1 +1,1 @@
-gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info asgi_simple:app
+web: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_fastmcp_asgi:application

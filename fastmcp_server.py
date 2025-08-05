@@ -444,6 +444,18 @@ async def root_info(request):
     })
 
 
+@mcp.custom_route("/", methods=["POST"])
+async def root_post(request):
+    """Handle POST to root - redirect to MCP endpoint"""
+    from starlette.responses import JSONResponse
+    
+    return JSONResponse({
+        "error": "Wrong endpoint",
+        "message": "MCP protocol endpoint is at /mcp",
+        "redirect": "/mcp"
+    }, status_code=400)
+
+
 @mcp.custom_route("/mcp", methods=["GET"])
 async def mcp_info(request):
     """Handle GET requests to /mcp endpoint with helpful info"""
@@ -470,6 +482,56 @@ async def mcp_info(request):
         },
         "info": "This endpoint is designed for Claude.ai MCP integration. For testing, use the health endpoint at /health"
     }, status_code=405)
+
+
+@mcp.custom_route("/.well-known/oauth-authorization-server", methods=["GET"])
+async def oauth_auth_server(request):
+    """OAuth discovery endpoint for Claude.ai"""
+    from starlette.responses import JSONResponse
+    
+    # Return minimal OAuth server metadata indicating no auth required
+    return JSONResponse({
+        "issuer": request.url.scheme + "://" + request.url.netloc,
+        "authorization_endpoint": None,
+        "token_endpoint": None,
+        "response_types_supported": [],
+        "grant_types_supported": [],
+        "token_endpoint_auth_methods_supported": ["none"],
+        "service_documentation": request.url.scheme + "://" + request.url.netloc,
+        "ui_locales_supported": ["en-US"]
+    })
+
+
+@mcp.custom_route("/.well-known/oauth-protected-resource", methods=["GET"])
+async def oauth_protected_resource(request):
+    """OAuth protected resource metadata for Claude.ai"""
+    from starlette.responses import JSONResponse
+    
+    # Indicate this resource doesn't require OAuth
+    return JSONResponse({
+        "resource": request.url.scheme + "://" + request.url.netloc,
+        "oauth_required": False,
+        "authentication_required": False
+    })
+
+
+@mcp.custom_route("/register", methods=["POST"])
+async def register_client(request):
+    """Handle OAuth client registration attempts"""
+    from starlette.responses import JSONResponse
+    
+    # Return a dummy registration response
+    return JSONResponse({
+        "client_id": "no-auth-required",
+        "client_secret": "no-auth-required",
+        "registration_access_token": "no-auth-required",
+        "registration_client_uri": request.url.scheme + "://" + request.url.netloc + "/register/no-auth-required",
+        "client_id_issued_at": 1734567890,
+        "client_secret_expires_at": 0,
+        "grant_types": [],
+        "response_types": [],
+        "token_endpoint_auth_method": "none"
+    })
 
 
 if __name__ == "__main__":

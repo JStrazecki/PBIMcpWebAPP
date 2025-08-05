@@ -1,0 +1,10 @@
+# Azure App Service configuration
+runtime: python
+runtime_version: "3.11"
+startup_script: "python run_fastmcp.py"
+
+# Environment variables (set these in Azure Portal)
+env_variables:
+  PYTHONUNBUFFERED: "1"
+  ENABLE_ORYX_BUILD: "true"
+  SCM_DO_BUILD_DURING_DEPLOYMENT: "true"

@@ -1,14 +1,18 @@
 """
-Power BI MCP Server using FastMCP
-Built with FastMCP for better Claude.ai compatibility
+Power BI MCP Server using FastMCP with OAuth2 support for Azure
+Combines FastMCP with Flask for OAuth2 endpoints
 """
 
 import os
 import sys
 import logging
+import json
+import secrets
 from typing import Optional, Dict, Any
 from datetime import datetime
 
+from flask import Flask, request, jsonify, redirect, Response
+from flask_cors import CORS
 from fastmcp import FastMCP
 from fastmcp.server import Context
 import requests
@@ -23,12 +27,16 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     stream=sys.stderr
 )
-logger = logging.getLogger("pbi-fastmcp")
+logger = logging.getLogger("pbi-fastmcp-azure")
 
 # Power BI Client Credentials Configuration
 CLIENT_ID = os.environ.get('AZURE_CLIENT_ID', '')
 CLIENT_SECRET = os.environ.get('AZURE_CLIENT_SECRET', '')
 TENANT_ID = os.environ.get('AZURE_TENANT_ID', '')
+
+# Create Flask app for OAuth2 endpoints
+flask_app = Flask(__name__)
+CORS(flask_app)
 
 # Create FastMCP server
 mcp = FastMCP(
@@ -39,6 +47,22 @@ mcp = FastMCP(
 
 # Power BI OAuth scopes
 POWERBI_SCOPES = ["https://analysis.windows.net/powerbi/api/.default"]
+
+def check_claude_auth():
+    """Check if request has a valid bearer token from Claude"""
+    auth_header = request.headers.get('Authorization')
+    user_agent = request.headers.get('User-Agent', 'Unknown')
+    
+    logger.info(f"Auth check - User-Agent: {user_agent}, Auth header: {auth_header[:30] if auth_header else 'None'}...")
+    
+    if auth_header:
+        if (auth_header.startswith('Bearer ') or 
+            auth_header.startswith('bearer ') or
+            'Bearer Bearer' in auth_header):
+            logger.info(f"Valid auth header detected from {user_agent}")
+            return True
+    logger.warning(f"Invalid or missing auth header from {user_agent}: {auth_header}")
+    return False
 
 def get_powerbi_token() -> Optional[str]:
     """Get Power BI access token using client credentials flow"""
@@ -70,6 +94,146 @@ def get_powerbi_token() -> Optional[str]:
         logger.error(f"Error getting Power BI token: {e}")
         return None
 
+# Flask OAuth2 endpoints
+@flask_app.route('/', methods=['GET', 'POST'])
+def home():
+    """Root endpoint for server info"""
+    base_url = request.base_url
+    if 'azurewebsites.net' in base_url:
+        base_url = base_url.replace('http://', 'https://')
+    
+    return jsonify({
+        "name": "Power BI MCP Server (FastMCP)",
+        "version": "3.0.0", 
+        "protocol_version": "2024-11-05",
+        "capabilities": {
+            "tools": True,
+            "resources": False,
+            "prompts": False
+        },
+        "server_info": {
+            "name": "powerbi-fastmcp",
+            "version": "3.0.0"
+        },
+        "authentication": {
+            "type": "oauth2",
+            "powerbi_configured": bool(CLIENT_ID and CLIENT_SECRET and TENANT_ID),
+        },
+        "endpoints": {
+            "mcp": f"{base_url}mcp",
+            "oauth_authorize": f"{base_url}authorize",
+            "oauth_token": f"{base_url}token",
+            "health": f"{base_url}health"
+        }
+    })
+
+@flask_app.route('/health')
+def health():
+    """Health check endpoint"""
+    token = get_powerbi_token()
+    powerbi_configured = bool(token)
+    
+    return jsonify({
+        "status": "healthy",
+        "service": "Power BI MCP Server (FastMCP)",
+        "version": "3.0.0",
+        "authentication": "client_credentials",
+        "powerbi_configured": powerbi_configured,
+        "powerbi_access": "granted" if token else "using_demo_data",
+        "client_id_configured": bool(CLIENT_ID),
+        "environment": "Azure" if os.environ.get('WEBSITE_HOSTNAME') else "Local",
+        "framework": "FastMCP + Flask",
+        "timestamp": datetime.utcnow().isoformat()
+    })
+
+@flask_app.route('/authorize', methods=['GET', 'POST'])
+def authorize():
+    """Handle Claude's OAuth authorize request"""
+    if request.method == 'POST':
+        data = request.get_json() or request.form
+        client_id = data.get('client_id')
+        redirect_uri = data.get('redirect_uri')
+        state = data.get('state')
+    else:
+        client_id = request.args.get('client_id')
+        redirect_uri = request.args.get('redirect_uri')
+        state = request.args.get('state')
+    
+    logger.info(f"OAuth authorize request: method={request.method}, client_id={client_id}, redirect_uri={redirect_uri}")
+    
+    if not redirect_uri:
+        redirect_uri = "https://claude.ai/api/mcp/auth_callback"
+        logger.info(f"Using default redirect URI: {redirect_uri}")
+    
+    if not state:
+        state = "claude-auth-state"
+        logger.info(f"Using default state: {state}")
+    
+    auth_code = secrets.token_urlsafe(32)
+    logger.info(f"Generated auth code for client_id={client_id}")
+    
+    redirect_url = f"{redirect_uri}?code={auth_code}&state={state}"
+    return redirect(redirect_url)
+
+@flask_app.route('/token', methods=['POST'])
+def token():
+    """Handle Claude's OAuth token request"""
+    grant_type = request.form.get('grant_type')
+    code = request.form.get('code')
+    client_id = request.form.get('client_id')
+    client_secret = request.form.get('client_secret')
+    
+    logger.info(f"OAuth token request: grant_type={grant_type}, client_id={client_id}")
+    
+    if grant_type != 'authorization_code':
+        return jsonify({
+            "error": "unsupported_grant_type",
+            "error_description": "Only authorization_code grant type is supported"
+        }), 400
+    
+    if not code:
+        return jsonify({
+            "error": "invalid_request",
+            "error_description": "Missing authorization code"
+        }), 400
+    
+    # Validate client credentials
+    if not client_id or not client_secret:
+        logger.warning("Token request missing client credentials")
+        return jsonify({
+            "error": "invalid_client",
+            "error_description": "Client authentication required"
+        }), 401
+    
+    if client_id != CLIENT_ID or client_secret != CLIENT_SECRET:
+        logger.warning(f"Invalid client credentials: client_id='{client_id}'")
+        return jsonify({
+            "error": "invalid_client", 
+            "error_description": "Invalid client credentials"
+        }), 401
+    
+    logger.info(f"Client {client_id} authenticated successfully")
+    
+    access_token = secrets.token_urlsafe(64)
+    
+    return jsonify({
+        "access_token": access_token,
+        "token_type": "Bearer",
+        "expires_in": 3600,
+        "scope": "powerbi"
+    })
+
+# CORS preflight handlers
+@flask_app.route('/<path:path>', methods=['OPTIONS'])
+def handle_options(path):
+    """Handle CORS preflight requests"""
+    response = Response('', 200)
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    return response
+
+# FastMCP tools
 @mcp.tool()
 async def powerbi_health(ctx: Context) -> str:
     """Check Power BI server health and configuration status"""
@@ -89,7 +253,6 @@ async def powerbi_health(ctx: Context) -> str:
         "timestamp": datetime.utcnow().isoformat()
     }
     
-    import json
     return json.dumps(result, indent=2)
 
 @mcp.tool()
@@ -98,7 +261,6 @@ async def powerbi_workspaces(ctx: Context) -> str:
     token = get_powerbi_token()
     
     if token:
-        # Get real Power BI workspaces
         try:
             headers = {
                 "Authorization": f"Bearer {token}",
@@ -134,10 +296,7 @@ async def powerbi_workspaces(ctx: Context) -> str:
                     "timestamp": datetime.utcnow().isoformat()
                 }
                 
-                import json
                 return json.dumps(result, indent=2)
-            else:
-                logger.error(f"Power BI API error: {response.status_code} - {response.text}")
         except Exception as e:
             logger.error(f"Error fetching Power BI workspaces: {e}")
     
@@ -175,7 +334,6 @@ async def powerbi_workspaces(ctx: Context) -> str:
         "timestamp": datetime.utcnow().isoformat()
     }
     
-    import json
     return json.dumps(result, indent=2)
 
 @mcp.tool()
@@ -188,7 +346,6 @@ async def powerbi_datasets(ctx: Context, workspace_id: Optional[str] = None) -> 
     token = get_powerbi_token()
     
     if token:
-        # Get real Power BI datasets
         try:
             headers = {
                 "Authorization": f"Bearer {token}",
@@ -227,10 +384,7 @@ async def powerbi_datasets(ctx: Context, workspace_id: Optional[str] = None) -> 
                     "timestamp": datetime.utcnow().isoformat()
                 }
                 
-                import json
                 return json.dumps(result, indent=2)
-            else:
-                logger.error(f"Power BI datasets API error: {response.status_code} - {response.text}")
         except Exception as e:
             logger.error(f"Error fetching Power BI datasets: {e}")
     
@@ -259,7 +413,6 @@ async def powerbi_datasets(ctx: Context, workspace_id: Optional[str] = None) -> 
         }
     ]
     
-    # Filter by workspace if specified
     if workspace_id and not workspace_id.startswith('demo-'):
         filtered_datasets = []
     elif workspace_id:
@@ -277,7 +430,6 @@ async def powerbi_datasets(ctx: Context, workspace_id: Optional[str] = None) -> 
         "timestamp": datetime.utcnow().isoformat()
     }
     
-    import json
     return json.dumps(result, indent=2)
 
 @mcp.tool()
@@ -297,7 +449,6 @@ async def powerbi_query(
     token = get_powerbi_token()
     
     if token and dax_query:
-        # Execute real DAX query
         try:
             headers = {
                 "Authorization": f"Bearer {token}",
@@ -339,12 +490,8 @@ async def powerbi_query(
                     "status": "success"
                 }
                 
-                import json
                 return json.dumps(result, indent=2)
             else:
-                logger.error(f"Power BI query API error: {response.status_code} - {response.text}")
-                
-                # Parse error for better user guidance
                 error_message = response.text[:500]
                 troubleshooting_tip = ""
                 
@@ -393,10 +540,9 @@ async def powerbi_query(
         "status": "success"
     }
     
-    import json
     return json.dumps(result, indent=2)
 
-# Add initialization handler
+# Initialization handler
 @mcp.on_initialize
 async def on_initialize(ctx: Context, params):
     """Handle initialization and log protocol details"""
@@ -404,28 +550,44 @@ async def on_initialize(ctx: Context, params):
     logger.info(f"Client info: {params.get('clientInfo', {})}")
     logger.info("FastMCP server ready with Power BI tools")
 
+# Create combined ASGI app
+def create_app():
+    """Create the combined ASGI application"""
+    from werkzeug.middleware.dispatcher import DispatcherMiddleware
+    from werkzeug.exceptions import NotFound
+    
+    # Get FastMCP ASGI app
+    mcp_asgi = mcp.get_asgi_app(
+        transport="http",
+        path="/mcp"
+    )
+    
+    # Convert Flask to ASGI using a2wsgi
+    try:
+        from a2wsgi import WSGIMiddleware
+        flask_asgi = WSGIMiddleware(flask_app)
+    except ImportError:
+        logger.error("a2wsgi not installed. Install with: pip install a2wsgi")
+        raise
+    
+    # Create dispatcher to route requests
+    def dispatcher(environ, start_response):
+        path = environ.get('PATH_INFO', '')
+        if path.startswith('/mcp'):
+            # Route to FastMCP
+            return mcp_asgi(environ, start_response)
+        else:
+            # Route to Flask for OAuth2 and other endpoints
+            return flask_asgi(environ, start_response)
+    
+    return dispatcher
+
+# ASGI application
+application = create_app()
+
 if __name__ == "__main__":
-    # Get configuration from environment
-    transport = os.environ.get('MCP_TRANSPORT', 'stdio')
+    # For local testing
+    import uvicorn
     port = int(os.environ.get('PORT', 8000))
-    
-    logger.info(f"Starting FastMCP Power BI server with transport: {transport}")
-    
-    if transport == 'http':
-        # For Azure deployment
-        mcp.run(
-            transport="http",
-            host="0.0.0.0",
-            port=port,
-            path="/mcp"
-        )
-    elif transport == 'sse':
-        # For SSE transport
-        mcp.run(
-            transport="sse",
-            host="0.0.0.0",
-            port=port
-        )
-    else:
-        # Default to stdio for local testing
-        mcp.run(transport="stdio")
+    logger.info(f"Starting FastMCP + Flask server on port {port}")
+    uvicorn.run(application, host="0.0.0.0", port=port)

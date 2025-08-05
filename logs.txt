@@ -1,52 +1,212 @@
-2025-08-03T14:03:49.9142005Z 2025-08-03 14:03:49,913 - pbi-mcp-simple - INFO - Successfully acquired Power BI access token
-2025-08-03T14:03:49.9207359Z 169.254.132.1 - - [03/Aug/2025:14:03:49 +0000] "GET /health HTTP/1.1" 200 372 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-08-03T14:04:43.2925502Z 169.254.132.1 - - [03/Aug/2025:14:04:43 +0000] "POST / HTTP/1.1" 401 78 "-" "Claude-User"
-2025-08-03T14:04:43.2926323Z 2025-08-03 14:04:43,291 - pbi-mcp-simple - INFO - Received JSON-RPC request at root: method=initialize
-2025-08-03T14:04:43.2926363Z 2025-08-03 14:04:43,291 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: None...
-2025-08-03T14:04:43.2926383Z 2025-08-03 14:04:43,291 - pbi-mcp-simple - WARNING - Invalid or missing auth header from Claude-User: None
-2025-08-03T14:04:43.7131832Z 2025-08-03 14:04:43,713 - pbi-mcp-simple - INFO - Detected SSE request at root endpoint: Accept=text/event-stream
-2025-08-03T14:04:43.7137812Z 2025-08-03 14:04:43,713 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: None...
-2025-08-03T14:04:43.7140142Z 2025-08-03 14:04:43,713 - pbi-mcp-simple - WARNING - Invalid or missing auth header from Claude-User: None
-2025-08-03T14:04:43.7161271Z 169.254.132.1 - - [03/Aug/2025:14:04:43 +0000] "GET / HTTP/1.1" 401 44 "-" "Claude-User"
-2025-08-03T14:04:44.1513093Z 169.254.132.1 - - [03/Aug/2025:14:04:44 +0000] "POST / HTTP/1.1" 401 78 "-" "Claude-User"
-2025-08-03T14:04:44.1513880Z 2025-08-03 14:04:44,149 - pbi-mcp-simple - INFO - Received JSON-RPC request at root: method=initialize
-2025-08-03T14:04:44.1513986Z 2025-08-03 14:04:44,150 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: None...
-2025-08-03T14:04:44.1514009Z 2025-08-03 14:04:44,150 - pbi-mcp-simple - WARNING - Invalid or missing auth header from Claude-User: None
-2025-08-03T14:04:44.8391204Z 169.254.132.1 - - [03/Aug/2025:14:04:44 +0000] "GET / HTTP/1.1" 401 44 "-" "Claude-User"
-2025-08-03T14:04:45.8383966Z 2025-08-03 14:04:44,568 - pbi-mcp-simple - INFO - Detected SSE request at root endpoint: Accept=text/event-stream
-2025-08-03T14:04:45.8384204Z 2025-08-03 14:04:44,569 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: None...
-2025-08-03T14:04:45.8384227Z 2025-08-03 14:04:44,569 - pbi-mcp-simple - WARNING - Invalid or missing auth header from Claude-User: None
-2025-08-03T14:05:07.0488208Z 169.254.132.1 - - [03/Aug/2025:14:05:07 +0000] "HEAD / HTTP/1.1" 200 0 "-" "python-httpx/0.27.0"
-2025-08-03T14:05:07.5094631Z 169.254.132.1 - - [03/Aug/2025:14:05:07 +0000] "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 207 "-" "python-httpx/0.27.0"
-2025-08-03T14:05:07.9007920Z 169.254.132.1 - - [03/Aug/2025:14:05:07 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 207 "-" "python-httpx/0.27.0"
-2025-08-03T14:05:08.0972395Z 2025-08-03 14:05:08,096 - pbi-mcp-simple - INFO - OAuth authorize request: method=GET, client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15, redirect_uri=https://claude.ai/api/mcp/auth_callback, state=1zDEJg156ucxjp-iAwqfnM_FmrWIbecrmLkFRHzsBTM
-2025-08-03T14:05:08.1054833Z 169.254.132.1 - - [03/Aug/2025:14:05:08 +0000] "GET /authorize?response_type=code&client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15&redirect_uri=https%3A%2F%2Fclaude.ai%2Fapi%2Fmcp%2Fauth_callback&code_challenge=_3MNhChR86aOQjTiv75S2_j0HjeQpZQic_rW5vkPDEE&code_challenge_method=S256&state=1zDEJg156ucxjp-iAwqfnM_FmrWIbecrmLkFRHzsBTM&scope=claudeai HTTP/1.1" 302 471 "https://claude.ai/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
-2025-08-03T14:05:08.1055273Z 2025-08-03 14:05:08,103 - pbi-mcp-simple - INFO - Generated auth code for client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15, redirecting to https://claude.ai/api/mcp/auth_callback
-2025-08-03T14:05:08.9054189Z 169.254.132.1 - - [03/Aug/2025:14:05:08 +0000] "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 207 "-" "python-httpx/0.27.0"
-2025-08-03T14:05:09.3501240Z 2025-08-03 14:05:09,344 - pbi-mcp-simple - INFO - OAuth token request: grant_type=authorization_code, client_id=5bdb10bc-bb29-4af9-8cb5-062690e6be15
-2025-08-03T14:05:09.3514772Z 2025-08-03 14:05:09,351 - pbi-mcp-simple - INFO - Validating credentials - Received client_id: '5bdb10bc-bb29-4af9-8cb5-062690e6be15', Expected: '5bdb10bc-bb29-4af9-8cb5-062690e6be15'
-2025-08-03T14:05:09.3520325Z 2025-08-03 14:05:09,351 - pbi-mcp-simple - INFO - Client ID match: True
-2025-08-03T14:05:09.3523011Z 2025-08-03 14:05:09,352 - pbi-mcp-simple - INFO - Client secret provided: Yes
-2025-08-03T14:05:09.3525412Z 2025-08-03 14:05:09,352 - pbi-mcp-simple - INFO - Client secret match: True
-2025-08-03T14:05:09.3527384Z 2025-08-03 14:05:09,352 - pbi-mcp-simple - INFO - Client 5bdb10bc-bb29-4af9-8cb5-062690e6be15 authenticated successfully
-2025-08-03T14:05:09.3530085Z 2025-08-03 14:05:09,352 - pbi-mcp-simple - INFO - Returning token response: {"access_token": "TOKEN_HIDDEN", "token_type": "Bearer", "expires_in": 3600, "scope": "powerbi"}
-2025-08-03T14:05:09.3626450Z 169.254.132.1 - - [03/Aug/2025:14:05:09 +0000] "POST /token HTTP/1.1" 200 164 "-" "python-httpx/0.27.0"
-2025-08-03T14:05:12.1500534Z 169.254.132.1 - - [03/Aug/2025:14:05:12 +0000] "POST / HTTP/1.1" 200 169 "-" "Claude-User"
-2025-08-03T14:05:12.1583967Z 2025-08-03 14:05:12,148 - pbi-mcp-simple - INFO - Received JSON-RPC request at root: method=initialize
-2025-08-03T14:05:12.1584082Z 2025-08-03 14:05:12,148 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer nsf-x22EekFFhc2OkBpN8Ok...
-2025-08-03T14:05:12.1584115Z 2025-08-03 14:05:12,148 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
-2025-08-03T14:05:12.1584135Z 2025-08-03 14:05:12,148 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=initialize, id=0
-2025-08-03T14:05:12.1584215Z 2025-08-03 14:05:12,148 - pbi-mcp-simple - INFO - Initialize request received - ID: 0, Params: {'protocolVersion': '2025-06-18', 'capabilities': {}, 'clientInfo': {'name': 'claude-ai', 'version': '0.1.0'}}
-2025-08-03T14:05:12.1584243Z 2025-08-03 14:05:12,148 - pbi-mcp-simple - INFO - Initialize response: {"jsonrpc": "2.0", "id": 0, "result": {"protocolVersion": "2024-11-05", "capabilities": {"tools": {}, "logging": {}}, "serverInfo": {"name": "powerbi-mcp-server", "version": "1.0.0"}}}
-2025-08-03T14:05:12.3811228Z 2025-08-03 14:05:12,376 - pbi-mcp-simple - INFO - Received JSON-RPC request at root: method=notifications/initialized
-2025-08-03T14:05:12.3811582Z 2025-08-03 14:05:12,376 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer nsf-x22EekFFhc2OkBpN8Ok...
-2025-08-03T14:05:12.3811610Z 2025-08-03 14:05:12,376 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
-2025-08-03T14:05:12.3811641Z 2025-08-03 14:05:12,376 - pbi-mcp-simple - INFO - HTTP transport MCP request: method=notifications/initialized, id=None
-2025-08-03T14:05:12.3811659Z 2025-08-03 14:05:12,376 - pbi-mcp-simple - INFO - Received initialized notification - client ready
-2025-08-03T14:05:12.3811734Z 2025-08-03 14:05:12,376 - pbi-mcp-simple - INFO - Waiting for Claude to call tools/list...
-2025-08-03T14:05:12.3817305Z 169.254.132.1 - - [03/Aug/2025:14:05:12 +0000] "POST / HTTP/1.1" 200 3 "-" "Claude-User"
-2025-08-03T14:05:12.7855273Z 2025-08-03 14:05:12,784 - pbi-mcp-simple - INFO - Detected SSE request at root endpoint: Accept=text/event-stream
-2025-08-03T14:05:12.7855775Z 2025-08-03 14:05:12,784 - pbi-mcp-simple - INFO - Auth check - User-Agent: Claude-User, Auth header: Bearer nsf-x22EekFFhc2OkBpN8Ok...
-2025-08-03T14:05:12.7855799Z 2025-08-03 14:05:12,784 - pbi-mcp-simple - INFO - Valid auth header detected from Claude-User
-2025-08-03T14:05:12.7855815Z 2025-08-03 14:05:12,784 - pbi-mcp-simple - INFO - SSE endpoint accessed at root, starting event stream
-2025-08-03T14:05:12.7855836Z 2025-08-03 14:05:12,784 - pbi-mcp-simple - INFO - SSE: Connection established, waiting for Claude to request tools via tools/list
+2025-08-05T14:54:33.7409645Z    _____
+2025-08-05T14:54:33.7510965Z   /  _  \ __________ _________   ____
+2025-08-05T14:54:33.7511147Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-05T14:54:33.7511204Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-05T14:54:33.7511225Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-05T14:54:33.7511245Z         \/      \/                  \/
+2025-08-05T14:54:33.7511275Z A P P   S E R V I C E   O N   L I N U X
+2025-08-05T14:54:33.7511300Z
+2025-08-05T14:54:33.7511326Z Documentation: http://aka.ms/webapp-linux
+2025-08-05T14:54:33.7511363Z Python 3.11.13
+2025-08-05T14:54:33.7511386Z Note: Any data outside '/home' is not persisted
+2025-08-05T14:54:36.7827217Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-05T14:54:36.8415406Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-05T14:54:36.9746713Z Updating certificates in /etc/ssl/certs...
+2025-08-05T14:54:46.1694575Z 4 added, 0 removed; done.
+2025-08-05T14:54:46.1695152Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-05T14:54:46.1795780Z done.
+2025-08-05T14:54:46.1796219Z CA certificates copied and updated successfully.
+2025-08-05T14:54:46.4210713Z Site's appCommandLine: python run_fastmcp.py
+2025-08-05T14:54:46.9535689Z Starting periodic command scheduler: cron.
+2025-08-05T14:54:46.9536151Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'python run_fastmcp.py'
+2025-08-05T14:54:47.6677504Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-08-05T14:54:47.6705634Z Build Operation ID: 4d379a6beb7709f2
+2025-08-05T14:54:47.6783203Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
+2025-08-05T14:54:47.6801481Z Output is compressed. Extracting it...
+2025-08-05T14:54:47.6905026Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd42f92546882'...
+2025-08-05T14:55:01.2327253Z App path is set to '/tmp/8ddd42f92546882'
+2025-08-05T14:55:01.2711617Z Writing output script to '/opt/startup/startup.sh'
+2025-08-05T14:55:02.0010068Z Using packages from virtual environment antenv located at /tmp/8ddd42f92546882/antenv.
+2025-08-05T14:55:02.0020858Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd42f92546882/antenv/lib/python3.11/site-packages'
+2025-08-05T14:55:12.1857188Z 2025-08-05 14:55:12,185 - run-fastmcp - INFO - Starting FastMCP HTTP server on port 8000
+2025-08-05T14:55:12.1865649Z 2025-08-05 14:55:12,186 - run-fastmcp - INFO - Environment: Azure
+2025-08-05T14:55:12.3156679Z
+2025-08-05T14:55:12.3157305Z
+2025-08-05T14:55:12.3157377Z ╭─ FastMCP 2.0 ──────────────────────────────────────────────────────────────╮
+2025-08-05T14:55:12.3157426Z │                                                                            │
+2025-08-05T14:55:12.3157519Z │        _ __ ___ ______           __  __  _____________    ____    ____     │
+2025-08-05T14:55:12.3157544Z │       _ __ ___ / ____/___ ______/ /_/  |/  / ____/ __ \  |___ \  / __ \    │
+2025-08-05T14:55:12.3157567Z │      _ __ ___ / /_  / __ `/ ___/ __/ /|_/ / /   / /_/ /  ___/ / / / / /    │
+2025-08-05T14:55:12.3157591Z │     _ __ ___ / __/ / /_/ (__  ) /_/ /  / / /___/ ____/  /  __/_/ /_/ /     │
+2025-08-05T14:55:12.3157613Z │    _ __ ___ /_/    \__,_/____/\__/_/  /_/\____/_/      /_____(_)____/      │
+2025-08-05T14:55:12.3157654Z │                                                                            │
+2025-08-05T14:55:12.3157678Z │                                                                            │
+2025-08-05T14:55:12.3157702Z │                                                                            │
+2025-08-05T14:55:12.3157727Z │    🖥️  Server name:     Power BI MCP Server                                 │
+2025-08-05T14:55:12.3157752Z │    📦 Transport:       Streamable-HTTP                                     │
+2025-08-05T14:55:12.3157776Z │    🔗 Server URL:      http://0.0.0.0:8000/mcp                             │
+2025-08-05T14:55:12.3157816Z │                                                                            │
+2025-08-05T14:55:12.3157841Z │    📚 Docs:            https://gofastmcp.com                               │
+2025-08-05T14:55:12.3157885Z │    🚀 Deploy:          https://fastmcp.cloud                               │
+2025-08-05T14:55:12.3157908Z │                                                                            │
+2025-08-05T14:55:12.3157933Z │    🏎️  FastMCP version: 2.11.1                                              │
+2025-08-05T14:55:12.3157974Z │    🤝 MCP version:     1.12.3                                              │
+2025-08-05T14:55:12.3157997Z │                                                                            │
+2025-08-05T14:55:12.3158031Z ╰────────────────────────────────────────────────────────────────────────────╯
+2025-08-05T14:55:12.3158054Z
+2025-08-05T14:55:12.3158071Z
+2025-08-05T14:55:12.3361038Z [08/05/25 14:55:12] INFO     Starting MCP server 'Power BI MCP    server.py:1519
+2025-08-05T14:55:12.3361518Z                              Server' with transport 'http' on
+2025-08-05T14:55:12.3361548Z                              http://0.0.0.0:8000/mcp
+2025-08-05T14:55:12.4482092Z INFO:     Started server process [1045]
+2025-08-05T14:55:12.4486976Z INFO:     Waiting for application startup.
+2025-08-05T14:55:12.4572433Z 2025-08-05 14:55:12,457 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
+2025-08-05T14:55:12.4582255Z INFO:     Application startup complete.
+2025-08-05T14:55:12.4663683Z INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-08-05T14:55:12.6617298Z INFO:     169.254.132.1:33911 - "GET /robots933456.txt HTTP/1.1" 404 Not Found
+2025-08-05T14:55:33.4601344Z INFO:     Shutting down
+2025-08-05T14:55:33.5709694Z ERROR:    Cancel 0 running task(s), timeout graceful shutdown exceeded
+2025-08-05T14:55:33.5715169Z INFO:     Waiting for application shutdown.
+2025-08-05T14:55:33.5721454Z 2025-08-05 14:55:33,572 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager shutting down
+2025-08-05T14:55:33.5796544Z INFO:     Application shutdown complete.
+2025-08-05T14:55:33.5806664Z INFO:     Finished server process [1045]
+2025-08-05T14:55:33.6003335Z Terminated
+2025-08-05T14:56:47  No new trace in the past 1 min(s).
+2025-08-05T14:57:47  No new trace in the past 2 min(s).
+2025-08-05T14:58:15.7226539Z 2025-08-05 14:58:15,722 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 8456ac6fc8b84c369fb56915127679ec
+2025-08-05T14:58:15.7338418Z INFO:     34.162.102.82:50176:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:58:15.7355614Z 2025-08-05 14:58:15,735 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:58:15.7439103Z INFO:     169.254.132.1:33193 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:58:16.2623130Z INFO:     169.254.132.1:33193 - "GET / HTTP/1.1" 200 OK
+2025-08-05T14:58:16.4115226Z INFO:     34.162.102.82:50178:0 - "POST /mcp/ HTTP/1.1" 202 Accepted
+2025-08-05T14:58:16.4133111Z 2025-08-05 14:58:16,413 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 202 Accepted"
+2025-08-05T14:58:16.4215817Z INFO:     169.254.132.1:33193 - "POST / HTTP/1.1" 202 Accepted
+2025-08-05T14:58:16.8842386Z INFO:     34.162.102.82:50179:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:58:16.8940284Z 2025-08-05 14:58:16,893 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:58:16.8951121Z 2025-08-05 14:58:16,894 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:58:17.0540273Z 2025-08-05 14:58:17,053 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:58:17.2002024Z INFO:     169.254.132.1:33193 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:58:22.0905591Z INFO:     34.162.102.82:50180:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:58:22.0991891Z 2025-08-05 14:58:22,099 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:58:22.1001653Z 2025-08-05 14:58:22,100 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:58:22.2157613Z 2025-08-05 14:58:22,215 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:58:22.3153030Z 2025-08-05 14:58:22,315 - pbi-fastmcp - ERROR - Power BI datasets API permissions error: 403 - {"Message":"API is not accessible for application"}
+2025-08-05T14:58:22.3242082Z INFO:     169.254.132.1:33193 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:58:27.9433638Z INFO:     34.162.102.82:50181:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:58:27.9607570Z 2025-08-05 14:58:27,951 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:58:27.9607831Z 2025-08-05 14:58:27,951 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:58:28.0716357Z 2025-08-05 14:58:28,071 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:58:28.2077361Z INFO:     169.254.132.1:10931 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:58:34.2995802Z INFO:     34.162.102.82:50182:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:58:34.3082296Z 2025-08-05 14:58:34,308 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:58:34.3091874Z 2025-08-05 14:58:34,309 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:58:34.4398197Z 2025-08-05 14:58:34,439 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:58:34.4411234Z 2025-08-05 14:58:34,440 - pbi-fastmcp - INFO - Executing DAX query on dataset 72efb974-5943-40c5-8f21-f9340c1b579f in workspace 6d40d0dc-7eb0-44a1-9979-0de51f73c71c
+2025-08-05T14:58:35.6134919Z 2025-08-05 14:58:35,608 - pbi-fastmcp - ERROR - Power BI query API error: 400 - {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Failed to open the MSOLAP connection."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"0"}}]}}}
+2025-08-05T14:58:35.6152639Z INFO:     169.254.132.1:10947 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:58:41.2897794Z INFO:     34.162.102.82:50183:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:58:41.3005543Z 2025-08-05 14:58:41,300 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:58:41.3175893Z 2025-08-05 14:58:41,307 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:58:41.4483274Z 2025-08-05 14:58:41,440 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:58:41.4483669Z 2025-08-05 14:58:41,441 - pbi-fastmcp - INFO - Executing DAX query on dataset 72efb974-5943-40c5-8f21-f9340c1b579f in workspace 6d40d0dc-7eb0-44a1-9979-0de51f73c71c
+2025-08-05T14:58:42.1201680Z 2025-08-05 14:58:42,112 - pbi-fastmcp - ERROR - Power BI query API error: 400 - {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Failed to open the MSOLAP connection."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"0"}}]}}}
+2025-08-05T14:58:42.1221158Z INFO:     169.254.132.1:47001 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:58:46.9513759Z INFO:     34.162.102.82:50184:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:58:46.9600077Z 2025-08-05 14:58:46,959 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:58:46.9609489Z 2025-08-05 14:58:46,960 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:58:47.1103434Z 2025-08-05 14:58:47,110 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:58:47.1120314Z 2025-08-05 14:58:47,111 - pbi-fastmcp - INFO - Executing DAX query on dataset 72efb974-5943-40c5-8f21-f9340c1b579f in workspace 6d40d0dc-7eb0-44a1-9979-0de51f73c71c
+2025-08-05T14:58:47.7220490Z 2025-08-05 14:58:47,715 - pbi-fastmcp - ERROR - Power BI query API error: 400 - {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Failed to open the MSOLAP connection."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"0"}}]}}}
+2025-08-05T14:58:47.7234680Z INFO:     169.254.132.1:47001 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:58:53.5523912Z INFO:     34.162.102.82:50185:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:58:53.5541213Z 2025-08-05 14:58:53,553 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:58:53.5647999Z 2025-08-05 14:58:53,564 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:58:53.6891975Z 2025-08-05 14:58:53,688 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:58:53.6901338Z 2025-08-05 14:58:53,690 - pbi-fastmcp - INFO - Executing DAX query on dataset 72efb974-5943-40c5-8f21-f9340c1b579f in workspace 6d40d0dc-7eb0-44a1-9979-0de51f73c71c
+2025-08-05T14:58:54.3230214Z 2025-08-05 14:58:54,321 - pbi-fastmcp - ERROR - Power BI query API error: 400 - {"error":{"code":"DatasetExecuteQueriesError","pbi.error":{"code":"DatasetExecuteQueriesError","parameters":{},"details":[{"code":"DetailsMessage","detail":{"type":1,"value":"Failed to open the MSOLAP connection."}},{"code":"AnalysisServicesErrorCode","detail":{"type":1,"value":"0"}}]}}}
+2025-08-05T14:58:54.3258396Z INFO:     169.254.132.1:33579 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:00:47  No new trace in the past 1 min(s).
+2025-08-05T15:01:47  No new trace in the past 2 min(s).
+2025-08-05T15:02:47  No new trace in the past 3 min(s).
+2025-08-05T15:03:08.2759490Z 2025-08-05 15:03:08,271 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 2566af709b2842f984b2093366be89d4
+2025-08-05T15:03:08.3073821Z 2025-08-05 15:03:08,297 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:03:08.3162865Z INFO:     34.162.142.92:2560:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:03:08.3163269Z INFO:     169.254.132.1:33905 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:03:08.9318984Z INFO:     169.254.132.1:33913 - "GET / HTTP/1.1" 200 OK
+2025-08-05T15:03:08.9492162Z INFO:     34.162.142.92:2561:0 - "POST /mcp/ HTTP/1.1" 202 Accepted
+2025-08-05T15:03:08.9577262Z 2025-08-05 15:03:08,950 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 202 Accepted"
+2025-08-05T15:03:08.9594208Z INFO:     169.254.132.1:33905 - "POST / HTTP/1.1" 202 Accepted
+2025-08-05T15:03:09.4488761Z INFO:     34.162.142.92:2563:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:03:09.4508865Z 2025-08-05 15:03:09,450 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:03:09.4588594Z 2025-08-05 15:03:09,458 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2025-08-05T15:03:09.4685208Z INFO:     169.254.132.1:33905 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:03:10.1291520Z INFO:     34.162.142.92:2564:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:03:10.1478159Z 2025-08-05 15:03:10,138 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:03:10.1478647Z 2025-08-05 15:03:10,139 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2025-08-05T15:03:10.1598779Z 2025-08-05 15:03:10,159 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 87937d2ea08b4938abbb0ce1d995e220
+2025-08-05T15:03:10.1706365Z INFO:     169.254.132.1:33905 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:03:10.1789290Z INFO:     34.162.102.82:50176:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:03:10.1893986Z INFO:     169.254.132.1:33913 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:03:10.7012192Z INFO:     169.254.132.1:33913 - "GET / HTTP/1.1" 200 OK
+2025-08-05T15:03:10.7505113Z INFO:     34.162.102.82:50178:0 - "POST /mcp/ HTTP/1.1" 202 Accepted
+2025-08-05T15:03:10.7674146Z INFO:     169.254.132.1:33913 - "POST / HTTP/1.1" 202 Accepted
+2025-08-05T15:03:11.1647727Z INFO:     34.162.102.82:50179:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:03:11.1748005Z INFO:     169.254.132.1:33913 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:03:11.6922303Z 2025-08-05 15:03:10,180 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:03:11.6922501Z 2025-08-05 15:03:10,758 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 202 Accepted"
+2025-08-05T15:03:11.6922522Z 2025-08-05 15:03:11,165 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:03:11.6922539Z 2025-08-05 15:03:11,166 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2025-08-05T15:03:11.7033546Z INFO:     34.162.102.82:50180:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:03:11.7044820Z 2025-08-05 15:03:11,704 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:03:11.7220749Z INFO:     169.254.132.1:33913 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:03:11.7221703Z 2025-08-05 15:03:11,704 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2025-08-05T15:04:47  No new trace in the past 1 min(s).
+2025-08-05T15:05:47  No new trace in the past 2 min(s).
+2025-08-05T15:06:47  No new trace in the past 3 min(s).
+2025-08-05T15:07:47  No new trace in the past 4 min(s).
+2025-08-05T15:08:34.2255519Z INFO:     169.254.132.1:47543 - "GET /health HTTP/1.1" 200 OK
+2025-08-05T15:09:47  No new trace in the past 1 min(s).
+2025-08-05T15:10:47  No new trace in the past 2 min(s).
+2025-08-05T15:11:47  No new trace in the past 3 min(s).
+2025-08-05T15:12:47  No new trace in the past 4 min(s).
+2025-08-05T15:13:11.3191725Z 2025-08-05 15:13:11,317 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: caa100a6a75a4d5f911e54a7af36a5b7
+2025-08-05T15:13:11.3432186Z INFO:     34.162.102.82:50176:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:13:11.3457927Z 2025-08-05 15:13:11,345 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:13:11.3475048Z INFO:     169.254.132.1:12191 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:13:11.8853734Z INFO:     169.254.132.1:12191 - "GET / HTTP/1.1" 200 OK
+2025-08-05T15:13:11.9337693Z INFO:     34.162.102.82:50177:0 - "POST /mcp/ HTTP/1.1" 202 Accepted
+2025-08-05T15:13:11.9348182Z 2025-08-05 15:13:11,934 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 202 Accepted"
+2025-08-05T15:13:11.9355737Z INFO:     169.254.132.1:12191 - "POST / HTTP/1.1" 202 Accepted
+2025-08-05T15:13:12.4232907Z INFO:     34.162.102.82:50179:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:13:12.4245505Z 2025-08-05 15:13:12,424 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:13:12.4250212Z 2025-08-05 15:13:12,424 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2025-08-05T15:13:12.4419143Z INFO:     169.254.132.1:12191 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:13:12.9624130Z INFO:     34.162.102.82:50180:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:13:12.9820536Z 2025-08-05 15:13:12,981 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:13:12.9825601Z 2025-08-05 15:13:12,982 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2025-08-05T15:13:12.9997218Z INFO:     169.254.132.1:12191 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:14:47  No new trace in the past 1 min(s).
+2025-08-05T15:15:47  No new trace in the past 2 min(s).
+2025-08-05T15:16:47  No new trace in the past 3 min(s).
+2025-08-05T15:17:47  No new trace in the past 4 min(s).
+2025-08-05T15:18:47  No new trace in the past 5 min(s).
+2025-08-05T15:19:44.3041254Z 2025-08-05 15:19:44,303 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 15959368fb2f4be9a1f09e7cfa944394
+2025-08-05T15:19:44.3166109Z INFO:     34.162.102.82:50176:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:19:44.3183883Z 2025-08-05 15:19:44,318 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:19:44.3244672Z INFO:     169.254.132.1:52767 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:19:44.8410004Z INFO:     169.254.132.1:52767 - "GET / HTTP/1.1" 200 OK
+2025-08-05T15:19:44.9245132Z INFO:     34.162.102.82:50178:0 - "POST /mcp/ HTTP/1.1" 202 Accepted
+2025-08-05T15:19:44.9324274Z 2025-08-05 15:19:44,932 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 202 Accepted"
+2025-08-05T15:19:44.9333418Z INFO:     169.254.132.1:52767 - "POST / HTTP/1.1" 202 Accepted
+2025-08-05T15:19:45.4295724Z INFO:     34.162.102.82:50179:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:19:45.4381433Z 2025-08-05 15:19:45,431 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:19:45.4388045Z 2025-08-05 15:19:45,438 - mcp.server.lowlevel.server - INFO - Processing request of type ListResourcesRequest
+2025-08-05T15:19:45.4508799Z INFO:     169.254.132.1:52767 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:19:45.4613812Z INFO:     34.162.102.82:50180:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:19:45.4788349Z 2025-08-05 15:19:45,469 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:19:45.4788483Z 2025-08-05 15:19:45,469 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-08-05T15:19:45.4788765Z INFO:     169.254.132.1:52779 - "POST / HTTP/1.1" 200 OK
+2025-08-05T15:19:46.2932721Z INFO:     34.162.102.82:50181:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T15:19:46.3100813Z 2025-08-05 15:19:46,300 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T15:19:46.3100984Z 2025-08-05 15:19:46,302 - mcp.server.lowlevel.server - INFO - Processing request of type ListPromptsRequest
+2025-08-05T15:19:46.3118495Z INFO:     169.254.132.1:52779 - "POST / HTTP/1.1" 200 OK

@@ -1,5 +1,4 @@
-Could you list me all available workspaces? Can you acces finance model in demo workspace and tell me what was my revenue in 2024?
-Use these 3 queries independently to understand model finance demo model structure.EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Tables, [Name], [Description]), NOT(ISBLANK(def_Tables[Description])) )EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Columns, [Table], [Name], [Description]), NOT(ISBLANK(def_Columns[Description])) )EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Measures, [Name], [Description], [DisplayFolder]), NOT(ISBLANK(def_Measures[Description])) )EditI'll help you explore the Power BI workspaces and analyze the finance model. Let me start by checking what workspaces are available.Tpowerbi_workspacesRequest{}Response{
+Could you list me all available workspaces? Can you acces finance model in demo workspace and tell me what was my revenue in 2024? Use these 3 queries independently to understand model finance demo model structure.EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Tables, [Name], [Description]), NOT(ISBLANK(def_Tables[Description])) )EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Columns, [Table], [Name], [Description]), NOT(ISBLANK(def_Columns[Description])) )EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Measures, [Name], [Description], [DisplayFolder]), NOT(ISBLANK(def_Measures[Description])) )EditI'll help you explore the Power BI workspaces and analyze the finance model in the demo workspace. Let me start by checking what workspaces are available.Tpowerbi_workspacesRequest{}Response{
   "workspaces": [
     {
       "id": "6d40d0dc-7eb0-44a1-9979-0de51f73c71c",
@@ -21,91 +20,142 @@ Use these 3 queries independently to understand model finance demo model structu
   "total_count": 2,
   "mode": "real_powerbi_data",
   "authentication": "client_credentials",
-  "timestamp": "2025-08-05T14:26:33.398333"
-}Great! I can see two available workspaces:
+  "timestamp": "2025-08-05T14:58:17.195266"
+}Great! I can see there are 2 available workspaces:
 
 Onetribe Demo (ID: 6d40d0dc-7eb0-44a1-9979-0de51f73c71c)
 RMC Demo Application (ID: 92506d9a-cc47-4356-a280-e624addba9f2)
 
-Now let me check the datasets in these workspaces to find the finance model in the demo workspace:Tpowerbi_datasetsRequest{}Response{
+Now let me check for datasets in these workspaces to find the finance model in the demo workspace:Tpowerbi_datasetsRequest{}Response{
+  "error": "Power BI API permissions not configured",
+  "message": "The service principal doesn't have the required Power BI API permissions.",
+  "troubleshooting": [
+    "1. Add Power BI Service API permissions (Dataset.Read.All) in Azure AD",
+    "2. Grant admin consent for the permissions",
+    "3. Enable 'Service principals can use Power BI APIs' in Power BI Admin Portal",
+    "4. Add service principal to workspace with Member role"
+  ],
   "workspace_id": "all",
+  "details": "{\"Message\":\"API is not accessible for application\"}",
+  "mode": "permission_error",
+  "status": "failed"
+}I see there's a permissions issue with accessing the datasets. Let me try accessing the Onetribe Demo workspace specifically, as that seems like it could be the demo workspace with the finance model:Tpowerbi_datasetsRequest{
+  `workspace_id`: `6d40d0dc-7eb0-44a1-9979-0de51f73c71c`
+}Response{
+  "workspace_id": "6d40d0dc-7eb0-44a1-9979-0de51f73c71c",
   "datasets": [
     {
-      "id": "demo-ds-1",
-      "name": "Financial KPIs",
-      "workspace_id": "demo-ws-1",
+      "id": "72efb974-5943-40c5-8f21-f9340c1b579f",
+      "name": "Onetribe Demo - Model Finance",
+      "web_url": "https://app.powerbi.com/groups/6d40d0dc-7eb0-44a1-9979-0de51f73c71c/datasets/72efb974-5943-40c5-8f21-f9340c1b579f",
+      "configured_by": "jakub@onetribeadvisory.com",
       "is_refreshable": true,
-      "tables": [
-        "Revenue",
-        "Expenses",
-        "Profit"
-      ]
+      "created_date": "2025-02-13T15:28:19.633Z",
+      "content_provider_type": null
     },
     {
-      "id": "demo-ds-2",
-      "name": "Sales Performance",
-      "workspace_id": "demo-ws-2",
+      "id": "26174ea2-c464-4755-8c09-62dfe94e2480",
+      "name": "Demo - Model Inventory",
+      "web_url": "https://app.powerbi.com/groups/6d40d0dc-7eb0-44a1-9979-0de51f73c71c/datasets/26174ea2-c464-4755-8c09-62dfe94e2480",
+      "configured_by": "jakub@onetribeadvisory.com",
       "is_refreshable": true,
-      "tables": [
-        "Sales",
-        "Customers",
-        "Products"
-      ]
+      "created_date": "2025-04-30T10:23:52.417Z",
+      "content_provider_type": null
     },
     {
-      "id": "demo-ds-3",
-      "name": "Operations Metrics",
-      "workspace_id": "demo-ws-3",
-      "is_refreshable": false,
-      "tables": [
-        "Inventory",
-        "Orders",
-        "Deliveries"
-      ]
+      "id": "22dc6e3e-6c76-4436-ad1f-19c7ac92be59",
+      "name": "Onetribe Demo - VIP Model",
+      "web_url": "https://app.powerbi.com/groups/6d40d0dc-7eb0-44a1-9979-0de51f73c71c/datasets/22dc6e3e-6c76-4436-ad1f-19c7ac92be59",
+      "configured_by": "jakub@onetribeadvisory.com",
+      "is_refreshable": true,
+      "created_date": "2025-06-09T20:18:53.607Z",
+      "content_provider_type": null
     }
   ],
   "total_count": 3,
-  "mode": "demo_data",
-  "authentication": "client_credentials_not_configured",
-  "note": "Set AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID for real Power BI data",
-  "timestamp": "2025-08-05T14:26:38.355852"
-}I can see a Financial KPIs dataset which appears to be our finance model. Now let me run the three queries you specified to understand the model structure. Let me start with the first query to get the table information:Tpowerbi_queryRequest{
-  `dax_query`: `EVALUATE CALCULATETABLE( SELECTCOLUMNS(__def_Tables, [Name], [Description]), NOT(ISBLANK(__def_Tables[Description])) )`,
-  `dataset_id`: `demo-ds-1`
+  "mode": "real_powerbi_data",
+  "authentication": "client_credentials",
+  "timestamp": "2025-08-05T14:58:28.200475"
+}Perfect! I found the finance model: "Onetribe Demo - Model Finance" (ID: 72efb974-5943-40c5-8f21-f9340c1b579f) in the Onetribe Demo workspace.
+Now let me run the three DAX queries you provided to understand the model structure. Starting with the tables query:Tpowerbi_queryRequest{
+  `dax_query`: `EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Tables, [Name], [Description]), NOT(ISBLANK(def_Tables[Description])) )`,
+  `dataset_id`: `72efb974-5943-40c5-8f21-f9340c1b579f`,
+  `workspace_id`: `6d40d0dc-7eb0-44a1-9979-0de51f73c71c`
 }Response{
   "error": "Power BI API error: 400",
-  "message": "{\"error\":{\"code\":\"BadRequest\",\"message\":\"Bad Request\",\"details\":[{\"message\":\"ImpersonatedUserName, if specified, needs to be non-empty.\",\"target\":\"request\"}]}}",
-  "troubleshooting_tip": "",
-  "dataset_id": "demo-ds-1",
-  "workspace_id": null,
-  "dax_query": "EVALUATE CALCULATETABLE( SELECTCOLUMNS(__def_Tables, [Name], [Description]), NOT(ISBLANK(__def_Tables[Description])) )",
+  "message": "{\"error\":{\"code\":\"DatasetExecuteQueriesError\",\"pbi.error\":{\"code\":\"DatasetExecuteQueriesError\",\"parameters\":{},\"details\":[{\"code\":\"DetailsMessage\",\"detail\":{\"type\":1,\"value\":\"Failed to open the MSOLAP connection.\"}},{\"code\":\"AnalysisServicesErrorCode\",\"detail\":{\"type\":1,\"value\":\"0\"}}]}}}",
+  "troubleshooting_tip": "Check: 1) Service principal needs Member role in workspace, 2) Dataset security settings, 3) Dataset might need to be refreshed",
+  "dataset_id": "72efb974-5943-40c5-8f21-f9340c1b579f",
+  "workspace_id": "6d40d0dc-7eb0-44a1-9979-0de51f73c71c",
+  "dax_query": "EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Tables, [Name], [Description]), NOT(ISBLANK(def_Tables[Description])) )",
   "mode": "real_powerbi_query_failed",
   "status": "failed"
-}I see there's an authentication issue with the real Power BI API. Let me try a simpler approach to explore the finance model and get your 2024 revenue. Let me query the Revenue table directly:Tpowerbi_queryRequest{
-  `dax_query`: `EVALUATE Revenue`,
-  `dataset_id`: `demo-ds-1`
+}I'm encountering a connection issue with the MSOLAP connection. Let me try a simpler approach by running the columns query:Tpowerbi_queryRequest{
+  `dax_query`: `EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Columns, [Table], [Name], [Description]), NOT(ISBLANK(def_Columns[Description])) )`,
+  `dataset_id`: `72efb974-5943-40c5-8f21-f9340c1b579f`,
+  `workspace_id`: `6d40d0dc-7eb0-44a1-9979-0de51f73c71c`
 }Response{
   "error": "Power BI API error: 400",
-  "message": "{\"error\":{\"code\":\"BadRequest\",\"message\":\"Bad Request\",\"details\":[{\"message\":\"ImpersonatedUserName, if specified, needs to be non-empty.\",\"target\":\"request\"}]}}",
-  "troubleshooting_tip": "",
-  "dataset_id": "demo-ds-1",
-  "workspace_id": null,
-  "dax_query": "EVALUATE Revenue",
+  "message": "{\"error\":{\"code\":\"DatasetExecuteQueriesError\",\"pbi.error\":{\"code\":\"DatasetExecuteQueriesError\",\"parameters\":{},\"details\":[{\"code\":\"DetailsMessage\",\"detail\":{\"type\":1,\"value\":\"Failed to open the MSOLAP connection.\"}},{\"code\":\"AnalysisServicesErrorCode\",\"detail\":{\"type\":1,\"value\":\"0\"}}]}}}",
+  "troubleshooting_tip": "Check: 1) Service principal needs Member role in workspace, 2) Dataset security settings, 3) Dataset might need to be refreshed",
+  "dataset_id": "72efb974-5943-40c5-8f21-f9340c1b579f",
+  "workspace_id": "6d40d0dc-7eb0-44a1-9979-0de51f73c71c",
+  "dax_query": "EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Columns, [Table], [Name], [Description]), NOT(ISBLANK(def_Columns[Description])) )",
   "mode": "real_powerbi_query_failed",
   "status": "failed"
-}It appears there's a configuration issue with the Power BI authentication that's preventing access to the actual data. The error message indicates that an "ImpersonatedUserName" needs to be specified, which suggests the Power BI service is expecting user impersonation credentials.
-Summary of Available Resources:
+}Let me try the measures query:Tpowerbi_queryRequest{
+  `dax_query`: `EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Measures, [Name], [Description], [DisplayFolder]), NOT(ISBLANK(def_Measures[Description])) )`,
+  `dataset_id`: `72efb974-5943-40c5-8f21-f9340c1b579f`,
+  `workspace_id`: `6d40d0dc-7eb0-44a1-9979-0de51f73c71c`
+}Response{
+  "error": "Power BI API error: 400",
+  "message": "{\"error\":{\"code\":\"DatasetExecuteQueriesError\",\"pbi.error\":{\"code\":\"DatasetExecuteQueriesError\",\"parameters\":{},\"details\":[{\"code\":\"DetailsMessage\",\"detail\":{\"type\":1,\"value\":\"Failed to open the MSOLAP connection.\"}},{\"code\":\"AnalysisServicesErrorCode\",\"detail\":{\"type\":1,\"value\":\"0\"}}]}}}",
+  "troubleshooting_tip": "Check: 1) Service principal needs Member role in workspace, 2) Dataset security settings, 3) Dataset might need to be refreshed",
+  "dataset_id": "72efb974-5943-40c5-8f21-f9340c1b579f",
+  "workspace_id": "6d40d0dc-7eb0-44a1-9979-0de51f73c71c",
+  "dax_query": "EVALUATE CALCULATETABLE( SELECTCOLUMNS(def_Measures, [Name], [Description], [DisplayFolder]), NOT(ISBLANK(def_Measures[Description])) )",
+  "mode": "real_powerbi_query_failed",
+  "status": "failed"
+}Let me try a basic query to test the connection and see if we can at least access some basic data:Tpowerbi_queryRequest{
+  `dax_query`: `EVALUATE { \"Test Connection\" }`,
+  `dataset_id`: `72efb974-5943-40c5-8f21-f9340c1b579f`,
+  `workspace_id`: `6d40d0dc-7eb0-44a1-9979-0de51f73c71c`
+}Response{
+  "error": "Power BI API error: 400",
+  "message": "{\"error\":{\"code\":\"DatasetExecuteQueriesError\",\"pbi.error\":{\"code\":\"DatasetExecuteQueriesError\",\"parameters\":{},\"details\":[{\"code\":\"DetailsMessage\",\"detail\":{\"type\":1,\"value\":\"Failed to open the MSOLAP connection.\"}},{\"code\":\"AnalysisServicesErrorCode\",\"detail\":{\"type\":1,\"value\":\"0\"}}]}}}",
+  "troubleshooting_tip": "Check: 1) Service principal needs Member role in workspace, 2) Dataset security settings, 3) Dataset might need to be refreshed",
+  "dataset_id": "72efb974-5943-40c5-8f21-f9340c1b579f",
+  "workspace_id": "6d40d0dc-7eb0-44a1-9979-0de51f73c71c",
+  "dax_query": "EVALUATE { \"Test Connection\" }",
+  "mode": "real_powerbi_query_failed",
+  "status": "failed"
+}Summary
+I was able to successfully identify the available workspaces and locate the finance model, but unfortunately encountered connection issues when trying to execute DAX queries. Here's what I found:
 Available Workspaces:
 
-Onetribe Demo (ID: 6d40d0dc-7eb0-44a1-9979-0de51f73c71c)
-RMC Demo Application (ID: 92506d9a-cc47-4356-a280-e624addba9f2)
+Onetribe Demo - Contains 3 datasets including the finance model
+RMC Demo Application - Another demo workspace
 
-Available Datasets:
+Finance Model Located:
 
-Financial KPIs (demo-ds-1) - Contains Revenue, Expenses, and Profit tables
-Sales Performance (demo-ds-2) - Contains Sales, Customers, and Products tables
-Operations Metrics (demo-ds-3) - Contains Inventory, Orders, and Deliveries tables
+Dataset Name: "Onetribe Demo - Model Finance"
+Dataset ID: 72efb974-5943-40c5-8f21-f9340c1b579f
+Workspace: Onetribe Demo
+Created: February 13, 2025
+Configured by: jakub@onetribeadvisory.com
 
-Current Issue:
-The Power BI connection requires proper user impersonation credentials to be configured. The system needs AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID to be properly set up, along with user impersonation settings.
-To get your 2024 revenue data and run the model structure queries you specified, the Power BI service configuration would need to be updated to include the proper authentication parameters. Once that's resolved, I could run your three DAX queries to explore the model structure and then query the revenue data for 202
+Connection Issues:
+Unfortunately, I encountered "Failed to open the MSOLAP connection" errors when trying to execute the three DAX queries you provided to explore the model structure. This suggests there may be:
+
+Permission issues: The service principal may need Member role in the workspace
+Dataset security settings: May need to be configured to allow external access
+Dataset refresh: The dataset might need to be refreshed to be accessible
+
+To get your 2024 revenue data and explore the model structure, you would need to resolve these connection permissions first. The troubleshooting steps typically involve:
+
+Ensuring the service principal has proper Power BI API permissions
+Adding the service principal as a Member to the workspace
+Configuring dataset security settings
+Potentially refreshing the dataset
+
+Would you like me to help troubleshoot these connection issues, or do you have access to resolve the permissions on your end?

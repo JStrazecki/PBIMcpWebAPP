@@ -79,9 +79,20 @@ To connect to actual Power BI data instead of demo mode:
 - **Authentication**: None (public access)
 - **Session Management**: Automatic via MCP protocol
 - **Endpoints**:
-  - `/` - Server info
-  - `/health` - Health check
-  - `/mcp/` - MCP protocol endpoint
+  - `/` - Server info (GET)
+  - `/health` - Health check (GET)
+  - `/mcp` - MCP protocol endpoint (POST only, requires SSE headers)
+
+### Important: About the /mcp Endpoint
+
+The `/mcp` endpoint is designed for Claude.ai's internal use and requires:
+- **Method**: POST
+- **Headers**: 
+  - `Content-Type: application/json`
+  - `Accept: text/event-stream`
+- **Body**: JSON-RPC 2.0 format
+
+If you access `/mcp` directly in a browser, you'll see an error. This is normal! Claude.ai handles all the technical details automatically when you add the server.
 
 ## Support
 

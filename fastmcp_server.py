@@ -444,6 +444,34 @@ async def root_info(request):
     })
 
 
+@mcp.custom_route("/mcp", methods=["GET"])
+async def mcp_info(request):
+    """Handle GET requests to /mcp endpoint with helpful info"""
+    from starlette.responses import JSONResponse
+    
+    return JSONResponse({
+        "error": "Method not allowed",
+        "message": "This is an MCP (Model Context Protocol) endpoint that requires POST requests with proper headers",
+        "requirements": {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "text/event-stream"
+            },
+            "body": {
+                "jsonrpc": "2.0",
+                "method": "initialize",
+                "params": {
+                    "protocolVersion": "2024-11-05",
+                    "capabilities": {}
+                },
+                "id": 1
+            }
+        },
+        "info": "This endpoint is designed for Claude.ai MCP integration. For testing, use the health endpoint at /health"
+    }, status_code=405)
+
+
 if __name__ == "__main__":
     # For local testing with FastMCP's built-in server
     port = int(os.environ.get('PORT', 8000))

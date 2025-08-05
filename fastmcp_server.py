@@ -308,13 +308,18 @@ async def powerbi_query(
             else:
                 url = f"https://api.powerbi.com/v1.0/myorg/datasets/{dataset_id}/executeQueries"
             
+            # Log the request details for debugging
+            logger.info(f"Executing DAX query on dataset {dataset_id} in workspace {workspace_id}")
+            logger.debug(f"Query URL: {url}")
+            
             payload = {
                 "queries": [{
                     "query": dax_query
                 }],
                 "serializerSettings": {
                     "includeNulls": True
-                }
+                },
+                "impersonatedUserName": ""  # Empty string = use service principal's context
             }
             
             response = requests.post(
@@ -347,11 +352,13 @@ async def powerbi_query(
                 troubleshooting_tip = ""
                 
                 if "MSOLAP connection" in error_message or "DatasetExecuteQueriesError" in error_message:
-                    troubleshooting_tip = "Your service principal needs to be added as a Member (not Viewer) to the Power BI workspace."
+                    troubleshooting_tip = "Check: 1) Service principal needs Member role in workspace, 2) Dataset security settings, 3) Dataset might need to be refreshed"
+                elif response.status_code == 404:
+                    troubleshooting_tip = "Dataset not found. Check: 1) Dataset ID is correct, 2) Dataset exists in workspace, 3) Service principal has access to workspace"
                 elif response.status_code == 403:
-                    troubleshooting_tip = "Your service principal needs 'Dataset.Read.All' API permissions and workspace Member access."
+                    troubleshooting_tip = "Access denied. Service principal needs: 1) Dataset.Read.All API permission, 2) Member role in workspace"
                 elif response.status_code == 401:
-                    troubleshooting_tip = "Check your AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID environment variables."
+                    troubleshooting_tip = "Authentication failed. Check AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_TENANT_ID environment variables."
                 
                 return json.dumps({
                     "error": f"Power BI API error: {response.status_code}",

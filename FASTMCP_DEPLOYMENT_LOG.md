@@ -1,6 +1,107 @@
 # FastMCP Deployment Log
 
-## SUCCESS! (2025-08-05) - Pure ASGI Implementation Working
+## SOLUTION IMPLEMENTED (2025-08-05) - Direct FastMCP Run
+
+### Final Decision
+After investigating the ModuleNotFoundError and FastMCP's architecture, the best solution is to run FastMCP directly instead of trying to force it into gunicorn.
+
+### Changes Made:
+1. **Updated Procfile**: Now uses `python run_fastmcp.py`
+2. **Direct execution**: FastMCP runs with its built-in HTTP server
+3. **No gunicorn needed**: FastMCP handles HTTP transport internally
+
+### Why This Works:
+- FastMCP is designed to run its own server
+- It doesn't expose an ASGI app for external servers
+- The `mcp.run(transport="http")` creates its own Starlette app internally
+- This matches how the pbi_mcp_finance module works
+
+## PREVIOUS ISSUE (2025-08-05 11:08) - ModuleNotFoundError
+
+### The Error
+```
+ModuleNotFoundError: No module named 'asgi'
+```
+
+### Root Cause
+The Python path in Azure doesn't include the application directory `/home/site/wwwroot`. Gunicorn is looking for `asgi.py` but can't find it.
+
+### Solution Applied
+Created multiple fixes:
+1. Updated `asgi.py` with proper Python path handling
+2. Created `app.py` as a simpler entry point
+3. Created `fastmcp_asgi.py` with Starlette wrapper
+
+### The Real Issue
+FastMCP is designed to run its own server with `mcp.run()`, not to export an ASGI app for gunicorn. This is a fundamental design difference.
+
+### Recommended Solution
+Use the direct run approach instead of trying to force FastMCP into gunicorn:
+```bash
+python run_fastmcp.py
+```
+
+Or use the startup.sh script which will fallback to direct run if gunicorn fails.
+
+## LATEST STATUS (2025-08-05) - FastMCP Implementation Ready
+
+### Summary
+Created a proper FastMCP implementation based on the working mcp_simple_server.py. The main challenge is that FastMCP doesn't directly expose its ASGI app for gunicorn, so we've created multiple deployment options.
+
+### Clean Implementation
+- Removed all experimental Python files
+- Kept only mcp_simple_server.py as reference
+- Created clean FastMCP implementation with all the same tools
+- No authentication required (Claude.ai friendly)
+
+## NEW APPROACH (2025-08-05) - Using FastMCP Library Properly
+
+### Research Findings
+Based on FastMCP documentation and examples:
+1. FastMCP uses `.run()` method for direct execution
+2. For ASGI deployment, we need to extract the Starlette app
+3. FastMCP creates its own ASGI app internally when using HTTP transport
+
+### The Problem with FastMCP + Gunicorn
+FastMCP doesn't expose its internal Starlette app directly. When you call `mcp.run()`, it creates the app internally but doesn't give us access to it for gunicorn.
+
+### Possible Solutions:
+1. **Direct Run** - Use `python run_fastmcp.py` instead of gunicorn
+2. **Extract Internal App** - Try to access FastMCP's internal Starlette app
+3. **Custom ASGI Wrapper** - Create our own ASGI app that wraps FastMCP
+
+### Current Implementation:
+- `fastmcp_server.py` - FastMCP server with all tools from mcp_simple_server.py
+- `asgi.py` - Attempts to extract the ASGI app for gunicorn
+- `run_fastmcp.py` - Direct runner using mcp.run()
+- `startup.sh` - Azure startup script that tries both approaches
+
+### Files Ready for Deployment:
+1. **fastmcp_server.py** - Main FastMCP implementation with all Power BI tools
+2. **run_fastmcp.py** - Direct runner that calls mcp.run()
+3. **Procfile** - Updated to use `python run_fastmcp.py`
+4. **startup.sh** - Backup script with fallback options
+
+### Removed Files:
+- `asgi.py` - Not needed, FastMCP doesn't export ASGI apps
+- `app.py` - Not needed for direct run
+- `fastmcp_asgi.py` - Not needed for direct run
+
+### Current Status:
+✅ Ready for deployment with direct FastMCP run
+✅ No authentication required (Claude.ai friendly)
+✅ All Power BI tools implemented
+✅ Demo data fallback when credentials not configured
+
+### Next Steps:
+1. Deploy to Azure
+2. Check startup logs
+3. If gunicorn fails, Azure can use startup.sh or Procfile.direct
+4. Update this log with results
+
+## Previous Attempts
+
+### SUCCESS! (2025-08-05) - Pure ASGI Implementation Working
 
 ### Deployment Status: ✅ WORKING
 

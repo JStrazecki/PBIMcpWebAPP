@@ -33,7 +33,9 @@
       "Bash(taskkill:*)",
       "Bash(npx @modelcontextprotocol/inspector:*)",
       "Bash(echo:*)",
-      "WebFetch(domain:pbimcp.azurewebsites.net)"
+      "WebFetch(domain:pbimcp.azurewebsites.net)",
+      "WebFetch(domain:gofastmcp.com)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": []
   }

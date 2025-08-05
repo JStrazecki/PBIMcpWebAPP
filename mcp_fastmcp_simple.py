@@ -280,15 +280,16 @@ async def powerbi_query(
         "mode": "demo_data"
     }, indent=2)
 
-# Run the server
+# Create ASGI app for deployment
+app = mcp.get_asgi_app(transport="http")
+
+# Run the server (for local testing only)
 if __name__ == "__main__":
     import uvicorn
-    
-    # Get the ASGI app
-    app = mcp.get_asgi_app(transport="http")
     
     # Run with uvicorn
     port = int(os.environ.get('PORT', 8000))
     logger.info(f"Starting FastMCP server on port {port}")
+    logger.info(f"Environment: {'Azure' if os.environ.get('WEBSITE_HOSTNAME') else 'Local'}")
     
     uvicorn.run(app, host="0.0.0.0", port=port)

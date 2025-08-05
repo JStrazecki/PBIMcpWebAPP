@@ -1,5 +1,29 @@
 # FastMCP Deployment Log
 
+## CRITICAL ISSUE ANALYSIS & SOLUTION
+
+### The Problem
+From analyzing `logs.txt`, the issue is clear:
+1. Claude.ai is sending requests WITHOUT authentication headers initially
+2. The Flask server (`mcp_simple_server.py`) was REJECTING these requests with 401 errors
+3. Claude.ai expects to connect first, THEN authenticate via OAuth flow
+
+**Key Log Evidence:**
+```
+Auth check - User-Agent: Claude-User, Auth header: None...
+WARNING - Invalid or missing auth header from Claude-User: None
+POST / HTTP/1.1" 401 78 "-" "Claude-User"
+```
+
+### Why Flask Doesn't Work with Claude.ai
+The Flask implementation checks for auth headers on EVERY request, including the initial MCP protocol handshake. Claude.ai doesn't send auth headers until AFTER OAuth flow completes.
+
+### The Solution: FastMCP Without Auth Checks
+FastMCP handles the protocol layer separately from authentication, allowing Claude.ai to:
+1. Connect without authentication
+2. Initialize the MCP protocol
+3. Then optionally authenticate via OAuth
+
 ## LATEST: Simplified FastMCP Implementation (No Auth Required)
 
 ### Created Simplified Files:
@@ -25,12 +49,79 @@
 
 ### Test After Deployment:
 ```bash
-# Check health
-curl https://your-app.azurewebsites.net/health
+# Check if server is running
+curl https://your-app.azurewebsites.net/
 
-# Check tools
-curl https://your-app.azurewebsites.net/tools
+# Test MCP initialize
+curl -X POST https://your-app.azurewebsites.net/ \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"initialize","params":{},"id":1}'
 ```
+
+## Common Azure Deployment Issues & Solutions
+
+### 1. ModuleNotFoundError: No module named 'fastmcp'
+**Solution:** Ensure `fastmcp>=0.1.0` is in requirements.txt
+
+### 2. ImportError: cannot import name 'FastMCP'
+**Solution:** Check if FastMCP is installed correctly:
+```bash
+pip install fastmcp
+```
+
+### 3. Gunicorn Worker Timeout
+**Solution:** Already handled in Procfile with `--timeout 600`
+
+### 4. ASGI Application Not Found
+**Solution:** Ensure `asgi_simple.py` imports correctly:
+- Check Python path includes current directory
+- Verify `mcp_fastmcp_simple.py` exists
+
+### 5. Claude.ai Connection Rejected
+**Solution:** This is why we moved to FastMCP - it doesn't require auth for initial connection
+
+## Monitoring Deployment
+
+After deploying, check Azure logs:
+```bash
+# In Azure Portal > App Service > Log stream
+# Or use Azure CLI:
+az webapp log tail --name your-app-name --resource-group your-rg
+```
+
+Look for:
+- "FastMCP server ready"
+- "Starting gunicorn with FastMCP"
+- No import errors
+
+## Final Summary: Why FastMCP Works
+
+### The Authentication Flow Problem
+1. **Flask Issue**: Required auth on EVERY request, including initial protocol handshake
+2. **Claude.ai Behavior**: Sends unauthenticated requests first, expects OAuth flow later
+3. **FastMCP Solution**: Separates protocol handling from authentication
+
+### Key Differences
+| Flask Server | FastMCP Server |
+|--------------|----------------|
+| Checks auth on all requests | No auth checks on protocol |
+| Returns 401 immediately | Accepts all connections |
+| Complex OAuth integration | Simple HTTP transport |
+| Manual protocol handling | Built-in MCP protocol |
+
+### Deployment Checklist
+- [x] Use `asgi_simple.py` as entry point
+- [x] Procfile uses uvicorn worker class
+- [x] No authentication in FastMCP server
+- [x] Direct app export in module
+- [x] Proper error handling in ASGI wrapper
+
+### Success Indicators
+When properly deployed, you should see:
+1. No 401 errors in logs
+2. Claude.ai connects without OAuth prompt
+3. Tools are immediately available
+4. "Claude-User" appears in logs with successful connections
 
 ---
 

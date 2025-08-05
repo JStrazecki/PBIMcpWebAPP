@@ -35,7 +35,8 @@
       "Bash(echo:*)",
       "WebFetch(domain:pbimcp.azurewebsites.net)",
       "WebFetch(domain:gofastmcp.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(cat:*)"
     ],
     "deny": []
   }

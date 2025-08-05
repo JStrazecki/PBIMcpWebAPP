@@ -1,78 +1,79 @@
-2025-08-05T11:07:46.9005179Z    _____
-2025-08-05T11:07:46.9006402Z   /  _  \ __________ _________   ____
-2025-08-05T11:07:46.9006482Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
-2025-08-05T11:07:46.9006506Z /    |    \/    /|  |  /|  | \/\  ___/
-2025-08-05T11:07:46.9006528Z \____|__  /_____ \____/ |__|    \___  >
-2025-08-05T11:07:46.9006555Z         \/      \/                  \/
-2025-08-05T11:07:46.9006576Z A P P   S E R V I C E   O N   L I N U X
-2025-08-05T11:07:46.9006599Z
-2025-08-05T11:07:46.9006628Z Documentation: http://aka.ms/webapp-linux
-2025-08-05T11:07:46.9006667Z Python 3.11.13
-2025-08-05T11:07:46.9006689Z Note: Any data outside '/home' is not persisted
-2025-08-05T11:07:54.4003976Z Starting OpenBSD Secure Shell server: sshd.
-2025-08-05T11:07:54.4828966Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
-2025-08-05T11:07:54.5836080Z Updating certificates in /etc/ssl/certs...
-2025-08-05T11:08:00.5230611Z Tue Aug 5 11:08:00 UTC 2025 running .net core
-2025-08-05T11:08:09.1175227Z Startup : 11.08.08.968046
-2025-08-05T11:08:09.2186879Z Configure Services : 11.08.09.218507
-2025-08-05T11:08:10.4943923Z 4 added, 0 removed; done.
-2025-08-05T11:08:10.4955295Z Running hooks in /etc/ca-certificates/update.d...
-2025-08-05T11:08:10.4964568Z done.
-2025-08-05T11:08:10.5272070Z CA certificates copied and updated successfully.
-2025-08-05T11:08:10.7876217Z Site's appCommandLine: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info asgi:app
-2025-08-05T11:08:11.8220019Z Starting periodic command scheduler: cron.
-2025-08-05T11:08:12.0528121Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info asgi:app'
-2025-08-05T11:08:13.0245389Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
-2025-08-05T11:08:13.0294804Z Build Operation ID: a0685935400b0260
-2025-08-05T11:08:13.0303045Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
-2025-08-05T11:08:13.0311980Z Output is compressed. Extracting it...
-2025-08-05T11:08:13.0321112Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd40e0e95d028'...
-2025-08-05T11:08:13.1406811Z Configure : 11.08.13.140550
-2025-08-05T11:08:14.3062705Z Setting Up Routes : 11.08.14.306119
-2025-08-05T11:08:15.8149272Z Exiting Configure : 11.08.15.814740
-2025-08-05T11:08:16.5689699Z Hosting environment: Production
-2025-08-05T11:08:16.5892864Z Content root path: /opt/Kudu
-2025-08-05T11:08:16.5893190Z Now listening on: http://0.0.0.0:8181
-2025-08-05T11:08:16.5893230Z Application started. Press Ctrl+C to shut down.
-2025-08-05T11:08:30.2335224Z App path is set to '/tmp/8ddd40e0e95d028'
-2025-08-05T11:08:30.2512697Z Writing output script to '/opt/startup/startup.sh'
-2025-08-05T11:08:30.4147092Z Using packages from virtual environment antenv located at /tmp/8ddd40e0e95d028/antenv.
-2025-08-05T11:08:30.4153459Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages'
-2025-08-05T11:08:31.6231815Z [2025-08-05 11:08:31 +0000] [1045] [INFO] Starting gunicorn 23.0.0
-2025-08-05T11:08:31.6244070Z [2025-08-05 11:08:31 +0000] [1045] [INFO] Listening at: http://0.0.0.0:8000 (1045)
-2025-08-05T11:08:31.6413362Z [2025-08-05 11:08:31 +0000] [1045] [INFO] Using worker: uvicorn.workers.UvicornWorker
-2025-08-05T11:08:31.6529787Z [2025-08-05 11:08:31 +0000] [1046] [INFO] Booting worker with pid: 1046
-2025-08-05T11:08:31.6839817Z [2025-08-05 11:08:31 +0000] [1046] [ERROR] Exception in worker process
-2025-08-05T11:08:31.6840326Z Traceback (most recent call last):
-2025-08-05T11:08:31.6840363Z   File "/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
-2025-08-05T11:08:31.6840454Z     worker.init_process()
-2025-08-05T11:08:31.6840486Z   File "/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages/uvicorn/workers.py", line 75, in init_process
-2025-08-05T11:08:31.6840508Z     super().init_process()
-2025-08-05T11:08:31.6840533Z   File "/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
-2025-08-05T11:08:31.6840555Z     self.load_wsgi()
-2025-08-05T11:08:31.6840580Z   File "/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
-2025-08-05T11:08:31.6840621Z     self.wsgi = self.app.wsgi()
-2025-08-05T11:08:31.6840642Z                 ^^^^^^^^^^^^^^^
-2025-08-05T11:08:31.6840666Z   File "/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
-2025-08-05T11:08:31.6840687Z     self.callable = self.load()
-2025-08-05T11:08:31.6840707Z                     ^^^^^^^^^^^
-2025-08-05T11:08:31.6840730Z   File "/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
-2025-08-05T11:08:31.6840776Z     return self.load_wsgiapp()
-2025-08-05T11:08:31.6840796Z            ^^^^^^^^^^^^^^^^^^^
-2025-08-05T11:08:31.6840837Z   File "/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
-2025-08-05T11:08:31.6840859Z     return util.import_app(self.app_uri)
-2025-08-05T11:08:31.6840880Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-08-05T11:08:31.6840929Z   File "/tmp/8ddd40e0e95d028/antenv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
-2025-08-05T11:08:31.6840951Z     mod = importlib.import_module(module)
-2025-08-05T11:08:31.6840972Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-08-05T11:08:31.6840996Z   File "/opt/python/3.11.13/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-08-05T11:08:31.6841019Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-08-05T11:08:31.6841041Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-08-05T11:08:31.6841088Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-08-05T11:08:31.6841113Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-08-05T11:08:31.6841135Z   File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
-2025-08-05T11:08:31.6841157Z ModuleNotFoundError: No module named 'asgi'
-2025-08-05T11:08:31.7221998Z [2025-08-05 11:08:31 +0000] [1046] [INFO] Worker exiting (pid: 1046)
-2025-08-05T11:08:31.9258382Z [2025-08-05 11:08:31 +0000] [1045] [ERROR] Worker (pid:1046) exited with code 3
-2025-08-05T11:08:31.9460474Z [2025-08-05 11:08:31 +0000] [1045] [ERROR] Shutting down: Master
-2025-08-05T11:08:31.9539240Z [2025-08-05 11:08:31 +0000] [1045] [ERROR] Reason: Worker failed to boot.
+2025-08-05T11:34:52.3058748Z Application started. Press Ctrl+C to shut down.
+2025-08-05T11:35:00.5280363Z    _____
+2025-08-05T11:35:00.5281758Z   /  _  \ __________ _________   ____
+2025-08-05T11:35:00.5281797Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-05T11:35:00.5281823Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-05T11:35:00.5281843Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-05T11:35:00.5281868Z         \/      \/                  \/
+2025-08-05T11:35:00.5281931Z A P P   S E R V I C E   O N   L I N U X
+2025-08-05T11:35:00.5281956Z
+2025-08-05T11:35:00.5281981Z Documentation: http://aka.ms/webapp-linux
+2025-08-05T11:35:00.5282004Z Python 3.11.13
+2025-08-05T11:35:00.5282025Z Note: Any data outside '/home' is not persisted
+2025-08-05T11:35:04.9022636Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-05T11:35:04.9206742Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-05T11:35:04.9803322Z Updating certificates in /etc/ssl/certs...
+2025-08-05T11:35:12.7198174Z 4 added, 0 removed; done.
+2025-08-05T11:35:12.7198778Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-05T11:35:12.7390073Z done.
+2025-08-05T11:35:12.7683601Z CA certificates copied and updated successfully.
+2025-08-05T11:35:12.9790970Z Site's appCommandLine: python run_fastmcp.py
+2025-08-05T11:35:13.5835850Z Starting periodic command scheduler: cron.
+2025-08-05T11:35:13.5844595Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'python run_fastmcp.py'
+2025-08-05T11:35:13.9464436Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-08-05T11:35:14.0541843Z Build Operation ID: 86002f770c071fec
+2025-08-05T11:35:14.0562614Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
+2025-08-05T11:35:14.0640071Z Output is compressed. Extracting it...
+2025-08-05T11:35:14.0657643Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd411a4832bae'...
+2025-08-05T11:35:19  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
+2025-08-05T11:35:12.7390073Z done.
+2025-08-05T11:35:12.7683601Z CA certificates copied and updated successfully.
+2025-08-05T11:35:12.9790970Z Site's appCommandLine: python run_fastmcp.py
+2025-08-05T11:35:13.5835850Z Starting periodic command scheduler: cron.
+2025-08-05T11:35:13.5844595Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'python run_fastmcp.py'
+2025-08-05T11:35:13.9464436Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-08-05T11:35:14.0541843Z Build Operation ID: 86002f770c071fec
+2025-08-05T11:35:14.0562614Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
+2025-08-05T11:35:14.0640071Z Output is compressed. Extracting it...
+2025-08-05T11:35:14.0657643Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd411a4832bae'...Ending Log Tail of existing logs ---Starting Live Log Stream ---
+2025-08-05T11:35:34.2290195Z App path is set to '/tmp/8ddd411a4832bae'
+2025-08-05T11:35:34.2470866Z Writing output script to '/opt/startup/startup.sh'
+2025-08-05T11:35:36.1310487Z Using packages from virtual environment antenv located at /tmp/8ddd411a4832bae/antenv.
+2025-08-05T11:35:36.1311025Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd411a4832bae/antenv/lib/python3.11/site-packages'
+2025-08-05T11:35:47.2430999Z 2025-08-05 11:35:47,242 - run-fastmcp - INFO - Starting FastMCP HTTP server on port 8000
+2025-08-05T11:35:47.2439697Z 2025-08-05 11:35:47,243 - run-fastmcp - INFO - Environment: Azure
+2025-08-05T11:35:47.3963668Z
+2025-08-05T11:35:47.4232277Z
+2025-08-05T11:35:47.4232375Z ╭─ FastMCP 2.0 ──────────────────────────────────────────────────────────────╮
+2025-08-05T11:35:47.4232471Z │                                                                            │
+2025-08-05T11:35:47.4232496Z │        _ __ ___ ______           __  __  _____________    ____    ____     │
+2025-08-05T11:35:47.4232520Z │       _ __ ___ / ____/___ ______/ /_/  |/  / ____/ __ \  |___ \  / __ \    │
+2025-08-05T11:35:47.4232543Z │      _ __ ___ / /_  / __ `/ ___/ __/ /|_/ / /   / /_/ /  ___/ / / / / /    │
+2025-08-05T11:35:47.4232566Z │     _ __ ___ / __/ / /_/ (__  ) /_/ /  / / /___/ ____/  /  __/_/ /_/ /     │
+2025-08-05T11:35:47.4232613Z │    _ __ ___ /_/    \__,_/____/\__/_/  /_/\____/_/      /_____(_)____/      │
+2025-08-05T11:35:47.4232637Z │                                                                            │
+2025-08-05T11:35:47.4232660Z │                                                                            │
+2025-08-05T11:35:47.4232683Z │                                                                            │
+2025-08-05T11:35:47.4232708Z │    🖥️  Server name:     Power BI MCP Server                                 │
+2025-08-05T11:35:47.4232733Z │    📦 Transport:       Streamable-HTTP                                     │
+2025-08-05T11:35:47.4232782Z │    🔗 Server URL:      http://0.0.0.0:8000/mcp                             │
+2025-08-05T11:35:47.4232805Z │                                                                            │
+2025-08-05T11:35:47.4232831Z │    📚 Docs:            https://gofastmcp.com                               │
+2025-08-05T11:35:47.4232866Z │    🚀 Deploy:          https://fastmcp.cloud                               │
+2025-08-05T11:35:47.4232892Z │                                                                            │
+2025-08-05T11:35:47.4232937Z │    🏎️  FastMCP version: 2.11.1                                              │
+2025-08-05T11:35:47.4232961Z │    🤝 MCP version:     1.12.3                                              │
+2025-08-05T11:35:47.4232985Z │                                                                            │
+2025-08-05T11:35:47.4233020Z ╰────────────────────────────────────────────────────────────────────────────╯
+2025-08-05T11:35:47.4233041Z
+2025-08-05T11:35:47.4233079Z
+2025-08-05T11:35:47.4233385Z [08/05/25 11:35:47] INFO     Starting MCP server 'Power BI MCP    server.py:1519
+2025-08-05T11:35:47.4233414Z                              Server' with transport 'http' on
+2025-08-05T11:35:47.4233437Z                              http://0.0.0.0:8000/mcp
+2025-08-05T11:35:47.5659881Z INFO:     Started server process [1039]
+2025-08-05T11:35:47.5668506Z INFO:     Waiting for application startup.
+2025-08-05T11:35:47.5743480Z 2025-08-05 11:35:47,574 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
+2025-08-05T11:35:47.5751597Z INFO:     Application startup complete.
+2025-08-05T11:35:47.5761116Z INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-08-05T11:35:48.4297098Z INFO:     169.254.132.1:27103 - "GET /robots933456.txt HTTP/1.1" 404 Not Found
+2025-08-05T11:35:48.7017908Z INFO:     169.254.132.1:27115 - "GET /health HTTP/1.1" 200 OK

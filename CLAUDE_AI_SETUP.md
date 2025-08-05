@@ -11,7 +11,7 @@ Your Power BI MCP Server is deployed and ready at: **https://pbimcp.azurewebsite
 3. Click "Add MCP Server"
 4. Enter:
    - **Name**: Power BI MCP Server
-   - **URL**: `https://pbimcp.azurewebsites.net/mcp`
+   - **URL**: `https://pbimcp.azurewebsites.net`
    - **Authentication**: Leave empty
 5. Click "Connect"
 

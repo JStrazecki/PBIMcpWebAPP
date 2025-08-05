@@ -100,3 +100,86 @@
 2025-08-05T13:13:15.8390896Z INFO:     169.254.132.1:44249 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
 2025-08-05T13:13:18.9128931Z INFO:     169.254.132.1:44249 - "POST / HTTP/1.1" 400 Bad Request
 2025-08-05T13:13:19.3165132Z INFO:     169.254.132.1:44249 - "GET / HTTP/1.1" 200 OK
+2025-08-05T13:14:34.8280325Z INFO:     169.254.132.1:42903 - "GET /health HTTP/1.1" 200 OK
+2025-08-05T13:14:40.9760322Z INFO:     169.254.132.1:11279 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 200 OK
+2025-08-05T13:14:47.5621200Z INFO:     169.254.132.1:49049 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
+2025-08-05T13:14:59.8698167Z INFO:     169.254.132.1:25637 - "POST /register HTTP/1.1" 200 OK
+2025-08-05T13:16:05.9011670Z INFO:     169.254.132.1:25637 - "GET /mcp HTTP/1.1" 405 Method Not Allowed
+2025-08-05T13:16:12.8073355Z 2025-08-05 13:16:12,805 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 17e257aada224e538f89c6d197f1560b
+2025-08-05T13:16:12.9778849Z INFO:     169.254.132.1:61585 - "POST /mcp/ HTTP/1.1" 406 Not Acceptable
+2025-08-05T13:16:19.8499878Z 2025-08-05 13:16:19,840 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 97203de259674b9590b57d842ed57af4
+2025-08-05T13:16:19.8845766Z 2025-08-05 13:16:19,884 - root - WARNING - Failed to validate request: 21 validation errors for ClientRequest
+2025-08-05T13:16:19.8846149Z PingRequest.method
+2025-08-05T13:16:19.8846173Z   Input should be 'ping' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846193Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8846208Z InitializeRequest.params.clientInfo
+2025-08-05T13:16:19.8846226Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8846286Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8846302Z CompleteRequest.method
+2025-08-05T13:16:19.8846319Z   Input should be 'completion/complete' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846335Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8846348Z CompleteRequest.params.ref
+2025-08-05T13:16:19.8846365Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8846381Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8846395Z CompleteRequest.params.argument
+2025-08-05T13:16:19.8846412Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8846453Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8846467Z SetLevelRequest.method
+2025-08-05T13:16:19.8846484Z   Input should be 'logging/setLevel' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846499Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8846512Z SetLevelRequest.params.level
+2025-08-05T13:16:19.8846529Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8846544Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8846558Z GetPromptRequest.method
+2025-08-05T13:16:19.8846574Z   Input should be 'prompts/get' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846590Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8846627Z GetPromptRequest.params.name
+2025-08-05T13:16:19.8846644Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8846659Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8846673Z ListPromptsRequest.method
+2025-08-05T13:16:19.8846690Z   Input should be 'prompts/list' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846706Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8846719Z ListResourcesRequest.method
+2025-08-05T13:16:19.8846735Z   Input should be 'resources/list' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846789Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8846804Z ListResourceTemplatesRequest.method
+2025-08-05T13:16:19.8846821Z   Input should be 'resources/templates/list' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846836Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8846849Z ReadResourceRequest.method
+2025-08-05T13:16:19.8846865Z   Input should be 'resources/read' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846880Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8846893Z ReadResourceRequest.params.uri
+2025-08-05T13:16:19.8846912Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8846950Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8846963Z SubscribeRequest.method
+2025-08-05T13:16:19.8846981Z   Input should be 'resources/subscribe' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8846996Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8847009Z SubscribeRequest.params.uri
+2025-08-05T13:16:19.8847026Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8847041Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8847054Z UnsubscribeRequest.method
+2025-08-05T13:16:19.8847071Z   Input should be 'resources/unsubscribe' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8847107Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8847120Z UnsubscribeRequest.params.uri
+2025-08-05T13:16:19.8847137Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8847153Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8847165Z CallToolRequest.method
+2025-08-05T13:16:19.8847182Z   Input should be 'tools/call' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8847403Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8847420Z CallToolRequest.params.name
+2025-08-05T13:16:19.8847437Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
+2025-08-05T13:16:19.8847473Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
+2025-08-05T13:16:19.8847487Z ListToolsRequest.method
+2025-08-05T13:16:19.8847503Z   Input should be 'tools/list' [type=literal_error, input_value='initialize', input_type=str]
+2025-08-05T13:16:19.8847519Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
+2025-08-05T13:16:19.8910056Z INFO:     169.254.132.1:44397 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T13:16:26.1754133Z 2025-08-05 13:16:26,175 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: f21fc0a4ff0b4e7fb62139b5e34df7ad
+2025-08-05T13:16:26.1921534Z INFO:     169.254.132.1:44411 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T13:17:51  No new trace in the past 1 min(s).
+2025-08-05T13:18:31.5948656Z INFO:     169.254.132.1:63211 - "GET /health HTTP/1.1" 200 OK
+2025-08-05T13:18:37.1581923Z INFO:     169.254.132.1:63641 - "HEAD / HTTP/1.1" 200 OK
+2025-08-05T13:18:37.5879686Z INFO:     169.254.132.1:63641 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 200 OK
+2025-08-05T13:18:38.0260380Z INFO:     169.254.132.1:63641 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
+2025-08-05T13:18:38.4897878Z INFO:     169.254.132.1:63641 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
+2025-08-05T13:18:43.1991357Z INFO:     169.254.132.1:63641 - "POST / HTTP/1.1" 400 Bad Request
+2025-08-05T13:18:43.5760076Z INFO:     169.254.132.1:63641 - "GET / HTTP/1.1" 200 OK

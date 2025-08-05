@@ -447,13 +447,13 @@ async def root_info(request):
 @mcp.custom_route("/", methods=["POST"])
 async def root_post(request):
     """Handle POST to root - redirect to MCP endpoint"""
-    from starlette.responses import JSONResponse
+    from starlette.responses import RedirectResponse
     
-    return JSONResponse({
-        "error": "Wrong endpoint",
-        "message": "MCP protocol endpoint is at /mcp",
-        "redirect": "/mcp"
-    }, status_code=400)
+    # Get the current URL and append /mcp/
+    redirect_url = str(request.url).rstrip('/') + '/mcp/'
+    
+    # Return 307 redirect to preserve POST method
+    return RedirectResponse(url=redirect_url, status_code=307)
 
 
 @mcp.custom_route("/mcp", methods=["GET"])

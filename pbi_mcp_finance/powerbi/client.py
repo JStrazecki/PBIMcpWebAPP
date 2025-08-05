@@ -14,6 +14,7 @@ from ..utils.exceptions import (
     PowerBIError, AuthenticationError, WorkspaceNotFoundError, 
     DatasetNotFoundError, DAXQueryError
 )
+from .permissions_handler import PermissionsHandler
 
 
 class PowerBIClient:
@@ -91,11 +92,23 @@ class PowerBIClient:
                 error_message = f"HTTP {response.status_code}: {response.text[:200]}"
                 powerbi_logger.error(error_message)
                 
-                # Classify errors
+                # Classify errors with enhanced diagnostics
                 if response.status_code == 401:
                     raise AuthenticationError(error_message)
                 elif response.status_code == 404:
                     raise PowerBIError(error_message)
+                elif response.status_code == 403:
+                    # Handle permission errors specially
+                    if "API is not accessible for application" in response.text:
+                        diagnostic = PermissionsHandler.analyze_error(response.text, 403)
+                        error_msg = (
+                            f"Power BI API permissions not configured. "
+                            f"The service principal doesn't have the required Power BI API permissions. "
+                            f"Required: {', '.join(diagnostic['permissions_needed'])}"
+                        )
+                        raise PowerBIError(error_msg)
+                    else:
+                        raise PowerBIError(error_message)
                 else:
                     raise PowerBIError(error_message)
             

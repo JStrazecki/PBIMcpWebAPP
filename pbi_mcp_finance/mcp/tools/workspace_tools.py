@@ -9,6 +9,7 @@ from ...powerbi.client import get_powerbi_client
 from ...config.settings import settings
 from ...utils.logging import mcp_logger
 from ...utils.exceptions import PowerBIError
+from ...powerbi.permissions_handler import handle_powerbi_error
 
 
 def register_workspace_tools(mcp: FastMCP):
@@ -76,7 +77,12 @@ def register_workspace_tools(mcp: FastMCP):
                     else:
                         output += f"  Datasets: None available\n"
                 except Exception as dataset_error:
-                    output += f"  Datasets: Error retrieving ({str(dataset_error)[:50]}...)\n"
+                    # Check if this is a permissions error
+                    error_str = str(dataset_error)
+                    if "API is not accessible" in error_str or "403" in error_str:
+                        output += f"  Datasets: Permission denied (Dataset.Read.All required)\n"
+                    else:
+                        output += f"  Datasets: Error retrieving ({error_str[:50]}...)\n"
                 
                 output += "\n"
             
@@ -84,10 +90,10 @@ def register_workspace_tools(mcp: FastMCP):
                 
         except PowerBIError as e:
             mcp_logger.error(f"Failed to list workspaces: {e}")
-            return f"Error: {e}"
+            return handle_powerbi_error(e, {"operation": "list_workspaces"})
         except Exception as e:
             mcp_logger.error(f"Unexpected error listing workspaces: {e}")
-            return f"Error: Unexpected error occurred"
+            return handle_powerbi_error(e, {"operation": "list_workspaces"})
     
     @mcp.tool()
     def list_datasets(workspace_name: str) -> str:

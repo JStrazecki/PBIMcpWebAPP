@@ -9,6 +9,7 @@ from ...powerbi.client import get_powerbi_client
 from ...config.settings import settings
 from ...utils.logging import mcp_logger
 from ...utils.exceptions import PowerBIError, DAXQueryError
+from ...powerbi.permissions_handler import handle_powerbi_error
 
 
 def register_query_tools(mcp: FastMCP):
@@ -53,7 +54,21 @@ def register_query_tools(mcp: FastMCP):
                 
         except (PowerBIError, DAXQueryError) as e:
             mcp_logger.error(f"Failed to execute custom DAX: {e}")
-            return f"Error: {e}"
+            context = {
+                "operation": "execute_dax",
+                "workspace_name": workspace_name,
+                "dataset_name": dataset_name,
+                "query_preview": query[:100] + "..." if len(query) > 100 else query
+            }
+            if 'workspace' in locals() and 'id' in workspace:
+                context["workspace_id"] = workspace['id']
+            if 'dataset' in locals() and 'id' in dataset:
+                context["dataset_id"] = dataset['id']
+            return handle_powerbi_error(e, context)
         except Exception as e:
             mcp_logger.error(f"Unexpected error executing DAX: {e}")
-            return f"Error: Unexpected error occurred"
+            return handle_powerbi_error(e, {
+                "operation": "execute_dax",
+                "workspace_name": workspace_name,
+                "dataset_name": dataset_name
+            })

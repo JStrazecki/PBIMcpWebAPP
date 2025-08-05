@@ -1,5 +1,37 @@
 # FastMCP Deployment Log
 
+## CURRENT ISSUE (2025-08-05 11:22) - Azure Using Wrong Startup Command
+
+### The Problem
+Azure App Service is ignoring the Procfile and using its own startup command:
+```
+Site's appCommandLine: gunicorn ... asgi:app
+```
+
+This references the deleted `asgi.py` file, causing `ModuleNotFoundError: No module named 'asgi'`
+
+### Solution Applied
+1. **Created new asgi.py** - A placeholder that tells Azure to use the correct command
+2. **Key Issue**: Azure App Service is using a cached or configured startup command instead of reading the Procfile
+
+### Required Fix
+The Azure App Service needs its startup command updated to:
+```bash
+python run_fastmcp.py
+```
+
+### How to Fix in Azure Portal
+1. Go to Azure Portal
+2. Navigate to your App Service
+3. Go to Configuration > General settings
+4. Update "Startup Command" to: `python run_fastmcp.py`
+5. Save and restart the app
+
+### Alternative: Use Azure CLI
+```bash
+az webapp config set --resource-group <your-rg> --name <your-app> --startup-file "python run_fastmcp.py"
+```
+
 ## SOLUTION IMPLEMENTED (2025-08-05) - Direct FastMCP Run
 
 ### Final Decision

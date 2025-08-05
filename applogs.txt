@@ -1,0 +1,44 @@
+2025-08-05T14:30:47  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
+2025-08-05T14:26:42.8698770Z 2025-08-05 14:26:42,869 - pbi-fastmcp - INFO - Executing DAX query on dataset demo-ds-1 in workspace None
+2025-08-05T14:26:42.9791713Z 2025-08-05 14:26:42,978 - pbi-fastmcp - ERROR - Power BI query API error: 400 - {"error":{"code":"BadRequest","message":"Bad Request","details":[{"message":"ImpersonatedUserName, if specified, needs to be non-empty.","target":"request"}]}}
+2025-08-05T14:26:42.9837337Z INFO:     169.254.132.1:31569 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:26:50.6038524Z INFO:     34.162.142.92:2566:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:26:50.6124028Z 2025-08-05 14:26:50,612 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:26:50.6130466Z 2025-08-05 14:26:50,612 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:26:50.7520131Z 2025-08-05 14:26:50,751 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:26:50.7529017Z 2025-08-05 14:26:50,752 - pbi-fastmcp - INFO - Executing DAX query on dataset demo-ds-1 in workspace None
+2025-08-05T14:26:50.8871032Z 2025-08-05 14:26:50,882 - pbi-fastmcp - ERROR - Power BI query API error: 400 - {"error":{"code":"BadRequest","message":"Bad Request","details":[{"message":"ImpersonatedUserName, if specified, needs to be non-empty.","target":"request"}]}}
+2025-08-05T14:26:50.8886676Z INFO:     169.254.132.1:12983 - "POST / HTTP/1.1" 200 OKEnding Log Tail of existing logs ---Starting Live Log Stream ---
+2025-08-05T14:31:05.0454768Z 2025-08-05 14:31:05,044 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 960528cdad2e471eb9b8ed3502de658a
+2025-08-05T14:31:05.0761253Z INFO:     34.162.102.82:50176:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:31:05.0864388Z 2025-08-05 14:31:05,086 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:31:05.0882236Z INFO:     169.254.132.1:51285 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:31:05.7881785Z INFO:     169.254.132.1:51285 - "GET / HTTP/1.1" 200 OK
+2025-08-05T14:31:05.8689775Z INFO:     34.162.102.82:50178:0 - "POST /mcp/ HTTP/1.1" 202 Accepted
+2025-08-05T14:31:05.8704777Z 2025-08-05 14:31:05,870 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 202 Accepted"
+2025-08-05T14:31:05.8715281Z INFO:     169.254.132.1:51285 - "POST / HTTP/1.1" 202 Accepted
+2025-08-05T14:31:06.3298844Z INFO:     34.162.102.82:50179:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:31:06.3390987Z 2025-08-05 14:31:06,338 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:31:06.3391134Z 2025-08-05 14:31:06,338 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:31:06.4902878Z 2025-08-05 14:31:06,490 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:31:06.7034076Z INFO:     169.254.132.1:51285 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:31:10.4145080Z INFO:     34.162.102.82:50180:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:31:10.4159910Z 2025-08-05 14:31:10,415 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:31:10.4168315Z 2025-08-05 14:31:10,416 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:31:10.8518807Z 2025-08-05 14:31:10,851 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:31:10.9946354Z 2025-08-05 14:31:10,994 - pbi-fastmcp - ERROR - Power BI datasets API error: 403 - {"Message":"API is not accessible for application"}
+2025-08-05T14:31:11.0050339Z INFO:     169.254.132.1:51285 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:31:15.7049982Z INFO:     34.162.102.82:50181:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:31:15.7136013Z 2025-08-05 14:31:15,713 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:31:15.7144988Z 2025-08-05 14:31:15,714 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:31:15.8666711Z 2025-08-05 14:31:15,864 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:31:15.8667115Z 2025-08-05 14:31:15,865 - pbi-fastmcp - INFO - Executing DAX query on dataset demo-ds-1 in workspace None
+2025-08-05T14:31:15.9768457Z 2025-08-05 14:31:15,967 - pbi-fastmcp - ERROR - Power BI query API error: 400 - {"error":{"code":"BadRequest","message":"Bad Request","details":[{"message":"ImpersonatedUserName, if specified, needs to be non-empty.","target":"request"}]}}
+2025-08-05T14:31:15.9780189Z INFO:     169.254.132.1:51285 - "POST / HTTP/1.1" 200 OK
+2025-08-05T14:31:20.4832512Z INFO:     34.162.102.82:50182:0 - "POST /mcp/ HTTP/1.1" 200 OK
+2025-08-05T14:31:20.4846875Z 2025-08-05 14:31:20,484 - httpx - INFO - HTTP Request: POST http://localhost:8000/mcp/ "HTTP/1.1 200 OK"
+2025-08-05T14:31:20.4947568Z 2025-08-05 14:31:20,494 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-08-05T14:31:20.6445929Z 2025-08-05 14:31:20,644 - pbi-fastmcp - INFO - Successfully acquired Power BI access token
+2025-08-05T14:31:20.6458586Z 2025-08-05 14:31:20,645 - pbi-fastmcp - INFO - Executing DAX query on dataset demo-ds-1 in workspace None
+2025-08-05T14:31:20.7612147Z 2025-08-05 14:31:20,761 - pbi-fastmcp - ERROR - Power BI query API error: 400 - {"error":{"code":"BadRequest","message":"Bad Request","details":[{"message":"ImpersonatedUserName, if specified, needs to be non-empty.","target":"request"}]}}
+2025-08-05T14:31:20.7690903Z INFO:     169.254.132.1:51285 - "POST / HTTP/1.1" 200 OK

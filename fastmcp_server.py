@@ -132,6 +132,21 @@ async def powerbi_workspaces() -> str:
                 }
                 
                 return json.dumps(result, indent=2)
+            elif response.status_code == 403 and "API is not accessible for application" in response.text:
+                logger.error(f"Power BI API permissions error: {response.status_code} - {response.text}")
+                return json.dumps({
+                    "error": "Power BI API permissions not configured",
+                    "message": "The service principal doesn't have the required Power BI API permissions.",
+                    "troubleshooting": [
+                        "1. Add Power BI Service API permissions (Workspace.Read.All, Dataset.Read.All) in Azure AD",
+                        "2. Grant admin consent for the permissions",
+                        "3. Enable 'Service principals can use Power BI APIs' in Power BI Admin Portal",
+                        "4. Add service principal to workspaces with Member role"
+                    ],
+                    "details": response.text[:200],
+                    "mode": "permission_error",
+                    "status": "failed"
+                }, indent=2)
             else:
                 logger.error(f"Power BI API error: {response.status_code} - {response.text}")
                 # Fall through to demo data
@@ -226,6 +241,22 @@ async def powerbi_datasets(workspace_id: Optional[str] = None) -> str:
                 }
                 
                 return json.dumps(result, indent=2)
+            elif response.status_code == 403 and "API is not accessible for application" in response.text:
+                logger.error(f"Power BI datasets API permissions error: {response.status_code} - {response.text}")
+                return json.dumps({
+                    "error": "Power BI API permissions not configured",
+                    "message": "The service principal doesn't have the required Power BI API permissions.",
+                    "troubleshooting": [
+                        "1. Add Power BI Service API permissions (Dataset.Read.All) in Azure AD",
+                        "2. Grant admin consent for the permissions",
+                        "3. Enable 'Service principals can use Power BI APIs' in Power BI Admin Portal",
+                        "4. Add service principal to workspace with Member role"
+                    ],
+                    "workspace_id": workspace_id or "all",
+                    "details": response.text[:200],
+                    "mode": "permission_error",
+                    "status": "failed"
+                }, indent=2)
             else:
                 logger.error(f"Power BI datasets API error: {response.status_code} - {response.text}")
                 # Fall through to demo data
@@ -318,8 +349,7 @@ async def powerbi_query(
                 }],
                 "serializerSettings": {
                     "includeNulls": True
-                },
-                "impersonatedUserName": ""  # Empty string = use service principal's context
+                }
             }
             
             response = requests.post(

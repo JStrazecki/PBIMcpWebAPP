@@ -124,7 +124,9 @@ def test_api_permissions(token):
                 results[test['name']] = True
             else:
                 print(f"[FAILED] Failed - Status: {response.status_code}")
-                print(f"  Error: {response.text[:200]}")
+                print(f"  Raw API Response:")
+                print(f"  {response.text}")
+                print(f"  Response Headers: {dict(response.headers)}")
                 results[test['name']] = False
                 
         except Exception as e:
@@ -198,19 +200,13 @@ def test_workspace_access(token):
                         print("    [OK] DAX query successful")
                     else:
                         print(f"    [FAILED] DAX query failed - Status: {query_response.status_code}")
-                        error_msg = query_response.text[:200]
-                        print(f"    Error: {error_msg}")
-                        
-                        # Parse specific error
-                        if "DatasetExecuteQueriesError" in error_msg:
-                            if "Failed to open the MSOLAP connection" in error_msg:
-                                print("    -> Issue: Cannot connect to dataset XMLA endpoint")
-                                print("    -> Solution: Enable XMLA read endpoint in workspace settings")
-                            elif "permissions" in error_msg.lower():
-                                print("    -> Issue: Insufficient permissions on dataset")
-                                print("    -> Solution: Add service principal to workspace with Member role")
+                        print(f"    Raw API Response:")
+                        print(f"    {query_response.text}")
+                        print(f"    Request URL: {query_response.url}")
+                        print(f"    Request Body: {json.dumps(query_data, indent=6)}")
             else:
                 print(f"  [FAILED] Cannot access datasets - Status: {ds_response.status_code}")
+                print(f"  Raw API Response: {ds_response.text}")
                 
     except Exception as e:
         print(f"[ERROR] Error testing workspaces: {e}")

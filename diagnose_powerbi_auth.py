@@ -33,7 +33,7 @@ def check_environment_variables():
         "POWERBI_WORKSPACE": os.environ.get("POWERBI_WORKSPACE"),
         "POWERBI_WORKSPACE_ID": os.environ.get("POWERBI_WORKSPACE_ID"),
         "POWERBI_DATASET": os.environ.get("POWERBI_DATASET"),
-        "POWERBI_TOKEN": "***SET***" if os.environ.get("POWERBI_TOKEN") else None
+        "POWERBI_TOKEN":  os.environ.get("POWERBI_TOKEN"),
     }
     
     for var, value in vars_to_check.items():

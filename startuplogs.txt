@@ -1,94 +1,43 @@
-2025-08-05T10:19:33.3930165Z [notice] A new release of pip is available: 24.0 -> 25.2
-2025-08-05T10:19:33.4315313Z [notice] To update, run: pip install --upgrade pip
-2025-08-05T10:19:33.4524323Z Not a vso image, so not writing build commands
-2025-08-05T10:19:33.4914979Z Preparing output...
-2025-08-05T10:19:33.5318011Z
-2025-08-05T10:19:33.5736288Z Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
-2025-08-05T10:19:45.0693931Z .......
-2025-08-05T10:19:45.0707503Z Done in 13 sec(s).
-2025-08-05T10:19:45.0897007Z Compressing content of directory '/tmp/_preCompressedDestinationDir'...
-2025-08-05T10:20:13.9252283Z ........................
-2025-08-05T10:20:13.9252758Z Copied the compressed output to '/home/site/wwwroot'
-2025-08-05T10:20:14.0052679Z
-2025-08-05T10:20:14.0364442Z Removing existing manifest file
-2025-08-05T10:20:14.0569897Z Creating a manifest file...
-2025-08-05T10:20:14.0943355Z Manifest file created.
-2025-08-05T10:20:14.1043145Z Copying .ostype to manifest output directory.
-2025-08-05T10:20:14.1364501Z
-2025-08-05T10:20:14.1468162Z Done in 126 sec(s).
-2025-08-05T10:20:26.3623553Z    _____
-2025-08-05T10:20:26.3624028Z   /  _  \ __________ _________   ____
-2025-08-05T10:20:26.3624050Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
-2025-08-05T10:20:26.3624129Z /    |    \/    /|  |  /|  | \/\  ___/
-2025-08-05T10:20:26.3624147Z \____|__  /_____ \____/ |__|    \___  >
-2025-08-05T10:20:26.3624160Z         \/      \/                  \/
-2025-08-05T10:20:26.3624175Z A P P   S E R V I C E   O N   L I N U X
-2025-08-05T10:20:26.3624195Z
-2025-08-05T10:20:26.3624212Z Documentation: http://aka.ms/webapp-linux
-2025-08-05T10:20:26.3624226Z Python 3.11.13
-2025-08-05T10:20:26.3624242Z Note: Any data outside '/home' is not persisted
-2025-08-05T10:20:27.2444250Z Starting OpenBSD Secure Shell server: sshd.
-2025-08-05T10:20:27.2573152Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
-2025-08-05T10:20:27.2975015Z Updating certificates in /etc/ssl/certs...
-2025-08-05T10:20:34.2836014Z 4 added, 0 removed; done.
-2025-08-05T10:20:34.2836383Z Running hooks in /etc/ca-certificates/update.d...
-2025-08-05T10:20:34.2923540Z done.
-2025-08-05T10:20:34.2943607Z CA certificates copied and updated successfully.
-2025-08-05T10:20:34.4124839Z Site's appCommandLine: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info asgi_simple:app
-2025-08-05T10:20:34.8063665Z Starting periodic command scheduler: cron.
-2025-08-05T10:20:34.8067458Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info asgi_simple:app'
-2025-08-05T10:20:35.0566058Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
-2025-08-05T10:20:35.0584174Z Build Operation ID: 0bc7f950c2a74104
-2025-08-05T10:20:35.0587518Z Output is compressed. Extracting it...
-2025-08-05T10:20:35.0587751Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
-2025-08-05T10:20:35.0665489Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd4095d15e98b'...
-2025-08-05T10:20:49.4542898Z App path is set to '/tmp/8ddd4095d15e98b'
-2025-08-05T10:20:49.4921879Z Writing output script to '/opt/startup/startup.sh'
-2025-08-05T10:20:49.8954259Z Using packages from virtual environment antenv located at /tmp/8ddd4095d15e98b/antenv.
-2025-08-05T10:20:49.8962547Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages'
-2025-08-05T10:20:52.2586326Z [2025-08-05 10:20:52 +0000] [1040] [INFO] Starting gunicorn 23.0.0
-2025-08-05T10:20:52.2654101Z [2025-08-05 10:20:52 +0000] [1040] [INFO] Listening at: http://0.0.0.0:8000 (1040)
-2025-08-05T10:20:52.2657134Z [2025-08-05 10:20:52 +0000] [1040] [INFO] Using worker: uvicorn.workers.UvicornWorker
-2025-08-05T10:20:52.2761635Z [2025-08-05 10:20:52 +0000] [1045] [INFO] Booting worker with pid: 1045
-2025-08-05T10:20:58.0783761Z [2025-08-05 10:20:58 +0000] [1045] [ERROR] Exception in worker process
-2025-08-05T10:20:58.0784137Z Traceback (most recent call last):
-2025-08-05T10:20:58.0784164Z   File "/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
-2025-08-05T10:20:58.0784194Z     worker.init_process()
-2025-08-05T10:20:58.0784212Z   File "/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages/uvicorn/workers.py", line 75, in init_process
-2025-08-05T10:20:58.0784230Z     super().init_process()
-2025-08-05T10:20:58.0784250Z   File "/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
-2025-08-05T10:20:58.0784264Z     self.load_wsgi()
-2025-08-05T10:20:58.0784338Z   File "/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
-2025-08-05T10:20:58.0784354Z     self.wsgi = self.app.wsgi()
-2025-08-05T10:20:58.0784368Z                 ^^^^^^^^^^^^^^^
-2025-08-05T10:20:58.0784386Z   File "/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
-2025-08-05T10:20:58.0784400Z     self.callable = self.load()
-2025-08-05T10:20:58.0784413Z                     ^^^^^^^^^^^
-2025-08-05T10:20:58.0784432Z   File "/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
-2025-08-05T10:20:58.0784447Z     return self.load_wsgiapp()
-2025-08-05T10:20:58.0784461Z            ^^^^^^^^^^^^^^^^^^^
-2025-08-05T10:20:58.0784479Z   File "/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
-2025-08-05T10:20:58.0784512Z     return util.import_app(self.app_uri)
-2025-08-05T10:20:58.0784528Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-08-05T10:20:58.0784545Z   File "/tmp/8ddd4095d15e98b/antenv/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
-2025-08-05T10:20:58.0784560Z     mod = importlib.import_module(module)
-2025-08-05T10:20:58.0784576Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-08-05T10:20:58.0784593Z   File "/opt/python/3.11.13/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-08-05T10:20:58.0784610Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-08-05T10:20:58.0784625Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-08-05T10:20:58.0784641Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-08-05T10:20:58.0784657Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-08-05T10:20:58.0784691Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-08-05T10:20:58.0784707Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-08-05T10:20:58.0784725Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-08-05T10:20:58.0784741Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-08-05T10:20:58.0784757Z   File "/tmp/8ddd4095d15e98b/asgi_simple.py", line 22, in <module>
-2025-08-05T10:20:58.0784772Z     from mcp_fastmcp_simple import app
-2025-08-05T10:20:58.0784787Z   File "/tmp/8ddd4095d15e98b/mcp_fastmcp_simple.py", line 280, in <module>
-2025-08-05T10:20:58.0784803Z     app = mcp.get_asgi_app(transport="http")
-2025-08-05T10:20:58.0784816Z           ^^^^^^^^^^^^^^^^
-2025-08-05T10:20:58.0784851Z AttributeError: 'FastMCP' object has no attribute 'get_asgi_app'
-2025-08-05T10:20:58.0786538Z [2025-08-05 10:20:58 +0000] [1045] [INFO] Worker exiting (pid: 1045)
-2025-08-05T10:20:58.6616393Z [2025-08-05 10:20:58 +0000] [1040] [ERROR] Worker (pid:1045) exited with code 3
-2025-08-05T10:20:58.6788956Z [2025-08-05 10:20:58 +0000] [1040] [ERROR] Shutting down: Master
-2025-08-05T10:20:58.6789225Z [2025-08-05 10:20:58 +0000] [1040] [ERROR] Reason: Worker failed to boot.
+2025-08-05T10:37:31.9370262Z    _____
+2025-08-05T10:37:31.9371623Z   /  _  \ __________ _________   ____
+2025-08-05T10:37:31.9371664Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-05T10:37:31.9371693Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-05T10:37:31.9371716Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-05T10:37:31.9371793Z         \/      \/                  \/
+2025-08-05T10:37:31.9371816Z A P P   S E R V I C E   O N   L I N U X
+2025-08-05T10:37:31.9371843Z
+2025-08-05T10:37:31.9371870Z Documentation: http://aka.ms/webapp-linux
+2025-08-05T10:37:31.9371893Z Python 3.11.13
+2025-08-05T10:37:31.9371915Z Note: Any data outside '/home' is not persisted
+2025-08-05T10:37:33.2537803Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-05T10:37:33.2842624Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-05T10:37:33.3722235Z Updating certificates in /etc/ssl/certs...
+2025-08-05T10:37:41.1240737Z 4 added, 0 removed; done.
+2025-08-05T10:37:41.1249812Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-05T10:37:41.1447224Z done.
+2025-08-05T10:37:41.1654888Z CA certificates copied and updated successfully.
+2025-08-05T10:37:41.3057359Z Site's appCommandLine: gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_fastmcp_asgi:application
+2025-08-05T10:37:41.7659332Z Starting periodic command scheduler: cron.
+2025-08-05T10:37:41.7659768Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'gunicorn --bind=0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile - --error-logfile - --log-level info mcp_fastmcp_asgi:application'
+2025-08-05T10:37:42.1079702Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-08-05T10:37:42.1206214Z Build Operation ID: 9a17d815e1d159e8
+2025-08-05T10:37:42.1211899Z Output is compressed. Extracting it...
+2025-08-05T10:37:42.1212567Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
+2025-08-05T10:37:42.1588337Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd40a95bac973'...
+2025-08-05T10:38:00.5797003Z App path is set to '/tmp/8ddd40a95bac973'
+2025-08-05T10:38:00.6078696Z Writing output script to '/opt/startup/startup.sh'
+2025-08-05T10:38:00.9293571Z Using packages from virtual environment antenv located at /tmp/8ddd40a95bac973/antenv.
+2025-08-05T10:38:00.9298417Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd40a95bac973/antenv/lib/python3.11/site-packages'
+2025-08-05T10:38:04.1463848Z [2025-08-05 10:38:04 +0000] [1045] [INFO] Starting gunicorn 23.0.0
+2025-08-05T10:38:04.1563788Z [2025-08-05 10:38:04 +0000] [1045] [INFO] Listening at: http://0.0.0.0:8000 (1045)
+2025-08-05T10:38:04.1568670Z [2025-08-05 10:38:04 +0000] [1045] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-08-05T10:38:04.1761585Z [2025-08-05 10:38:04 +0000] [1046] [INFO] Booting worker with pid: 1046
+2025-08-05T10:38:05.1623756Z [2025-08-05 10:38:05 +0000] [1046] [INFO] Started server process [1046]
+2025-08-05T10:38:05.1625449Z [2025-08-05 10:38:05 +0000] [1046] [INFO] Waiting for application startup.
+2025-08-05T10:38:05.1628411Z [2025-08-05 10:38:05 +0000] [1046] [INFO] Application startup complete.
+2025-08-05T10:38:05.1722302Z 169.254.132.1:23597 - "GET /robots933456.txt HTTP/1.1" 404
+2025-08-05T10:38:06.1985788Z 169.254.132.1:23601 - "GET / HTTP/1.1" 200
+2025-08-05T10:38:06.6525029Z 169.254.132.1:23601 - "GET /favicon.ico HTTP/1.1" 404
+2025-08-05T10:39:28  No new trace in the past 1 min(s).
+2025-08-05T10:40:28  No new trace in the past 2 min(s).
+2025-08-05T10:41:28  No new trace in the past 3 min(s).

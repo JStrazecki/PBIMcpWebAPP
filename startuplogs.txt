@@ -1,140 +1,102 @@
-2025-08-05T12:25:29  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
-2025-08-05T12:25:06.9251611Z INFO:     169.254.132.1:64011 - "GET / HTTP/1.1" 200 OK
-2025-08-05T12:25:07.6304677Z INFO:     169.254.132.1:64011 - "GET / HTTP/1.1" 200 OK
-2025-08-05T12:25:07.7411886Z INFO:     Shutting down
-2025-08-05T12:25:07.8426459Z ERROR:    Cancel 0 running task(s), timeout graceful shutdown exceeded
-2025-08-05T12:25:07.8526310Z INFO:     Waiting for application shutdown.
-2025-08-05T12:25:07.8536604Z 2025-08-05 12:25:07,851 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager shutting down
-2025-08-05T12:25:07.8543662Z INFO:     Application shutdown complete.
-2025-08-05T12:25:07.8623775Z INFO:     Finished server process [1038]
-2025-08-05T12:25:07.8743144Z Terminated
-2025-08-05T12:25:17.4056811Z INFO:     169.254.132.1:18923 - "GET / HTTP/1.1" 200 OKEnding Log Tail of existing logs ---Starting Live Log Stream ---
-2025-08-05T12:25:29.9432134Z INFO:     169.254.132.1:16885 - "GET / HTTP/1.1" 200 OK
-2025-08-05T12:25:41.2155505Z INFO:     169.254.132.1:17007 - "GET / HTTP/1.1" 200 OK
-2025-08-05T12:25:42.3444748Z     __ __          __      __    _ __
-2025-08-05T12:25:42.5325060Z    / //_/_  _ ____/ /_  __/ /   (_) /____
-2025-08-05T12:25:42.5325220Z   / ,< / / / / __  / / / / /   / / __/ _
-2025-08-05T12:25:42.5325241Z  / /| / /_/ / /_/ / /_/ / /___/ / /_/  __/
-2025-08-05T12:25:42.5325259Z /_/ |_\__,_/\__,_/\__,_/_____/_/\__/\___/
-2025-08-05T12:25:42.5325291Z
-2025-08-05T12:25:42.5325314Z
-2025-08-05T12:25:42.5325332Z DEBUG CONSOLE | AZURE APP SERVICE ON LINUX
-2025-08-05T12:25:42.5325364Z
-2025-08-05T12:25:42.5325386Z Documentation: http://aka.ms/webapp-linux
-2025-08-05T12:25:42.5325404Z Kudu Version : 20250623.5
-2025-08-05T12:25:42.5325424Z Commit       : 353543ec4c45fcbfd4750522d32c94e23b31927a
-2025-08-05T12:25:42.5325440Z
-2025-08-05T12:25:43.8464112Z chown: changing ownership of '/temp': Operation not permitted
-2025-08-05T12:25:43.8666209Z chmod: changing permissions of '/temp': Operation not permitted
-2025-08-05T12:25:46.6407880Z    _____
-2025-08-05T12:25:46.6409245Z   /  _  \ __________ _________   ____
-2025-08-05T12:25:46.6409287Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
-2025-08-05T12:25:46.6409309Z /    |    \/    /|  |  /|  | \/\  ___/
-2025-08-05T12:25:46.6409331Z \____|__  /_____ \____/ |__|    \___  >
-2025-08-05T12:25:46.6409356Z         \/      \/                  \/
-2025-08-05T12:25:46.6409377Z A P P   S E R V I C E   O N   L I N U X
-2025-08-05T12:25:46.6409421Z
-2025-08-05T12:25:46.6409448Z Documentation: http://aka.ms/webapp-linux
-2025-08-05T12:25:46.6409470Z Python 3.11.13
-2025-08-05T12:25:46.6409491Z Note: Any data outside '/home' is not persisted
-2025-08-05T12:25:47.1138681Z Restarting OpenBSD Secure Shell server: sshd.
-2025-08-05T12:25:47.1533315Z INFO:     169.254.132.1:18311 - "GET /mcp HTTP/1.1" 405 Method Not Allowed
-2025-08-05T12:25:47.3042865Z node not running, starting node /opt/webssh/index.js
-2025-08-05T12:25:50.1612099Z Starting OpenBSD Secure Shell server: sshd.
-2025-08-05T12:25:50.1612491Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
-2025-08-05T12:25:50.1612575Z Updating certificates in /etc/ssl/certs...
-2025-08-05T12:25:51.5697011Z INFO:     169.254.132.1:18311 - "GET / HTTP/1.1" 200 OK
-2025-08-05T12:25:54.0628449Z INFO:     169.254.132.1:18311 - "HEAD / HTTP/1.1" 200 OK
-2025-08-05T12:25:54.4927391Z INFO:     169.254.132.1:18311 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 Not Found
-2025-08-05T12:25:54.9172829Z INFO:     169.254.132.1:18311 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 Not Found
-2025-08-05T12:25:55.4085372Z INFO:     169.254.132.1:18311 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 Not Found
-2025-08-05T12:25:55.9314843Z INFO:     169.254.132.1:18311 - "POST /register HTTP/1.1" 404 Not Found
-2025-08-05T12:25:58.7854331Z INFO:     169.254.132.1:18311 - "POST / HTTP/1.1" 405 Method Not Allowed
-2025-08-05T12:25:59.1981274Z INFO:     169.254.132.1:18311 - "GET / HTTP/1.1" 200 OK
-2025-08-05T12:26:08.2719203Z 4 added, 0 removed; done.
-2025-08-05T12:26:08.9491166Z Running hooks in /etc/ca-certificates/update.d...
-2025-08-05T12:26:08.9491402Z done.
-2025-08-05T12:26:08.9491432Z CA certificates copied and updated successfully.
-2025-08-05T12:26:09.1403776Z Site's appCommandLine: python run_fastmcp.py
-2025-08-05T12:26:09.7648050Z Starting periodic command scheduler: cron.
-2025-08-05T12:26:09.7652259Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'python run_fastmcp.py'
-2025-08-05T12:26:10.3180333Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
-2025-08-05T12:26:10.3561875Z Build Operation ID: d2dc677aa2f2fcac
-2025-08-05T12:26:10.3565278Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
-2025-08-05T12:26:10.3566134Z Output is compressed. Extracting it...
-2025-08-05T12:26:10.3576173Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd41a90097a26'...
-2025-08-05T12:26:13.6953446Z Tue Aug 5 12:26:13 UTC 2025 running .net core
-2025-08-05T12:26:19.4569007Z Startup : 12.26.19.367138
-2025-08-05T12:26:19.5901741Z Configure Services : 12.26.19.589983
-2025-08-05T12:26:20.7146578Z Configure : 12.26.20.714500
-2025-08-05T12:26:21.7811585Z Setting Up Routes : 12.26.21.780990
-2025-08-05T12:26:23.2580670Z Exiting Configure : 12.26.23.257938
-2025-08-05T12:26:23.9096754Z Hosting environment: Production
-2025-08-05T12:26:23.9099926Z Content root path: /opt/Kudu
-2025-08-05T12:26:23.9103040Z Now listening on: http://0.0.0.0:8181
-2025-08-05T12:26:23.9104828Z Application started. Press Ctrl+C to shut down.
-2025-08-05T12:26:30.5839912Z App path is set to '/tmp/8ddd41a90097a26'
-2025-08-05T12:26:30.6454920Z Writing output script to '/opt/startup/startup.sh'
-2025-08-05T12:26:31.2185468Z Using packages from virtual environment antenv located at /tmp/8ddd41a90097a26/antenv.
-2025-08-05T12:26:31.2190167Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd41a90097a26/antenv/lib/python3.11/site-packages'
-2025-08-05T12:26:41.6215551Z 2025-08-05 12:26:41,614 - run-fastmcp - INFO - Starting FastMCP HTTP server on port 8000
-2025-08-05T12:26:41.6224852Z 2025-08-05 12:26:41,622 - run-fastmcp - INFO - Environment: Azure
-2025-08-05T12:26:41.7846803Z
-2025-08-05T12:26:41.7847399Z
-2025-08-05T12:26:41.7847472Z ╭─ FastMCP 2.0 ──────────────────────────────────────────────────────────────╮
-2025-08-05T12:26:41.7847522Z │                                                                            │
-2025-08-05T12:26:41.7847608Z │        _ __ ___ ______           __  __  _____________    ____    ____     │
-2025-08-05T12:26:41.7847633Z │       _ __ ___ / ____/___ ______/ /_/  |/  / ____/ __ \  |___ \  / __ \    │
-2025-08-05T12:26:41.7847655Z │      _ __ ___ / /_  / __ `/ ___/ __/ /|_/ / /   / /_/ /  ___/ / / / / /    │
-2025-08-05T12:26:41.7847680Z │     _ __ ___ / __/ / /_/ (__  ) /_/ /  / / /___/ ____/  /  __/_/ /_/ /     │
-2025-08-05T12:26:41.7847702Z │    _ __ ___ /_/    \__,_/____/\__/_/  /_/\____/_/      /_____(_)____/      │
-2025-08-05T12:26:41.7847744Z │                                                                            │
-2025-08-05T12:26:41.7847768Z │                                                                            │
-2025-08-05T12:26:41.7847791Z │                                                                            │
-2025-08-05T12:26:41.7847816Z │    🖥️  Server name:     Power BI MCP Server                                 │
-2025-08-05T12:26:41.7847841Z │    📦 Transport:       Streamable-HTTP                                     │
-2025-08-05T12:26:41.7847865Z │    🔗 Server URL:      http://0.0.0.0:8000/mcp                             │
-2025-08-05T12:26:41.7847910Z │                                                                            │
-2025-08-05T12:26:41.7847934Z │    📚 Docs:            https://gofastmcp.com                               │
-2025-08-05T12:26:41.7847979Z │    🚀 Deploy:          https://fastmcp.cloud                               │
-2025-08-05T12:26:41.7848003Z │                                                                            │
-2025-08-05T12:26:41.7848027Z │    🏎️  FastMCP version: 2.11.1                                              │
-2025-08-05T12:26:41.7848068Z │    🤝 MCP version:     1.12.3                                              │
-2025-08-05T12:26:41.7848091Z │                                                                            │
-2025-08-05T12:26:41.7848126Z ╰────────────────────────────────────────────────────────────────────────────╯
-2025-08-05T12:26:41.7848148Z
-2025-08-05T12:26:41.7848165Z
-2025-08-05T12:26:41.8025532Z [08/05/25 12:26:41] INFO     Starting MCP server 'Power BI MCP    server.py:1519
-2025-08-05T12:26:41.8025964Z                              Server' with transport 'http' on
-2025-08-05T12:26:41.8026052Z                              http://0.0.0.0:8000/mcp
-2025-08-05T12:26:42.0449190Z INFO:     Started server process [1038]
-2025-08-05T12:26:42.0449517Z INFO:     Waiting for application startup.
-2025-08-05T12:26:42.0449554Z 2025-08-05 12:26:42,044 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
-2025-08-05T12:26:42.0449620Z INFO:     Application startup complete.
-2025-08-05T12:26:42.0449648Z INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-2025-08-05T12:26:42.0548445Z INFO:     169.254.132.1:58899 - "GET /robots933456.txt HTTP/1.1" 404 Not Found
-2025-08-05T12:26:47  Welcome, you are now connected to log-streaming service.Starting Log Tail -n 10 of existing logs ----/appsvctmp/volatile/logs/runtime/container.log
-2025-08-05T12:26:41.7848165Z
-2025-08-05T12:26:41.8025532Z [08/05/25 12:26:41] INFO     Starting MCP server 'Power BI MCP    server.py:1519
-2025-08-05T12:26:41.8025964Z                              Server' with transport 'http' on
-2025-08-05T12:26:41.8026052Z                              http://0.0.0.0:8000/mcp
-2025-08-05T12:26:42.0449190Z INFO:     Started server process [1038]
-2025-08-05T12:26:42.0449517Z INFO:     Waiting for application startup.
-2025-08-05T12:26:42.0449554Z 2025-08-05 12:26:42,044 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
-2025-08-05T12:26:42.0449620Z INFO:     Application startup complete.
-2025-08-05T12:26:42.0449648Z INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-2025-08-05T12:26:42.0548445Z INFO:     169.254.132.1:58899 - "GET /robots933456.txt HTTP/1.1" 404 Not FoundEnding Log Tail of existing logs ---Starting Live Log Stream ---
-2025-08-05T12:27:02.7899200Z INFO:     Shutting down
-2025-08-05T12:27:02.8999317Z ERROR:    Cancel 0 running task(s), timeout graceful shutdown exceeded
-2025-08-05T12:27:02.8999663Z INFO:     Waiting for application shutdown.
-2025-08-05T12:27:02.8999688Z 2025-08-05 12:27:02,889 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager shutting down
-2025-08-05T12:27:02.8999705Z INFO:     Application shutdown complete.
-2025-08-05T12:27:02.9495805Z INFO:     Finished server process [1045]
-2025-08-05T12:27:03.0403209Z Terminated
-2025-08-05T12:27:08.7096394Z INFO:     169.254.132.1:51693 - "HEAD / HTTP/1.1" 200 OK
-2025-08-05T12:27:09.1276793Z INFO:     169.254.132.1:51693 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 Not Found
-2025-08-05T12:27:09.5629274Z INFO:     169.254.132.1:51693 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 Not Found
-2025-08-05T12:27:10.0736161Z INFO:     169.254.132.1:51693 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 404 Not Found
-2025-08-05T12:27:10.9890808Z INFO:     169.254.132.1:51693 - "POST /register HTTP/1.1" 404 Not Found
-2025-08-05T12:27:13.2888122Z INFO:     169.254.132.1:51693 - "POST / HTTP/1.1" 405 Method Not Allowed
-2025-08-05T12:27:13.7121360Z INFO:     169.254.132.1:51693 - "GET / HTTP/1.1" 200 OK
+2025-08-05T13:10:06.5927020Z
+2025-08-05T13:10:06.5969265Z [notice] A new release of pip is available: 24.0 -> 25.2
+2025-08-05T13:10:06.6003392Z [notice] To update, run: pip install --upgrade pip
+2025-08-05T13:10:06.6047808Z Not a vso image, so not writing build commands
+2025-08-05T13:10:06.6074339Z Preparing output...
+2025-08-05T13:10:06.6105995Z
+2025-08-05T13:10:06.6148636Z Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
+2025-08-05T13:10:15.8837339Z .....
+2025-08-05T13:10:15.9019933Z Done in 21 sec(s).
+2025-08-05T13:10:15.9280881Z Compressing content of directory '/tmp/_preCompressedDestinationDir'...
+2025-08-05T13:10:50.9886197Z ..............................
+2025-08-05T13:10:50.9895351Z Copied the compressed output to '/home/site/wwwroot'
+2025-08-05T13:10:51.0814598Z
+2025-08-05T13:10:51.1198148Z Removing existing manifest file
+2025-08-05T13:10:51.1389931Z Creating a manifest file...
+2025-08-05T13:10:51.1505754Z Manifest file created.
+2025-08-05T13:10:51.1608349Z Copying .ostype to manifest output directory.
+2025-08-05T13:10:51.1704998Z
+2025-08-05T13:10:51.1889979Z Done in 175 sec(s).
+2025-08-05T13:11:08.9667559Z    _____
+2025-08-05T13:11:09.1702333Z   /  _  \ __________ _________   ____
+2025-08-05T13:11:09.1702620Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-05T13:11:09.1702648Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-05T13:11:09.1702676Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-05T13:11:09.1702701Z         \/      \/                  \/
+2025-08-05T13:11:09.1702789Z A P P   S E R V I C E   O N   L I N U X
+2025-08-05T13:11:09.1702825Z
+2025-08-05T13:11:09.1702855Z Documentation: http://aka.ms/webapp-linux
+2025-08-05T13:11:09.1702879Z Python 3.11.13
+2025-08-05T13:11:09.1702906Z Note: Any data outside '/home' is not persisted
+2025-08-05T13:11:11.7195257Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-05T13:11:11.7521468Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-05T13:11:11.8905647Z Updating certificates in /etc/ssl/certs...
+2025-08-05T13:11:27.7833284Z 4 added, 0 removed; done.
+2025-08-05T13:11:27.7833714Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-05T13:11:27.8435478Z done.
+2025-08-05T13:11:27.8460814Z CA certificates copied and updated successfully.
+2025-08-05T13:11:28.6705801Z Site's appCommandLine: python run_fastmcp.py
+2025-08-05T13:11:28.6885897Z INFO:     169.254.132.1:17789 - "GET /mcp HTTP/1.1" 405 Method Not Allowed
+2025-08-05T13:11:31.4738936Z Starting periodic command scheduler: cron.
+2025-08-05T13:11:31.4739344Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'python run_fastmcp.py'
+2025-08-05T13:11:32.6867242Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-08-05T13:11:32.7064659Z Build Operation ID: 2ddd16804a4823cd
+2025-08-05T13:11:32.7073785Z Output is compressed. Extracting it...
+2025-08-05T13:11:32.7073968Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd421141a2e92'...
+2025-08-05T13:11:32.7074957Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
+2025-08-05T13:11:55.7255658Z App path is set to '/tmp/8ddd421141a2e92'
+2025-08-05T13:11:55.8046596Z Writing output script to '/opt/startup/startup.sh'
+2025-08-05T13:11:57.6757680Z Using packages from virtual environment antenv located at /tmp/8ddd421141a2e92/antenv.
+2025-08-05T13:11:57.6758094Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd421141a2e92/antenv/lib/python3.11/site-packages'
+2025-08-05T13:12:17.8458516Z 2025-08-05 13:12:17,838 - run-fastmcp - INFO - Starting FastMCP HTTP server on port 8000
+2025-08-05T13:12:17.8463233Z 2025-08-05 13:12:17,846 - run-fastmcp - INFO - Environment: Azure
+2025-08-05T13:12:18.4737996Z
+2025-08-05T13:12:18.4738657Z
+2025-08-05T13:12:18.4738737Z ╭─ FastMCP 2.0 ──────────────────────────────────────────────────────────────╮
+2025-08-05T13:12:18.4738786Z │                                                                            │
+2025-08-05T13:12:18.4738875Z │        _ __ ___ ______           __  __  _____________    ____    ____     │
+2025-08-05T13:12:18.4738900Z │       _ __ ___ / ____/___ ______/ /_/  |/  / ____/ __ \  |___ \  / __ \    │
+2025-08-05T13:12:18.4738923Z │      _ __ ___ / /_  / __ `/ ___/ __/ /|_/ / /   / /_/ /  ___/ / / / / /    │
+2025-08-05T13:12:18.4738948Z │     _ __ ___ / __/ / /_/ (__  ) /_/ /  / / /___/ ____/  /  __/_/ /_/ /     │
+2025-08-05T13:12:18.4738971Z │    _ __ ___ /_/    \__,_/____/\__/_/  /_/\____/_/      /_____(_)____/      │
+2025-08-05T13:12:18.4739017Z │                                                                            │
+2025-08-05T13:12:18.4739042Z │                                                                            │
+2025-08-05T13:12:18.4739066Z │                                                                            │
+2025-08-05T13:12:18.4739092Z │    🖥️  Server name:     Power BI MCP Server                                 │
+2025-08-05T13:12:18.4739119Z │    📦 Transport:       Streamable-HTTP                                     │
+2025-08-05T13:12:18.4739143Z │    🔗 Server URL:      http://0.0.0.0:8000/mcp                             │
+2025-08-05T13:12:18.4739192Z │                                                                            │
+2025-08-05T13:12:18.4739217Z │    📚 Docs:            https://gofastmcp.com                               │
+2025-08-05T13:12:18.4739258Z │    🚀 Deploy:          https://fastmcp.cloud                               │
+2025-08-05T13:12:18.4739282Z │                                                                            │
+2025-08-05T13:12:18.4739306Z │    🏎️  FastMCP version: 2.11.1                                              │
+2025-08-05T13:12:18.4739353Z │    🤝 MCP version:     1.12.3                                              │
+2025-08-05T13:12:18.4739377Z │                                                                            │
+2025-08-05T13:12:18.4739412Z ╰────────────────────────────────────────────────────────────────────────────╯
+2025-08-05T13:12:18.4739521Z
+2025-08-05T13:12:18.4739542Z
+2025-08-05T13:12:18.4912301Z [08/05/25 13:12:18] INFO     Starting MCP server 'Power BI MCP    server.py:1519
+2025-08-05T13:12:18.4912512Z                              Server' with transport 'http' on
+2025-08-05T13:12:18.4912539Z                              http://0.0.0.0:8000/mcp
+2025-08-05T13:12:19.2165745Z INFO:     Started server process [1045]
+2025-08-05T13:12:19.2476517Z INFO:     Waiting for application startup.
+2025-08-05T13:12:19.2477297Z 2025-08-05 13:12:19,184 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
+2025-08-05T13:12:19.2477368Z INFO:     Application startup complete.
+2025-08-05T13:12:19.2477395Z INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-08-05T13:12:19.4177962Z INFO:     169.254.132.1:64505 - "GET /robots933456.txt HTTP/1.1" 404 Not Found
+2025-08-05T13:12:40.7116848Z INFO:     Shutting down
+2025-08-05T13:12:40.8132452Z ERROR:    Cancel 0 running task(s), timeout graceful shutdown exceeded
+2025-08-05T13:12:40.8308290Z INFO:     Waiting for application shutdown.
+2025-08-05T13:12:40.8816240Z 2025-08-05 13:12:40,841 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager shutting down
+2025-08-05T13:12:40.8816454Z INFO:     Application shutdown complete.
+2025-08-05T13:12:40.8915252Z INFO:     Finished server process [1046]
+2025-08-05T13:12:40.9334577Z Terminated
+2025-08-05T13:12:51.7688266Z INFO:     169.254.132.1:33031 - "GET /mcp HTTP/1.1" 405 Method Not Allowed
+2025-08-05T13:12:55.8267451Z INFO:     169.254.132.1:33031 - "GET / HTTP/1.1" 200 OK
+2025-08-05T13:13:02.3396573Z INFO:     169.254.132.1:50039 - "GET /health HTTP/1.1" 200 OK
+2025-08-05T13:13:13.9990379Z INFO:     169.254.132.1:44249 - "HEAD / HTTP/1.1" 200 OK
+2025-08-05T13:13:14.7137200Z INFO:     169.254.132.1:44249 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 200 OK
+2025-08-05T13:13:15.2453810Z INFO:     169.254.132.1:44249 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
+2025-08-05T13:13:15.8390896Z INFO:     169.254.132.1:44249 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
+2025-08-05T13:13:18.9128931Z INFO:     169.254.132.1:44249 - "POST / HTTP/1.1" 400 Bad Request
+2025-08-05T13:13:19.3165132Z INFO:     169.254.132.1:44249 - "GET / HTTP/1.1" 200 OK

@@ -489,15 +489,19 @@ async def oauth_auth_server(request):
     """OAuth discovery endpoint for Claude.ai"""
     from starlette.responses import JSONResponse
     
+    # Get the proper scheme from headers (Azure terminates SSL)
+    scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+    base_url = f"{scheme}://{request.url.netloc}"
+    
     # Return minimal OAuth server metadata indicating no auth required
     return JSONResponse({
-        "issuer": request.url.scheme + "://" + request.url.netloc,
+        "issuer": base_url,
         "authorization_endpoint": None,
         "token_endpoint": None,
         "response_types_supported": [],
         "grant_types_supported": [],
         "token_endpoint_auth_methods_supported": ["none"],
-        "service_documentation": request.url.scheme + "://" + request.url.netloc,
+        "service_documentation": base_url,
         "ui_locales_supported": ["en-US"]
     })
 
@@ -507,9 +511,13 @@ async def oauth_protected_resource(request):
     """OAuth protected resource metadata for Claude.ai"""
     from starlette.responses import JSONResponse
     
+    # Get the proper scheme from headers (Azure terminates SSL)
+    scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+    base_url = f"{scheme}://{request.url.netloc}"
+    
     # Indicate this resource doesn't require OAuth
     return JSONResponse({
-        "resource": request.url.scheme + "://" + request.url.netloc,
+        "resource": base_url,
         "oauth_required": False,
         "authentication_required": False
     })
@@ -520,12 +528,16 @@ async def register_client(request):
     """Handle OAuth client registration attempts"""
     from starlette.responses import JSONResponse
     
+    # Get the proper scheme from headers (Azure terminates SSL)
+    scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+    base_url = f"{scheme}://{request.url.netloc}"
+    
     # Return a dummy registration response
     return JSONResponse({
         "client_id": "no-auth-required",
         "client_secret": "no-auth-required",
         "registration_access_token": "no-auth-required",
-        "registration_client_uri": request.url.scheme + "://" + request.url.netloc + "/register/no-auth-required",
+        "registration_client_uri": f"{base_url}/register/no-auth-required",
         "client_id_issued_at": 1734567890,
         "client_secret_expires_at": 0,
         "grant_types": [],

@@ -1,185 +1,97 @@
-2025-08-05T13:10:06.5927020Z
-2025-08-05T13:10:06.5969265Z [notice] A new release of pip is available: 24.0 -> 25.2
-2025-08-05T13:10:06.6003392Z [notice] To update, run: pip install --upgrade pip
-2025-08-05T13:10:06.6047808Z Not a vso image, so not writing build commands
-2025-08-05T13:10:06.6074339Z Preparing output...
-2025-08-05T13:10:06.6105995Z
-2025-08-05T13:10:06.6148636Z Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
-2025-08-05T13:10:15.8837339Z .....
-2025-08-05T13:10:15.9019933Z Done in 21 sec(s).
-2025-08-05T13:10:15.9280881Z Compressing content of directory '/tmp/_preCompressedDestinationDir'...
-2025-08-05T13:10:50.9886197Z ..............................
-2025-08-05T13:10:50.9895351Z Copied the compressed output to '/home/site/wwwroot'
-2025-08-05T13:10:51.0814598Z
-2025-08-05T13:10:51.1198148Z Removing existing manifest file
-2025-08-05T13:10:51.1389931Z Creating a manifest file...
-2025-08-05T13:10:51.1505754Z Manifest file created.
-2025-08-05T13:10:51.1608349Z Copying .ostype to manifest output directory.
-2025-08-05T13:10:51.1704998Z
-2025-08-05T13:10:51.1889979Z Done in 175 sec(s).
-2025-08-05T13:11:08.9667559Z    _____
-2025-08-05T13:11:09.1702333Z   /  _  \ __________ _________   ____
-2025-08-05T13:11:09.1702620Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
-2025-08-05T13:11:09.1702648Z /    |    \/    /|  |  /|  | \/\  ___/
-2025-08-05T13:11:09.1702676Z \____|__  /_____ \____/ |__|    \___  >
-2025-08-05T13:11:09.1702701Z         \/      \/                  \/
-2025-08-05T13:11:09.1702789Z A P P   S E R V I C E   O N   L I N U X
-2025-08-05T13:11:09.1702825Z
-2025-08-05T13:11:09.1702855Z Documentation: http://aka.ms/webapp-linux
-2025-08-05T13:11:09.1702879Z Python 3.11.13
-2025-08-05T13:11:09.1702906Z Note: Any data outside '/home' is not persisted
-2025-08-05T13:11:11.7195257Z Starting OpenBSD Secure Shell server: sshd.
-2025-08-05T13:11:11.7521468Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
-2025-08-05T13:11:11.8905647Z Updating certificates in /etc/ssl/certs...
-2025-08-05T13:11:27.7833284Z 4 added, 0 removed; done.
-2025-08-05T13:11:27.7833714Z Running hooks in /etc/ca-certificates/update.d...
-2025-08-05T13:11:27.8435478Z done.
-2025-08-05T13:11:27.8460814Z CA certificates copied and updated successfully.
-2025-08-05T13:11:28.6705801Z Site's appCommandLine: python run_fastmcp.py
-2025-08-05T13:11:28.6885897Z INFO:     169.254.132.1:17789 - "GET /mcp HTTP/1.1" 405 Method Not Allowed
-2025-08-05T13:11:31.4738936Z Starting periodic command scheduler: cron.
-2025-08-05T13:11:31.4739344Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'python run_fastmcp.py'
-2025-08-05T13:11:32.6867242Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
-2025-08-05T13:11:32.7064659Z Build Operation ID: 2ddd16804a4823cd
-2025-08-05T13:11:32.7073785Z Output is compressed. Extracting it...
-2025-08-05T13:11:32.7073968Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd421141a2e92'...
-2025-08-05T13:11:32.7074957Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
-2025-08-05T13:11:55.7255658Z App path is set to '/tmp/8ddd421141a2e92'
-2025-08-05T13:11:55.8046596Z Writing output script to '/opt/startup/startup.sh'
-2025-08-05T13:11:57.6757680Z Using packages from virtual environment antenv located at /tmp/8ddd421141a2e92/antenv.
-2025-08-05T13:11:57.6758094Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd421141a2e92/antenv/lib/python3.11/site-packages'
-2025-08-05T13:12:17.8458516Z 2025-08-05 13:12:17,838 - run-fastmcp - INFO - Starting FastMCP HTTP server on port 8000
-2025-08-05T13:12:17.8463233Z 2025-08-05 13:12:17,846 - run-fastmcp - INFO - Environment: Azure
-2025-08-05T13:12:18.4737996Z
-2025-08-05T13:12:18.4738657Z
-2025-08-05T13:12:18.4738737Z ╭─ FastMCP 2.0 ──────────────────────────────────────────────────────────────╮
-2025-08-05T13:12:18.4738786Z │                                                                            │
-2025-08-05T13:12:18.4738875Z │        _ __ ___ ______           __  __  _____________    ____    ____     │
-2025-08-05T13:12:18.4738900Z │       _ __ ___ / ____/___ ______/ /_/  |/  / ____/ __ \  |___ \  / __ \    │
-2025-08-05T13:12:18.4738923Z │      _ __ ___ / /_  / __ `/ ___/ __/ /|_/ / /   / /_/ /  ___/ / / / / /    │
-2025-08-05T13:12:18.4738948Z │     _ __ ___ / __/ / /_/ (__  ) /_/ /  / / /___/ ____/  /  __/_/ /_/ /     │
-2025-08-05T13:12:18.4738971Z │    _ __ ___ /_/    \__,_/____/\__/_/  /_/\____/_/      /_____(_)____/      │
-2025-08-05T13:12:18.4739017Z │                                                                            │
-2025-08-05T13:12:18.4739042Z │                                                                            │
-2025-08-05T13:12:18.4739066Z │                                                                            │
-2025-08-05T13:12:18.4739092Z │    🖥️  Server name:     Power BI MCP Server                                 │
-2025-08-05T13:12:18.4739119Z │    📦 Transport:       Streamable-HTTP                                     │
-2025-08-05T13:12:18.4739143Z │    🔗 Server URL:      http://0.0.0.0:8000/mcp                             │
-2025-08-05T13:12:18.4739192Z │                                                                            │
-2025-08-05T13:12:18.4739217Z │    📚 Docs:            https://gofastmcp.com                               │
-2025-08-05T13:12:18.4739258Z │    🚀 Deploy:          https://fastmcp.cloud                               │
-2025-08-05T13:12:18.4739282Z │                                                                            │
-2025-08-05T13:12:18.4739306Z │    🏎️  FastMCP version: 2.11.1                                              │
-2025-08-05T13:12:18.4739353Z │    🤝 MCP version:     1.12.3                                              │
-2025-08-05T13:12:18.4739377Z │                                                                            │
-2025-08-05T13:12:18.4739412Z ╰────────────────────────────────────────────────────────────────────────────╯
-2025-08-05T13:12:18.4739521Z
-2025-08-05T13:12:18.4739542Z
-2025-08-05T13:12:18.4912301Z [08/05/25 13:12:18] INFO     Starting MCP server 'Power BI MCP    server.py:1519
-2025-08-05T13:12:18.4912512Z                              Server' with transport 'http' on
-2025-08-05T13:12:18.4912539Z                              http://0.0.0.0:8000/mcp
-2025-08-05T13:12:19.2165745Z INFO:     Started server process [1045]
-2025-08-05T13:12:19.2476517Z INFO:     Waiting for application startup.
-2025-08-05T13:12:19.2477297Z 2025-08-05 13:12:19,184 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
-2025-08-05T13:12:19.2477368Z INFO:     Application startup complete.
-2025-08-05T13:12:19.2477395Z INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-2025-08-05T13:12:19.4177962Z INFO:     169.254.132.1:64505 - "GET /robots933456.txt HTTP/1.1" 404 Not Found
-2025-08-05T13:12:40.7116848Z INFO:     Shutting down
-2025-08-05T13:12:40.8132452Z ERROR:    Cancel 0 running task(s), timeout graceful shutdown exceeded
-2025-08-05T13:12:40.8308290Z INFO:     Waiting for application shutdown.
-2025-08-05T13:12:40.8816240Z 2025-08-05 13:12:40,841 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager shutting down
-2025-08-05T13:12:40.8816454Z INFO:     Application shutdown complete.
-2025-08-05T13:12:40.8915252Z INFO:     Finished server process [1046]
-2025-08-05T13:12:40.9334577Z Terminated
-2025-08-05T13:12:51.7688266Z INFO:     169.254.132.1:33031 - "GET /mcp HTTP/1.1" 405 Method Not Allowed
-2025-08-05T13:12:55.8267451Z INFO:     169.254.132.1:33031 - "GET / HTTP/1.1" 200 OK
-2025-08-05T13:13:02.3396573Z INFO:     169.254.132.1:50039 - "GET /health HTTP/1.1" 200 OK
-2025-08-05T13:13:13.9990379Z INFO:     169.254.132.1:44249 - "HEAD / HTTP/1.1" 200 OK
-2025-08-05T13:13:14.7137200Z INFO:     169.254.132.1:44249 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 200 OK
-2025-08-05T13:13:15.2453810Z INFO:     169.254.132.1:44249 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
-2025-08-05T13:13:15.8390896Z INFO:     169.254.132.1:44249 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
-2025-08-05T13:13:18.9128931Z INFO:     169.254.132.1:44249 - "POST / HTTP/1.1" 400 Bad Request
-2025-08-05T13:13:19.3165132Z INFO:     169.254.132.1:44249 - "GET / HTTP/1.1" 200 OK
-2025-08-05T13:14:34.8280325Z INFO:     169.254.132.1:42903 - "GET /health HTTP/1.1" 200 OK
-2025-08-05T13:14:40.9760322Z INFO:     169.254.132.1:11279 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 200 OK
-2025-08-05T13:14:47.5621200Z INFO:     169.254.132.1:49049 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
-2025-08-05T13:14:59.8698167Z INFO:     169.254.132.1:25637 - "POST /register HTTP/1.1" 200 OK
-2025-08-05T13:16:05.9011670Z INFO:     169.254.132.1:25637 - "GET /mcp HTTP/1.1" 405 Method Not Allowed
-2025-08-05T13:16:12.8073355Z 2025-08-05 13:16:12,805 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 17e257aada224e538f89c6d197f1560b
-2025-08-05T13:16:12.9778849Z INFO:     169.254.132.1:61585 - "POST /mcp/ HTTP/1.1" 406 Not Acceptable
-2025-08-05T13:16:19.8499878Z 2025-08-05 13:16:19,840 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 97203de259674b9590b57d842ed57af4
-2025-08-05T13:16:19.8845766Z 2025-08-05 13:16:19,884 - root - WARNING - Failed to validate request: 21 validation errors for ClientRequest
-2025-08-05T13:16:19.8846149Z PingRequest.method
-2025-08-05T13:16:19.8846173Z   Input should be 'ping' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846193Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8846208Z InitializeRequest.params.clientInfo
-2025-08-05T13:16:19.8846226Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8846286Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8846302Z CompleteRequest.method
-2025-08-05T13:16:19.8846319Z   Input should be 'completion/complete' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846335Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8846348Z CompleteRequest.params.ref
-2025-08-05T13:16:19.8846365Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8846381Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8846395Z CompleteRequest.params.argument
-2025-08-05T13:16:19.8846412Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8846453Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8846467Z SetLevelRequest.method
-2025-08-05T13:16:19.8846484Z   Input should be 'logging/setLevel' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846499Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8846512Z SetLevelRequest.params.level
-2025-08-05T13:16:19.8846529Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8846544Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8846558Z GetPromptRequest.method
-2025-08-05T13:16:19.8846574Z   Input should be 'prompts/get' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846590Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8846627Z GetPromptRequest.params.name
-2025-08-05T13:16:19.8846644Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8846659Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8846673Z ListPromptsRequest.method
-2025-08-05T13:16:19.8846690Z   Input should be 'prompts/list' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846706Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8846719Z ListResourcesRequest.method
-2025-08-05T13:16:19.8846735Z   Input should be 'resources/list' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846789Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8846804Z ListResourceTemplatesRequest.method
-2025-08-05T13:16:19.8846821Z   Input should be 'resources/templates/list' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846836Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8846849Z ReadResourceRequest.method
-2025-08-05T13:16:19.8846865Z   Input should be 'resources/read' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846880Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8846893Z ReadResourceRequest.params.uri
-2025-08-05T13:16:19.8846912Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8846950Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8846963Z SubscribeRequest.method
-2025-08-05T13:16:19.8846981Z   Input should be 'resources/subscribe' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8846996Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8847009Z SubscribeRequest.params.uri
-2025-08-05T13:16:19.8847026Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8847041Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8847054Z UnsubscribeRequest.method
-2025-08-05T13:16:19.8847071Z   Input should be 'resources/unsubscribe' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8847107Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8847120Z UnsubscribeRequest.params.uri
-2025-08-05T13:16:19.8847137Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8847153Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8847165Z CallToolRequest.method
-2025-08-05T13:16:19.8847182Z   Input should be 'tools/call' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8847403Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8847420Z CallToolRequest.params.name
-2025-08-05T13:16:19.8847437Z   Field required [type=missing, input_value={'protocolVersion': '2024...05', 'capabilities': {}}, input_type=dict]
-2025-08-05T13:16:19.8847473Z     For further information visit https://errors.pydantic.dev/2.11/v/missing
-2025-08-05T13:16:19.8847487Z ListToolsRequest.method
-2025-08-05T13:16:19.8847503Z   Input should be 'tools/list' [type=literal_error, input_value='initialize', input_type=str]
-2025-08-05T13:16:19.8847519Z     For further information visit https://errors.pydantic.dev/2.11/v/literal_error
-2025-08-05T13:16:19.8910056Z INFO:     169.254.132.1:44397 - "POST /mcp/ HTTP/1.1" 200 OK
-2025-08-05T13:16:26.1754133Z 2025-08-05 13:16:26,175 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: f21fc0a4ff0b4e7fb62139b5e34df7ad
-2025-08-05T13:16:26.1921534Z INFO:     169.254.132.1:44411 - "POST /mcp/ HTTP/1.1" 200 OK
-2025-08-05T13:17:51  No new trace in the past 1 min(s).
-2025-08-05T13:18:31.5948656Z INFO:     169.254.132.1:63211 - "GET /health HTTP/1.1" 200 OK
-2025-08-05T13:18:37.1581923Z INFO:     169.254.132.1:63641 - "HEAD / HTTP/1.1" 200 OK
-2025-08-05T13:18:37.5879686Z INFO:     169.254.132.1:63641 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 200 OK
-2025-08-05T13:18:38.0260380Z INFO:     169.254.132.1:63641 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
-2025-08-05T13:18:38.4897878Z INFO:     169.254.132.1:63641 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
-2025-08-05T13:18:43.1991357Z INFO:     169.254.132.1:63641 - "POST / HTTP/1.1" 400 Bad Request
-2025-08-05T13:18:43.5760076Z INFO:     169.254.132.1:63641 - "GET / HTTP/1.1" 200 OK
+2025-08-05T13:25:30.3721468Z [notice] A new release of pip is available: 24.0 -> 25.2
+2025-08-05T13:25:30.4320675Z [notice] To update, run: pip install --upgrade pip
+2025-08-05T13:25:30.4525440Z Not a vso image, so not writing build commands
+2025-08-05T13:25:30.4909609Z Preparing output...
+2025-08-05T13:25:30.4936102Z
+2025-08-05T13:25:30.5320756Z Copying files to destination directory '/tmp/_preCompressedDestinationDir'...
+2025-08-05T13:25:46.5127352Z ...........
+2025-08-05T13:25:46.5133735Z Done in 18 sec(s).
+2025-08-05T13:25:46.5355889Z Compressing content of directory '/tmp/_preCompressedDestinationDir'...
+2025-08-05T13:26:19.2774146Z ............................
+2025-08-05T13:26:19.2777611Z Copied the compressed output to '/home/site/wwwroot'
+2025-08-05T13:26:19.3055655Z
+2025-08-05T13:26:19.3277886Z Removing existing manifest file
+2025-08-05T13:26:19.3572866Z Creating a manifest file...
+2025-08-05T13:26:19.3760612Z Manifest file created.
+2025-08-05T13:26:19.3889007Z Copying .ostype to manifest output directory.
+2025-08-05T13:26:19.4329636Z
+2025-08-05T13:26:19.4472320Z Done in 151 sec(s).
+2025-08-05T13:26:37.5058721Z    _____
+2025-08-05T13:26:37.7391255Z   /  _  \ __________ _________   ____
+2025-08-05T13:26:37.7391530Z  /  /_\  \\___   /  |  \_  __ \_/ __ \
+2025-08-05T13:26:37.7391557Z /    |    \/    /|  |  /|  | \/\  ___/
+2025-08-05T13:26:37.7391578Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-05T13:26:37.7391598Z         \/      \/                  \/
+2025-08-05T13:26:37.7391628Z A P P   S E R V I C E   O N   L I N U X
+2025-08-05T13:26:37.7391678Z
+2025-08-05T13:26:37.7391703Z Documentation: http://aka.ms/webapp-linux
+2025-08-05T13:26:37.7391725Z Python 3.11.13
+2025-08-05T13:26:37.7391749Z Note: Any data outside '/home' is not persisted
+2025-08-05T13:26:39.9304925Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-05T13:26:39.9533819Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-05T13:26:39.9930316Z Updating certificates in /etc/ssl/certs...
+2025-08-05T13:26:48.0489282Z 4 added, 0 removed; done.
+2025-08-05T13:26:48.0573872Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-05T13:26:48.2914840Z done.
+2025-08-05T13:26:48.2915678Z CA certificates copied and updated successfully.
+2025-08-05T13:26:48.4849699Z Site's appCommandLine: python run_fastmcp.py
+2025-08-05T13:26:49.0771541Z Starting periodic command scheduler: cron.
+2025-08-05T13:26:49.0788153Z Launching oryx with: create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh -virtualEnvName antenv -defaultApp /opt/defaultsite -userStartupCommand 'python run_fastmcp.py'
+2025-08-05T13:26:49.3481470Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-08-05T13:26:49.3590100Z Build Operation ID: e59db105209c5716
+2025-08-05T13:26:49.3789673Z Output is compressed. Extracting it...
+2025-08-05T13:26:49.3790114Z Extracting '/home/site/wwwroot/output.tar.gz' to directory '/tmp/8ddd4234bb49f52'...
+2025-08-05T13:26:49.3801551Z Oryx Version: 0.2.20250709.3, Commit: 0cfb8cb7d114b65e539d2f9ccf9804e87b9966ba, ReleaseTagName: 20250709.3
+2025-08-05T13:27:07.7505650Z Writing output script to '/opt/startup/startup.sh'
+2025-08-05T13:27:08.4845053Z App path is set to '/tmp/8ddd4234bb49f52'
+2025-08-05T13:27:08.9886466Z Using packages from virtual environment antenv located at /tmp/8ddd4234bb49f52/antenv.
+2025-08-05T13:27:08.9886729Z Updated PYTHONPATH to '/opt/startup/app_logs:/tmp/8ddd4234bb49f52/antenv/lib/python3.11/site-packages'
+2025-08-05T13:27:34.5012522Z 2025-08-05 13:27:34,500 - run-fastmcp - INFO - Starting FastMCP HTTP server on port 8000
+2025-08-05T13:27:34.5013256Z 2025-08-05 13:27:34,501 - run-fastmcp - INFO - Environment: Azure
+2025-08-05T13:27:35.4267290Z
+2025-08-05T13:27:35.4267918Z
+2025-08-05T13:27:35.4267997Z ╭─ FastMCP 2.0 ──────────────────────────────────────────────────────────────╮
+2025-08-05T13:27:35.4268051Z │                                                                            │
+2025-08-05T13:27:35.4268150Z │        _ __ ___ ______           __  __  _____________    ____    ____     │
+2025-08-05T13:27:35.4268175Z │       _ __ ___ / ____/___ ______/ /_/  |/  / ____/ __ \  |___ \  / __ \    │
+2025-08-05T13:27:35.4268199Z │      _ __ ___ / /_  / __ `/ ___/ __/ /|_/ / /   / /_/ /  ___/ / / / / /    │
+2025-08-05T13:27:35.4268223Z │     _ __ ___ / __/ / /_/ (__  ) /_/ /  / / /___/ ____/  /  __/_/ /_/ /     │
+2025-08-05T13:27:35.4268246Z │    _ __ ___ /_/    \__,_/____/\__/_/  /_/\____/_/      /_____(_)____/      │
+2025-08-05T13:27:35.4268289Z │                                                                            │
+2025-08-05T13:27:35.4268313Z │                                                                            │
+2025-08-05T13:27:35.4268337Z │                                                                            │
+2025-08-05T13:27:35.4268362Z │    🖥️  Server name:     Power BI MCP Server                                 │
+2025-08-05T13:27:35.4268388Z │    📦 Transport:       Streamable-HTTP                                     │
+2025-08-05T13:27:35.4268412Z │    🔗 Server URL:      http://0.0.0.0:8000/mcp                             │
+2025-08-05T13:27:35.4268453Z │                                                                            │
+2025-08-05T13:27:35.4268478Z │    📚 Docs:            https://gofastmcp.com                               │
+2025-08-05T13:27:35.4268520Z │    🚀 Deploy:          https://fastmcp.cloud                               │
+2025-08-05T13:27:35.4268545Z │                                                                            │
+2025-08-05T13:27:35.4268570Z │    🏎️  FastMCP version: 2.11.1                                              │
+2025-08-05T13:27:35.4268617Z │    🤝 MCP version:     1.12.3                                              │
+2025-08-05T13:27:35.4268642Z │                                                                            │
+2025-08-05T13:27:35.4268676Z ╰────────────────────────────────────────────────────────────────────────────╯
+2025-08-05T13:27:35.4268698Z
+2025-08-05T13:27:35.4268717Z
+2025-08-05T13:27:35.5360165Z [08/05/25 13:27:35] INFO     Starting MCP server 'Power BI MCP    server.py:1519
+2025-08-05T13:27:35.5360521Z                              Server' with transport 'http' on
+2025-08-05T13:27:35.5360550Z                              http://0.0.0.0:8000/mcp
+2025-08-05T13:27:36.1303340Z INFO:     Started server process [1043]
+2025-08-05T13:27:36.7641622Z INFO:     Waiting for application startup.
+2025-08-05T13:27:36.7641910Z 2025-08-05 13:27:36,131 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
+2025-08-05T13:27:36.7641971Z INFO:     Application startup complete.
+2025-08-05T13:27:36.7641995Z INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-08-05T13:27:37.8790501Z INFO:     169.254.132.1:53171 - "GET /robots933456.txt HTTP/1.1" 404 Not Found
+2025-08-05T13:27:59.3763278Z INFO:     Shutting down
+2025-08-05T13:27:59.6040322Z ERROR:    Cancel 0 running task(s), timeout graceful shutdown exceeded
+2025-08-05T13:27:59.6040739Z INFO:     Waiting for application shutdown.
+2025-08-05T13:27:59.6060686Z 2025-08-05 13:27:59,605 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager shutting down
+2025-08-05T13:27:59.6100960Z INFO:     Application shutdown complete.
+2025-08-05T13:27:59.6123793Z INFO:     Finished server process [1045]
+2025-08-05T13:27:59.7625703Z Terminated
+2025-08-05T13:28:40.8809527Z INFO:     169.254.132.1:60137 - "HEAD / HTTP/1.1" 200 OK
+2025-08-05T13:28:41.5454071Z INFO:     169.254.132.1:60137 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 200 OK
+2025-08-05T13:28:42.1976567Z INFO:     169.254.132.1:60137 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
+2025-08-05T13:28:42.8226341Z INFO:     169.254.132.1:60137 - "GET /.well-known/oauth-authorization-server HTTP/1.1" 200 OK
+2025-08-05T13:28:45.8201718Z INFO:     169.254.132.1:60137 - "POST / HTTP/1.1" 307 Temporary Redirect
+2025-08-05T13:28:51.7041335Z INFO:     169.254.132.1:15815 - "GET / HTTP/1.1" 200 OK

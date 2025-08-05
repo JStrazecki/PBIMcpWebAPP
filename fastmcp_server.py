@@ -446,14 +446,47 @@ async def root_info(request):
 
 @mcp.custom_route("/", methods=["POST"])
 async def root_post(request):
-    """Handle POST to root - redirect to MCP endpoint"""
-    from starlette.responses import RedirectResponse
+    """Handle POST to root - proxy to MCP endpoint"""
+    from starlette.responses import Response, StreamingResponse
+    import httpx
+    import json
     
-    # Get the current URL and append /mcp/
-    redirect_url = str(request.url).rstrip('/') + '/mcp/'
+    # Read the request body
+    body = await request.body()
     
-    # Return 307 redirect to preserve POST method
-    return RedirectResponse(url=redirect_url, status_code=307)
+    # Try to add missing clientInfo if this is an initialize request
+    try:
+        data = json.loads(body)
+        if (data.get("method") == "initialize" and 
+            "params" in data and 
+            "clientInfo" not in data["params"]):
+            data["params"]["clientInfo"] = {
+                "name": "claude-ai",
+                "version": "1.0"
+            }
+            body = json.dumps(data).encode()
+    except:
+        pass  # If not JSON or parsing fails, use original body
+    
+    # Get headers from original request
+    headers = dict(request.headers)
+    
+    # Make internal request to MCP endpoint
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            "http://localhost:8000/mcp/",
+            headers=headers,
+            content=body,
+            timeout=30.0
+        )
+        
+        # Return the response
+        return Response(
+            content=response.content,
+            status_code=response.status_code,
+            headers=dict(response.headers),
+            media_type=response.headers.get("content-type")
+        )
 
 
 @mcp.custom_route("/mcp", methods=["GET"])

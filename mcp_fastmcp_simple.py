@@ -32,11 +32,7 @@ CLIENT_SECRET = os.environ.get('AZURE_CLIENT_SECRET', '')
 TENANT_ID = os.environ.get('AZURE_TENANT_ID', '')
 
 # Create FastMCP server
-mcp = FastMCP(
-    "Power BI MCP Server",
-    version="1.0.0",
-    description="Simplified Power BI integration for Claude.ai"
-)
+mcp = FastMCP("Power BI MCP Server")
 
 # Power BI OAuth scopes
 POWERBI_SCOPES = ["https://analysis.windows.net/powerbi/api/.default"]

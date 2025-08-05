@@ -1,5 +1,60 @@
 # FastMCP Deployment Log
 
+## LATEST CRITICAL FIX (2025-08-05)
+
+### The Issue
+**TypeError: FastMCP.__init__() got an unexpected keyword argument 'description'**
+
+From the startup logs, FastMCP was failing to initialize because:
+- We were passing `description` parameter to FastMCP constructor
+- FastMCP only accepts the server name as a parameter
+- This caused immediate worker failure on startup
+
+### The Fix
+```python
+# WRONG - Causes TypeError
+mcp = FastMCP(
+    "Power BI MCP Server",
+    version="1.0.0",
+    description="Simplified Power BI integration for Claude.ai"
+)
+
+# CORRECT - Only pass the name
+mcp = FastMCP("Power BI MCP Server")
+```
+
+### Deployment Status
+- **Issue Found**: TypeError in FastMCP initialization
+- **Fix Applied**: Removed extra parameters from FastMCP constructor
+- **File Updated**: `mcp_fastmcp_simple.py`
+- **Ready to Deploy**: Yes
+
+### Quick Deployment Checklist
+1. ✅ FastMCP constructor fixed (no description parameter)
+2. ✅ Procfile uses correct ASGI worker class
+3. ✅ No authentication required (Claude.ai friendly)
+4. ✅ ASGI app exported at module level
+5. ✅ Error handling in asgi_simple.py
+
+### Test Command After Deploy
+```bash
+curl -X POST https://your-app.azurewebsites.net/ \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"initialize","params":{"protocolVersion":"2024-11-05"},"id":1}'
+```
+
+Expected response:
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {"tools": {}},
+    "serverInfo": {"name": "Power BI MCP Server"}
+  }
+}
+
 ## CRITICAL ISSUE ANALYSIS & SOLUTION
 
 ### The Problem
